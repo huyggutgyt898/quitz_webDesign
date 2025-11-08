@@ -1,0 +1,152 @@
+[
+  {
+    "question": "Thủ đô của Việt Nam là gì?",
+    "answers": ["Hà Nội", "TP. Hồ Chí Minh", "Đà Nẵng", "Huế"],
+    "correct": 0
+  },
+  {
+    "question": "Ai là người sáng lập ra Microsoft?",
+    "answers": ["Steve Jobs", "Bill Gates", "Mark Zuckerberg", "Elon Musk"],
+    "correct": 1
+  },
+  {
+    "question": "Sông nào dài nhất thế giới?",
+    "answers": ["Sông Nile", "Sông Amazon", "Sông Hồng", "Sông Mê Kông"],
+    "correct": 0
+  },
+  {
+    "question": "Trái đất quay quanh Mặt Trời theo hướng nào?",
+    "answers": ["Từ Đông sang Tây", "Từ Tây sang Đông", "Ngẫu nhiên", "Không quay"],
+    "correct": 1
+  },
+  {
+    "question": "Ngôn ngữ lập trình Python do ai tạo ra?",
+    "answers": ["Guido van Rossum", "Dennis Ritchie", "Bjarne Stroustrup", "James Gosling"],
+    "correct": 0
+  },
+  {
+    "question": "Quốc gia nào có diện tích lớn nhất thế giới?",
+    "answers": ["Mỹ", "Nga", "Trung Quốc", "Canada"],
+    "correct": 1
+  },
+  {
+    "question": "Kí hiệu hóa học của nước là gì?",
+    "answers": ["CO2", "H2O", "O2", "NaCl"],
+    "correct": 1
+  },
+  {
+    "question": "Ai là tác giả của 'Truyện Kiều'?",
+    "answers": ["Nguyễn Du", "Nguyễn Trãi", "Ngô Tất Tố", "Hồ Xuân Hương"],
+    "correct": 0
+  },
+  {
+    "question": "Loài động vật nào có thể bay?",
+    "answers": ["Chó", "Mèo", "Dơi", "Rắn"],
+    "correct": 2
+  },
+  {
+    "question": "Quốc kỳ Nhật Bản có màu gì?",
+    "answers": ["Trắng và đỏ", "Đỏ và vàng", "Xanh và trắng", "Trắng và đen"],
+    "correct": 0
+  },
+  {
+    "question": "Trong hình học, tổng 3 góc của tam giác là bao nhiêu?",
+    "answers": ["90°", "180°", "270°", "360°"],
+    "correct": 1
+  },
+  {
+    "question": "Facebook được thành lập vào năm nào?",
+    "answers": ["2000", "2004", "2006", "2008"],
+    "correct": 1
+  },
+  {
+    "question": "Hệ điều hành Android thuộc sở hữu của công ty nào?",
+    "answers": ["Apple", "Google", "Microsoft", "Samsung"],
+    "correct": 1
+  },
+  {
+    "question": "Đơn vị đo cường độ dòng điện là gì?",
+    "answers": ["Volt", "Watt", "Ampere", "Ohm"],
+    "correct": 2
+  },
+  {
+    "question": "Động vật nào được gọi là chúa sơn lâm?",
+    "answers": ["Sư tử", "Hổ", "Báo", "Voi"],
+    "correct": 1
+  },
+  {
+    "question": "Việt Nam giành độc lập vào năm nào?",
+    "answers": ["1945", "1954", "1975", "1986"],
+    "correct": 0
+  },
+  {
+    "question": "Châu lục nào có diện tích nhỏ nhất?",
+    "answers": ["Châu Á", "Châu Âu", "Châu Úc", "Châu Nam Cực"],
+    "correct": 2
+  },
+  {
+    "question": "Ngôi sao gần Trái Đất nhất là gì?",
+    "answers": ["Sirius", "Alpha Centauri", "Mặt Trời", "Proxima Centauri"],
+    "correct": 2
+  },
+  {
+    "question": "Tác giả của bài thơ 'Sóng' là ai?",
+    "answers": ["Hàn Mặc Tử", "Xuân Diệu", "Xuân Quỳnh", "Tố Hữu"],
+    "correct": 2
+  },
+  {
+    "question": "Mắt người bình thường có thể phân biệt bao nhiêu màu cơ bản?",
+    "answers": ["2", "3", "4", "5"],
+    "correct": 1
+  },
+  {
+    "question": "CPU trong máy tính có chức năng chính là gì?",
+    "answers": ["Lưu trữ dữ liệu", "Xử lý dữ liệu", "Hiển thị hình ảnh", "Kết nối mạng"],
+    "correct": 1
+  },
+  {
+    "question": "Ai là người đầu tiên đặt chân lên Mặt Trăng?",
+    "answers": ["Neil Armstrong", "Buzz Aldrin", "Yuri Gagarin", "John Glenn"],
+    "correct": 0
+  },
+  {
+    "question": "Bảng chữ cái tiếng Việt có bao nhiêu chữ cái?",
+    "answers": ["26", "28", "29", "30"],
+    "correct": 2
+  },
+  {
+    "question": "Phim hoạt hình Doraemon có xuất xứ từ quốc gia nào?",
+    "answers": ["Việt Nam", "Nhật Bản", "Hàn Quốc", "Trung Quốc"],
+    "correct": 1
+  },
+  {
+    "question": "Ai là người viết truyện 'Harry Potter'?",
+    "answers": ["J.K. Rowling", "Suzanne Collins", "Stephen King", "George R.R. Martin"],
+    "correct": 0
+  },
+  {
+    "question": "Cầu thủ nào được mệnh danh là 'Vua bóng đá'?",
+    "answers": ["Messi", "Cristiano Ronaldo", "Pelé", "Maradona"],
+    "correct": 2
+  },
+  {
+    "question": "Đơn vị đo nhiệt độ trong hệ SI là gì?",
+    "answers": ["Celsius", "Kelvin", "Fahrenheit", "Rankine"],
+    "correct": 1
+  },
+  {
+    "question": "Kim loại nào dẫn điện tốt nhất?",
+    "answers": ["Vàng", "Bạc", "Đồng", "Sắt"],
+    "correct": 1
+  },
+  {
+    "question": "Hành tinh nào được gọi là 'Hành tinh Đỏ'?",
+    "answers": ["Sao Thổ", "Sao Hỏa", "Sao Kim", "Sao Mộc"],
+    "correct": 1
+  },
+  {
+    "question": "Tỉnh nào có diện tích lớn nhất Việt Nam?",
+    "answers": ["Nghệ An", "Thanh Hóa", "Gia Lai", "Đắk Lắk"],
+    "correct": 0
+  }
+]

@@ -1,0 +1,156 @@
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff7f2;
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 230px;
+  background: linear-gradient(180deg, #ffa65c, #ffb783);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.15);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.menu-item:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* Main */
+.main {
+  flex: 1;
+  background: #fffdfb;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: relative;
+}
+
+/* Avatar (profile circle) */
+.avatar {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #ff7a00 40%, #ffb783);
+  border: 2px solid #ff7a00;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+}
+
+/* Quiz box */
+.quiz-box, .create-box, .leaderboard {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  width: 600px;
+  padding: 30px;
+  margin-top: 80px;
+}
+
+.quiz-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #ffa65c;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+#timer {
+  text-align: right;
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #ff7a00;
+}
+
+.answers button {
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+  border: 2px solid #ffa65c;
+  border-radius: 8px;
+  background: #fff4ec;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.answers button:hover {
+  background: #ffe0c7;
+}
+
+.answers button.correct {
+  background: #4ade80;
+  color: white;
+  border-color: #4ade80;
+}
+
+.answers button.wrong {
+  background: #f87171;
+  color: white;
+  border-color: #f87171;
+}
+
+.next-btn {
+  background: #ff7a00;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.next-btn:hover {
+  background: #e06700;
+}
+
+.result {
+  text-align: center;
+}
+
+.create-box input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 2px solid #ffa65c;
+  border-radius: 8px;
+}
