@@ -17,15 +17,21 @@ body {
 .topbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background-color: #ffe9c7;
   padding: 10px 20px;
   border-bottom: 2px solid #ffb84d;
+  background-color: #ffe9c7;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
+}
+
+.right-group {
+  margin-left: auto;   
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .brand {
