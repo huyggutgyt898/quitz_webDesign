@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kho đề - Quiz Game</title>
+  <link rel="stylesheet" href="Styles/khode.css">
+</head>
+<body>
+  <div class="card">
+    <div class="topbar">
+      <div>
+        <h1>📚 Kho đề của bạn</h1>
+        <div style="color:#666;font-size:14px">
+          Danh sách các đề đã lưu (lưu trữ cục bộ trên trình duyệt)
+        </div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-secondary" id="clearAll">🗑️ Xóa tất cả</button>
+        <button class="btn btn-secondary" id="importBtn">📂 Nhập JSON</button>
+        <button class="btn btn-primary" id="exportAll">📥 Xuất tất cả</button>
+      </div>
+    </div>
+
+    <div id="list" class="list"></div>
+    <div id="empty" class="empty" style="display:none">
+      Chưa có đề nào trong kho. Bạn có thể lưu đề từ trang tải/soạn đề.
+    </div>
+
+    <hr style="margin:18px 0;border:none;border-top:1px solid #eef2ff">
+
+    <div id="detail" style="display:none">
+      <h2>Chi tiết đề</h2>
+      <div id="detailMeta" style="margin-bottom:12px;color:#666"></div>
+      <pre id="detailJson"></pre>
+      <div style="margin-top:12px">
+        <button class="btn btn-secondary" id="backList">← Quay lại danh sách</button>
+      </div>
+    </div>
+
+    <!-- ✅ Nút quay lại trang chính -->
+    <div class="back-home-container">
+      <button class="back-home-btn" onclick="window.location.href='trangperson.html'">← Quay lại trang chính</button>
+    </div>
+  </div>
+
+  <input type="file" id="importFile" accept="application/json" style="display:none">
+
+  <script src="Scripts/khode.js"> </script>
+</body>
+</html>

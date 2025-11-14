@@ -1,0 +1,109 @@
+body {
+      font-family: Segoe UI, Tahoma, sans-serif;
+      background: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+      min-height: 100vh;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+
+    h1 { color: #667eea; margin-bottom: 8px; }
+
+    .list {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .quiz-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #eef2ff;
+    }
+
+    .quiz-meta { flex: 1; }
+
+    .quiz-title { font-weight: 700; color: #333; }
+
+    .quiz-desc { color: #666; font-size: 13px; margin-top: 6px; }
+
+    .quiz-actions { display: flex; gap: 8px; }
+
+    .btn {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg,#667eea,#764ba2);
+      color: #fff;
+    }
+
+    .btn-secondary { background: #f0f2f7; color: #333; }
+
+    .empty {
+      padding: 40px;
+      text-align: center;
+      color: #666;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #f8f9fb;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #eef2ff;
+      max-height: 320px;
+      overflow: auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ✅ Nút quay lại trang chính */
+    .back-home-container {
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .back-home-btn {
+      background-color: #eac066;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .back-home-btn:hover {
+      background-color: #5a63d1;
+    }
+
+    @media(max-width:600px) {
+      .quiz-item { flex-direction: column; align-items: flex-start; }
+      .quiz-actions { width: 100%; justify-content: space-between; }
+    }
