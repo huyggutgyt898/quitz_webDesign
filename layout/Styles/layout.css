@@ -6,11 +6,23 @@
   font-family: "Segoe UI", sans-serif;
 }
 
+/* ========== FIX FOOTER ========== */
+html, body {
+  height: 100%;
+}
+
 body {
-  background-color: #fffef9;
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  min-height: 100vh; /* Quan trọng */
+}
+
+/* Phần chứa nội dung */
+.main-body {
+  flex: 1; /* Đẩy footer xuống đáy */
+  margin-top: 80px;
+  text-align: center;
+  padding: 40px 20px;
 }
 
 /* Thanh trên đầu */
@@ -66,7 +78,7 @@ body {
   font-weight: bold;
 }
 
-/* Menu bên phải (icon + avatar) */
+/* Menu bên phải */
 .right-menu {
   display: flex;
   align-items: center;
@@ -92,83 +104,7 @@ body {
   box-shadow: 0 0 6px rgba(255, 184, 77, 0.6);
 }
 
-/* Nội dung chính */
-.main-body {
-  margin-top: 80px;
-  text-align: center;
-  padding: 40px 20px;
-}
-
-/* Footer hiện đại */
-.footer {
-  background-color: #111;
-  color: #f1f1f1;
-  padding: 40px 20px 10px;
-  margin-top: auto;
-}
-
-.footer-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer-section h3 {
-  color: #ffb84d;
-  font-size: 18px;
-  margin-bottom: 15px;
-  border-bottom: 2px solid #ffb84d;
-  display: inline-block;
-  padding-bottom: 5px;
-}
-
-.footer-section p,
-.footer-section a,
-.footer-section li {
-  color: #ddd;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.footer-section a {
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.footer-section a:hover {
-  color: #ffb84d;
-}
-
-/* Liên kết nhanh dạng danh sách */
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section ul li {
-  margin: 6px 0;
-}
-
-/* Icon mạng xã hội */
-.social-icons {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.social-icons a {
-  color: #ddd;
-  text-decoration: none;
-  font-size: 15px;
-}
-
-.social-icons a:hover {
-  color: #ffb84d;
-}
-
-/* ========== HIỆU ỨNG CUỘN XUẤT HIỆN ========== */
+/* Hiệu ứng xuất hiện  */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -179,34 +115,6 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
-
-/* Footer cũng dùng hiệu ứng tương tự */
-.footer {
-  background-color: #111;
-  color: #f1f1f1;
-  padding: 40px 20px 10px;
-  margin-top: auto;
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
-
-.footer.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-/* Dòng bản quyền cuối */
-.footer-bottom {
-  text-align: center;
-  border-top: 1px solid #333;
-  margin-top: 30px;
-  padding-top: 10px;
-  font-size: 14px;
-  color: #aaa;
-}
-
 
 /* Dropdown avatar */
 .avatar-container {
@@ -239,4 +147,71 @@ body {
 
 .dropdown-menu li a:hover {
   background-color: #ffe9c7;
+}
+
+/* ========= FOOTER =========== */
+.footer {
+  background: #1a1a1a;
+  color: #eee;
+  padding: 50px 0 20px;
+  font-family: sans-serif;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-col h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #fff;
+}
+
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 8px;
+}
+
+.footer-col a {
+  color: #bbb;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-col a:hover {
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 14px;
+  border-top: 1px solid #333;
+  color: #aaa;
+}
+
+/* Icon mạng xã hội */
+.social-icons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-icons a {
+  color: #ddd;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.social-icons a:hover {
+  color: #ffb84d;
 }
