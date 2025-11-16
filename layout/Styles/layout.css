@@ -104,16 +104,9 @@ body {
   box-shadow: 0 0 6px rgba(255, 184, 77, 0.6);
 }
 
-/* Hiệu ứng xuất hiện  */
 .reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s ease-out;
-}
-
-.reveal.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 /* Dropdown avatar */
@@ -215,3 +208,4 @@ body {
 .social-icons a:hover {
   color: #ffb84d;
 }
+
