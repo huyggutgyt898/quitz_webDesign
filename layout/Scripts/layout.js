@@ -40,13 +40,4 @@ $(window).on("scroll", function () {
       $(this).addClass("show");
     }
   });
-
-  // Footer riêng (xuất hiện khi gần cuối)
-  const footer = $(".footer");
-  const footerTop = footer.offset().top;
-  const scrollBottom = $(window).scrollTop() + $(window).height();
-  if (scrollBottom > footerTop - 200) {
-    footer.addClass("show");
-  }
 });
-
