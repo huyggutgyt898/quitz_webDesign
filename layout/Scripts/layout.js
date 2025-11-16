@@ -28,16 +28,3 @@ $(document).ready(function () {
     }
   });
 });
-
-// Hiệu ứng cuộn hiện dần nội dung
-$(window).on("scroll", function () {
-  $(".reveal").each(function () {
-    const elementTop = $(this).offset().top;
-    const scrollBottom = $(window).scrollTop() + $(window).height();
-
-    // Khi phần tử nằm trong vùng nhìn thấy (vào khung hình)
-    if (scrollBottom > elementTop + 100) {
-      $(this).addClass("show");
-    }
-  });
-});
