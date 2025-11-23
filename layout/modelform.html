@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Hot - Bảng Xếp Hạng</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="Styles/modelform.css">
+</head>
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="brand">
+      <i class="fas fa-graduation-cap"></i>
+      QuizMaster
+    </div>
+
+    <ul class="menu">
+      <li><i class="fas fa-home"></i> Trang chủ</li>
+      <li class="active"><i class="fas fa-fire"></i> Hot Quiz</li>
+      <li><i class="fas fa-plus-circle"></i> Tạo Quiz</li>
+      <li><i class="fas fa-trophy"></i> Thành tích</li>
+    </ul>
+
+    <div class="right-group">
+      <ul class="right-menu">
+        <li><i class="fas fa-bell"></i></li>
+        <li><i class="fas fa-search"></i></li>
+        <li class="avatar-container">
+          <img src="https://ui-avatars.com/api/?name=User&background=ffb84d&color=fff" alt="Avatar" class="avatar">
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-body">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1>
+        <i class="fas fa-fire"></i>
+        Quiz Hot Nhất
+        <i class="fas fa-fire"></i>
+      </h1>
+      <p>Khám phá những quiz học thuật được yêu thích nhất do cộng đồng tạo ra</p>
+    </div>
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <button class="filter-btn active" data-category="all">
+        <i class="fas fa-th"></i> Tất cả
+      </button>
+      <button class="filter-btn" data-category="math">
+        <i class="fas fa-calculator"></i> Toán học
+      </button>
+      <button class="filter-btn" data-category="science">
+        <i class="fas fa-flask"></i> Khoa học
+      </button>
+      <button class="filter-btn" data-category="history">
+        <i class="fas fa-landmark"></i> Lịch sử
+      </button>
+      <button class="filter-btn" data-category="language">
+        <i class="fas fa-language"></i> Ngôn ngữ
+      </button>
+      <button class="filter-btn" data-category="literature">
+        <i class="fas fa-book"></i> Văn học
+      </button>
+    </div>
+
+    <!-- Quiz Grid -->
+    <div class="quiz-grid" id="quizGrid"></div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h3>Về QuizMaster</h3>
+        <ul>
+          <li><a href="#">Giới thiệu</a></li>
+          <li><a href="#">Đội ngũ</a></li>
+          <li><a href="#">Liên hệ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Hỗ trợ</h3>
+        <ul>
+          <li><a href="#">Trung tâm trợ giúp</a></li>
+          <li><a href="#">Điều khoản</a></li>
+          <li><a href="#">Chính sách</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Cộng đồng</h3>
+        <ul>
+          <li><a href="#">Diễn đàn</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Sự kiện</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Theo dõi</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+          <a href="#"><i class="fab fa-twitter"></i> Twitter</a>
+          <a href="#"><i class="fab fa-youtube"></i> YouTube</a>
+          <a href="#"><i class="fab fa-instagram"></i> Instagram</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2024 QuizMaster. All rights reserved.
+    </div>
+  </footer>
+
+  <script src="Scripts/modelform.js"></script>
+</body>
+</html>
