@@ -1,30 +1,14 @@
-$(document).ready(function () {
-  const $items = $(".menu li");
+/*AVATAR*/
+const avatarBtn = document.getElementById('avatarBtn');
+const avatarDropdown = document.getElementById('avatarDropdown');
 
-  $items.on("click", function () {
-    $items.removeClass("active");
-    $(this).addClass("active");
-  });
+avatarBtn.addEventListener('click', () => {
+    avatarDropdown.style.display = avatarDropdown.style.display === 'block' ? 'none' : 'block';
 });
 
-$(document).ready(function () {
-  const $items = $(".menu li");
-
-  $items.on("click", function () {
-    $items.removeClass("active");
-    $(this).addClass("active");
-  });
-
-  // Xử lý mở / đóng menu avatar
-  $(".avatar-link").on("click", function (e) {
-    e.preventDefault();
-    $(".dropdown-menu").toggle();
-  });
-
-  // Ẩn menu khi click ra ngoài
-  $(document).on("click", function (e) {
-    if (!$(e.target).closest(".avatar-container").length) {
-      $(".dropdown-menu").hide();
+// Ẩn dropdown khi click ngoài
+window.addEventListener('click', (e) => {
+    if(!avatarBtn.contains(e.target) && !avatarDropdown.contains(e.target)){
+        avatarDropdown.style.display = 'none';
     }
-  });
 });
