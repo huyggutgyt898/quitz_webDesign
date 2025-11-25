@@ -1,0 +1,64 @@
+/* Kích thước nhỏ gọn như bạn muốn */
+.leaderboard-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 15px;
+}
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    font-size: 1em;
+}
+.leaderboard-table th {
+    background: #4a6cf7;
+    color: white;
+    padding: 14px 10px;
+    font-size: 1.25em;
+    text-align: center;
+}
+.leaderboard-table td {
+    padding: 14px 10px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+.leaderboard-table tr:hover {
+    background-color: #f8faff !important;
+}
+
+/* Top 3 gradient như ban đầu */
+.top3 { font-weight: bold; }
+.top3-1 { background: linear-gradient(90deg, #ffd700, #ffed99); color: #b8860b; }
+.top3-2 { background: linear-gradient(90deg, #c0c0c0, #e5e5e5); color: #444; }
+.top3-3 { background: linear-gradient(90deg, #cd7f32, #f0b37e); color: #6b3e00; }
+
+/* Hiệu ứng xuất hiện lần lượt */
+.top3 { opacity: 0; transform: translateY(60px); transition: all 0.8s cubic-bezier(0.22, 0.61, 0.36, 1); }
+.top3.revealed { opacity: 1; transform: translateY(0); }
+
+/* Rung hạng 1 */
+@keyframes shake {
+    0%,100% { transform: translateX(0); }
+    10%,30%,50%,70%,90% { transform: translateX(-8px); }
+    20%,40%,60%,80% { transform: translateX(8px); }
+}
+.shake { animation: shake 0.7s ease-in-out; }
+
+/* Tiêu đề & mô tả */
+.leaderboard-subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+.layout-content h1 {
+    font-size: 2.2em !important;
+    margin: 20px 0 8px !important;
+    text-align: center;
+    color: #4a6cf7;
+}
+
+audio { display: none; }
