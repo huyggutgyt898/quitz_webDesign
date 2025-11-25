@@ -1,107 +1,96 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vietnam">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quizzz - Bảng xếp hạng</title>
-  <link rel="stylesheet" href="Styles/layout.css" />
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUIZZKIT - Bảng Xếp Hạng</title>
+    <link rel="stylesheet" href="Styles/layout.css" />
+    <!-- CSS riêng của leaderboard -->
+    <link rel="stylesheet" href="Styles/leaderboard.css" />
 </head>
 <body>
-  <!-- Thanh trên đầu giống trang chủ -->
-  <header class="topbar">
-    <div class="brand">Quizzz</div>
-    <div class="right-group">
-      <ul class="menu">
-  <li><i>🏠</i><span><a href="layout.html">Trang chủ</a></span></li>
-  <li><i>❓</i><span><a href="quiz.html">Câu đố</a></span></li>
-  <li class="active"><i>🏆</i><span><a href="leaderboard.html">Bảng xếp hạng</a></span></li>
-</ul>
 
-      <ul class="right-menu">
-        <li class="avatar-container">
-          <a href="#" class="avatar-link">
-            <img src="Images/A2.jpg" alt="Avatar" class="avatar" />
-          </a>
-          <!-- Dropdown -->
-          <ul class="dropdown-menu">
-            <li><a href="profile.html">👤 Trang cá nhân</a></li>
-            <li><a href="#">⚙️ Cài đặt</a></li>
-            <li><a href="login.html">🔑 Đăng nhập</a></li>
-            <li><a href="#">🚪 Đăng xuất</a></li>
-          </ul>
-        </li>
-      </ul>
+    <!-- SIDEBAR (dùng chung) -->
+    <aside class="layout-sidebar">
+        <div class="layout-sidebar__title">MENU</div>
+        <a class="layout-sidebar__item" href="index.html">Trang chủ</a>
+        <a class="layout-sidebar__item" href="quiz.html">Câu hỏi</a>
+        <a class="layout-sidebar__item" href="create-quiz.html">Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="history.html">Lịch sử</a>
+        <a class="layout-sidebar__item" href="profile.html">Hồ sơ</a>
+        <a class="layout-sidebar__item active" href="leaderboard.html">Bảng xếp hạng</a>
+        <a class="layout-sidebar__item" href="settings.html">Cài đặt</a>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="layout-main">
+        <!-- TOPBAR (dùng chung) -->
+        <header class="layout-topbar">
+            <div class="layout-topbar__logo">QUIZZKIT</div>
+            <div class="layout-topbar__search">
+                <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
+            </div>
+            <div class="layout-topbar__avatar">
+                <img src="Images/A2.jpg" alt="avatar" id="avatarBtn"/>
+                <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+                    <a href="profile.html">Hồ sơ cá nhân</a>
+                    <a href="settings.html">Cài đặt</a>
+                    <a href="login.html">Đăng nhập</a>
+                    <a href="index.html">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- NỘI DUNG CHÍNH -->
+        <section class="layout-content reveal">
+            <h1>Bảng Xếp Hạng</h1>
+            <p class="leaderboard-subtitle">Top 10 người chơi xuất sắc nhất tuần này!</p>
+
+            <div class="leaderboard-container">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Tên người chơi</th>
+                            <th>Điểm số</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="top3 top3-1"><td>1</td><td>Nguyễn Văn A</td><td>95</td></tr>
+                        <tr class="top3 top3-2"><td>2</td><td>Trần Thị B</td><td>90</td></tr>
+                        <tr class="top3 top3-3"><td>3</td><td>Lê Văn C</td><td>88</td></tr>
+                        <tr><td>4</td><td>Phạm Thị D</td><td>85</td></tr>
+                        <tr><td>5</td><td>Hoàng Văn E</td><td>82</td></tr>
+                        <tr><td>6</td><td>Đỗ Thị F</td><td>80</td></tr>
+                        <tr><td>7</td><td>Ngô Văn G</td><td>78</td></tr>
+                        <tr><td>8</td><td>Vũ Thị H</td><td>75</td></tr>
+                        <tr><td>9</td><td>Đặng Văn I</td><td>72</td></tr>
+                        <tr><td>10</td><td>Phan Thị K</td><td>70</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- FOOTER (dùng chung) -->
+        <footer class="layout-footer reveal">
+            <div class="layout-footer-container">
+                <div class="layout-footer-section"><h3>Giới thiệu</h3><p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p></div>
+                <div class="layout-footer-section"><h3>Liên hệ</h3><p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p><p>Hotline: 0123 456 789</p></div>
+                <div class="layout-footer-section"><h3>Liên kết nhanh</h3><p><a href="index.html">Trang chủ</a></p><p><a href="quiz.html">Câu hỏi</a></p><p><a href="leaderboard.html">Bảng xếp hạng</a></p><p><a href="login.html">Đăng nhập</a></p></div>
+                <div class="layout-footer-section"><h3>Cộng đồng</h3><p><a href="https://facebook.com" target="_blank">Facebook</a></p><p><a href="https://instagram.com" target="_blank">Instagram</a></p><p><a href="https://discord.com" target="_blank">Discord</a></p></div>
+            </div>
+            <div class="layout-footer-bottom"><p>© 2025 QUIZZKIT. All rights reserved.</p></div>
+        </footer>
     </div>
-  </header>
 
-  <!-- Nội dung chính (Leaderboard) -->
-  <main class="main-body">
-    <h1>🏆 Bảng xếp hạng</h1>
-    <p>Dưới đây là danh sách top người chơi xuất sắc nhất!</p>
+    <!-- Âm thanh (tùy chọn – để riêng) -->
+    <audio id="sound3" src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3"></audio>
+    <audio id="sound2" src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3"></audio>
+    <audio id="sound1" src="https://assets.mixkit.co/sfx/preview/mixkit-trophy-win-789.mp3"></audio>
 
-    <div class="leaderboard-container">
-      <table class="leaderboard-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Tên người chơi</th>
-            <th>Điểm số</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="top3 top3-1"><td>1</td><td>Nguyễn Văn A</td><td>95</td></tr>
-          <tr class="top3 top3-2"><td>2</td><td>Trần Thị B</td><td>90</td></tr>
-          <tr class="top3 top3-3"><td>3</td><td>Lê Văn C</td><td>88</td></tr>
-          <tr><td>4</td><td>Phạm Thị D</td><td>85</td></tr>
-          <tr><td>5</td><td>Hoàng Văn E</td><td>82</td></tr>
-          <tr><td>6</td><td>Đỗ Thị F</td><td>80</td></tr>
-          <tr><td>7</td><td>Ngô Văn G</td><td>78</td></tr>
-          <tr><td>8</td><td>Vũ Thị H</td><td>75</td></tr>
-          <tr><td>9</td><td>Đặng Văn I</td><td>72</td></tr>
-          <tr><td>10</td><td>Phan Thị K</td><td>70</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </main>
-
-  <!-- Footer giữ nguyên -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-section">
-        <h3>Giới thiệu</h3>
-        <p>Quizzz là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
-      </div>
-      <div class="footer-section">
-        <h3>Liên hệ</h3>
-        <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
-        <p>Hotline: 0123 456 789</p>
-      </div>
-      <div class="footer-section">
-        <h3>Liên kết nhanh</h3>
-        <ul>
-          <li><a href="index.html">Trang chủ</a></li>
-          <li><a href="quiz.html">Câu đố</a></li>
-          <li><a href="#">Cài đặt</a></li>
-          <li><a href="login.html">Đăng nhập</a></li>
-        </ul>
-      </div>
-      <div class="footer-section">
-        <h3>Cộng đồng</h3>
-        <div class="social-icons">
-          <a href="https://facebook.com" target="_blank"> Facebook</a>
-          <a href="https://instagram.com" target="_blank"> Instagram</a>
-          <a href="https://discord.com" target="_blank"> Discord</a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2025 Quizzz. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <script src="Scripts/layout.js"></script>
-  
-  </script>
+    <!-- Script chung (avatar, reveal, v.v.) -->
+    <script src="Scripts/layout.js"></script>
+    <!-- Script riêng của leaderboard -->
+    <script src="Scripts/leaderboard.js"></script>
 </body>
 </html>
