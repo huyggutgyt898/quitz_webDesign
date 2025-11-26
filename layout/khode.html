@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kho Đề - Quiz Game</title>
+  <link rel="stylesheet" href="Styles/khode.css">
+</head>
+<body>
+  <!-- ========== TOPBAR ========== -->
+  <header class="topbar-main">
+    <div class="topbar__logo">QUIZZKIT</div>
+    <div class="topbar__search">
+      <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
+    </div>
+    <div class="topbar__avatar">
+      <img src="/layout/Images/A2.jpg" alt="avatar" />
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="main-wrapper">
+      <!-- ========== SIDEBAR ========== -->
+      <aside class="sidebar-main">
+        <h2>🎯 Quiz</h2>
+        <ul>
+          <li>
+            <a href="index.html">
+              <span>🏠</span> HOME
+            </a>
+          </li>
+          <li>
+            <a href="quizzes.html">
+              <span>🧠</span> QUIZZES
+            </a>
+          </li>
+          <li>
+            <a href="taicauhoi.html">
+              <span>📤</span> TẢI ĐỀ THI
+            </a>
+          </li>
+          <li>
+            <a href="taocauhoi.html">
+              <span>📝</span> TẠO CÂU HỎI
+            </a>
+          </li>
+          <li>
+            <a href="khode.html" class="active">
+              <span>📂</span> KHO ĐỀ
+            </a>
+          </li>
+          <li>
+            <a href="leaderboard.html">
+              <span>🏆</span> LEADER BOARD
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <!-- ========== MAIN CONTENT ========== -->
+      <main class="main-content">
+        <div class="card">
+          <div class="topbar">
+            <div>
+              <h1>📚 Kho đề của bạn</h1>
+              <div class="subtitle">Danh sách các đề đã lưu (lưu trữ cục bộ trên trình duyệt)</div>
+            </div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-secondary" id="clearAll">🗑️ Xóa tất cả</button>
+              <button class="btn btn-secondary" id="importBtn">📂 Nhập JSON</button>
+              <button class="btn btn-primary" id="exportAll">📥 Xuất tất cả</button>
+            </div>
+          </div>
+
+          <div id="list" class="list"></div>
+          <div id="empty" class="empty" style="display:none">
+            Chưa có đề nào trong kho. Bạn có thể lưu đề từ trang tải/soạn đề.
+          </div>
+
+          <hr style="margin:18px 0;border:none;border-top:1px solid #eef2ff">
+
+          <div id="detail" style="display:none">
+            <h2>Chi tiết đề</h2>
+            <div id="detailMeta" style="margin-bottom:12px;color:#666"></div>
+            <pre id="detailJson"></pre>
+            <div style="margin-top:12px">
+              <button class="btn btn-secondary" id="backList">← Quay lại danh sách</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="layout-footer">
+      <div class="layout-footer-container">
+        <div class="layout-footer-section">
+          <h3>Giới thiệu</h3>
+          <p>QUIZZKIT là nền tảng cung cấp các câu đề vui và thử thách trí tuệ.</p>
+        </div>
+        <div class="layout-footer-section">
+          <h3>Liên hệ</h3>
+          <p>Email: <a href="">nhatthanh@quizzz.vn</a></p>
+          <p>Hotline: 0123 456 789</p>
+        </div>
+        <div class="layout-footer-section">
+          <h3>Liên kết nhanh</h3>
+          <p><a href="#">Trang chủ</a></p>
+          <p><a href="#">Câu hỏi</a></p>
+          <p><a href="#">Cài đặt</a></p>
+          <p><a href="#">Đăng nhập</a></p>
+        </div>
+        <div class="layout-footer-section">
+          <h3>Cộng đồng</h3>
+          <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+          <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
+          <p><a href="https://discord.com" target="_blank">Discord</a></p>
+        </div>
+      </div>
+      <div class="layout-footer-bottom">
+        <p>© 2025 Quizzz. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <input type="file" id="importFile" accept="application/json" style="display:none">
+  <script src="Scripts/khode.js"></script>
+</body>
+</html>

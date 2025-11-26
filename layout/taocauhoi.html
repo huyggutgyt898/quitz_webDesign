@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tạo Câu Hỏi - QUIZZKIT</title>
+  <link rel="stylesheet" href="Styles/taocauhoi.css">
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <header class="topbar-main">
+    <div class="topbar__logo">QUIZZKIT</div>
+    <div class="topbar__search">
+      <input type="text" placeholder="Tìm kiếm khóa học, quiz...">
+    </div>
+    <div class="topbar__avatar">
+        <img src="/layout/Images/A2.jpg" alt="avatar" />
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="main-wrapper">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar-main">
+        <h2>Quiz Game</h2>
+        <ul>
+          <li><a href="index.html"><span>🏠</span> HOME</a></li>
+          <li><a href="quizzes.html"><span>📝</span> QUIZZES</a></li>
+          <li><a href="taicauhoi.html"><span>📥</span> TẢI ĐỀ THI</a></li>
+          <li><a href="taocauhoi.html" class="active"><span>✏️</span> TẠO CÂU HỎI</a></li>
+          <li><a href="khode.html"><span>📚</span> KHO ĐỀ</a></li>
+          <li><a href="leaderboard.html"><span>🏆</span> LEADER BOARD</a></li>
+        </ul>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <div class="page-header">
+          <h1>Tạo bài tập hoặc đề thi</h1>
+          <p>Dễ dàng tạo các bài tập trắc nghiệm, đề thi với nhiều dạng câu hỏi khác nhau.</p>
+        </div>
+
+        <!-- Form tạo câu hỏi -->
+        <div class="create-section">
+          <form id="questionForm">
+            <div class="form-group">
+              <label>Nội dung câu hỏi *</label>
+              <textarea id="questionInput" rows="4" placeholder="Nhập nội dung câu hỏi..." required></textarea>
+            </div>
+
+            <div class="metadata-row">
+              <div class="form-group">
+                <label>Mức độ khó</label>
+                <select id="difficulty">
+                  <option value="easy">Dễ</option>
+                  <option value="medium" selected>Trung bình</option>
+                  <option value="hard">Khó</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Chủ đề</label>
+                <select id="subject">
+                  <option value="math">Toán học</option>
+                  <option value="physics">Vật lý</option>
+                  <option value="chemistry">Hóa học</option>
+                  <option value="biology">Sinh học</option>
+                  <option value="english">Tiếng Anh</option>
+                  <option value="literature">Văn học</option>
+                  <option value="history">Lịch sử</option>
+                  <option value="geography">Địa lý</option>
+                  <option value="other">Khác</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group image-upload">
+              <label>Thêm hình ảnh (tùy chọn)</label>
+              <label class="upload-btn">
+                <input type="file" id="imageUpload" accept="image/*" style="display:none">
+                Chọn ảnh
+              </label>
+              <img id="imagePreview" class="image-preview" alt="Preview">
+            </div>
+
+            <div class="form-group">
+              <label>Đáp án (chọn đáp án đúng)</label>
+              <div class="answers-grid">
+                <div class="answer-item">
+                  <input type="radio" name="correctAnswer" value="A" id="correctA" required>
+                  <span class="answer-label">A.</span>
+                  <input type="text" id="answerA" placeholder="Nhập đáp án A" required>
+                </div>
+                <div class="answer-item">
+                  <input type="radio" name="correctAnswer" value="B" id="correctB">
+                  <span class="answer-label">B.</span>
+                  <input type="text" id="answerB" placeholder="Nhập đáp án B" required>
+                </div>
+                <div class="answer-item">
+                  <input type="radio" name="correctAnswer" value="C" id="correctC">
+                  <span class="answer-label">C.</span>
+                  <input type="text" id="answerC" placeholder="Nhập đáp án C" required>
+                </div>
+                <div class="answer-item">
+                  <input type="radio" name="correctAnswer" value="D" id="correctD">
+                  <span class="answer-label">D.</span>
+                  <input type="text" id="answerD" placeholder="Nhập đáp án D" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="button-group">
+              <button type="submit" class="btn btn-primary">Thêm câu hỏi</button>
+              <button type="button" class="btn btn-success" id="saveBtn">Lưu file JSON</button>
+              <button type="button" class="btn btn-danger" id="clearBtn">Xóa tất cả</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Danh sách câu hỏi đã tạo -->
+        <div class="questions-list">
+          <h2>Danh sách câu hỏi <span class="question-count" id="questionCount">0</span></h2>
+          <div id="questionsList">
+            <div class="empty-state">
+              <div class="empty-state-icon">📝</div>
+              <p>Chưa có câu hỏi nào. Hãy thêm câu hỏi đầu tiên!</p>
+            </div>
+          </div>
+        </div>
+          <!-- Nút quay lại đặt dưới danh sách câu hỏi -->
+<div class="back-btn-container">
+          <button class="back-btn" onclick="window.location.href='trangperson.html'">← Quay lại</button>
+        </div>
+        
+      </main>
+    
+       
+    </div>
+ 
+    <!-- FOOTER -->
+    <footer class="layout-footer">
+      <div class="layout-footer-container">
+        <div class="layout-footer-section">
+          <h3>Giới thiệu</h3>
+          <p>QUIZZKIT – Nền tảng quiz vui & thử thách trí tuệ.</p>
+        </div>
+        <div class="layout-footer-section">
+          <h3>Liên hệ</h3>
+          <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
+          <p>Hotline: 0123 456 789</p>
+        </div>
+        <div class="layout-footer-section">
+          <h3>Liên kết nhanh</h3>
+          <p><a href="#">Trang chủ</a> · <a href="#">Quiz</a> · <a href="#">Kho đề</a></p>
+        </div>
+        <div class="layout-footer-section">
+          <h3>Cộng đồng</h3>
+          <p><a href="#" target="_blank">Facebook</a> · <a href="#" target="_blank">Instagram</a></p>
+        </div>
+      </div>
+      <div class="layout-footer-bottom">
+        <p>© 2025 QUIZZKIT. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="Scripts/taocauhoi.js"></script>
+</body>
+</html>
