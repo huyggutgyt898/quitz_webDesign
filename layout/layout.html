@@ -7,11 +7,12 @@
     <link rel="stylesheet" href="Styles/layout.css" />
 </head>
 <body>
+    <!-- OVERLAY MỜ - CHỈ HIỆN KHI SIDEBAR MỞ -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- SIDEBAR -->
-    <aside class="layout-sidebar">
+    <aside class="layout-sidebar" id="sidebar">
         <div class="layout-sidebar__title">MENU</div>
-
         <a class="layout-sidebar__item" href="">Trang chủ</a>
         <a class="layout-sidebar__item" href="">Câu hỏi</a>
         <a class="layout-sidebar__item" href="">Tạo câu hỏi</a>
@@ -21,69 +22,81 @@
     </aside>
 
     <!-- MAIN PAGE WRAPPER -->
-    <div class="layout-main">
-
+    <div class="layout-main" id="mainContent">
         <!-- TOPBAR -->
         <header class="layout-topbar">
-            <div class="layout-topbar__logo">QUIZZKIT</div>
-
+            <div class="layout-topbar__left">
+                <!-- HAMBURGER MENU -->
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="layout-topbar__logo">QUIZZKIT</div>
+            </div>
             <div class="layout-topbar__search">
                 <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
             </div>
-
             <div class="layout-topbar__avatar">
-            <img src="Images/A2.jpg" alt="avatar" id="avatarBtn"/>
-            <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
-            <a href="">Đăng nhập</a>
-            <a href="">Đăng xuất</a>
-        </div>
+                <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
+                <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+                    <a href="">Đăng nhập</a>
+                    <a href="">Đăng xuất</a>
+                </div>
+            </div>
         </header>
+
+        <!-- NAVIGATION BAR - THANH TOPBAR THỨ 2 -->
+        <nav class="layout-navbar">
+            <a class="layout-navbar__item active" href="">Trang chủ</a>
+            <a class="layout-navbar__item" href="">Câu hỏi</a>
+            <a class="layout-navbar__item" href="">Tạo câu hỏi</a>
+            <a class="layout-navbar__item" href="">Bảng xếp hạng</a>
+            <a class="layout-navbar__item" href="">Tài khoản</a>
+        </nav>
 
         <!-- MAIN CONTENT AREA -->
         <section class="layout-content">
             <h1 style="margin-top:0">Nội Dung</h1>
-            <p>Viết nội dung vào đây</p>
+            <p>Viết nội dung vào đây. Click vào icon hamburger (3 gạch) để mở sidebar.</p>
         </section>
 
         <!-- FOOTER -->
-<footer class="layout-footer">
-  <div class="layout-footer-container">
-    <!-- Giới thiệu -->
-    <div class="layout-footer-section">
-      <h3>Giới thiệu</h3>
-      <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
+        <footer class="layout-footer">
+            <div class="layout-footer-container">
+                <!-- Giới thiệu -->
+                <div class="layout-footer-section">
+                    <h3>Giới thiệu</h3>
+                    <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
+                </div>
+                <!-- Liên hệ -->
+                <div class="layout-footer-section">
+                    <h3>Liên hệ</h3>
+                    <p>Email: <a href="">nhatthanh@quizzz.vn</a></p>
+                    <p>Hotline: 0123 456 789</p>
+                </div>
+                <!-- Liên kết nhanh -->
+                <div class="layout-footer-section">
+                    <h3>Liên kết nhanh</h3>
+                    <p><a href="#">Trang chủ</a></p>
+                    <p><a href="#">Câu hỏi</a></p>
+                    <p><a href="#">Cài đặt</a></p>
+                    <p><a href="#">Đăng nhập</a></p>
+                </div>
+                <!-- Mạng xã hội -->
+                <div class="layout-footer-section">
+                    <h3>Cộng đồng</h3>
+                    <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+                    <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
+                    <p><a href="https://discord.com" target="_blank">Discord</a></p>
+                </div>
+            </div>
+            <div class="layout-footer-bottom">
+                <p>© 2025 Quizzz. All rights reserved.</p>
+            </div>
+        </footer>
     </div>
 
-    <!-- Liên hệ -->
-    <div class="layout-footer-section">
-      <h3>Liên hệ</h3>
-      <p>Email: <a href="">nhatthanh@quizzz.vn</a></p>
-      <p>Hotline: 0123 456 789</p>
-    </div>
-
-    <!-- Liên kết nhanh -->
-    <div class="layout-footer-section">
-      <h3>Liên kết nhanh</h3>
-        <p><a href="#">Trang chủ</a></p>
-        <p><a href="#">Câu hỏi</a></p>
-        <p><a href="#">Cài đặt</a></p>
-        <p><a href="#">Đăng nhập</a></p>
-    </div>
-
-    <!-- Mạng xã hội -->
-    <div class="layout-footer-section">
-      <h3>Cộng đồng</h3>
-      <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
-      <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
-      <p><a href="https://discord.com" target="_blank">Discord</a></p>
-    </div>
-  </div>
-
-  <div class="layout-footer-bottom">
-    <p>© 2025 Quizzz. All rights reserved.</p>
-  </div>
-  </footer>
-  </div>
-<script src="Scripts/layout.js"></script>
+    <script src="Scripts/layout.js"></script>
 </body>
 </html>
