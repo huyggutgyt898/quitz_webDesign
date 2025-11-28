@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div>
+      <h2>Quiz Game</h2>
+      <div class="menu">
+        <div class="menu-item" onclick="navigate('home')">🏠 Home</div>
+        <div class="menu-item" onclick="navigate('hot')">🔥 Trending Questions</div>
+        <div class="menu-item" onclick="navigate('leaderboard')">🏆 Leaderboard</div>
+        <div class="menu-item" onclick="navigate('create')">📝 Create Question</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <div class="avatar" title="Profile" onclick="navigate('profile')"></div>
+
+    <!-- Quiz box -->
+    <div class="quiz-box">
+      <div class="quiz-header">
+        <div id="question-number">Question 1/10</div>
+        <div id="score">Score: 0</div>
+      </div>
+
+      <div id="question" class="question">Loading question...</div>
+      <div id="answers" class="answers"></div>
+
+      <button id="next-btn" class="next-btn">Next ➜</button>
+
+      <div id="result" class="result" style="display:none;">
+        <h2>Result</h2>
+        <p id="final-score"></p>
+        <button onclick="restartQuiz()" class="next-btn">Play Again</button>
+      </div>
+    </div>
+
+    <!-- Create question form -->
+    <div class="create-box" style="display:none;">
+      <h2>Create Your Own Question</h2>
+      <input type="text" id="new-question" placeholder="Enter question text">
+      <input type="text" id="opt1" placeholder="Option 1">
+      <input type="text" id="opt2" placeholder="Option 2">
+      <input type="text" id="opt3" placeholder="Option 3">
+      <input type="text" id="opt4" placeholder="Option 4">
+      <input type="number" id="correct" min="1" max="4" placeholder="Correct option (1–4)">
+      <button class="next-btn" onclick="saveQuestion()">Save Question</button>
+      <p id="save-msg"></p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
