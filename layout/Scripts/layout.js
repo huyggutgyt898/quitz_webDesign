@@ -38,3 +38,29 @@ navItems.forEach(item => {
         this.classList.add('active');
     });
 });
+
+// Show/hide password function
+function loadQuestionsPage(event) {
+    event.preventDefault();
+    document.querySelector('.home-content').style.display = 'none';
+    document.getElementById('questionIframe').style.display = 'block';
+    updateActiveNav('questions');
+}
+
+function loadHomePage(event) {
+    event.preventDefault();
+    document.querySelector('.home-content').style.display = 'block';
+    document.getElementById('questionIframe').style.display = 'none';
+    updateActiveNav('home');
+}
+
+function updateActiveNav(activePage) {
+    const navItems = document.querySelectorAll('.layout-navbar__item');
+    navItems.forEach(item => item.classList.remove('active'));
+    
+    navItems.forEach(item => {
+        if (item.getAttribute('onclick')?.includes(activePage)) {
+            item.classList.add('active');
+        }
+    });
+}
