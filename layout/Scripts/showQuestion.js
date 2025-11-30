@@ -1,7 +1,7 @@
 let questions = [];
 let currentQuestion = 0;
 let score = 0;
-// let username = prompt("Enter your name:") || "Player";
+let username = prompt("Enter your name:") || "Player";
 
 async function loadQuestions() {
   try {
