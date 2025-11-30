@@ -1,465 +1,444 @@
 // QUESTIONS PAGE JAVASCRIPT
 
-// Filter Tabs Functionality
-const filterTabs = document.querySelectorAll('.filter-tab');
-const categoryFilters = document.querySelectorAll('.category-filter');
-const quizItems = document.querySelectorAll('.quiz-item');
-const quizList = document.querySelector('.quiz-list');
+// DOM Elements
+const filterDropdownBtn = document.getElementById('filterDropdownBtn');
+const filterDropdown = document.getElementById('filterDropdown');
+const filterOptions = document.querySelectorAll('.filter-option');
+const categoryDropdownItems = document.querySelectorAll('#categoryDropdown .dropdown-item');
+const quizSearchInput = document.getElementById('quizSearchInput');
+const searchBtn = document.getElementById('searchBtn');
+const allSections = document.getElementById('allSections');
+const singleSection = document.getElementById('singleSection');
+const filteredQuizGrid = document.getElementById('filteredQuizGrid');
+const quizSections = document.querySelectorAll('.quiz-section');
+const allQuizItems = document.querySelectorAll('.quiz-item');
 
-let currentFilter = 'recommended';
+let currentFilter = 'all';
 let currentCategory = 'all';
+let searchTerm = '';
 
-// Filter Tab Click Handler
-filterTabs.forEach(tab => {
-    tab.addEventListener('click', function() {
-        // Remove active class from all tabs
-        filterTabs.forEach(t => t.classList.remove('active'));
+// Toggle Filter Dropdown
+filterDropdownBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    filterDropdown.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    if (!filterDropdown.contains(e.target) && !filterDropdownBtn.contains(e.target)) {
+        filterDropdown.classList.remove('active');
+    }
+});
+
+// Filter Option Click Handler
+filterOptions.forEach(option => {
+    option.addEventListener('click', function() {
+        // Remove active class from all options
+        filterOptions.forEach(opt => opt.classList.remove('active'));
         
-        // Add active class to clicked tab
+        // Add active class to clicked option
         this.classList.add('active');
         
         // Get filter value
         currentFilter = this.getAttribute('data-filter');
         
-        // Apply filters
-        applyFilters();
+        // Update button text
+        const filterText = this.querySelector('span:last-child').textContent;
+        filterDropdownBtn.querySelector('.filter-text').textContent = filterText;
+        
+        // Close dropdown
+        filterDropdown.classList.remove('active');
+        
+        // Apply filter
+        applyFilter();
     });
 });
 
-// Category Filter Click Handler
-categoryFilters.forEach(filter => {
-    filter.addEventListener('click', function() {
-        // Remove active class from all filters
-        categoryFilters.forEach(f => f.classList.remove('active'));
+// Category Dropdown Click Handler
+categoryDropdownItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+        e.preventDefault();
         
-        // Add active class to clicked filter
+        // Remove active class from all items
+        categoryDropdownItems.forEach(i => i.classList.remove('active'));
+        
+        // Add active class to clicked item
         this.classList.add('active');
         
         // Get category value
         currentCategory = this.getAttribute('data-category');
         
-        // Apply filters
-        applyFilters();
+        // Apply filter
+        applyFilter();
     });
 });
 
-// Apply Filters Function
-function applyFilters() {
-    let hasVisibleItems = false;
-    
-    quizItems.forEach(item => {
-        const itemFilter = item.getAttribute('data-filter');
-        const itemCategory = item.getAttribute('data-category');
-        
-        // Check if item matches current filters
-        const matchesFilter = currentFilter === 'recommended' || itemFilter === currentFilter;
-        const matchesCategory = currentCategory === 'all' || itemCategory === currentCategory;
-        
-        if (matchesFilter && matchesCategory) {
-            item.style.display = 'flex';
-            // Add fade-in animation
-            item.style.animation = 'fadeIn 0.5s ease';
-            hasVisibleItems = true;
-        } else {
-            item.style.display = 'none';
-        }
-    });
-    
-    // Show/hide empty state
-    showEmptyState(!hasVisibleItems);
-}
-
-// Show Empty State
-function showEmptyState(show) {
-    let emptyState = document.querySelector('.empty-state');
-    
-    if (show) {
-        if (!emptyState) {
-            emptyState = document.createElement('div');
-            emptyState.className = 'empty-state';
-            emptyState.innerHTML = `
-                <div class="empty-state-icon">🔍</div>
-                <div class="empty-state-text">Không tìm thấy quiz nào</div>
-                <div class="empty-state-subtext">Thử thay đổi bộ lọc hoặc tìm kiếm khác</div>
-            `;
-            quizList.appendChild(emptyState);
-        }
-        emptyState.style.display = 'block';
+// Apply Filter Function
+function applyFilter() {
+    if (currentFilter === 'all') {
+        // Show all sections
+        showAllSections();
     } else {
-        if (emptyState) {
-            emptyState.style.display = 'none';
-        }
+        // Show single filtered section
+        showFilteredSection();
     }
+    
+    // Apply category filter
+    applyCategoryFilter();
 }
 
-// Add fadeIn animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-`;
-document.head.appendChild(style);
-
-// Quiz Item Click Handler
-quizItems.forEach((item, index) => {
-    const playBtn = item.querySelector('.play-btn');
+// Show All Sections (Tab "Tất cả")
+function showAllSections() {
+    allSections.style.display = 'block';
+    singleSection.style.display = 'none';
     
-    // Click on play button
-    if (playBtn) {
-        playBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            window.location.href = `quiz-play.html?id=${index + 1}`;
-        });
-    }
-    
-    // Click on entire card
-    item.addEventListener('click', function() {
-        window.location.href = `quiz-detail.html?id=${index + 1}`;
-    });
-});
-
-// Like/Dislike Buttons
-const likeButtons = document.querySelectorAll('.like-btn');
-const dislikeButtons = document.querySelectorAll('.dislike-btn');
-
-likeButtons.forEach((btn, index) => {
-    btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        
-        const countSpan = this.querySelector('.reaction-count');
-        let count = parseInt(countSpan.textContent);
-        
-        if (this.classList.contains('active')) {
-            // Unlike
-            this.classList.remove('active');
-            count--;
-        } else {
-            // Like
-            this.classList.add('active');
-            count++;
-            
-            // Remove dislike if active
-            const dislikeBtn = this.parentElement.querySelector('.dislike-btn');
-            if (dislikeBtn.classList.contains('active')) {
-                dislikeBtn.classList.remove('active');
-                const dislikeCount = dislikeBtn.querySelector('.reaction-count');
-                dislikeCount.textContent = parseInt(dislikeCount.textContent) - 1;
-            }
-        }
-        
-        countSpan.textContent = count;
-        
-        // Add animation
-        this.style.transform = 'scale(1.2)';
-        setTimeout(() => {
-            this.style.transform = '';
-        }, 200);
-    });
-});
-
-dislikeButtons.forEach((btn, index) => {
-    btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        
-        const countSpan = this.querySelector('.reaction-count');
-        let count = parseInt(countSpan.textContent);
-        
-        if (this.classList.contains('active')) {
-            // Un-dislike
-            this.classList.remove('active');
-            count--;
-        } else {
-            // Dislike
-            this.classList.add('active');
-            count++;
-            
-            // Remove like if active
-            const likeBtn = this.parentElement.querySelector('.like-btn');
-            if (likeBtn.classList.contains('active')) {
-                likeBtn.classList.remove('active');
-                const likeCount = likeBtn.querySelector('.reaction-count');
-                likeCount.textContent = parseInt(likeCount.textContent) - 1;
-            }
-        }
-        
-        countSpan.textContent = count;
-        
-        // Add animation
-        this.style.transform = 'scale(1.2)';
-        setTimeout(() => {
-            this.style.transform = '';
-        }, 200);
-    });
-});
-
-// Load More Button
-const loadMoreBtn = document.getElementById('loadMoreBtn');
-let isLoading = false;
-
-if (loadMoreBtn) {
-    loadMoreBtn.addEventListener('click', function() {
-        if (isLoading) return;
-        
-        isLoading = true;
-        const textSpan = this.querySelector('span:first-child');
-        const spinner = this.querySelector('.loading-spinner');
-        
-        // Show loading state
-        textSpan.textContent = 'Đang tải...';
-        spinner.style.display = 'inline-block';
-        this.style.opacity = '0.7';
-        this.style.cursor = 'not-allowed';
-        
-        // Simulate loading (replace with actual API call)
-        setTimeout(() => {
-            // Add more quiz items (demo)
-            addMoreQuizzes();
-            
-            // Reset button state
-            textSpan.textContent = 'Xem thêm';
-            spinner.style.display = 'none';
-            this.style.opacity = '1';
-            this.style.cursor = 'pointer';
-            isLoading = false;
-        }, 1500);
+    // Show all sections
+    quizSections.forEach(section => {
+        section.style.display = 'block';
     });
 }
 
-// Add More Quizzes Function (Demo)
-function addMoreQuizzes() {
-    const categories = ['technology', 'science', 'history', 'geography', 'sports', 'entertainment'];
-    const filters = ['recommended', 'trending', 'new', 'popular', 'most-played'];
-    const quizTitles = [
-        'Quiz về JavaScript',
-        'Khoa học vũ trụ',
-        'Chiến tranh thế giới',
-        'Thủ đô các nước',
-        'Bóng rổ NBA',
-        'Âm nhạc Việt Nam'
-    ];
+// Show Filtered Section (Specific tab selected)
+function showFilteredSection() {
+    allSections.style.display = 'none';
+    singleSection.style.display = 'block';
     
-    for (let i = 0; i < 4; i++) {
-        const randomCategory = categories[Math.floor(Math.random() * categories.length)];
-        const randomFilter = filters[Math.floor(Math.random() * filters.length)];
-        const randomTitle = quizTitles[Math.floor(Math.random() * quizTitles.length)];
-        
-        const quizItem = document.createElement('div');
-        quizItem.className = 'quiz-item';
-        quizItem.setAttribute('data-category', randomCategory);
-        quizItem.setAttribute('data-filter', randomFilter);
-        quizItem.style.display = 'none';
-        
-        quizItem.innerHTML = `
-            <div class="quiz-thumbnail">
-                <img src="https://via.placeholder.com/200x150/667eea/ffffff?text=Quiz" alt="${randomTitle}">
-                <div class="quiz-overlay">
-                    <button class="play-btn">▶ Chơi ngay</button>
-                </div>
-            </div>
-            <div class="quiz-details">
-                <h3 class="quiz-name">${randomTitle}</h3>
-                <p class="quiz-description">Mô tả ngắn về quiz này</p>
-                <div class="quiz-author">
-                    <img src="Images/Avatar.jpg" alt="User" class="author-avatar">
-                    <span class="author-name">User ${Math.floor(Math.random() * 100)}</span>
-                </div>
-                <div class="quiz-stats">
-                    <div class="stat-item">
-                        <span class="stat-icon">👁️</span>
-                        <span class="stat-value">${Math.floor(Math.random() * 5000) + 500}</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-icon">🎮</span>
-                        <span class="stat-value">${Math.floor(Math.random() * 2000) + 100}</span>
-                    </div>
-                    <div class="quiz-reactions">
-                        <button class="reaction-btn like-btn">
-                            <span class="reaction-icon">👍</span>
-                            <span class="reaction-count">${Math.floor(Math.random() * 50)}</span>
-                        </button>
-                        <button class="reaction-btn dislike-btn">
-                            <span class="reaction-icon">👎</span>
-                            <span class="reaction-count">${Math.floor(Math.random() * 10)}</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        quizList.appendChild(quizItem);
-        
-        // Add event listeners to new items
-        const playBtn = quizItem.querySelector('.play-btn');
-        playBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            alert('Chức năng chơi quiz sẽ được triển khai!');
-        });
-        
-        quizItem.addEventListener('click', function() {
-            alert('Chi tiết quiz sẽ được hiển thị!');
-        });
-        
-        // Add like/dislike functionality
-        const newLikeBtn = quizItem.querySelector('.like-btn');
-        const newDislikeBtn = quizItem.querySelector('.dislike-btn');
-        
-        newLikeBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            this.classList.toggle('active');
-        });
-        
-        newDislikeBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            this.classList.toggle('active');
-        });
+    // Clear filtered grid
+    filteredQuizGrid.innerHTML = '';
+    
+    // Get all quiz items that match the filter
+    const matchingQuizzes = Array.from(allQuizItems).filter(item => {
+        const itemFilter = item.getAttribute('data-filter');
+        return itemFilter === currentFilter;
+    });
+    
+    // Clone and add matching quizzes to filtered grid
+    matchingQuizzes.forEach(quiz => {
+        const clonedQuiz = quiz.cloneNode(true);
+        attachQuizEventListeners(clonedQuiz);
+        filteredQuizGrid.appendChild(clonedQuiz);
+    });
+    
+    // Show empty state if no results
+    if (matchingQuizzes.length === 0) {
+        showEmptyState(filteredQuizGrid);
     }
-    
-    // Re-apply filters to show new items
-    applyFilters();
+}
+
+// Apply Category Filter
+function applyCategoryFilter() {
+    if (currentCategory === 'all') {
+        // Show all quizzes
+        if (currentFilter === 'all') {
+            quizSections.forEach(section => {
+                section.style.display = 'block';
+            });
+        } else {
+            const quizzes = filteredQuizGrid.querySelectorAll('.quiz-item');
+            quizzes.forEach(quiz => {
+                quiz.style.display = 'flex';
+            });
+        }
+    } else {
+        // Filter by category
+        if (currentFilter === 'all') {
+            // Hide/show sections based on whether they have items in this category
+            quizSections.forEach(section => {
+                const quizzesInSection = section.querySelectorAll('.quiz-item');
+                let hasMatchingQuiz = false;
+                
+                quizzesInSection.forEach(quiz => {
+                    const quizCategory = quiz.getAttribute('data-category');
+                    if (quizCategory === currentCategory) {
+                        quiz.style.display = 'flex';
+                        hasMatchingQuiz = true;
+                    } else {
+                        quiz.style.display = 'none';
+                    }
+                });
+                
+                // Hide section if no matching quizzes
+                section.style.display = hasMatchingQuiz ? 'block' : 'none';
+            });
+        } else {
+            // Filter in single section view
+            const quizzes = filteredQuizGrid.querySelectorAll('.quiz-item');
+            let hasResults = false;
+            
+            quizzes.forEach(quiz => {
+                const quizCategory = quiz.getAttribute('data-category');
+                if (quizCategory === currentCategory) {
+                    quiz.style.display = 'flex';
+                    hasResults = true;
+                } else {
+                    quiz.style.display = 'none';
+                }
+            });
+            
+            if (!hasResults) {
+                showEmptyState(filteredQuizGrid);
+            }
+        }
+    }
 }
 
 // Search Functionality
-const searchInput = document.getElementById('searchInput');
-let searchTimeout;
-
-if (searchInput) {
-    searchInput.addEventListener('input', function() {
-        clearTimeout(searchTimeout);
-        const searchTerm = this.value.toLowerCase();
-        
-        if (searchTerm.length > 0) {
-            searchTimeout = setTimeout(() => {
-                filterBySearch(searchTerm);
-            }, 300);
-        } else {
-            applyFilters();
-        }
-    });
-}
-
-// Filter by Search
-function filterBySearch(term) {
-    let hasResults = false;
+function handleSearch() {
+    searchTerm = quizSearchInput.value.toLowerCase().trim();
     
-    quizItems.forEach(item => {
-        const quizName = item.querySelector('.quiz-name').textContent.toLowerCase();
-        const quizDesc = item.querySelector('.quiz-description').textContent.toLowerCase();
-        const authorName = item.querySelector('.author-name').textContent.toLowerCase();
-        
-        if (quizName.includes(term) || quizDesc.includes(term) || authorName.includes(term)) {
-            item.style.display = 'flex';
-            hasResults = true;
-        } else {
-            item.style.display = 'none';
-        }
-    });
+    if (searchTerm === '') {
+        applyFilter();
+        return;
+    }
     
-    showEmptyState(!hasResults);
+    // Search in current view
+    if (currentFilter === 'all') {
+        // Search in all sections
+        quizSections.forEach(section => {
+            const quizzes = section.querySelectorAll('.quiz-item');
+            let hasResults = false;
+            
+            quizzes.forEach(quiz => {
+                if (matchesSearch(quiz)) {
+                    quiz.style.display = 'flex';
+                    hasResults = true;
+                } else {
+                    quiz.style.display = 'none';
+                }
+            });
+            
+            section.style.display = hasResults ? 'block' : 'none';
+        });
+    } else {
+        // Search in filtered view
+        const quizzes = filteredQuizGrid.querySelectorAll('.quiz-item');
+        let hasResults = false;
+        
+        quizzes.forEach(quiz => {
+            if (matchesSearch(quiz)) {
+                quiz.style.display = 'flex';
+                hasResults = true;
+            } else {
+                quiz.style.display = 'none';
+            }
+        });
+        
+        if (!hasResults) {
+            showEmptyState(filteredQuizGrid);
+        }
+    }
 }
 
-// Scroll to Top on Filter Change
-function scrollToTop() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+// Check if quiz matches search term
+function matchesSearch(quizElement) {
+    const quizName = quizElement.querySelector('.quiz-name').textContent.toLowerCase();
+    const quizDesc = quizElement.querySelector('.quiz-description').textContent.toLowerCase();
+    const authorName = quizElement.querySelector('.author-name').textContent.toLowerCase();
+    
+    return quizName.includes(searchTerm) || 
+           quizDesc.includes(searchTerm) || 
+           authorName.includes(searchTerm);
 }
 
-filterTabs.forEach(tab => {
-    tab.addEventListener('click', scrollToTop);
+// Search event listeners
+quizSearchInput.addEventListener('input', () => {
+    clearTimeout(window.searchTimeout);
+    window.searchTimeout = setTimeout(handleSearch, 300);
 });
 
-// Save User Preferences
-function saveFilterPreference() {
+searchBtn.addEventListener('click', handleSearch);
+
+quizSearchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        handleSearch();
+    }
+});
+
+// Show Empty State
+function showEmptyState(container) {
+    const existingEmpty = container.querySelector('.empty-state');
+    if (existingEmpty) return;
+    
+    const emptyState = document.createElement('div');
+    emptyState.className = 'empty-state';
+    emptyState.innerHTML = `
+        <div class="empty-state-icon">🔍</div>
+        <div class="empty-state-text">Không tìm thấy quiz nào</div>
+        <div class="empty-state-subtext">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</div>
+    `;
+    container.appendChild(emptyState);
+}
+
+// Attach Event Listeners to Quiz Items
+function attachQuizEventListeners(quizElement) {
+    const playBtn = quizElement.querySelector('.play-btn');
+    const likeBtn = quizElement.querySelector('.like-btn');
+    const dislikeBtn = quizElement.querySelector('.dislike-btn');
+    
+    // Play button
+    if (playBtn) {
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            alert('Chức năng chơi quiz sẽ được triển khai!');
+        });
+    }
+    
+    // Quiz item click
+    quizElement.addEventListener('click', () => {
+        alert('Chi tiết quiz sẽ được hiển thị!');
+    });
+    
+    // Like button
+    if (likeBtn) {
+        likeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            handleReaction(likeBtn, dislikeBtn);
+        });
+    }
+    
+    // Dislike button
+    if (dislikeBtn) {
+        dislikeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            handleReaction(dislikeBtn, likeBtn);
+        });
+    }
+}
+
+// Handle Like/Dislike
+function handleReaction(clickedBtn, oppositeBtn) {
+    const countSpan = clickedBtn.querySelector('.reaction-count');
+    let count = parseInt(countSpan.textContent);
+    
+    if (clickedBtn.classList.contains('active')) {
+        // Remove reaction
+        clickedBtn.classList.remove('active');
+        count--;
+    } else {
+        // Add reaction
+        clickedBtn.classList.add('active');
+        count++;
+        
+        // Remove opposite reaction if active
+        if (oppositeBtn.classList.contains('active')) {
+            oppositeBtn.classList.remove('active');
+            const oppositeCount = oppositeBtn.querySelector('.reaction-count');
+            oppositeCount.textContent = parseInt(oppositeCount.textContent) - 1;
+        }
+    }
+    
+    countSpan.textContent = count;
+    
+    // Animation
+    clickedBtn.style.transform = 'scale(1.2)';
+    setTimeout(() => {
+        clickedBtn.style.transform = '';
+    }, 200);
+}
+
+// Initialize event listeners for existing quiz items
+allQuizItems.forEach(quiz => {
+    attachQuizEventListeners(quiz);
+});
+
+// Section "xem thêm" links
+document.querySelectorAll('.section-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const section = link.closest('.quiz-section');
+        const sectionName = section.getAttribute('data-section');
+        
+        // Find and activate the corresponding filter
+        filterOptions.forEach(option => {
+            if (option.getAttribute('data-filter') === sectionName) {
+                option.click();
+            }
+        });
+    });
+});
+
+// Save user preferences
+function savePreferences() {
     localStorage.setItem('lastFilter', currentFilter);
     localStorage.setItem('lastCategory', currentCategory);
 }
 
-filterTabs.forEach(tab => {
-    tab.addEventListener('click', saveFilterPreference);
-});
-
-categoryFilters.forEach(filter => {
-    filter.addEventListener('click', saveFilterPreference);
-});
-
-// Load User Preferences
-function loadFilterPreference() {
-    const lastFilter = localStorage.getItem('lastFilter');
-    const lastCategory = localStorage.getItem('lastCategory');
+// Load user preferences
+function loadPreferences() {
+    const savedFilter = localStorage.getItem('lastFilter');
+    const savedCategory = localStorage.getItem('lastCategory');
     
-    if (lastFilter) {
-        currentFilter = lastFilter;
-        filterTabs.forEach(tab => {
-            if (tab.getAttribute('data-filter') === lastFilter) {
-                tab.classList.add('active');
+    if (savedFilter) {
+        currentFilter = savedFilter;
+        filterOptions.forEach(option => {
+            if (option.getAttribute('data-filter') === savedFilter) {
+                option.classList.add('active');
+                const filterText = option.querySelector('span:last-child').textContent;
+                filterDropdownBtn.querySelector('.filter-text').textContent = filterText;
             } else {
-                tab.classList.remove('active');
+                option.classList.remove('active');
             }
         });
     }
     
-    if (lastCategory) {
-        currentCategory = lastCategory;
-        categoryFilters.forEach(filter => {
-            if (filter.getAttribute('data-category') === lastCategory) {
-                filter.classList.add('active');
+    if (savedCategory) {
+        currentCategory = savedCategory;
+        categoryDropdownItems.forEach(item => {
+            if (item.getAttribute('data-category') === savedCategory) {
+                item.classList.add('active');
             } else {
-                filter.classList.remove('active');
+                item.classList.remove('active');
             }
         });
     }
     
-    applyFilters();
+    applyFilter();
+}
+
+// Auto-save on changes
+filterOptions.forEach(option => {
+    option.addEventListener('click', savePreferences);
+});
+
+categoryDropdownItems.forEach(item => {
+    item.addEventListener('click', savePreferences);
+});
+
+// Entrance animation
+function addEntranceAnimation() {
+    const visibleQuizzes = document.querySelectorAll('.quiz-item[style*="display: flex"], .quiz-item:not([style*="display: none"])');
+    
+    visibleQuizzes.forEach((quiz, index) => {
+        quiz.style.opacity = '0';
+        quiz.style.transform = 'translateY(20px)';
+        
+        setTimeout(() => {
+            quiz.style.transition = 'all 0.5s ease';
+            quiz.style.opacity = '1';
+            quiz.style.transform = 'translateY(0)';
+        }, index * 50);
+    });
 }
 
 // Initialize on page load
 window.addEventListener('load', () => {
-    loadFilterPreference();
-    
-    // Add entrance animation to quiz items
-    quizItems.forEach((item, index) => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(30px)';
-        
-        setTimeout(() => {
-            item.style.transition = 'all 0.5s ease';
-            item.style.opacity = '1';
-            item.style.transform = 'translateY(0)';
-        }, index * 50);
+    loadPreferences();
+    addEntranceAnimation();
+});
+
+// Re-animate on filter change
+filterOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        setTimeout(addEntranceAnimation, 100);
     });
 });
 
-// Infinite Scroll (Optional)
-let autoLoadEnabled = false;
-
-window.addEventListener('scroll', () => {
-    if (!autoLoadEnabled || isLoading) return;
-    
-    const scrollPosition = window.innerHeight + window.scrollY;
-    const pageHeight = document.documentElement.scrollHeight;
-    
-    // Load more when user is 200px from bottom
-    if (scrollPosition >= pageHeight - 200) {
-        if (loadMoreBtn) {
-            loadMoreBtn.click();
-        }
-    }
+categoryDropdownItems.forEach(item => {
+    item.addEventListener('click', () => {
+        setTimeout(addEntranceAnimation, 100);
+    });
 });
 
-// Toggle auto-load (can be controlled by user setting)
-function toggleAutoLoad(enabled) {
-    autoLoadEnabled = enabled;
-}
-
-// Console welcome message
+// Console log
 console.log('%c🎮 Questions Page Loaded! ', 'background: #e07b39; color: white; font-size: 16px; padding: 8px; border-radius: 4px;');
-console.log(`Current Filter: ${currentFilter} | Current Category: ${currentCategory}`);
+console.log(`Filter: ${currentFilter} | Category: ${currentCategory}`);
