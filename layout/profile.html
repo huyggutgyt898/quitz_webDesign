@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUIZZKIT</title>
+    <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/profile.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- OVERLAY MỜ - CHỈ HIỆN KHI SIDEBAR MỞ -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="layout-sidebar" id="sidebar">
+        <div class="layout-sidebar__title">MENU</div>
+        <a class="layout-sidebar__item" href="">Trang chủ</a>
+        <a class="layout-sidebar__item" href="">Câu hỏi</a>
+        <a class="layout-sidebar__item" href="">Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="">Lịch sử</a>
+        <a class="layout-sidebar__item" href="">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="">Cài đặt</a>
+    </aside>
+
+    <!-- MAIN PAGE WRAPPER -->
+    <div class="layout-main" id="mainContent">
+        <!-- TOPBAR -->
+        <header class="layout-topbar">
+            <div class="layout-topbar__left">
+                <!-- HAMBURGER MENU -->
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="layout-topbar__logo">QUIZZKIT</div>
+            </div>
+            <div class="layout-topbar__search">
+                <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
+            </div>
+            <div class="layout-topbar__avatar">
+                <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
+                <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+                    <a href="">Đăng nhập</a>
+                    <a href="">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVIGATION BAR - THANH TOPBAR THỨ 2 -->
+        <nav class="layout-navbar">
+            <a class="layout-navbar__item active" href="">Trang chủ</a>
+            <a class="layout-navbar__item" href="">Câu hỏi</a>
+            <a class="layout-navbar__item" href="">Tạo câu hỏi</a>
+            <a class="layout-navbar__item" href="">Bảng xếp hạng</a>
+            <a class="layout-navbar__item" href="">Tài khoản</a>
+        </nav>
+
+        <!-- MAIN CONTENT AREA -->
+        <section class="layout-content">
+            <!-- MAIN CONTENT -->
+  <main class="profile-container reveal">
+
+    <h1 class="profile-title">Hồ sơ cá nhân</h1>
+
+    <!-- Header -->
+  <section class="profile-header">
+    <div class="profile-left">
+      <img src="Images/Avatar.jpg" class="avatar" alt="avatar" id="avatarImg">
+      <div class="user-info">
+        <h2>Thanh</h2>
+        <p>@Thanhdzai</p>
+        <span>50 người theo dõi</span> · <span>120 người đang theo dõi</span>
+      </div>
+    </div>
+    <button class="edit-btn" id="changeAvatarBtn">Đổi avatar</button>
+  </section>
+
+  <!-- Popup chọn avatar -->
+  <div id="avatarSelector">
+  <div>
+    <h3>Chọn avatar mới</h3>
+    <div id="avatarList"></div>
+    <button id="closeSelectorBtn">Đóng</button>
+  </div>
+  </div>
+  
+  <!-- Stats -->
+  <section class="stats-section">
+    <div class="stat-card"><h3>120</h3><p>Câu đố đã chơi</p></div>
+    <div class="stat-card"><h3>87%</h3><p>Tỷ lệ chính xác</p></div>
+    <div class="stat-card"><h3>1.567</h3><p>Ngày hoạt động</p></div>
+    <div class="stat-card"><h3>15</h3><p>Thành tựu</p></div>
+    <div class="stat-card"><h3>#7</h3><p>Xếp hạng tháng</p></div>
+  </section>
+
+  <!-- Achievements -->
+  <section class="achievements">
+    <h2>🏅 Thành tích nổi bật</h2>
+    <div class="achieve-grid">
+      <div class="achieve-item">
+        <i>🏅</i>
+        <div><b>Top BXH</b><p>Top 1 tháng 2/2025</p></div>
+      </div>
+      <div class="achieve-item">
+        <i>⭐</i>
+        <div><b>Chuỗi thắng</b><p>Liên tục 10 lần</p></div>
+      </div>
+      <div class="achieve-item">
+        <i>🔥</i>
+        <div><b>Thành viên thường trực</b><p>1.500 ngày</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Friends -->
+  <section class="friends">
+    <h2>👥 Bạn bè</h2>
+    <div class="friend-grid">
+      <div class="friend">
+        <img src="Images/Avatar.jpg" alt="">
+        <div><b>Đỗ</b><p>Nhanh nhất</p></div>
+      </div>
+      <div class="friend">
+        <img src="Images/A3.jpg" alt="">
+        <div><b>Nhật</b><p>Đạt điểm cao nhất</p></div>
+      </div>
+      <div class="friend add">+ Thêm bạn bè</div>
+    </div>
+  </section>
+
+  </main>
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="layout-footer">
+            <div class="layout-footer-container">
+                <!-- Giới thiệu -->
+                <div class="layout-footer-section">
+                    <h3>Giới thiệu</h3>
+                    <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
+                </div>
+                <!-- Liên hệ -->
+                <div class="layout-footer-section">
+                    <h3>Liên hệ</h3>
+                    <p>Email: <a href="">nhatthanh@quizzz.vn</a></p>
+                    <p>Hotline: 0123 456 789</p>
+                </div>
+                <!-- Liên kết nhanh -->
+                <div class="layout-footer-section">
+                    <h3>Liên kết nhanh</h3>
+                    <p><a href="#">Trang chủ</a></p>
+                    <p><a href="#">Câu hỏi</a></p>
+                    <p><a href="#">Cài đặt</a></p>
+                    <p><a href="#">Đăng nhập</a></p>
+                </div>
+                <!-- Mạng xã hội -->
+                <div class="layout-footer-section">
+                    <h3>Cộng đồng</h3>
+                    <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+                    <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
+                    <p><a href="https://discord.com" target="_blank">Discord</a></p>
+                </div>
+            </div>
+            <div class="layout-footer-bottom">
+                <p>© 2025 Quizzz. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="Scripts/layout.js"></script>
+    <script src="Scripts/profile.js"></script>
+</body>
+</html>
