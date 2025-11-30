@@ -6,7 +6,7 @@ body {
   height: 100vh;
 }
 
-/* Sidebar */
+Sidebar
 .sidebar {
   width: 230px;
   background: linear-gradient(180deg, #ffa65c, #ffb783);
@@ -55,7 +55,7 @@ body {
   position: relative;
 }
 
-/* Avatar (profile circle) */
+/* Avatar (profile circle)
 .avatar {
   position: absolute;
   top: 20px;
@@ -67,11 +67,11 @@ body {
   border: 2px solid #ff7a00;
   cursor: pointer;
   transition: transform 0.2s;
-}
+} */
 
-.avatar:hover {
+/* .avatar:hover {
   transform: scale(1.1);
-}
+} */
 
 /* Quiz box */
 .quiz-box, .create-box, .leaderboard {
