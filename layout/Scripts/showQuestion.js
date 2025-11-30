@@ -7,6 +7,10 @@ async function loadQuestions() {
   try {
     const res = await fetch("questions.json");
     questions = await res.json();
+
+    currentQuestion = 0;
+    score = 0;
+
     showQuestion();
   } catch (err) {
     document.getElementById("question").innerText = "❌ Failed to load questions.";
@@ -14,10 +18,11 @@ async function loadQuestions() {
 }
 
 function showQuestion() {
-  if (currentQuestion >= questions.length) {
+   if (currentQuestion >= questions.length) {
     showResult();
     return;
   }
+
 
   const q = questions[currentQuestion];
   document.getElementById("question-number").innerText = `Question ${currentQuestion + 1}/${questions.length}`;
@@ -61,12 +66,10 @@ function showResult() {
 }
 
 function restartQuiz() {
-  currentQuestion = 0;
-  score = 0;
   document.getElementById("score").innerText = "Score: 0";
   document.getElementById("result").style.display = "none";
   document.querySelector(".quiz-box").style.display = "block";
-  showQuestion();
+  loadQuestions();
 }
 
 function navigate(page) {
