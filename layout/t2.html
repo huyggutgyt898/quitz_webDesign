@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUIZZKIT - Trang Chủ</title>
+    <link rel="stylesheet" href="Styles/t2.css" />
+</head>
+<body>
+    <!-- OVERLAY MỜ - CHỈ HIỆN KHI SIDEBAR MỞ -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="layout-sidebar" id="sidebar">
+        <div class="layout-sidebar__title">MENU</div>
+        <a class="layout-sidebar__item" href="">Trang chủ</a>
+        <a class="layout-sidebar__item" href="">Câu hỏi</a>
+        <a class="layout-sidebar__item" href="">Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="">Lịch sử</a>
+        <a class="layout-sidebar__item" href="">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="">Cài đặt</a>
+    </aside>
+
+    <!-- MAIN PAGE WRAPPER -->
+    <div class="layout-main" id="mainContent">
+        <!-- TOPBAR -->
+        <header class="layout-topbar">
+            <div class="layout-topbar__left">
+                <!-- HAMBURGER MENU -->
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="layout-topbar__logo">QUIZZKIT</div>
+            </div>
+            <div class="layout-topbar__search">
+                <input type="text" placeholder="Tìm kiếm quiz, chủ đề..." />
+            </div>
+            <div class="layout-topbar__avatar">
+                <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
+                <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+                    <a href="">Đăng nhập</a>
+                    <a href="">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVIGATION BAR - THANH TOPBAR THỨ 2 -->
+        <nav class="layout-navbar">
+            <a class="layout-navbar__item active" href="">Trang chủ</a>
+            <a class="layout-navbar__item" href="">Câu hỏi</a>
+            <a class="layout-navbar__item" href="">Tạo quiz</a>
+            <a class="layout-navbar__item" href="">Bảng xếp hạng</a>
+            <a class="layout-navbar__item" href="">Tài khoản</a>
+        </nav>
+
+        <!-- MAIN CONTENT AREA -->
+        <section class="layout-content">
+            <!-- Hero Banner -->
+            <div class="hero-banner">
+                <h1>Khám Phá Quiz Vui & Kiến Thức Tại QUIZZKIT!</h1>
+                <p>Thử thách bản thân với hàng ngàn quiz tâm lý, vui nhộn, tình yêu và hơn thế nữa.</p>
+                <a href="" class="cta-button">Tạo Quiz Ngay</a>
+            </div>
+
+            <!-- Carousel Quiz Nổi Bật -->
+            <section class="quiz-carousel-section">
+                <h2>Quiz Nổi Bật</h2>
+                <div class="quiz-carousel">
+                    <div class="quiz-carousel__slide">
+                        <img src="Images/A2.jpg" alt="Quiz 1">
+                        <div class="quiz-carousel__content">
+                            <h3>POV: Hội Chợ</h3>
+                            <p>Bạn sẽ là ai trong hội chợ sôi động? Thử ngay!</p>
+                            <a href="" class="play-button">Chơi Ngay</a>
+                        </div>
+                    </div>
+                    <div class="quiz-carousel__slide">
+                        <img src="https://source.unsplash.com/random/800x400/?personality" alt="Quiz 2">
+                        <div class="quiz-carousel__content">
+                            <h3>Trắc Nghiệm Tính Cách</h3>
+                            <p>Khám phá bản thân qua 10 câu hỏi thú vị.</p>
+                            <a href="" class="play-button">Chơi Ngay</a>
+                        </div>
+                    </div>
+                    <div class="quiz-carousel__slide">
+                        <img src="https://source.unsplash.com/random/800x400/?love" alt="Quiz 3">
+                        <div class="quiz-carousel__content">
+                            <h3>Quiz Tình Yêu</h3>
+                            <p>Bạn hợp với kiểu người nào? Kiểm tra ngay!</p>
+                            <a href="" class="play-button">Chơi Ngay</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button id="prevSlide">&lt;</button>
+                    <button id="nextSlide">&gt;</button>
+                </div>
+            </section>
+
+            <!-- Danh Mục Quiz -->
+            <section class="quiz-categories">
+                <h2>Danh Mục Phổ Biến</h2>
+                <div class="categories-grid">
+                    <a href="" class="category-card">Tâm Lý</a>
+                    <a href="" class="category-card">Vui Nhộn</a>
+                    <a href="" class="category-card">Kiến Thức</a>
+                    <a href="" class="category-card">Tình Yêu</a>
+                    <a href="" class="category-card">Vận Mệnh</a>
+                    <a href="" class="category-card">Khác</a>
+                </div>
+            </section>
+
+            <!-- Quiz Phổ Biến -->
+            <section class="popular-quizzes">
+                <h2>Quiz Phổ Biến</h2>
+                <div class="quizzes-grid">
+                    <div class="quiz-card">
+                        <img src="https://source.unsplash.com/random/300x200/?fun" alt="Quiz Pop 1">
+                        <h3>Quiz Vui: Bạn Là Siêu Anh Hùng Nào?</h3>
+                        <p>100k lượt chơi</p>
+                        <a href="" class="play-button">Chơi</a>
+                    </div>
+                    <div class="quiz-card">
+                        <img src="https://source.unsplash.com/random/300x200/?knowledge" alt="Quiz Pop 2">
+                        <h3>Trắc Nghiệm Lịch Sử Việt Nam</h3>
+                        <p>50k lượt chơi</p>
+                        <a href="" class="play-button">Chơi</a>
+                    </div>
+                    <div class="quiz-card">
+                        <img src="https://source.unsplash.com/random/300x200/?fate" alt="Quiz Pop 3">
+                        <h3>Xem Bói Năm Mới</h3>
+                        <p>80k lượt chơi</p>
+                        <a href="" class="play-button">Chơi</a>
+                    </div>
+                    <!-- Thêm nhiều card hơn nếu cần -->
+                </div>
+            </section>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="layout-footer">
+            <div class="layout-footer-container">
+                <!-- Giới thiệu -->
+                <div class="layout-footer-section">
+                    <h3>Giới thiệu</h3>
+                    <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
+                </div>
+                <!-- Liên hệ -->
+                <div class="layout-footer-section">
+                    <h3>Liên hệ</h3>
+                    <p>Email: <a href="">nhatthanh@quizzz.vn</a></p>
+                    <p>Hotline: 0123 456 789</p>
+                </div>
+                <!-- Liên kết nhanh -->
+                <div class="layout-footer-section">
+                    <h3>Liên kết nhanh</h3>
+                    <p><a href="#">Trang chủ</a></p>
+                    <p><a href="#">Câu hỏi</a></p>
+                    <p><a href="#">Cài đặt</a></p>
+                    <p><a href="#">Đăng nhập</a></p>
+                </div>
+                <!-- Mạng xã hội -->
+                <div class="layout-footer-section">
+                    <h3>Cộng đồng</h3>
+                    <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+                    <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
+                    <p><a href="https://discord.com" target="_blank">Discord</a></p>
+                </div>
+            </div>
+            <div class="layout-footer-bottom">
+                <p>© 2025 QUIZZKIT. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="Scripts/t2.js"></script>
+</body>
+</html>
