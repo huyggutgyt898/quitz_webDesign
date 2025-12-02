@@ -1,155 +1,159 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Game</title>
-  <link rel="stylesheet" href="Styles/trangperson.css">
-  
-  
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang chủ - QUIZZKIT</title>
+    <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/trangperson.css" />
 </head>
 <body>
-  <!-- ========== TOPBAR ========== -->
-  <header class="topbar">
-    <div class="topbar__logo">QUIZZKIT</div>
-    <div class="topbar__search">
-      <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
+    <!-- OVERLAY MỜ - CHỈ HIỆN KHI SIDEBAR MỞ -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="layout-sidebar" id="sidebar">
+        <div class="layout-sidebar__title">MENU</div>
+        <a class="layout-sidebar__item active" href="index.html">Trang chủ</a>
+        <a class="layout-sidebar__item" href="kholythuyet.html">Lý thuyết</a>
+        <a class="layout-sidebar__item" href="taocauhoi.html">Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="taicauhoi.html">Tải đề thi</a>
+        <a class="layout-sidebar__item" href="khode.html">Kho đề</a>
+        <a class="layout-sidebar__item" href="#">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="#">Cài đặt</a>
+    </aside>
+
+    <!-- MAIN PAGE WRAPPER -->
+    <div class="layout-main" id="mainContent">
+        <!-- TOPBAR -->
+        <header class="layout-topbar">
+            <div class="layout-topbar__left">
+                <!-- HAMBURGER MENU -->
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="layout-topbar__logo">QUIZZKIT</div>
+            </div>
+            <div class="layout-topbar__search">
+                <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
+            </div>
+            <div class="layout-topbar__avatar">
+                <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
+                <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+                    <a href="#">Đăng nhập</a>
+                    <a href="#">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVIGATION BAR - THANH TOPBAR THỨ 2 -->
+        <nav class="layout-navbar">
+            <a class="layout-navbar__item active" href="index.html">Trang chủ</a>
+            <a class="layout-navbar__item active" href="kholythuyet.html">Lý thuyết</a>
+            <a class="layout-navbar__item" href="taocauhoi.html">Tạo câu hỏi</a>
+            <a class="layout-navbar__item" href="taicauhoi.html">Tải đề thi</a>
+            <a class="layout-navbar__item" href="khode.html">Kho đề</a>
+            <a class="layout-navbar__item" href="#">Bảng xếp hạng</a>
+            <a class="layout-navbar__item" href="#">Tài khoản</a>
+        </nav>
+
+        <!-- MAIN CONTENT AREA -->
+        <section class="layout-content">
+            <!-- Phần giới thiệu -->
+            <div class="welcome-section">
+                <h1>Chào mừng bạn đến với Quiz 🎉</h1>
+                <p>
+                    Bạn có thể tạo <span class="highlight">Bài tập, Đề thi</span> hoặc 
+                    <span class="highlight">Bảng đáp án</span> để học sinh thi online hoặc offline 
+                    bằng phiếu tô trắc nghiệm.
+                </p>
+                <p>
+                    Khám phá các tính năng mạnh mẽ của chúng tôi để tạo ra trải nghiệm học tập tốt nhất! 
+                    <a href="#" class="learn-more">Tìm hiểu thêm →</a>
+                </p>
+            </div>
+
+            <!-- Grid 3 tính năng -->
+            <div class="features-grid">
+                <!-- Tính năng 1 -->
+                <a href="taocauhoi.html" class="feature-card">
+                    <span class="feature-icon">📝</span>
+                    <h3>Tạo bài tập hoặc đề thi</h3>
+                    <p>
+                        Dễ dàng tạo các bài tập trắc nghiệm, đề thi với nhiều dạng câu hỏi khác nhau. 
+                        Hỗ trợ đầy đủ công cụ soạn thảo và quản lý ngân hàng câu hỏi.
+                    </p>
+                </a>
+
+                <!-- Tính năng 2 -->
+                <a href="khode.html" class="feature-card">
+                    <span class="feature-icon">📂</span>
+                    <h3>Kho Đề</h3>
+                    <p>
+                        Truy cập thư viện câu hỏi phong phú được chia sẻ bởi cộng đồng giáo viên. 
+                        Tiết kiệm thời gian với hàng nghìn câu hỏi chất lượng cao.
+                    </p>
+                </a>
+
+                <!-- Tính năng 3 -->
+                <a href="taicauhoi.html" class="feature-card">
+                    <span class="feature-icon">📤</span>
+                    <h3>Tải đề</h3>
+                    <p>
+                        Nhập đề thi từ file Word, Excel hoặc tải lên hình ảnh đề thi. 
+                        Hệ thống tự động nhận diện và chuyển đổi thành bài tập điện tử.
+                    </p>
+                </a>
+
+                <a href="kholythuyet.html" class="feature-card">
+                    <span class="feature-icon">📂</span>
+                    <h3>LÝ THUYẾT</h3>
+                    <p>
+                    Truy cập <span class="highlight">Tài liệu lý thuyết</span> chất lượng cao từ 
+                      cho tất cả các môn học.
+                </p>
+                </a>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="layout-footer">
+            <div class="layout-footer-container">
+                <!-- Giới thiệu -->
+                <div class="layout-footer-section">
+                    <h3>Giới thiệu</h3>
+                    <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
+                </div>
+                <!-- Liên hệ -->
+                <div class="layout-footer-section">
+                    <h3>Liên hệ</h3>
+                    <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
+                    <p>Hotline: 0123 456 789</p>
+                </div>
+                <!-- Liên kết nhanh -->
+                <div class="layout-footer-section">
+                    <h3>Liên kết nhanh</h3>
+                    <p><a href="index.html">Trang chủ</a></p>
+                    <p><a href="taocauhoi.html">Tạo câu hỏi</a></p>
+                    <p><a href="khode.html">Kho đề</a></p>
+                    <p><a href="#">Cài đặt</a></p>
+                </div>
+                <!-- Mạng xã hội -->
+                <div class="layout-footer-section">
+                    <h3>Cộng đồng</h3>
+                    <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+                    <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
+                    <p><a href="https://discord.com" target="_blank">Discord</a></p>
+                </div>
+            </div>
+            <div class="layout-footer-bottom">
+                <p>© 2025 Quizzz. All rights reserved.</p>
+            </div>
+        </footer>
     </div>
-    <div class="topbar__avatar">
-      <img src="/layout/Images/A2.jpg" alt="avatar" />
-    </div>
-  </header>
 
-  <div class="container">
-    <div class="main-wrapper">
-      <!-- ========== SIDEBAR ========== -->
-      <aside class="sidebar">
-        <h2>🎯 Quiz</h2>
-        <ul>
-          <li>
-            <a href="index.html" class="active">
-              <span>🏠</span> HOME
-            </a>
-          </li>
-          <li>
-            <a href="quizzes.html">
-              <span>🧠</span> QUIZZES
-            </a>
-          </li>
-          <li>
-            <a href="taicauhoi.html">
-              <span>📤</span> TẢI ĐỀ THI
-            </a>
-          </li>
-          <li>
-            <a href="taocauhoi.html">
-              <span>📝</span> TẠO CÂU HỎI
-            </a>
-          </li>
-          <li>
-            <a href="khode.html">
-              <span>📂</span> KHO ĐỀ
-            </a>
-          </li>
-          <li>
-            <a href="leaderboard.html">
-              <span>🏆</span> LEADER BOARD
-            </a>
-          </li>
-        </ul>
-      </aside>
-
-      <!-- ========== MAIN CONTENT ========== -->
-      <main class="main-content">
-        <!-- Phần giới thiệu -->
-        <div class="welcome-section">
-          <h1>Chào mừng bạn đến với Quiz 🎉</h1>
-          <p>
-            Bạn có thể tạo <span class="highlight">Bài tập, Đề thi</span> hoặc 
-            <span class="highlight">Bảng đáp án</span> để học sinh thi online hoặc offline 
-            bằng phiếu tô trắc nghiệm.
-          </p>
-          <p>
-            Khám phá các tính năng mạnh mẽ của chúng tôi để tạo ra trải nghiệm học tập tốt nhất! 
-            <a href="#" class="learn-more">Tìm hiểu thêm →</a>
-          </p>
-        </div>
-
-        <!-- Grid 3 tính năng -->
-        <div class="features-grid">
-          <!-- Tính năng 1 -->
-          <a href="taocauhoi.html" class="feature-card">
-            <span class="feature-icon">📝</span>
-            <h3>Tạo bài tập hoặc đề thi</h3>
-            <p>
-              Dễ dàng tạo các bài tập trắc nghiệm, đề thi với nhiều dạng câu hỏi khác nhau. 
-              Hỗ trợ đầy đủ công cụ soạn thảo và quản lý ngân hàng câu hỏi.
-            </p>
-          </a>
-
-          <!-- Tính năng 2 -->
-          <a href="khode.html" class="feature-card">
-            <span class="feature-icon">📂</span>
-            <h3>Kho Đề</h3>
-            <p>
-              Truy cập thư viện câu hỏi phong phú được chia sẻ bởi cộng đồng giáo viên. 
-              Tiết kiệm thời gian với hàng nghìn câu hỏi chất lượng cao.
-            </p>
-          </a>
-
-          <!-- Tính năng 3 -->
-          <a href="taicauhoi.html" class="feature-card">
-            <span class="feature-icon">📤</span>
-            <h3>Tải đề</h3>
-            <p>
-              Nhập đề thi từ file Word, Excel hoặc tải lên hình ảnh đề thi. 
-              Hệ thống tự động nhận diện và chuyển đổi thành bài tập điện tử.
-            </p>
-          </a>
-        </div>
-      </main>
-    </div>
-  </div>
-
-  <script src="/Scripts/trangperson.js"></script>
-
-  <!-- ========== FOOTER ========== -->
-  <footer class="layout-footer">
-    <div class="layout-footer-container">
-      <!-- Giới thiệu -->
-      <div class="layout-footer-section">
-        <h3>Giới thiệu</h3>
-        <p>QUIZZKIT là nền tảng cung cấp các câu đề vui và thử thách trí tuệ.</p>
-      </div>
-
-      <!-- Liên hệ -->
-      <div class="layout-footer-section">
-        <h3>Liên hệ</h3>
-        <p>Email: <a href="">nhatthanh@quizzz.vn</a></p>
-        <p>Hotline: 0123 456 789</p>
-      </div>
-
-      <!-- Liên kết nhanh -->
-      <div class="layout-footer-section">
-        <h3>Liên kết nhanh</h3>
-        <p><a href="#">Trang chủ</a></p>
-        <p><a href="#">Câu hỏi</a></p>
-        <p><a href="#">Cài đặt</a></p>
-        <p><a href="#">Đăng nhập</a></p>
-      </div>
-
-      <!-- Cộng đồng -->
-      <div class="layout-footer-section">
-        <h3>Cộng đồng</h3>
-        <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
-        <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
-        <p><a href="https://discord.com" target="_blank">Discord</a></p>
-      </div>
-    </div>
-
-    <div class="layout-footer-bottom">
-      <p>© 2025 Quizzz. All rights reserved.</p>
-    </div>
-  </footer>
+    <script src="Scripts/trangperson.js"></script>
 </body>
 </html>

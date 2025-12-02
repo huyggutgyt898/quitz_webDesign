@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lý thuyết - QUIZZKIT</title>
+    <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/trangperson.css" />
+    <style>
+        /* Thêm style cho trang lý thuyết */
+        .theory-welcome {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .theory-welcome h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theory-welcome p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .theory-welcome .highlight {
+            color: #e07b39;
+            font-weight: 600;
+        }
+
+        /* Grid môn học */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .subject-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .subject-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .subject-card h3 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .subject-card p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Màu sắc cho từng môn */
+        .subject-card.toan {
+            border-top: 4px solid #667eea;
+        }
+
+        .subject-card.toan:hover {
+            border-top-color: #5568d3;
+        }
+
+        .subject-card.ly {
+            border-top: 4px solid #e74c3c;
+        }
+
+        .subject-card.ly:hover {
+            border-top-color: #c0392b;
+        }
+
+        .subject-card.hoa {
+            border-top: 4px solid #48bb78;
+        }
+
+        .subject-card.hoa:hover {
+            border-top-color: #38a169;
+        }
+
+        .subject-card.sinh {
+            border-top: 4px solid #27ae60;
+        }
+
+        .subject-card.sinh:hover {
+            border-top-color: #229954;
+        }
+
+        .subject-card.van {
+            border-top: 4px solid #ed8936;
+        }
+
+        .subject-card.van:hover {
+            border-top-color: #dd6b20;
+        }
+
+        .subject-card.anh {
+            border-top: 4px solid #c0392b;
+        }
+
+        .subject-card.anh:hover {
+            border-top-color: #a93226;
+        }
+
+        .subject-card.su {
+            border-top: 4px solid #d35400;
+        }
+
+        .subject-card.su:hover {
+            border-top-color: #ba4a00;
+        }
+
+        .subject-card.dia {
+            border-top: 4px solid #16a085;
+        }
+
+        .subject-card.dia:hover {
+            border-top-color: #138d75;
+        }
+
+        .subject-card.tin {
+            border-top: 4px solid #8e44ad;
+        }
+
+        .subject-card.tin:hover {
+            border-top-color: #7d3c98;
+        }
+
+        .subject-card.gdcd {
+            border-top: 4px solid #f39c12;
+        }
+
+        .subject-card.gdcd:hover {
+            border-top-color: #e67e22;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .theory-welcome h1 {
+                font-size: 24px;
+            }
+
+            .theory-welcome p {
+                font-size: 14px;
+            }
+
+            .subject-card {
+                padding: 20px;
+            }
+
+            .subject-card h3 {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .theory-welcome {
+                padding: 20px;
+            }
+
+            .subject-icon {
+                font-size: 36px;
+            }
+        }
+        .back-btn-container {
+  margin-top: 25px;
+  text-align: center;
+  
+}
+
+.back-btn {
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+    
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.modal-icon {
+  font-size: 60px;
+  margin-bottom: 20px;
+}
+
+.modal h2 {
+  color: #667eea;
+  margin-bottom: 15px;
+}
+
+.modal p {
+  color: #666;
+  margin-bottom: 30px;
+}
+    </style>
+</head>
+<body>
+    <!-- OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="layout-sidebar" id="sidebar">
+        <div class="layout-sidebar__title">MENU</div>
+        <a class="layout-sidebar__item" href="index.html">Trang chủ</a>
+        <a class="layout-sidebar__item " href="kholythuyet.html">Lý thuyết</a>
+        <a class="layout-sidebar__item" href="taocauhoi.html">Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="taicauhoi.html">Tải đề thi</a>
+        <a class="layout-sidebar__item" href="khode.html">Kho đề</a>
+        <a class="layout-sidebar__item" href="#">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="#">Cài đặt</a>
+    </aside>
+
+    <!-- MAIN PAGE WRAPPER -->
+    <div class="layout-main" id="mainContent">
+        <!-- TOPBAR -->
+        <header class="layout-topbar">
+            <div class="layout-topbar__left">
+                <!-- HAMBURGER MENU -->
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="layout-topbar__logo">QUIZZKIT</div>
+            </div>
+            <div class="layout-topbar__search">
+                <input type="text" placeholder="Tìm kiếm môn học, lý thuyết..." />
+            </div>
+            <div class="layout-topbar__avatar">
+                <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
+                <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+                    <a href="#">Đăng nhập</a>
+                    <a href="#">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVIGATION BAR -->
+        <nav class="layout-navbar">
+            <a class="layout-navbar__item" href="index.html">Trang chủ</a>
+            <a class="layout-navbar__item active" href="kholythuyet.html">Lý thuyết</a>
+            <a class="layout-navbar__item" href="taocauhoi.html">Tạo câu hỏi</a>
+            <a class="layout-navbar__item" href="taicauhoi.html">Tải đề thi</a>
+            <a class="layout-navbar__item" href="khode.html">Kho đề</a>
+            <a class="layout-navbar__item" href="#">Bảng xếp hạng</a>
+            <a class="layout-navbar__item" href="#">Tài khoản</a>
+        </nav>
+
+        <!-- MAIN CONTENT AREA -->
+        <section class="layout-content">
+            <!-- Phần giới thiệu -->
+            <div class="theory-welcome">
+                <h1>Kho Tài Liệu Lý Thuyết 📚</h1>
+                <p>
+                    Truy cập <span class="highlight">Tài liệu lý thuyết</span> chất lượng cao từ 
+                     cho tất cả các môn học.
+                </p>
+                <p>
+                    Chọn môn học bạn muốn học và khám phá kho tàng kiến thức phong phú được biên soạn bởi đội ngũ giáo viên chuyên nghiệp!
+                </p>
+            </div>
+
+            <!-- Grid các môn học -->
+            <div class="subjects-grid">
+                <!-- Toán học -->
+                <a href="https://vietjack.com/toan-12-kn/index.jsp" target="_blank" class="subject-card toan">
+                    <span class="subject-icon">🔢</span>
+                    <h3>Toán học</h3>
+                    <p>
+                        Lý thuyết Toán từ lớp 1 đến lớp 12. Đại số, hình học, giải tích và các chuyên đề nâng cao.
+                    </p>
+                </a>
+
+                <!-- Vật lý -->
+                <a href="https://vietjack.com/vat-li-10-kn/ly-thuyet-vat-li-lop-10-ket-noi.jsp" target="_blank" class="subject-card ly">
+                    <span class="subject-icon">⚛️</span>
+                    <h3>Vật lý</h3>
+                    <p>
+                        Lý thuyết Vật lý đầy đủ. Cơ học, nhiệt học, điện học, quang học và vật lý hiện đại.
+                    </p>
+                </a>
+
+                <!-- Hóa học -->
+                <a href="https://www.vietjack.com/hoa-hoc-11-kn/index.jsp" target="_blank" class="subject-card hoa">
+                    <span class="subject-icon">🧪</span>
+                    <h3>Hóa học</h3>
+                    <p>
+                        Lý thuyết Hóa học chi tiết. Hóa vô cơ, hóa hữu cơ, hóa phân tích và hóa đại cương.
+                    </p>
+                </a>
+
+                <!-- Sinh học -->
+                <a href="https://vietjack.com/sinh-hoc-12-kn/index.jsp" target="_blank" class="subject-card sinh">
+                    <span class="subject-icon">🧬</span>
+                    <h3>Sinh học</h3>
+                    <p>
+                        Lý thuyết Sinh học toàn diện. Tế bào, di truyền, sinh thái và các chuyên đề sinh học.
+                    </p>
+                </a>
+
+                <!-- Ngữ văn -->
+                <a href="https://loigiaihay.com/tac-gia-tac-pham-tap-1-e11875.html" target="_blank" class="subject-card van">
+                    <span class="subject-icon">📖</span>
+                    <h3>Ngữ văn</h3>
+                    <p>
+                        Tài liệu Ngữ văn phong phú. Văn học Việt Nam, thế giới và các kỹ năng làm văn.
+                    </p>
+                </a>
+
+                <!-- Tiếng Anh -->
+                <a href="https://hocmai.vn/kho-tai-lieu/list.php?category=76" target="_blank" class="subject-card anh">
+                    <span class="subject-icon">🇬🇧</span>
+                    <h3>Tiếng Anh</h3>
+                    <p>
+                        Lý thuyết Tiếng Anh từ cơ bản đến nâng cao. Ngữ pháp, từ vựng và kỹ năng giao tiếp.
+                    </p>
+                </a>
+
+                <!-- Lịch sử -->
+                <a href="https://vietjack.com/giai-bai-tap-lich-su-12/index.jsp" target="_blank" class="subject-card su">
+                    <span class="subject-icon">🏛️</span>
+                    <h3>Lịch sử</h3>
+                    <p>
+                        Tài liệu Lịch sử đầy đủ. Lịch sử Việt Nam, thế giới và các sự kiện quan trọng.
+                    </p>
+                </a>
+
+                <!-- Địa lý -->
+                <a href="https://vietjack.com/giai-bai-tap-dia-li-12/index.jsp" target="_blank" class="subject-card dia">
+                    <span class="subject-icon">🌍</span>
+                    <h3>Địa lý</h3>
+                    <p>
+                        Lý thuyết Địa lý chi tiết. Địa lý tự nhiên, kinh tế và các vùng lãnh thổ.
+                    </p>
+                </a>
+
+                <!-- Tin học -->
+                <a href="https://vietjack.com/giai-bai-tap-tin-hoc-10/ly-thuyet-tin-hoc-10.jsp" target="_blank" class="subject-card tin">
+                    <span class="subject-icon">💻</span>
+                    <h3>Tin học</h3>
+                    <p>
+                        Tài liệu Tin học từ cơ bản đến nâng cao. Lập trình, thuật toán và ứng dụng.
+                    </p>
+                </a>
+
+                <!-- GDCD -->
+                <a href="https://vndoc.com/ly-thuyet-gdcd-lop-9-bai-1-163618" target="_blank" class="subject-card gdcd">
+                    <span class="subject-icon">⚖️</span>
+                    <h3>GDCD</h3>
+                    <p>
+                        Giáo dục Công dân toàn diện. Đạo đức, pháp luật và kỹ năng sống.
+                    </p>
+                </a>
+              
+            </div>
+              <div class="back-btn-container">
+          <button class="back-btn" onclick="window.location.href='trangperson.html'">← Quay lại</button>
+        </div>
+        </section>
+  
+        <!-- FOOTER -->
+        <footer class="layout-footer">
+            <div class="layout-footer-container">
+                <!-- Giới thiệu -->
+                <div class="layout-footer-section">
+                    <h3>Giới thiệu</h3>
+                    <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
+                </div>
+                <!-- Liên hệ -->
+                <div class="layout-footer-section">
+                    <h3>Liên hệ</h3>
+                    <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
+                    <p>Hotline: 0123 456 789</p>
+                </div>
+                <!-- Liên kết nhanh -->
+                <div class="layout-footer-section">
+                    <h3>Liên kết nhanh</h3>
+                    <p><a href="trangperson.html">Trang chủ</a></p>
+                    <p><a href="lythuyet.html">Lý thuyết</a></p>
+                    <p><a href="taocauhoi.html">Tạo câu hỏi</a></p>
+                    <p><a href="khode.html">Kho đề</a></p>
+                </div>
+                <!-- Mạng xã hội -->
+                <div class="layout-footer-section">
+                    <h3>Cộng đồng</h3>
+                    <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+                    <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
+                    <p><a href="https://discord.com" target="_blank">Discord</a></p>
+                </div>
+            </div>
+            <div class="layout-footer-bottom">
+                <p>© 2025 Quizzz. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="Scripts/trangperson.js"></script>
+</body>
+</html>
