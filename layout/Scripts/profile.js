@@ -74,3 +74,11 @@ changeAvatarBtn.addEventListener("click", showAvatarOptions);
 closeSelectorBtn.addEventListener("click", () => {
   avatarSelector.style.display = "none";
 });
+
+/*Đổi tên*/
+document.getElementById("changeNameBtn").addEventListener("click", function () {
+    const newName = prompt("Nhập tên mới:");
+    if (newName && newName.trim() !== "") {
+        document.getElementById("displayName").textContent = newName;
+    }
+});
