@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUIZZKIT - Bài Giảng</title>
+    <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/modelform.css" /> <!-- Reuse style từ quiz list -->
+</head>
+<body>
+    <!-- OVERLAY MỜ (giữ nguyên từ layout) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR (copy từ modelform.html) -->
+    <aside class="layout-sidebar" id="sidebar">
+        <div class="layout-sidebar__title">MENU</div>
+        <a class="layout-sidebar__item" href="index.html">Trang chủ</a>
+        <a class="layout-sidebar__item" href="questions.html">Câu hỏi</a>
+        <a class="layout-sidebar__item" href="create.html">Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="history.html">Lịch sử</a>
+        <a class="layout-sidebar__item" href="profile.html">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="settings.html">Cài đặt</a>
+    </aside>
+
+    <!-- MAIN PAGE WRAPPER -->
+    <div class="layout-main" id="mainContent">
+        <!-- TOPBAR (copy từ modelform.html) -->
+        <header class="layout-topbar">
+            <div class="layout-topbar__left">
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="layout-topbar__logo">QUIZZKIT</div>
+            </div>
+            <div class="layout-topbar__search">
+                <input type="text" placeholder="Tìm kiếm khóa học, quiz..." id="searchInput" />
+            </div>
+            <div class="layout-topbar__avatar">
+                <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
+                <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+                    <a href="login.html">Đăng nhập</a>
+                    <a href="logout.html">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVIGATION BAR (copy từ modelform.html, nhưng điều chỉnh active nếu cần) -->
+        <nav class="layout-navbar">
+            <a class="layout-navbar__item" href="index.html">Trang chủ</a>
+            <div class="layout-navbar__item active navbar-dropdown-wrapper">
+                <span>Câu hỏi</span>
+                <span class="dropdown-arrow">▼</span>
+                <!-- Giữ nguyên dropdown -->
+            </div>
+            <a class="layout-navbar__item" href="create.html">Tạo câu hỏi</a>
+            <a class="layout-navbar__item" href="leaderboard.html">Bảng xếp hạng</a>
+            <a class="layout-navbar__item" href="account.html">Tài khoản</a>
+        </nav>
+
+        <!-- MAIN CONTENT AREA: Bài giảng -->
+        <section class="layout-content">
+            <div class="lecture-section">
+                <h2 id="lectureTitle">Đang load...</h2>
+                <p id="lectureDescription">Mô tả...</p>
+                <div id="lectureContent"><!-- JS render content --></div>
+                <div class="lecture-footer">
+                    <button class="quiz-btn" id="startQuizBtn">Ôn tập</button>
+                    <button class="quiz-btn back-btn" onclick="history.back()">Quay lại</button> <!-- Nút quay về modelform.html -->
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER (copy từ modelform.html) -->
+        <footer class="layout-footer">
+            <!-- Giữ nguyên nội dung footer -->
+        </footer>
+    </div>
+
+    <script src="Scripts/layout.js"></script> <!-- Dark mode và layout chung -->
+    <script src="Scripts/lecture.js"></script> <!-- JS cho lecture -->
+</body>
+</html>

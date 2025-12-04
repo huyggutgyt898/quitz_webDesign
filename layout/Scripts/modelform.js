@@ -269,34 +269,34 @@ function showEmptyState(container) {
     container.appendChild(emptyState);
 }
 
-// Attach Event Listeners to Quiz Items
+// Cập nhật attachQuizEventListeners để redirect khi chơi
 function attachQuizEventListeners(quizElement) {
     const playBtn = quizElement.querySelector('.play-btn');
     const likeBtn = quizElement.querySelector('.like-btn');
     const dislikeBtn = quizElement.querySelector('.dislike-btn');
-    
-    // Play button
+    const quizName = quizElement.querySelector('.quiz-name').textContent;
+
     if (playBtn) {
         playBtn.addEventListener('click', (e) => {
             e.stopPropagation();
-            alert('Chức năng chơi quiz sẽ được triển khai!');
+            // Redirect đến lecture.html với param
+            window.location.href = `lecture.html?quiz=${encodeURIComponent(quizName)}`;
         });
     }
-    
-    // Quiz item click
+
+    // Giữ nguyên quiz item click 
     quizElement.addEventListener('click', () => {
         alert('Chi tiết quiz sẽ được hiển thị!');
     });
-    
-    // Like button
+
+    // Giữ nguyên like/dislike
     if (likeBtn) {
         likeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             handleReaction(likeBtn, dislikeBtn);
         });
     }
-    
-    // Dislike button
+
     if (dislikeBtn) {
         dislikeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -305,7 +305,87 @@ function attachQuizEventListeners(quizElement) {
     }
 }
 
-// Handle Like/Dislike
+// Thêm phần load và render quiz từ JSON
+window.addEventListener('load', () => {
+    loadPreferences();
+    
+    fetch('data/allQuizzes.json')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Không load được JSON');
+            }
+            return response.json();
+        })
+        .then(quizzes => {
+            // Map section đến grid DOM
+            const sectionGrids = {
+                recommended: document.querySelector('.quiz-section[data-section="recommended"] .quiz-grid'),
+                trending: document.querySelector('.quiz-section[data-section="trending"] .quiz-grid'),
+                new: document.querySelector('.quiz-section[data-section="new"] .quiz-grid'),
+                popular: document.querySelector('.quiz-section[data-section="popular"] .quiz-grid'),
+                'most-played': document.querySelector('.quiz-section[data-section="most-played"] .quiz-grid'),
+                'hot-players': document.querySelector('.quiz-section[data-section="hot-players"] .quiz-grid')
+            };
+
+            quizzes.forEach(quiz => {
+                const quizHTML = `
+                    <div class="quiz-item" data-category="${quiz.category}" data-filter="${quiz.section}">
+                        <div class="quiz-thumbnail">
+                            <img src="${quiz.thumbnail}" alt="${quiz.alt}">
+                            <div class="quiz-overlay">
+                                <button class="play-btn">▶ Chơi ngay</button>
+                            </div>
+                        </div>
+                        <div class="quiz-details">
+                            <h3 class="quiz-name">${quiz.name}</h3>
+                            <p class="quiz-description">${quiz.description}</p>
+                            <div class="quiz-author">
+                                <img src="${quiz.authorImg}" alt="${quiz.authorName}" class="author-avatar">
+                                <span class="author-name">${quiz.authorName}</span>
+                                ${quiz.authorBadge ? `<span class="author-badge">${quiz.authorBadge}</span>` : ''}
+                            </div>
+                            <div class="quiz-stats">
+                                <div class="stat-item">
+                                    <span class="stat-icon">▶️</span>
+                                    <span class="stat-value">${quiz.plays}</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-icon">👁️</span>
+                                    <span class="stat-value">${quiz.views}</span>
+                                </div>
+                                <div class="quiz-reactions">
+                                    <button class="reaction-btn like-btn">
+                                        <span class="reaction-icon">👍</span>
+                                        <span class="reaction-count">${quiz.likes}</span>
+                                    </button>
+                                    <button class="reaction-btn dislike-btn">
+                                        <span class="reaction-icon">👎</span>
+                                        <span class="reaction-count">${quiz.dislikes}</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                const targetGrid = sectionGrids[quiz.section];
+                if (targetGrid) {
+                    targetGrid.innerHTML += quizHTML;
+                    const newItem = targetGrid.lastElementChild;
+                    attachQuizEventListeners(newItem);
+                }
+            });
+
+            // Apply filter và animation sau render
+            applyFilter();
+            addEntranceAnimation();
+        })
+        .catch(error => {
+            console.error('Lỗi load quiz JSON:', error);
+            // Optional: Hiển thị thông báo lỗi trên page
+        });
+});
+//  Like/Dislike
 function handleReaction(clickedBtn, oppositeBtn) {
     const countSpan = clickedBtn.querySelector('.reaction-count');
     let count = parseInt(countSpan.textContent);

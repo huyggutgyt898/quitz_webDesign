@@ -1,0 +1,95 @@
+{
+  "Thử thách toán học": [
+    {"question": "2 + 2 = ?", "options": ["3", "4", "5", "6"], "answer": "4"},
+    {"question": "Số nguyên tố nhỏ nhất là?", "options": ["1", "2", "3", "0"], "answer": "2"},
+    {"question": "Diện tích hình vuông cạnh 3?", "options": ["6", "9", "12", "15"], "answer": "9"},
+    {"question": "Pi xấp xỉ bằng?", "options": ["3.14", "2.14", "4.14", "3.41"], "answer": "3.14"},
+    {"question": "Góc vuông bằng bao nhiêu độ?", "options": ["90", "180", "45", "360"], "answer": "90"},
+    {"question": "Phép trừ: 10 - 4 = ?", "options": ["6", "14", "5", "7"], "answer": "6"},
+    {"question": "Số chẵn lớn nhất dưới 10?", "options": ["8", "9", "10", "7"], "answer": "8"},
+    {"question": "Hình tam giác có bao nhiêu cạnh?", "options": ["3", "4", "5", "2"], "answer": "3"},
+    {"question": "1 + 1 + 1 = ?", "options": ["3", "2", "4", "1"], "answer": "3"},
+    {"question": "Số âm là số nhỏ hơn?", "options": ["0", "1", "2", "-1"], "answer": "0"},
+    {"question": "Căn bậc hai của 16?", "options": ["4", "2", "8", "16"], "answer": "4"}
+  ],
+  "Kiến thức lập trình cơ bản": [
+    {"question": "HTML là viết tắt của?", "options": ["Hyper Text Markup Language", "High Tech Machine Language", "Home Tool Markup Language", "Hyperlinks and Text Markup Language"], "answer": "Hyper Text Markup Language"},
+    {"question": "CSS dùng để làm gì?", "options": ["Cấu trúc trang", "Thiết kế giao diện", "Lập trình logic", "Lưu dữ liệu"], "answer": "Thiết kế giao diện"},
+    {"question": "JavaScript là ngôn ngữ?", "options": ["Client-side", "Server-side", "Database", "Markup"], "answer": "Client-side"},
+    {"question": "Thẻ <div> dùng để?", "options": ["Phân chia khối", "Hình ảnh", "Danh sách", "Bảng"], "answer": "Phân chia khối"},
+    {"question": "console.log() dùng để?", "options": ["In ra console", "Thay đổi style", "Lưu dữ liệu", "Tạo biến"], "answer": "In ra console"},
+    {"question": "Selector trong CSS là?", "options": ["Chọn phần tử", "Hàm JS", "Thẻ HTML", "Biến"], "answer": "Chọn phần tử"},
+    {"question": "Thẻ <a> dùng để?", "options": ["Liên kết", "Hình ảnh", "Đoạn văn", "Tiêu đề"], "answer": "Liên kết"},
+    {"question": "Biến trong JS khai báo bằng?", "options": ["let/var/const", "int", "string", "bool"], "answer": "let/var/const"},
+    {"question": "Flexbox trong CSS dùng để?", "options": ["Bố cục linh hoạt", "Animation", "Color", "Font"], "answer": "Bố cục linh hoạt"},
+    {"question": "Event listener trong JS là?", "options": ["Xử lý sự kiện", "Vẽ hình", "Lưu file", "Tính toán"], "answer": "Xử lý sự kiện"}
+  ],
+  "Vũ trụ và thiên văn học": [
+    {"question": "Hành tinh gần Mặt Trời nhất là?", "options": ["Trái Đất", "Sao Hỏa", "Sao Thủy", "Sao Kim"], "answer": "Sao Thủy"},
+    {"question": "Số hành tinh trong Hệ Mặt Trời?", "options": ["8", "9", "7", "10"], "answer": "8"},
+    {"question": "Ngôi sao gần Trái Đất nhất?", "options": ["Mặt Trời", "Sirius", "Alpha Centauri", "Betelgeuse"], "answer": "Mặt Trời"},
+    {"question": "Lỗ đen là gì?", "options": ["Vùng không gian hút mọi thứ", "Ngôi sao", "Hành tinh", "Thiên hà"], "answer": "Vùng không gian hút mọi thứ"},
+    {"question": "Sao băng là gì?", "options": ["Sao rơi", "Vệ tinh", "Tiểu hành tinh cháy", "Sao chổi"], "answer": "Tiểu hành tinh cháy"},
+    {"question": "Thiên hà của chúng ta tên là?", "options": ["Milky Way", "Andromeda", "Triangulum", "Sombrero"], "answer": "Milky Way"},
+    {"question": "Mặt Trăng quay quanh?", "options": ["Trái Đất", "Mặt Trời", "Sao Hỏa", "Sao Mộc"], "answer": "Trái Đất"},
+    {"question": "Big Bang là lý thuyết về?", "options": ["Nguồn gốc vũ trụ", "Hành tinh nổ", "Sao băng", "Lỗ đen"], "answer": "Nguồn gốc vũ trụ"},
+    {"question": "Sao neutron là gì?", "options": ["Tàn dư sao lớn", "Hành tinh", "Thiên thạch", "Khí gas"], "answer": "Tàn dư sao lớn"},
+    {"question": "Quasar là gì?", "options": ["Thiên hà hoạt động", "Sao", "Hành tinh", "Mặt Trăng"], "answer": "Thiên hà hoạt động"}
+  ],
+  "Các sự kiện lịch sử quan trọng": [
+    {"question": "Năm Columbus phát hiện châu Mỹ?", "options": ["1492", "1600", "1776", "1945"], "answer": "1492"},
+    {"question": "Chiến tranh Thế giới thứ II bắt đầu năm?", "options": ["1939", "1914", "1945", "1918"], "answer": "1939"},
+    {"question": "Cách mạng Pháp năm?", "options": ["1789", "1776", "1917", "1688"], "answer": "1789"},
+    {"question": "Tuyên ngôn Độc lập Mỹ năm?", "options": ["1776", "1789", "1945", "1914"], "answer": "1776"},
+    {"question": "Sụp đổ Bức tường Berlin năm?", "options": ["1989", "1991", "1945", "1961"], "answer": "1989"},
+    {"question": "Khám phá ra penicillin năm?", "options": ["1928", "1900", "1945", "1850"], "answer": "1928"},
+    {"question": "Cách mạng Công nghiệp bắt đầu ở?", "options": ["Anh", "Pháp", "Mỹ", "Đức"], "answer": "Anh"},
+    {"question": "Năm thành lập Liên Hợp Quốc?", "options": ["1945", "1919", "1939", "1950"], "answer": "1945"},
+    {"question": "Ai phát minh bóng đèn?", "options": ["Edison", "Tesla", "Newton", "Einstein"], "answer": "Edison"},
+    {"question": "Chiến tranh Lạnh kết thúc năm?", "options": ["1991", "1989", "1945", "1975"], "answer": "1991"}
+  ],
+  "Phim ảnh Việt Nam": [
+    {"question": "Phim 'Em Bé Hà Nội' của đạo diễn nào?", "options": ["Hải Ninh", "Nguyễn Văn A", "Trần Văn B", "Lê Thị C"], "answer": "Hải Ninh"},
+    {"question": "Phim 'Mùi Đu Đủ Xanh' đoạt giải gì?", "options": ["Cannes", "Oscar", "Golden Globe", "Berlinale"], "answer": "Cannes"}
+  ],
+  "World Cup - Giải đấu vĩ đại": [
+    {"question": "Quốc gia vô địch World Cup nhiều nhất?", "options": ["Brazil", "Đức", "Italy", "Argentina"], "answer": "Brazil"},
+    {"question": "World Cup đầu tiên năm?", "options": ["1930", "1950", "1900", "1940"], "answer": "1930"}
+  ],
+  "Trí tuệ nhân tạo AI 2024": [
+    {"question": "AI là viết tắt của?", "options": ["Artificial Intelligence", "Automated Integration", "Advanced Internet", "Artificial Integration"], "answer": "Artificial Intelligence"},
+    {"question": "Machine Learning là gì?", "options": ["Học máy", "Lập trình", "Database", "Mạng"], "answer": "Học máy"}
+  ],
+  "Âm nhạc quốc tế": [
+    {"question": "Nghệ sĩ hát 'Shake It Off'?", "options": ["Taylor Swift", "Beyoncé", "Adele", "Ed Sheeran"], "answer": "Taylor Swift"},
+    {"question": "Ban nhạc The Beatles từ đâu?", "options": ["Anh", "Mỹ", "Pháp", "Đức"], "answer": "Anh"}
+  ],
+  "Lịch sử Việt Nam qua các thời kỳ": [
+    {"question": "Triều đại đầu tiên của Việt Nam?", "options": ["Hùng Vương", "Lý", "Trần", "Nguyễn"], "answer": "Hùng Vương"},
+    {"question": "Trận Bạch Đằng năm nào?", "options": ["938", "1077", "1288", "1428"], "answer": "938"}
+  ],
+  "ChatGPT và công nghệ AI": [
+    {"question": "ChatGPT dựa trên mô hình nào?", "options": ["GPT", "BERT", "RNN", "CNN"], "answer": "GPT"},
+    {"question": "LLM là viết tắt của?", "options": ["Large Language Model", "Low Level Machine", "Long Learning Model", "Large Logic Machine"], "answer": "Large Language Model"}
+  ],
+  "Thủ đô các nước châu Á": [
+    {"question": "Thủ đô của Nhật Bản?", "options": ["Tokyo", "Beijing", "Seoul", "Bangkok"], "answer": "Tokyo"},
+    {"question": "Thủ đô của Trung Quốc?", "options": ["Beijing", "Shanghai", "Hong Kong", "Tokyo"], "answer": "Beijing"}
+  ],
+  "Phép tính nhanh siêu tốc": [
+    {"question": "25 x 25 = ?", "options": ["625", "650", "600", "675"], "answer": "625"},
+    {"question": "99 x 101 = ?", "options": ["9999", "10000", "9899", "10101"], "answer": "9999"}
+  ],
+  "Khoa học tự nhiên cơ bản": [
+    {"question": "Công thức nước?", "options": ["H2O", "CO2", "NaCl", "O2"], "answer": "H2O"},
+    {"question": "Lực hấp dẫn do ai phát hiện?", "options": ["Newton", "Einstein", "Galileo", "Tesla"], "answer": "Newton"}
+  ],
+  "Địa lý thế giới": [
+    {"question": "Châu lục lớn nhất?", "options": ["Châu Á", "Châu Phi", "Châu Âu", "Châu Mỹ"], "answer": "Châu Á"},
+    {"question": "Sông dài nhất thế giới?", "options": ["Nile", "Amazon", "Yangtze", "Mississippi"], "answer": "Amazon"}
+  ],
+  "Kiến thức bóng đá thế giới": [
+    {"question": "Cầu thủ ghi nhiều bàn nhất World Cup?", "options": ["Miroslav Klose", "Pele", "Ronaldo", "Messi"], "answer": "Miroslav Klose"},
+    {"question": "FIFA thành lập năm?", "options": ["1904", "1930", "1950", "1920"], "answer": "1904"}
+  ]
+}

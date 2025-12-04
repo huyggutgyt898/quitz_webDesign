@@ -1,0 +1,62 @@
+{
+  "Thử thách toán học": {
+    "description": "Kiểm tra kiến thức toán học của bạn với 25 câu hỏi thú vị!",
+    "content": "<h3>Bài giảng về toán học cơ bản</h3><p>Toán học là nền tảng của khoa học. Hãy ôn lại các khái niệm như phép cộng, trừ, nhân, chia và số nguyên tố.</p><p>Ví dụ: 2 + 2 = 4. Số nguyên tố là số chỉ chia hết cho 1 và chính nó.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_MATH' title='Bài giảng toán học' frameborder='0' allowfullscreen></iframe><p>Sau khi học, hãy thử quiz để kiểm tra kiến thức.</p>"
+  },
+  "Kiến thức lập trình cơ bản": {
+    "description": "30 câu hỏi về HTML, CSS, JavaScript cho người mới bắt đầu",
+    "content": "<h3>Bài giảng lập trình cơ bản</h3><p>Lập trình web bắt đầu với HTML cho cấu trúc, CSS cho thiết kế, và JavaScript cho tương tác.</p><p>Ví dụ: HTML là <code>&lt;p&gt;Hello World!&lt;/p&gt;</code>.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_PROGRAMMING' title='Lập trình cơ bản' frameborder='0' allowfullscreen></iframe><p>Xem video và thực hành code đơn giản.</p>"
+  },
+  "Vũ trụ và thiên văn học": {
+    "description": "Khám phá những bí ẩn của vũ trụ qua 20 câu hỏi hấp dẫn",
+    "content": "<h3>Bài giảng thiên văn học</h3><p>Vũ trụ bao gồm các hành tinh, ngôi sao và thiên hà. Hệ Mặt Trời của chúng ta có 8 hành tinh.</p><p>Ví dụ: Trái Đất quay quanh Mặt Trời trong 365 ngày.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_ASTRONOMY' title='Vũ trụ và thiên văn' frameborder='0' allowfullscreen></iframe><p>Khám phá thêm về lỗ đen và sao neutron.</p>"
+  },
+  "Các sự kiện lịch sử quan trọng": {
+    "description": "Những mốc thời gian quan trọng trong lịch sử thế giới",
+    "content": "<h3>Bài giảng lịch sử thế giới</h3><p>Lịch sử nhân loại có nhiều sự kiện như Chiến tranh Thế giới thứ II và Cách mạng Công nghiệp.</p><p>Ví dụ: Năm 1492, Columbus phát hiện châu Mỹ.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_HISTORY' title='Sự kiện lịch sử' frameborder='0' allowfullscreen></iframe><p>Ôn tập timeline các sự kiện lớn.</p>"
+  },
+  "Phim ảnh Việt Nam": {
+    "description": "Bạn biết gì về điện ảnh Việt Nam qua các thời kỳ?",
+    "content": "<h3>Bài giảng phim ảnh Việt Nam</h3><p>Điện ảnh Việt Nam phát triển từ thời kỳ kháng chiến đến hiện đại với các phim như 'Em Bé Hà Nội'.</p><p>Ví dụ: Thời kỳ đổi mới mang đến nhiều phim hay như 'Mùi Đu Đủ Xanh'.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_VIET_FILM' title='Phim Việt Nam' frameborder='0' allowfullscreen></iframe><p>Xem trailer và phân tích phim.</p>"
+  },
+  "World Cup - Giải đấu vĩ đại": {
+    "description": "Những câu hỏi thú vị về lịch sử World Cup",
+    "content": "<h3>Bài giảng về World Cup</h3><p>World Cup là giải bóng đá lớn nhất thế giới, bắt đầu từ năm 1930.</p><p>Ví dụ: Brazil vô địch nhiều nhất với 5 lần.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_WORLD_CUP' title='Lịch sử World Cup' frameborder='0' allowfullscreen></iframe><p>Ôn lại các khoảnh khắc nổi bật.</p>"
+  },
+  "Trí tuệ nhân tạo AI 2024": {
+    "description": "Kiến thức mới nhất về AI và Machine Learning",
+    "content": "<h3>Bài giảng AI 2024</h3><p>AI đang phát triển với các mô hình như GPT và machine learning cho dự đoán.</p><p>Ví dụ: Machine learning dùng dữ liệu để học mà không cần lập trình rõ ràng.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_AI' title='AI hiện đại' frameborder='0' allowfullscreen></iframe><p>Thảo luận về ứng dụng AI trong đời sống.</p>"
+  },
+  "Âm nhạc quốc tế": {
+    "description": "Bạn có phải fan của nhạc Pop/Rock quốc tế?",
+    "content": "<h3>Bài giảng âm nhạc quốc tế</h3><p>Âm nhạc quốc tế bao gồm Pop, Rock với nghệ sĩ như Taylor Swift và The Beatles.</p><p>Ví dụ: Pop thường có giai điệu dễ nghe, Rock nhấn mạnh guitar.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_MUSIC' title='Âm nhạc Pop/Rock' frameborder='0' allowfullscreen></iframe><p>Nghe playlist và phân tích thể loại.</p>"
+  },
+  "Lịch sử Việt Nam qua các thời kỳ": {
+    "description": "30 câu hỏi về lịch sử dân tộc Việt Nam anh hùng",
+    "content": "<h3>Bài giảng lịch sử Việt Nam</h3><p>Lịch sử Việt Nam từ thời Hùng Vương đến hiện đại, với các cuộc kháng chiến.</p><p>Ví dụ: Triều đại Lý - Trần xây dựng đất nước vững mạnh.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_VIET_HISTORY' title='Lịch sử Việt Nam' frameborder='0' allowfullscreen></iframe><p>Ôn tập các anh hùng dân tộc.</p>"
+  },
+  "ChatGPT và công nghệ AI": {
+    "description": "Bạn hiểu bao nhiêu về ChatGPT và các LLM?",
+    "content": "<h3>Bài giảng về ChatGPT</h3><p>ChatGPT là mô hình ngôn ngữ lớn (LLM) dựa trên transformer.</p><p>Ví dụ: Nó có thể trả lời câu hỏi dựa trên dữ liệu huấn luyện.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_CHATGPT' title='ChatGPT explained' frameborder='0' allowfullscreen></iframe><p>Thảo luận về ưu nhược điểm.</p>"
+  },
+  "Thủ đô các nước châu Á": {
+    "description": "Bạn có nhớ hết thủ đô của 48 quốc gia châu Á?",
+    "content": "<h3>Bài giảng địa lý châu Á</h3><p>Châu Á có 48 quốc gia, mỗi quốc gia có thủ đô riêng.</p><p>Ví dụ: Thủ đô Nhật Bản là Tokyo, Trung Quốc là Bắc Kinh.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_ASIA_CAPITALS' title='Thủ đô châu Á' frameborder='0' allowfullscreen></iframe><p>Học qua bản đồ và flashcard.</p>"
+  },
+  "Phép tính nhanh siêu tốc": {
+    "description": "Thử thách tính toán nhanh trong 60 giây",
+    "content": "<h3>Bài giảng tính toán nhanh</h3><p>Kỹ thuật tính nhanh như nhân số lớn hoặc bình phương.</p><p>Ví dụ: 25 x 25 = (20+5)^2 = 625.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_QUICK_MATH' title='Tính nhanh' frameborder='0' allowfullscreen></iframe><p>Luyện tập với ví dụ.</p>"
+  },
+  "Khoa học tự nhiên cơ bản": {
+    "description": "Kiến thức vật lý, hóa học, sinh học",
+    "content": "<h3>Bài giảng khoa học cơ bản</h3><p>Khoa học tự nhiên bao gồm vật lý (lực học), hóa học (phản ứng), sinh học (tế bào).</p><p>Ví dụ: Nước là H2O.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_SCIENCE' title='Khoa học cơ bản' frameborder='0' allowfullscreen></iframe><p>Thí nghiệm đơn giản tại nhà.</p>"
+  },
+  "Địa lý thế giới": {
+    "description": "Khám phá các quốc gia và lãnh thổ",
+    "content": "<h3>Bài giảng địa lý thế giới</h3><p>Thế giới có 7 châu lục, hơn 190 quốc gia.</p><p>Ví dụ: Châu Âu có 44 quốc gia.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_WORLD_GEO' title='Địa lý thế giới' frameborder='0' allowfullscreen></iframe><p>Học qua bản đồ tương tác.</p>"
+  },
+  "Kiến thức bóng đá thế giới": {
+    "description": "Dành cho fan hâm mộ bóng đá",
+    "content": "<h3>Bài giảng bóng đá</h3><p>Bóng đá là môn thể thao vua với các giải như Premier League, La Liga.</p><p>Ví dụ: Messi là cầu thủ nổi tiếng của Argentina.</p><iframe width='560' height='315' src='https://www.youtube.com/embed/VIDEO_ID_FOOTBALL' title='Bóng đá thế giới' frameborder='0' allowfullscreen></iframe><p>Ôn luật chơi và ngôi sao.</p>"
+  }
+}

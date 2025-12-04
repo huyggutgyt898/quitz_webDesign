@@ -38,3 +38,36 @@ navItems.forEach(item => {
         this.classList.add('active');
     });
 });
+// ============== CHUNG CHO TOÀN BỘ WEBSITE: SÁNG / TỐI ==============
+(function () {
+    const savedTheme = localStorage.getItem('quizzkit-theme');
+
+    // Nếu người dùng đã chọn tối trước đó → bật dark mode
+    if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.body.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+        document.body.classList.remove('dark');
+    }
+
+    // Tạo nút chuyển theme (nếu trang có phần tử #themeBtn hoặc #themeSwitch)
+    const themeBtn = document.getElementById('themeBtn') || document.getElementById('themeSwitch');
+    const themeText = document.getElementById('themeText');
+
+    if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            document.body.classList.toggle('dark');
+
+            if (document.documentElement.classList.contains('dark')) {
+                localStorage.setItem('quizzkit-theme', 'dark');
+                if (themeText) themeText.textContent = 'Chế độ tối';
+            } else {
+                localStorage.setItem('quizzkit-theme', 'light');
+                if (themeText) themeText.textContent = 'Chế độ sáng';
+            }
+        });
+    }
+})();
+//hết khúc sáng tối

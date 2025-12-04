@@ -281,3 +281,40 @@ body {
         font-size: 13px;
     }
 }
+/* ============== DARK MODE CHUNG CHO TOÀN BỘ WEBSITE ============== */
+html.dark,
+body.dark {
+    background: #333435;
+    color: #e2e8f0;
+}
+
+html.dark .layout-topbar,
+html.dark .layout-navbar,
+html.dark .layout-footer {
+    background: #111827 !important;
+    border-color: #1f2937 !important;
+}
+
+html.dark .layout-topbar__logo,
+html.dark .layout-navbar__item {
+    color: #e5e7eb !important;
+}
+
+html.dark .layout-navbar__item.active {
+    color: white !important;
+    border-bottom-color: #3b82f6 !important;
+}
+
+html.dark .layout-sidebar {
+    background: #111827 !important;
+}
+
+html.dark .layout-sidebar__item {
+    color: #9ca3af !important;
+}
+
+html.dark .layout-sidebar__item:hover,
+html.dark .layout-sidebar__item.active {
+    background: #1f2937 !important;
+    color: white !important;
+}

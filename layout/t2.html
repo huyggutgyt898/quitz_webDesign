@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QUIZZKIT - Trang Chủ</title>
-    <link rel="stylesheet" href="Styles/t2.css" />
+    <title>QUIZZKIT - Câu Đố</title>
+    <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/modelform.css" />
 </head>
 <body>
-    <!-- OVERLAY MỜ - CHỈ HIỆN KHI SIDEBAR MỞ -->
+    <!-- OVERLAY MỜ -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- SIDEBAR -->
     <aside class="layout-sidebar" id="sidebar">
         <div class="layout-sidebar__title">MENU</div>
-        <a class="layout-sidebar__item" href="">Trang chủ</a>
-        <a class="layout-sidebar__item" href="">Câu hỏi</a>
-        <a class="layout-sidebar__item" href="">Tạo câu hỏi</a>
-        <a class="layout-sidebar__item" href="">Lịch sử</a>
-        <a class="layout-sidebar__item" href="">Hồ sơ</a>
-        <a class="layout-sidebar__item" href="">Cài đặt</a>
+        <a class="layout-sidebar__item" href="index.html">Trang chủ</a>
+        <a class="layout-sidebar__item" href="questions.html">Câu hỏi</a>
+        <a class="layout-sidebar__item" href="create.html">Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="history.html">Lịch sử</a>
+        <a class="layout-sidebar__item" href="profile.html">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="settings.html">Cài đặt</a>
     </aside>
 
     <!-- MAIN PAGE WRAPPER -->
@@ -26,7 +27,6 @@
         <!-- TOPBAR -->
         <header class="layout-topbar">
             <div class="layout-topbar__left">
-                <!-- HAMBURGER MENU -->
                 <div class="hamburger-menu" id="hamburgerMenu">
                     <span></span>
                     <span></span>
@@ -35,133 +35,748 @@
                 <div class="layout-topbar__logo">QUIZZKIT</div>
             </div>
             <div class="layout-topbar__search">
-                <input type="text" placeholder="Tìm kiếm quiz, chủ đề..." />
+                <input type="text" placeholder="Tìm kiếm khóa học, quiz..." id="searchInput" />
             </div>
             <div class="layout-topbar__avatar">
                 <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
                 <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
-                    <a href="">Đăng nhập</a>
-                    <a href="">Đăng xuất</a>
+                    <a href="login.html">Đăng nhập</a>
+                    <a href="logout.html">Đăng xuất</a>
                 </div>
             </div>
         </header>
 
-        <!-- NAVIGATION BAR - THANH TOPBAR THỨ 2 -->
+        <!-- NAVIGATION BAR -->
         <nav class="layout-navbar">
-            <a class="layout-navbar__item active" href="">Trang chủ</a>
-            <a class="layout-navbar__item" href="">Câu hỏi</a>
-            <a class="layout-navbar__item" href="">Tạo quiz</a>
-            <a class="layout-navbar__item" href="">Bảng xếp hạng</a>
-            <a class="layout-navbar__item" href="">Tài khoản</a>
+            <a class="layout-navbar__item" href="index.html">Trang chủ</a>
+            <div class="layout-navbar__item active navbar-dropdown-wrapper">
+                <span>Câu hỏi</span>
+                <span class="dropdown-arrow">▼</span>
+                <div class="navbar-dropdown" id="categoryDropdown">
+                    <a href="#" class="dropdown-item active" data-category="all">Tất cả</a>
+                    <a href="#" class="dropdown-item" data-category="technology">Công nghệ</a>
+                    <a href="#" class="dropdown-item" data-category="science">Khoa học</a>
+                    <a href="#" class="dropdown-item" data-category="history">Lịch sử</a>
+                    <a href="#" class="dropdown-item" data-category="geography">Địa lý</a>
+                    <a href="#" class="dropdown-item" data-category="sports">Thể thao</a>
+                    <a href="#" class="dropdown-item" data-category="entertainment">Giải trí</a>
+                    <a href="#" class="dropdown-item" data-category="math">Toán học</a>
+                </div>
+            </div>
+            <a class="layout-navbar__item" href="create.html">Tạo câu hỏi</a>
+            <a class="layout-navbar__item" href="leaderboard.html">Bảng xếp hạng</a>
+            <a class="layout-navbar__item" href="account.html">Tài khoản</a>
         </nav>
 
         <!-- MAIN CONTENT AREA -->
         <section class="layout-content">
-            <!-- Hero Banner -->
-            <div class="hero-banner">
-                <h1>Khám Phá Quiz Vui & Kiến Thức Tại QUIZZKIT!</h1>
-                <p>Thử thách bản thân với hàng ngàn quiz tâm lý, vui nhộn, tình yêu và hơn thế nữa.</p>
-                <a href="" class="cta-button">Tạo Quiz Ngay</a>
+            <!-- FILTER BAR -->
+            <div class="filter-bar">
+                <div class="filter-dropdown-wrapper">
+                    <button class="filter-dropdown-btn" id="filterDropdownBtn">
+                        <span class="hamburger-icon">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                        <span class="filter-text">Lọc theo</span>
+                    </button>
+                    <div class="filter-dropdown" id="filterDropdown">
+                        <div class="filter-option active" data-filter="all">
+                            <span class="filter-icon">📋</span>
+                            <span>Tất cả</span>
+                        </div>
+                        <div class="filter-option" data-filter="recommended">
+                            <span class="filter-icon">⭐</span>
+                            <span>Đề xuất</span>
+                        </div>
+                        <div class="filter-option" data-filter="trending">
+                            <span class="filter-icon">🔥</span>
+                            <span>Trending</span>
+                        </div>
+                        <div class="filter-option" data-filter="new">
+                            <span class="filter-icon">✨</span>
+                            <span>Mới nhất</span>
+                        </div>
+                        <div class="filter-option" data-filter="popular">
+                            <span class="filter-icon">👁️</span>
+                            <span>Nhiều xem</span>
+                        </div>
+                        <div class="filter-option" data-filter="most-played">
+                            <span class="filter-icon">🎮</span>
+                            <span>Nhiều chơi</span>
+                        </div>
+                        <div class="filter-option" data-filter="hot-players">
+                            <span class="filter-icon">👑</span>
+                            <span>Hot Player</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm quiz..." id="quizSearchInput" />
+                    <button class="search-btn" id="searchBtn">
+                        <span>🔍</span>
+                    </button>
+                </div>
             </div>
 
-            <!-- Carousel Quiz Nổi Bật -->
-            <section class="quiz-carousel-section">
-                <h2>Quiz Nổi Bật</h2>
-                <div class="quiz-carousel">
-                    <div class="quiz-carousel__slide">
-                        <img src="Images/A2.jpg" alt="Quiz 1">
-                        <div class="quiz-carousel__content">
-                            <h3>POV: Hội Chợ</h3>
-                            <p>Bạn sẽ là ai trong hội chợ sôi động? Thử ngay!</p>
-                            <a href="" class="play-button">Chơi Ngay</a>
-                        </div>
+            <!-- QUIZ SECTIONS (Show all when filter = "all") -->
+            <div id="allSections" class="all-sections">
+                <!-- RECOMMENDED SECTION -->
+                <div class="quiz-section" data-section="recommended">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">⭐</span>
+                            Quiz đề xuất
+                        </h2>
+                        <a href="#" class="section-link">xem thêm quiz đề xuất...</a>
                     </div>
-                    <div class="quiz-carousel__slide">
-                        <img src="https://source.unsplash.com/random/800x400/?personality" alt="Quiz 2">
-                        <div class="quiz-carousel__content">
-                            <h3>Trắc Nghiệm Tính Cách</h3>
-                            <p>Khám phá bản thân qua 10 câu hỏi thú vị.</p>
-                            <a href="" class="play-button">Chơi Ngay</a>
+                    <div class="quiz-grid">
+                        <div class="quiz-item" data-category="math" data-filter="recommended">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=300&fit=crop" alt="Thử thách toán">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Thử thách toán học</h3>
+                                <p class="quiz-description">Kiểm tra kiến thức toán học của bạn với 25 câu hỏi thú vị!</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=1" alt="Tomoki Sakura" class="author-avatar">
+                                    <span class="author-name">Tomoki Sakura</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">576</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">1.6K</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">42</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">3</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="quiz-carousel__slide">
-                        <img src="https://source.unsplash.com/random/800x400/?love" alt="Quiz 3">
-                        <div class="quiz-carousel__content">
-                            <h3>Quiz Tình Yêu</h3>
-                            <p>Bạn hợp với kiểu người nào? Kiểm tra ngay!</p>
-                            <a href="" class="play-button">Chơi Ngay</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-controls">
-                    <button id="prevSlide">&lt;</button>
-                    <button id="nextSlide">&gt;</button>
-                </div>
-            </section>
 
-            <!-- Danh Mục Quiz -->
-            <section class="quiz-categories">
-                <h2>Danh Mục Phổ Biến</h2>
-                <div class="categories-grid">
-                    <a href="" class="category-card">Tâm Lý</a>
-                    <a href="" class="category-card">Vui Nhộn</a>
-                    <a href="" class="category-card">Kiến Thức</a>
-                    <a href="" class="category-card">Tình Yêu</a>
-                    <a href="" class="category-card">Vận Mệnh</a>
-                    <a href="" class="category-card">Khác</a>
-                </div>
-            </section>
+                        <div class="quiz-item" data-category="technology" data-filter="recommended">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop" alt="Lập trình">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Kiến thức lập trình cơ bản</h3>
+                                <p class="quiz-description">30 câu hỏi về HTML, CSS, JavaScript cho người mới bắt đầu</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=12" alt="Nguyễn Văn A" class="author-avatar">
+                                    <span class="author-name">Nguyễn Văn A</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">1.2K</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">3.2K</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">89</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">5</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-            <!-- Quiz Phổ Biến -->
-            <section class="popular-quizzes">
-                <h2>Quiz Phổ Biến</h2>
-                <div class="quizzes-grid">
-                    <div class="quiz-card">
-                        <img src="https://source.unsplash.com/random/300x200/?fun" alt="Quiz Pop 1">
-                        <h3>Quiz Vui: Bạn Là Siêu Anh Hùng Nào?</h3>
-                        <p>100k lượt chơi</p>
-                        <a href="" class="play-button">Chơi</a>
+                        <div class="quiz-item" data-category="science" data-filter="recommended">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&h=300&fit=crop" alt="Khoa học">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Vũ trụ và thiên văn học</h3>
+                                <p class="quiz-description">Khám phá những bí ẩn của vũ trụ qua 20 câu hỏi hấp dẫn</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=33" alt="Lê Thị C" class="author-avatar">
+                                    <span class="author-name">Lê Thị C</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">654</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">2.1K</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">67</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">4</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-item" data-category="history" data-filter="recommended">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=400&h=300&fit=crop" alt="Lịch sử">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Các sự kiện lịch sử quan trọng</h3>
+                                <p class="quiz-description">Những mốc thời gian quan trọng trong lịch sử thế giới</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=25" alt="Trần Văn B" class="author-avatar">
+                                    <span class="author-name">Trần Văn B</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">432</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">1.8K</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">54</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">2</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="quiz-card">
-                        <img src="https://source.unsplash.com/random/300x200/?knowledge" alt="Quiz Pop 2">
-                        <h3>Trắc Nghiệm Lịch Sử Việt Nam</h3>
-                        <p>50k lượt chơi</p>
-                        <a href="" class="play-button">Chơi</a>
-                    </div>
-                    <div class="quiz-card">
-                        <img src="https://source.unsplash.com/random/300x200/?fate" alt="Quiz Pop 3">
-                        <h3>Xem Bói Năm Mới</h3>
-                        <p>80k lượt chơi</p>
-                        <a href="" class="play-button">Chơi</a>
-                    </div>
-                    <!-- Thêm nhiều card hơn nếu cần -->
                 </div>
-            </section>
+
+                <!-- TRENDING SECTION -->
+                <div class="quiz-section" data-section="trending">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">🔥</span>
+                            Quiz trending
+                        </h2>
+                        <a href="#" class="section-link">xem thêm quiz trending...</a>
+                    </div>
+                    <div class="quiz-grid">
+                        <div class="quiz-item" data-category="entertainment" data-filter="trending">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=300&fit=crop" alt="Phim ảnh">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Phim ảnh Việt Nam</h3>
+                                <p class="quiz-description">Bạn biết gì về điện ảnh Việt Nam qua các thời kỳ?</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=45" alt="Ngô Văn F" class="author-avatar">
+                                    <span class="author-name">Ngô Văn F</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">789</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">2.9K</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">78</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">6</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-item" data-category="sports" data-filter="trending">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=400&h=300&fit=crop" alt="Bóng đá">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">World Cup - Giải đấu vĩ đại</h3>
+                                <p class="quiz-description">Những câu hỏi thú vị về lịch sử World Cup</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=68" alt="Hoàng Thị E" class="author-avatar">
+                                    <span class="author-name">Hoàng Thị E</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">1.5K</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">6.2K</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">156</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">8</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-item" data-category="technology" data-filter="trending">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=300&fit=crop" alt="AI">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Trí tuệ nhân tạo AI 2024</h3>
+                                <p class="quiz-description">Kiến thức mới nhất về AI và Machine Learning</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=52" alt="Phạm Minh D" class="author-avatar">
+                                    <span class="author-name">Phạm Minh D</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">923</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">4.5K</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">134</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">7</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-item" data-category="entertainment" data-filter="trending">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400&h=300&fit=crop" alt="Âm nhạc">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Âm nhạc quốc tế</h3>
+                                <p class="quiz-description">Bạn có phải fan của nhạc Pop/Rock quốc tế?</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=19" alt="Vũ Thị H" class="author-avatar">
+                                    <span class="author-name">Vũ Thị H</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">1.1K</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">5.3K</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">198</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">5</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW SECTION -->
+                <div class="quiz-section" data-section="new">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">✨</span>
+                            Quiz mới nhất
+                        </h2>
+                        <a href="#" class="section-link">xem thêm quiz mới nhất...</a>
+                    </div>
+                    <div class="quiz-grid">
+                        <div class="quiz-item" data-category="history" data-filter="new">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&h=300&fit=crop" alt="Lịch sử">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Lịch sử Việt Nam qua các thời kỳ</h3>
+                                <p class="quiz-description">30 câu hỏi về lịch sử dân tộc Việt Nam anh hùng</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=28" alt="Trần Thị B" class="author-avatar">
+                                    <span class="author-name">Trần Thị B</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">234</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">856</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">34</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">1</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-item" data-category="technology" data-filter="new">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=300&fit=crop" alt="AI">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">ChatGPT và công nghệ AI</h3>
+                                <p class="quiz-description">Bạn hiểu bao nhiêu về ChatGPT và các LLM?</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=41" alt="Đặng Thị G" class="author-avatar">
+                                    <span class="author-name">Đặng Thị G</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">145</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">567</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">28</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">2</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-item" data-category="geography" data-filter="new">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?w=400&h=300&fit=crop" alt="Địa lý">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Thủ đô các nước châu Á</h3>
+                                <p class="quiz-description">Bạn có nhớ hết thủ đô của 48 quốc gia châu Á?</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=57" alt="Bùi Văn K" class="author-avatar">
+                                    <span class="author-name">Bùi Văn K</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">89</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">321</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">15</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">1</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="quiz-item" data-category="math" data-filter="new">
+                            <div class="quiz-thumbnail">
+                                <img src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178?w=400&h=300&fit=crop" alt="Toán học">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Phép tính nhanh siêu tốc</h3>
+                                <p class="quiz-description">Thử thách tính toán nhanh trong 60 giây</p>
+                                <div class="quiz-author">
+                                    <img src="https://i.pravatar.cc/150?img=63" alt="Lý Minh L" class="author-avatar">
+                                    <span class="author-name">Lý Minh L</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">256</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">789</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">41</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">3</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- POPULAR SECTION -->
+                <div class="quiz-section" data-section="popular">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">👁️</span>
+                            Quiz nhiều xem
+                        </h2>
+                        <a href="#" class="section-link">xem thêm quiz nhiều xem...</a>
+                    </div>
+                    <div class="quiz-grid">
+                        <div class="quiz-item" data-category="science" data-filter="popular">
+                            <div class="quiz-thumbnail">
+                                <img src="https://via.placeholder.com/200x150/fa709a/ffffff?text=Science" alt="Khoa học">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Khoa học tự nhiên cơ bản</h3>
+                                <p class="quiz-description">Kiến thức vật lý, hóa học, sinh học</p>
+                                <div class="quiz-author">
+                                    <img src="Images/Avatar.jpg" alt="Lê Văn C" class="author-avatar">
+                                    <span class="author-name">Lê Văn C</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">987</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">5.4K</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">67</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">5</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MOST PLAYED SECTION -->
+                <div class="quiz-section" data-section="most-played">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">🎮</span>
+                            Quiz nhiều chơi
+                        </h2>
+                        <a href="#" class="section-link">xem thêm quiz nhiều chơi...</a>
+                    </div>
+                    <div class="quiz-grid">
+                        <div class="quiz-item" data-category="geography" data-filter="most-played">
+                            <div class="quiz-thumbnail">
+                                <img src="https://via.placeholder.com/200x150/43e97b/ffffff?text=Geography" alt="Địa lý">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Địa lý thế giới</h3>
+                                <p class="quiz-description">Khám phá các quốc gia và lãnh thổ</p>
+                                <div class="quiz-author">
+                                    <img src="Images/Avatar.jpg" alt="Phạm Văn D" class="author-avatar">
+                                    <span class="author-name">Phạm Văn D</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">2.1K</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">4.8K</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">89</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">4</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HOT PLAYERS SECTION -->
+                <div class="quiz-section" data-section="hot-players">
+                    <div class="section-header">
+                        <h2 class="section-title">
+                            <span class="section-icon">👑</span>
+                            Quiz từ Hot Player
+                        </h2>
+                        <a href="#" class="section-link">xem thêm quiz hot player...</a>
+                    </div>
+                    <div class="quiz-grid">
+                        <div class="quiz-item" data-category="sports" data-filter="hot-players">
+                            <div class="quiz-thumbnail">
+                                <img src="https://via.placeholder.com/200x150/ff6b6b/ffffff?text=Sports" alt="Thể thao">
+                                <div class="quiz-overlay">
+                                    <button class="play-btn">▶ Chơi ngay</button>
+                                </div>
+                            </div>
+                            <div class="quiz-details">
+                                <h3 class="quiz-name">Kiến thức bóng đá thế giới</h3>
+                                <p class="quiz-description">Dành cho fan hâm mộ bóng đá</p>
+                                <div class="quiz-author">
+                                    <img src="Images/Avatar.jpg" alt="Hoàng Thị E" class="author-avatar">
+                                    <span class="author-name">Hoàng Thị E</span>
+                                    <span class="author-badge">⭐ Pro</span>
+                                </div>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-icon">▶️</span>
+                                        <span class="stat-value">1.5K</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-icon">👁️</span>
+                                        <span class="stat-value">6.2K</span>
+                                    </div>
+                                    <div class="quiz-reactions">
+                                        <button class="reaction-btn like-btn">
+                                            <span class="reaction-icon">👍</span>
+                                            <span class="reaction-count">123</span>
+                                        </button>
+                                        <button class="reaction-btn dislike-btn">
+                                            <span class="reaction-icon">👎</span>
+                                            <span class="reaction-count">6</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SINGLE SECTION VIEW (When specific filter is selected) -->
+            <div id="singleSection" class="single-section" style="display: none;">
+                <div class="quiz-grid" id="filteredQuizGrid"></div>
+            </div>
         </section>
 
         <!-- FOOTER -->
         <footer class="layout-footer">
             <div class="layout-footer-container">
-                <!-- Giới thiệu -->
                 <div class="layout-footer-section">
                     <h3>Giới thiệu</h3>
                     <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
                 </div>
-                <!-- Liên hệ -->
                 <div class="layout-footer-section">
                     <h3>Liên hệ</h3>
-                    <p>Email: <a href="">nhatthanh@quizzz.vn</a></p>
+                    <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
                     <p>Hotline: 0123 456 789</p>
                 </div>
-                <!-- Liên kết nhanh -->
                 <div class="layout-footer-section">
                     <h3>Liên kết nhanh</h3>
-                    <p><a href="#">Trang chủ</a></p>
-                    <p><a href="#">Câu hỏi</a></p>
-                    <p><a href="#">Cài đặt</a></p>
-                    <p><a href="#">Đăng nhập</a></p>
+                    <p><a href="index.html">Trang chủ</a></p>
+                    <p><a href="questions.html">Câu hỏi</a></p>
+                    <p><a href="settings.html">Cài đặt</a></p>
+                    <p><a href="login.html">Đăng nhập</a></p>
                 </div>
-                <!-- Mạng xã hội -->
                 <div class="layout-footer-section">
                     <h3>Cộng đồng</h3>
                     <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
@@ -170,11 +785,12 @@
                 </div>
             </div>
             <div class="layout-footer-bottom">
-                <p>© 2025 QUIZZKIT. All rights reserved.</p>
+                <p>© 2025 Quizzz. All rights reserved.</p>
             </div>
         </footer>
     </div>
 
-    <script src="Scripts/t2.js"></script>
+    <script src="Scripts/layout.js"></script>
+    <script src="Scripts/modelform.js"></script>
 </body>
 </html>
