@@ -4,6 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QUIZZKIT</title>
+    <script>
+    if (!localStorage.getItem("loggedIn")) {
+        window.location.href = "login.html";
+    }
+    </script>
+
+    <script src="Scripts/auth.js"></script>
     <link rel="stylesheet" href="Styles/layout.css" />
 </head>
 <body>
@@ -41,7 +48,7 @@
                 <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
                 <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
                     <a href="">Đăng nhập</a>
-                    <a href="">Đăng xuất</a>
+                    <a href="" onclick="logoutUser(event)">Đăng xuất</a>
                 </div>
             </div>
         </header>
@@ -99,4 +106,5 @@
 
     <script src="Scripts/layout.js"></script>
 </body>
+
 </html>
