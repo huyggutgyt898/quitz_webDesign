@@ -58,6 +58,36 @@
     </from>
   </div>
 
+  <!-- CHỈ THÊM/THAY ĐỔI CÁC DÒNG SAU trong phần result: -->
+<div id="result" class="result" style="display:none;">
+  <h2>🎉 Quiz Completed!</h2>
+  
+  <!-- THÊM container cho kết quả chi tiết -->
+  <div class="result-details">
+    <div class="result-row">
+      <span class="result-label">Player:</span>
+      <span class="result-value" id="player-name">Player</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Score:</span>
+      <span class="result-value" id="final-score-text">0/0</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Percentage:</span>
+      <span class="result-value" id="percentage-text">0%</span>
+    </div>
+    <div class="result-row">
+      <span class="result-label">Grade:</span>
+      <span class="result-value" id="grade-text">-</span>
+    </div>
+  </div>
+  
+  <!-- GIỮ NGUYÊN phần final-score để tương thích với code cũ -->
+  <p id="final-score" style="display:none;"></p>
+  
+  <button onclick="restartQuiz()" class="next-btn">Play Again</button>
+</div>
+
   <script src="./Scripts/showQuestion.js"></script>
 </body>
 </html>

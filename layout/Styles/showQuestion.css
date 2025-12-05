@@ -120,3 +120,132 @@ body {
   border: 2px solid #ffa65c;
   border-radius: 8px;
 }
+
+/* ====== STYLE CHO RESULT BOX ====== */
+.result {
+    margin-top: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 20px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.8s ease;
+}
+
+.result h2 {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Container cho chi tiết kết quả */
+.result-details {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Mỗi dòng kết quả */
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-row:last-child {
+    border-bottom: none;
+}
+
+.result-label {
+    font-size: 1.1em;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.result-value {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: white;
+}
+
+/* Hiệu ứng cho grade */
+#grade-text {
+    display: inline-block;
+    padding: 5px 15px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    animation: pulse 2s infinite;
+}
+
+/* Nút Play Again trong result */
+.result .next-btn {
+    margin-top: 25px;
+    padding: 14px 40px;
+    font-size: 1.1em;
+    background: white;
+    color: #667eea;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.result .next-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: #f0f0f0;
+}
+
+/* Hiệu ứng động */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .result {
+        padding: 20px 15px;
+        margin-top: 20px;
+    }
+    
+    .result h2 {
+        font-size: 1.8em;
+    }
+    
+    .result-row {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+    
+    .result-label, .result-value {
+        width: 100%;
+    }
+}

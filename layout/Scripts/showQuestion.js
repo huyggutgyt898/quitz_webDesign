@@ -10,6 +10,7 @@ async function loadQuestions() {
 
     currentQuestion = 0;
     score = 0;
+    document.getElementById("score").innerText = "Score: 0"; // Reset hiển thị điểm
 
     showQuestion();
   } catch (err) {
@@ -18,11 +19,10 @@ async function loadQuestions() {
 }
 
 function showQuestion() {
-   if (currentQuestion >= questions.length) {
+  if (currentQuestion >= questions.length) {
     showResult();
     return;
   }
-
 
   const q = questions[currentQuestion];
   document.getElementById("question-number").innerText = `Question ${currentQuestion + 1}/${questions.length}`;
@@ -59,16 +59,57 @@ document.getElementById("next-btn").addEventListener("click", () => {
 });
 
 function showResult() {
-  document.querySelector(".quiz-box").style.display = "none";
-  const resultDiv = document.getElementById("result");
-  resultDiv.style.display = "block";
-  resultDiv.querySelector("#final-score").innerText = `${username} answered correctly ${score}/${questions.length} questions!`;
+  console.log("Showing result. Score:", score, "/", questions.length);
+  
+  // Ẩn các phần tử của quiz
+  document.getElementById("question").style.display = "none";
+  document.getElementById("answers").style.display = "none";
+  document.getElementById("next-btn").style.display = "none";
+  
+  // Tính toán kết quả
+  const percentage = Math.round((score / questions.length) * 100);
+  let grade = "";
+  
+  // Xác định grade
+  if (percentage >= 90) grade = "A+ 🎯";
+  else if (percentage >= 80) grade = "A 👍";
+  else if (percentage >= 70) grade = "B 😊";
+  else if (percentage >= 60) grade = "C 🙂";
+  else grade = "F 😢";
+  
+  // HIỂN THỊ KẾT QUẢ vào các phần tử HTML mới
+  document.getElementById("player-name").textContent = username;
+  document.getElementById("final-score-text").textContent = `${score}/${questions.length}`;
+  document.getElementById("percentage-text").textContent = `${percentage}%`;
+  document.getElementById("grade-text").textContent = grade;
+  
+  // Giữ lại cho tương thích (có thể ẩn)
+  document.getElementById("final-score").innerHTML = `
+    ${username} answered correctly ${score}/${questions.length} questions!<br>
+    Percentage: ${percentage}% | Grade: ${grade}
+  `;
+  
+  // Hiển thị result box
+  document.getElementById("result").style.display = "block";
 }
 
 function restartQuiz() {
+  console.log("Restarting quiz...");
+  
+  // Reset biến
+  currentQuestion = 0;
+  score = 0;
+  
+  // Hiển thị lại các phần tử quiz
+  document.getElementById("question").style.display = "block";
+  document.getElementById("answers").style.display = "block";
+  document.getElementById("next-btn").style.display = "block";
+  
+  // Reset hiển thị
   document.getElementById("score").innerText = "Score: 0";
   document.getElementById("result").style.display = "none";
-  document.querySelector(".quiz-box").style.display = "block";
+  
+  // Load lại câu hỏi
   loadQuestions();
 }
 
@@ -99,4 +140,6 @@ function saveQuestion() {
   questions.push(newQuestion);
   document.getElementById("save-msg").innerText = "✅ Question added successfully!";
 }
+
+// Load quiz khi khởi động
 loadQuestions();
