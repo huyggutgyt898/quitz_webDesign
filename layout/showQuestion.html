@@ -6,7 +6,7 @@
   <title>Quiz Game</title>
   <link rel="stylesheet" href="./Styles/showQuestion.css">
 </head>
-<body>
+<body class="theme-default">
 
   <!-- Main content -->
   <div class="main">
@@ -47,15 +47,15 @@
 
   <!--Background choice-->
   <div class="bg-choice">
-    <from action="action-page" method="POST">
-      <lable for="choice_Background">Lựa chọn giao diện</lable>
+    <form action="action-page" method="POST">
+      <label for="choice_Background">Lựa chọn giao diện</label>
       <select name="background" id="choice_Background">
         <option value="default">Mặc định</option>
-        <option value="Breach">Bãi biển</option>
-        <option value="Love">Tình yêu</option>
-        <option value="Noel">Giáng sinh</option>
+        <option value="breach">Bãi biển</option>
+        <option value="love">Tình yêu</option>
+        <option value="noel">Giáng sinh</option>
       </select>
-    </from>
+    </form>
   </div>
 
   <!-- CHỈ THÊM/THAY ĐỔI CÁC DÒNG SAU trong phần result: -->
