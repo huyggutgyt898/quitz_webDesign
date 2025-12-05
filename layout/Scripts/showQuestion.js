@@ -142,29 +142,31 @@ function saveQuestion() {
 }
 
 // Xử lý thay đổi background
-// Xử lý thay đổi background
 document.getElementById('choice_Background').addEventListener('change', function(e) {
   const theme = e.target.value; // "default", "breach", "love", "noel"
-  
+
   // Xóa tất cả class theme cũ
   document.body.className = '';
-  
+
   // Thêm class theme mới
   document.body.classList.add(`theme-${theme}`);
-  
+
   // Lưu vào localStorage
   localStorage.setItem('quizTheme', theme);
-  
+
   console.log("Đã chọn theme:", theme);
 });
 
 // Khôi phục background khi tải trang
 document.addEventListener('DOMContentLoaded', function() {
   const savedTheme = localStorage.getItem('quizTheme') || 'default';
-  
+
   // Đặt giá trị cho select
   document.getElementById('choice_Background').value = savedTheme;
-  
+
   // Thêm class theme cho body
   document.body.classList.add(`theme-${savedTheme}`);
 });
+
+// Load quiz khi khởi động
+loadQuestions();
