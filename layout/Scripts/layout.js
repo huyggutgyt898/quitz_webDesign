@@ -90,7 +90,7 @@ navItems.forEach(item => {
         </div>
 
         <audio id="bgmAudio" loop preload="auto">
-            <source src="music/background.mp3" type="audio/mpeg">
+            <source src="Sounds/Just for Kicks - Feeling Sunset.mp3" type="audio/mpeg">
             <source src="music/background.ogg" type="audio/ogg">
             Trình duyệt không hỗ trợ âm thanh.
         </audio>
@@ -143,3 +143,4 @@ navItems.forEach(item => {
         }
     });
 })();
+
