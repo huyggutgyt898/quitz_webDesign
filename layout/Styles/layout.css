@@ -318,3 +318,12 @@ html.dark .layout-sidebar__item.active {
     background: #1f2937 !important;
     color: white !important;
 }
+/* FIX 100% – nút nhạc luôn nổi trên footer */
+.layout-footer {
+    position: relative;
+    z-index: 1;
+}
+#quizzkit-bg-music {
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+}
