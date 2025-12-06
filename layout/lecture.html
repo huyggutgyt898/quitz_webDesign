@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QUIZZKIT - Bài Giảng</title>
     <link rel="stylesheet" href="Styles/layout.css" />
-    <link rel="stylesheet" href="Styles/modelform.css" /> <!-- Reuse style từ quiz list -->
+    <link rel="stylesheet" href="Styles/modelform.css" />
 </head>
 <body>
-    <!-- OVERLAY MỜ (giữ nguyên từ layout) -->
+    <!-- OVERLAY MỜ -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- SIDEBAR (copy từ modelform.html) -->
+    <!-- SIDEBAR -->
     <aside class="layout-sidebar" id="sidebar">
         <div class="layout-sidebar__title">MENU</div>
         <a class="layout-sidebar__item" href="index.html">Trang chủ</a>
@@ -24,7 +24,7 @@
 
     <!-- MAIN PAGE WRAPPER -->
     <div class="layout-main" id="mainContent">
-        <!-- TOPBAR (copy từ modelform.html) -->
+        <!-- TOPBAR -->
         <header class="layout-topbar">
             <div class="layout-topbar__left">
                 <div class="hamburger-menu" id="hamburgerMenu">
@@ -44,13 +44,22 @@
             </div>
         </header>
 
-        <!-- NAVIGATION BAR (copy từ modelform.html, nhưng điều chỉnh active nếu cần) -->
+        <!-- NAVIGATION BAR -->
         <nav class="layout-navbar">
             <a class="layout-navbar__item" href="index.html">Trang chủ</a>
             <div class="layout-navbar__item active navbar-dropdown-wrapper">
                 <span>Câu hỏi</span>
                 <span class="dropdown-arrow">▼</span>
-                <!-- Giữ nguyên dropdown -->
+                <div class="navbar-dropdown" id="categoryDropdown">
+                    <a href="#" class="dropdown-item active" data-category="all">Tất cả</a>
+                    <a href="#" class="dropdown-item" data-category="technology">Công nghệ</a>
+                    <a href="#" class="dropdown-item" data-category="science">Khoa học</a>
+                    <a href="#" class="dropdown-item" data-category="history">Lịch sử</a>
+                    <a href="#" class="dropdown-item" data-category="geography">Địa lý</a>
+                    <a href="#" class="dropdown-item" data-category="sports">Thể thao</a>
+                    <a href="#" class="dropdown-item" data-category="entertainment">Giải trí</a>
+                    <a href="#" class="dropdown-item" data-category="math">Toán học</a>
+                </div>
             </div>
             <a class="layout-navbar__item" href="create.html">Tạo câu hỏi</a>
             <a class="layout-navbar__item" href="leaderboard.html">Bảng xếp hạng</a>
@@ -65,18 +74,44 @@
                 <div id="lectureContent"><!-- JS render content --></div>
                 <div class="lecture-footer">
                     <button class="quiz-btn" id="startQuizBtn">Ôn tập</button>
-                    <button class="quiz-btn back-btn" onclick="history.back()">Quay lại</button> <!-- Nút quay về modelform.html -->
+                    <button class="quiz-btn back-btn" onclick="window.location.href='modelform.html'">Quay lại danh sách</button>
                 </div>
             </div>
         </section>
 
-        <!-- FOOTER (copy từ modelform.html) -->
+        <!-- FOOTER -->
         <footer class="layout-footer">
-            <!-- Giữ nguyên nội dung footer -->
+            <div class="layout-footer-container">
+                <div class="layout-footer-section">
+                    <h3>Giới thiệu</h3>
+                    <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
+                </div>
+                <div class="layout-footer-section">
+                    <h3>Liên hệ</h3>
+                    <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
+                    <p>Hotline: 0123 456 789</p>
+                </div>
+                <div class="layout-footer-section">
+                    <h3>Liên kết nhanh</h3>
+                    <p><a href="index.html">Trang chủ</a></p>
+                    <p><a href="questions.html">Câu hỏi</a></p>
+                    <p><a href="settings.html">Cài đặt</a></p>
+                    <p><a href="login.html">Đăng nhập</a></p>
+                </div>
+                <div class="layout-footer-section">
+                    <h3>Cộng đồng</h3>
+                    <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+                    <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
+                    <p><a href="https://discord.com" target="_blank">Discord</a></p>
+                </div>
+            </div>
+            <div class="layout-footer-bottom">
+                <p>© 2025 Quizzz. All rights reserved.</p>
+            </div>
         </footer>
     </div>
 
-    <script src="Scripts/layout.js"></script> <!-- Dark mode và layout chung -->
-    <script src="Scripts/lecture.js"></script> <!-- JS cho lecture -->
+    <script src="Scripts/layout.js"></script>
+    <script src="Scripts/lecture.js"></script>
 </body>
 </html>
