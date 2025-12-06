@@ -78,7 +78,7 @@ navItems.forEach(item => {
 
     // Tạo giao diện + audio
     document.body.insertAdjacentHTML('beforeend', `
-        <div id="quizzkit-bg-music" class="fixed bottom-5 left-5 z-50 flex items-center gap-4 bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg rounded-full shadow-2xl px-6 py-4 border border-gray-200 dark:border-gray-700">
+        <div id="quizzkit-bg-music" class="fixed bottom-5 left-5 z-50 flex items-center gap-4 bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg rounded-full shadow-2xl px-4 py-2 border border-gray-200 dark:border-gray-700">
             <button id="musicToggle" class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white shadow-xl hover:scale-110 transition-all">
                 <i class="fas fa-play text-lg ml-1"></i>
             </button>
@@ -87,7 +87,14 @@ navItems.forEach(item => {
                 <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Nhạc nền QUIZZKIT</span>
             </div>
             <input type="range" id="musicVolume" min="0" max="1" step="0.05" value="0.3" class="w-28 h-1 accent-purple-600 cursor-pointer rounded-full">
+            <button id="hideMusicUI" class="ml-3 text-gray-600 dark:text-gray-300 hover:text-red-500">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
+
+        <button id="showMusicUI" class="hidden fixed bottom-5 left-5 z-50 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white shadow-xl">
+            <i class="fas fa-music"></i>
+        </button>
 
         <audio id="bgmAudio" loop preload="auto">
             <source src="Sounds/Just for Kicks - Feeling Sunset.mp3" type="audio/mpeg">
@@ -99,6 +106,8 @@ navItems.forEach(item => {
     const audio = document.getElementById('bgmAudio');
     const toggleBtn = document.getElementById('musicToggle');
     const volumeSlider = document.getElementById('musicVolume');
+    const hideBtn = document.getElementById('hideMusicUI');
+    const showBtn = document.getElementById('showMusicUI');
 
     // Icon play/pause
     const playIcon = '<i class="fas fa-play text-lg ml-1"></i>';
@@ -113,7 +122,7 @@ navItems.forEach(item => {
 
     if (savedMusic === 'on') {
         toggleBtn.innerHTML = pauseIcon;
-        audio.play().catch(() => {}); // không báo lỗi nếu bị chặn tạm
+        audio.play().catch(() => {});
     }
 
     // Bấm nút bật/tắt
@@ -135,12 +144,25 @@ navItems.forEach(item => {
         localStorage.setItem('quizzkit-volume', volumeSlider.value);
     });
 
-    // Tự động tạm dừng khi rời tab (tiết kiệm pin)
+    // Tự động tạm dừng khi rời tab
     document.addEventListener('visibilitychange', () => {
         if (document.hidden && !audio.paused) {
             audio.pause();
             toggleBtn.innerHTML = playIcon;
         }
     });
+
+    // Nút ẩn/hiện giao diện
+    hideBtn.addEventListener('click', () => {
+        document.getElementById('quizzkit-bg-music').style.display = 'none';
+        showBtn.classList.remove('hidden');
+    });
+
+    showBtn.addEventListener('click', () => {
+        document.getElementById('quizzkit-bg-music').style.display = 'flex';
+        showBtn.classList.add('hidden');
+    });
 })();
+
+
 
