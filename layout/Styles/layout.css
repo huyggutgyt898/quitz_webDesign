@@ -203,7 +203,12 @@ body {
 /* CONTENT */
 .layout-content {
     flex: 1;
+<<<<<<< HEAD
     padding: 25px;
+=======
+    width: 100%;
+    height: 700px;
+>>>>>>> feature/show-question
 }
 
 /* FOOTER */
@@ -280,6 +285,7 @@ body {
     .layout-footer-bottom {
         font-size: 13px;
     }
+<<<<<<< HEAD
 }
 /* ============== DARK MODE CHUNG CHO TOÀN BỘ WEBSITE ============== */
 html.dark,
@@ -318,3 +324,6 @@ html.dark .layout-sidebar__item.active {
     background: #1f2937 !important;
     color: white !important;
 }
+=======
+}
+>>>>>>> feature/show-question
