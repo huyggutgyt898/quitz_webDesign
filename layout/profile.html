@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QUIZZKIT</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <script>
+    if (!localStorage.getItem("loggedIn")) {
+        window.location.href = "login.html";
+    }
+    </script>
+
+    <script src="Scripts/auth.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="Styles/layout.css" />
     <link rel="stylesheet" href="Styles/profile.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -44,8 +53,8 @@
             <div class="layout-topbar__avatar">
                 <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
                 <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
-                    <a href="">Đăng nhập</a>
-                    <a href="">Đăng xuất</a>
+                    <a href="">Cài đặt</a>
+                    <a href="" onclick="logoutUser(event)">Đăng xuất</a>
                 </div>
             </div>
         </header>
@@ -72,13 +81,13 @@
       <img src="Images/Avatar.jpg" class="avatar" alt="avatar" id="avatarImg">
       <div class="user-info">
         <h2 class="name-wrapper">
-          <span id="displayName">Thanh</span>
+          <span id="displayName">username123456</span>
           <button class="edit-name-btn" id="changeNameBtn" title="Đổi tên">
           <i class="fa-solid fa-pen fa-xs"></i>
           </button>
         </h2>
-        <p>@Thanhdzai</p>
-        <span>50 người theo dõi</span> · <span>120 người đang theo dõi</span>
+        <p>@123456</p>
+        <span>0 người theo dõi</span> · <span>0 người đang theo dõi</span>
       </div>
     </div>
     <button class="edit-btn" id="changeAvatarBtn">Đổi avatar</button>
@@ -95,11 +104,11 @@
   
   <!-- Stats -->
   <section class="stats-section">
-    <div class="stat-card"><h3>120</h3><p>Câu đố đã chơi</p></div>
-    <div class="stat-card"><h3>87%</h3><p>Tỷ lệ chính xác</p></div>
-    <div class="stat-card"><h3>1.567</h3><p>Ngày hoạt động</p></div>
-    <div class="stat-card"><h3>15</h3><p>Thành tựu</p></div>
-    <div class="stat-card"><h3>#7</h3><p>Xếp hạng tháng</p></div>
+    <div class="stat-card"><h3>0</h3><p>Câu đố đã chơi</p></div>
+    <div class="stat-card"><h3>0/0</h3><p>Tỷ lệ chính xác</p></div>
+    <div class="stat-card"><h3>1</h3><p>Ngày hoạt động</p></div>
+    <div class="stat-card"><h3>0</h3><p>Thành tựu</p></div>
+    <div class="stat-card"><h3>#X</h3><p>Xếp hạng tháng</p></div>
   </section>
 
   <!-- Achievements -->
@@ -108,15 +117,15 @@
     <div class="achieve-grid">
       <div class="achieve-item">
         <i><i class="fa-solid fa-medal"></i></i>
-        <div><b>Top BXH</b><p>Top 1 tháng 2/2025</p></div>
+        <div><b>Top BXH</b><p>Còn trống</p></div>
       </div>
       <div class="achieve-item">
         <i><i class="fa-regular fa-star"></i></i>
-        <div><b>Chuỗi thắng</b><p>Liên tục 10 lần</p></div>
+        <div><b>Chuỗi thắng</b><p>Còn trống</p></div>
       </div>
       <div class="achieve-item">
         <i><i class="fa-solid fa-fire"></i></i>
-        <div><b>Thành viên thường trực</b><p>1.500 ngày</p></div>
+        <div><b>Thành viên thường trực</b><p>Còn trống</p></div>
       </div>
     </div>
   </section>
@@ -127,11 +136,11 @@
     <div class="friend-grid">
       <div class="friend">
         <img src="Images/Avatar.jpg" alt="">
-        <div><b>Đỗ</b><p>Nhanh nhất</p></div>
+        <div><b>username</b><p>Còn trống</p></div>
       </div>
       <div class="friend">
         <img src="Images/A3.jpg" alt="">
-        <div><b>Nhật</b><p>Đạt điểm cao nhất</p></div>
+        <div><b>username</b><p>Còn trống</p></div>
       </div>
       <div class="friend add">+ Thêm bạn bè</div>
     </div>
@@ -153,7 +162,7 @@
             <p class="quiz-description">Kiểm tra kiến thức toán học của bạn với 25 câu hỏi thú vị!</p>
             <div class="quiz-author">
                 <img src="Images/Avatar.jpg" alt="" class="author-avatar">
-                <span class="author-name">Thanh</span>
+                <span class="author-name">username</span>
             </div>
             <div class="quiz-stats">
                 <div class="stat-item">
@@ -190,7 +199,7 @@
             <p class="quiz-description">30 câu hỏi về HTML, CSS, JavaScript cho người mới bắt đầu</p>
             <div class="quiz-author">
                 <img src="Images/Avatar.jpg" alt="" class="author-avatar">
-                <span class="author-name">Thanh</span>
+                <span class="author-name">username</span>
             </div>
             <div class="quiz-stats">
                 <div class="stat-item">
