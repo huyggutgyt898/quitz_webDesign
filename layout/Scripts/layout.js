@@ -71,13 +71,22 @@ navItems.forEach(item => {
     }
 })();
 //hết khúc sáng tối
+
 // ==================== NHẠC NỀN TOÀN SITE – TỰ ĐỘNG LẶP VÔ HẠN + CÓ NÚT ĐẸP ====================
 (function () {
-    // Tránh chạy 2 lần
-    if (document.getElementById('quizzkit-bg-music')) return;
+    'use strict';
 
-    // Tạo giao diện + audio
-    document.body.insertAdjacentHTML('beforeend', `
+    const musicUrl = "https://files.catbox.moe/5i8i1l.mp3"; // Thay bằng link nhạc của bạn (bắt buộc HTTPS)
+
+    let unlocked = false;
+    let isInjected = false;
+
+    // Hàm tạo toàn bộ cục play + audio
+    function injectMusicUI() {
+        if (isInjected) return;
+        isInjected = true;
+
+        document.body.insertAdjacentHTML('beforeend', `
         <div id="quizzkit-bg-music" class="fixed bottom-5 left-5 z-50 flex items-center gap-4 bg-white/95 dark:bg-gray-800/95 backdrop-blur-lg rounded-full shadow-2xl px-4 py-2 border border-gray-200 dark:border-gray-700">
             <button id="musicToggle" class="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center text-white shadow-xl hover:scale-110 transition-all">
                 <i class="fas fa-play text-lg ml-1"></i>
@@ -97,72 +106,106 @@ navItems.forEach(item => {
         </button>
 
         <audio id="bgmAudio" loop preload="auto">
-            <source src="Sounds/Just for Kicks - Feeling Sunset.mp3" type="audio/mpeg">
-            <source src="music/background.ogg" type="audio/ogg">
-            Trình duyệt không hỗ trợ âm thanh.
+            <source src="${musicUrl}" type="audio/mpeg">
         </audio>
-    `);
+        `);
 
-    const audio = document.getElementById('bgmAudio');
-    const toggleBtn = document.getElementById('musicToggle');
-    const volumeSlider = document.getElementById('musicVolume');
-    const hideBtn = document.getElementById('hideMusicUI');
-    const showBtn = document.getElementById('showMusicUI');
+        const audio = document.getElementById('bgmAudio');
+        const toggleBtn = document.getElementById('musicToggle');
+        const volumeSlider = document.getElementById('musicVolume');
+        const hideBtn = document.getElementById('hideMusicUI');
+        const showBtn = document.getElementById('showMusicUI');
 
-    // Icon play/pause
-    const playIcon = '<i class="fas fa-play text-lg ml-1"></i>';
-    const pauseIcon = '<i class="fas fa-pause text-lg"></i>';
+        const playIcon = '<i class="fas fa-play text-lg ml-1"></i>';
+        const pauseIcon = '<i class="fas fa-pause text-lg"></i>';
 
-    // Khôi phục trạng thái trước đó
-    const savedMusic = localStorage.getItem('quizzkit-music');
-    const savedVolume = localStorage.getItem('quizzkit-volume') || 0.3;
+        // Khôi phục volume + trạng thái
+        const savedVolume = localStorage.getItem('quizzkit-volume') || 0.3;
+        const savedState = localStorage.getItem('quizzkit-music');
 
-    audio.volume = savedVolume;
-    volumeSlider.value = savedVolume;
+        audio.volume = savedVolume;
+        volumeSlider.value = savedVolume;
 
-    if (savedMusic === 'on') {
-        toggleBtn.innerHTML = pauseIcon;
-        audio.play().catch(() => {});
+        if (savedState === 'on' && unlocked) {
+            audio.play().catch(() => {});
+            toggleBtn.innerHTML = pauseIcon;
+        }
+
+        // Nút play/pause
+        toggleBtn.onclick = () => {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    toggleBtn.innerHTML = pauseIcon;
+                    localStorage.setItem('quizzkit-music', 'on');
+                });
+            } else {
+                audio.pause();
+                toggleBtn.innerHTML = playIcon;
+                localStorage.setItem('quizzkit-music', 'off');
+            }
+        };
+
+        volumeSlider.oninput = () => {
+            audio.volume = volumeSlider.value;
+            localStorage.setItem('quizzkit-volume', volumeSlider.value);
+        };
+
+        hideBtn.onclick = () => {
+            document.getElementById('quizzkit-bg-music').style.display = 'none';
+            showBtn.classList.remove('hidden');
+        };
+
+        showBtn.onclick = () => {
+            document.getElementById('quizzkit-bg-music').style.display = 'flex';
+            showBtn.classList.add('hidden');
+        };
     }
 
-    // Bấm nút bật/tắt
-    toggleBtn.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.play();
-            toggleBtn.innerHTML = pauseIcon;
-            localStorage.setItem('quizzkit-music', 'on');
-        } else {
-            audio.pause();
-            toggleBtn.innerHTML = playIcon;
-            localStorage.setItem('quizzkit-music', 'off');
+    // Unlock autoplay sau lần click đầu tiên
+    const unlockAudio = () => {
+        if (unlocked) return;
+        unlocked = true;
+        document.body.removeEventListener('click', unlockAudio);
+        document.body.removeEventListener('touchstart', unlockAudio);
+
+        // Nếu người dùng đã bật nhạc trước đó → phát luôn
+        if (localStorage.getItem('quizzkit-music') === 'on') {
+            const audio = document.getElementById('bgmAudio');
+            if (audio) {
+                audio.play().catch(() => {});
+                const btn = document.getElementById('musicToggle');
+                if (btn) btn.innerHTML = '<i class="fas fa-pause text-lg"></i>';
+            }
+        }
+    };
+
+    document.body.addEventListener('click', unlockAudio, { once: true });
+    document.body.addEventListener('touchstart', unlockAudio, { once: true });
+
+    // QUAN TRỌNG NHẤT: Theo dõi DOM thay đổi để inject lại ngay lập tức
+    const observer = new MutationObserver(() => {
+        if (!document.getElementById('quizzkit-bg-music') && !document.getElementById('showMusicUI')) {
+            isInjected = false;
+            injectMusicUI();
         }
     });
 
-    // Điều chỉnh âm lượng
-    volumeSlider.addEventListener('input', () => {
-        audio.volume = volumeSlider.value;
-        localStorage.setItem('quizzkit-volume', volumeSlider.value);
-    });
+    // Bắt đầu quan sát ngay khi có body
+    if (document.body) {
+        observer.observe(document.body, { childList: true, subtree: true });
+        injectMusicUI();
+    } else {
+        // Trường hợp body chưa có (một số trang load chậm)
+        new MutationObserver((_, obs) => {
+            if (document.body) {
+                obs.disconnect();
+                observer.observe(document.body, { childList: true, subtree: true });
+                injectMusicUI();
+            }
+        }).observe(document.documentElement, { childList: true });
+    }
 
-    // Tự động tạm dừng khi rời tab
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden && !audio.paused) {
-            audio.pause();
-            toggleBtn.innerHTML = playIcon;
-        }
-    });
-
-    // Nút ẩn/hiện giao diện
-    hideBtn.addEventListener('click', () => {
-        document.getElementById('quizzkit-bg-music').style.display = 'none';
-        showBtn.classList.remove('hidden');
-    });
-
-    showBtn.addEventListener('click', () => {
-        document.getElementById('quizzkit-bg-music').style.display = 'flex';
-        showBtn.classList.add('hidden');
-    });
+    // Dự phòng thêm 2 lần inject nữa cho chắc
+    window.addEventListener('load', () => setTimeout(injectMusicUI, 800));
+    setTimeout(injectMusicUI, 1500);
 })();
-
-
-
