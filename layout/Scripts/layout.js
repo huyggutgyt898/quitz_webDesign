@@ -164,4 +164,3 @@ navItems.forEach(item => {
         showBtn.classList.add('hidden');
     });
 })();
-
