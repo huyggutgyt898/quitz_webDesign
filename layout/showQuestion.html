@@ -48,7 +48,7 @@
   <!--Background choice-->
   <div class="bg-choice">
     <form action="action-page" method="POST">
-      <label for="choice_Background">Lựa chọn giao diện</label>
+      <label for="choice_Background">Giao diện</label>
       <select name="background" id="choice_Background">
         <option value="default">Mặc định</option>
         <option value="breach">Bãi biển</option>
@@ -58,10 +58,24 @@
     </form>
   </div>
 
+  <!--Sound Choice-->
+  <div class="so-choice">
+    <form action="Action-page" method="POST">
+      <label for="choice-Sound">Âm thanh</label>
+      <select name="sound" id="choice-Sound">
+        <option value="none">Tắt âm</option>
+        <option value="02">02 Charact Select</option>
+        <option value="08">08 Stage 4 Fairy Lake</option>
+        <option value="11">11 Stage 6 Dungeon</option>
+        <option value="35">35 Ending</option>
+      </select>
+    </form>
+  </div>
+
   <!-- CHỈ THÊM/THAY ĐỔI CÁC DÒNG SAU trong phần result: -->
 <div id="result" class="result" style="display:none;">
   <h2>🎉 Quiz Completed!</h2>
-  
+
   <!-- THÊM container cho kết quả chi tiết -->
   <div class="result-details">
     <div class="result-row">
@@ -81,12 +95,14 @@
       <span class="result-value" id="grade-text">-</span>
     </div>
   </div>
-  
+
   <!-- GIỮ NGUYÊN phần final-score để tương thích với code cũ -->
   <p id="final-score" style="display:none;"></p>
-  
+
   <button onclick="restartQuiz()" class="next-btn">Play Again</button>
 </div>
+
+  <audio id="background-music" loop></audio>
 
   <script src="./Scripts/showQuestion.js"></script>
 </body>

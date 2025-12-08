@@ -1,0 +1,87 @@
+/* Styles/leaderboard.css - ĐẸP CHUẨN NHƯ LAYOUT GỐC */
+
+.leaderboard-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+    width: 280px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.relative.group:hover .leaderboard-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.leaderboard-dropdown button {
+    width: 100%;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 15px;
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.leaderboard-dropdown button:hover {
+    background: #f7fafc;
+    color: #2d3748;
+}
+
+.leaderboard-dropdown button.active {
+    background: #edf2f7;
+    color: #2c5282;
+    font-weight: 700;
+    position: relative;
+}
+
+.leaderboard-dropdown button.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 32px;
+    background: #4299e1;
+    border-radius: 0 4px 4px 0;
+}
+
+.leaderboard-dropdown .icon {
+    width: 40px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.leaderboard-dropdown .title {
+    font-weight: 600;
+    color: #2c3326;
+}
+
+.leaderboard-dropdown .desc {
+    font-size: 13px;
+    color: #719676;
+    margin-top: 2px;
+}
+/* Đổi màu chữ tiêu đề + dòng mô tả cho dễ nhìn trong dark mode */
+html.dark .layout-content h1,
+html.dark .layout-content p.text-center.mb-12 {
+    color: #f1f5f9 !important;   /* trắng sáng, cực dễ đọc */
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}

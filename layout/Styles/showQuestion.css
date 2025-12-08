@@ -238,17 +238,17 @@ body {
         padding: 20px 15px;
         margin-top: 20px;
     }
-    
+
     .result h2 {
         font-size: 1.8em;
     }
-    
+
     .result-row {
         flex-direction: column;
         text-align: center;
         gap: 5px;
     }
-    
+
     .result-label, .result-value {
         width: 100%;
     }
@@ -258,16 +258,16 @@ body {
   /* Xóa width và height cố định */
   width: auto !important;
   height: auto !important;
-  
+
   /* Chỉ giữ padding và border */
   padding: 10px;
   background:#ff7a00;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  
+
   /* Giới hạn kích thước */
   max-width: max-content;
-  
+
   /* Cố định vị trí */
   position: fixed;
   top: 200px;
@@ -324,4 +324,25 @@ body.theme-noel{
   height: 100%;
   z-index: -1;
   transition: background 0.5s ease;
+}
+
+.so-choice{
+  /* Xóa width và height cố đinh */
+  width: auto !important;
+  height: auto !important;
+
+  /* Căn chỉnh pading và border */
+  padding: 10px;
+  background-color: #ff7a00;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+  /* Cố định vị trí */
+  position: fixed;
+  right: 51px;
+  right: 14px;
+  top: 250px;
+
+  /* Giới hạn kích thước */
+  max-width:max-content;
+  border-radius: 8px;
 }
