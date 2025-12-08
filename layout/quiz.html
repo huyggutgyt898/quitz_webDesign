@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUIZZKIT - Quiz</title>
+    <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/modelform.css" />
+</head>
+<body>
+    <!-- Giữ nguyên sidebar, topbar, navbar, footer như lecture.html -->
+
+    <!-- MAIN CONTENT AREA: Quiz -->
+    <section class="layout-content">
+        <div class="quiz-page">
+            <h2 id="quizTitle">Đang load...</h2>
+            <div class="quiz-progress">
+                <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+            </div>
+            <div class="quiz-body" id="quizBody"><!-- JS render câu hỏi --></div>
+            <div class="quiz-footer">
+                <button class="quiz-btn" id="nextBtn" disabled>Tiếp theo</button>
+            </div>
+            <div class="quiz-result" id="quizResult" style="display: none;">
+                <h2>Kết quả</h2>
+                <p id="scoreText"></p>
+                <button class="quiz-btn" id="restartBtn">Chơi lại</button>
+                <button class="quiz-btn" id="backToLectureBtn">Quay về bài giảng</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="Scripts/layout.js"></script>
+    <script src="Scripts/quiz.js"></script>
+</body>
+</html>

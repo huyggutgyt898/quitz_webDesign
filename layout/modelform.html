@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUIZZKIT - Câu Đố</title>
+    <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/modelform.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <!-- OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="layout-sidebar" id="sidebar">
+        <div class="layout-sidebar__title">MENU</div>
+        <a class="layout-sidebar__item" href="index.html">Trang chủ</a>
+        <a class="layout-sidebar__item active" href="modelform.html">Câu hỏi</a>
+        <a class="layout-sidebar__item" href="create.html">Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="history.html">Lịch sử</a>
+        <a class="layout-sidebar__item" href="profile.html">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="settings.html">Cài đặt</a>
+    </aside>
+
+    <!-- MAIN WRAPPER -->
+    <div class="layout-main" id="mainContent">
+        <!-- TOPBAR -->
+        <header class="layout-topbar">
+            <div class="layout-topbar__left">
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="layout-topbar__logo" onclick="window.location.href='index.html'">QUIZZKIT</div>
+            </div>
+            <div class="layout-topbar__search">
+                <input type="text" placeholder="Tìm kiếm khóa học, quiz..." id="searchInput" />
+            </div>
+            <div class="layout-topbar__avatar">
+                <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
+                <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+                    <a href="login.html">Đăng nhập</a>
+                    <a href="logout.html">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVBAR -->
+        <nav class="layout-navbar">
+            <a class="layout-navbar__item" href="index.html">Trang chủ</a>
+            <div class="layout-navbar__item active navbar-dropdown-wrapper">
+                <span>Môn học</span>
+                <span class="dropdown-arrow">▼</span>
+                <div class="navbar-dropdown" id="categoryDropdown">
+                    <a href="#" class="dropdown-item active" data-category="all">Tất cả</a>
+                    <a href="#" class="dropdown-item" data-category="math">Toán học</a>
+                    <a href="#" class="dropdown-item" data-category="physics">Vật lý</a>
+                    <a href="#" class="dropdown-item" data-category="chemistry">Hóa học</a>
+                    <a href="#" class="dropdown-item" data-category="biology">Sinh học</a>
+                    <a href="#" class="dropdown-item" data-category="literature">Ngữ văn</a>
+                    <a href="#" class="dropdown-item" data-category="english">Tiếng Anh</a>
+                    <a href="#" class="dropdown-item" data-category="history">Lịch sử</a>
+                    <a href="#" class="dropdown-item" data-category="geography">Địa lý</a>
+                    <a href="#" class="dropdown-item" data-category="computer">Tin học</a>
+                    <a href="#" class="dropdown-item" data-category="civics">GDCD</a>
+                </div>
+            </div>
+            <a class="layout-navbar__item" href="create.html">Tạo câu hỏi</a>
+            <a class="layout-navbar__item" href="leaderboard.html">Bảng xếp hạng</a>
+            <a class="layout-navbar__item" href="account.html">Tài khoản</a>
+        </nav>
+
+        <!-- CONTENT -->
+        <section class="layout-content">
+            <!-- FILTER BAR -->
+            <div class="flex flex-col md:flex-row gap-4 mb-8 bg-white p-4 rounded-2xl shadow-md">
+                <div class="relative">
+                    <button class="flex items-center gap-3 px-5 py-3 bg-white border-2 border-gray-300 rounded-xl hover:border-orange-500 hover:bg-orange-50 transition-all font-semibold text-gray-700" id="filterDropdownBtn">
+                        <div class="flex flex-col gap-1 w-4">
+                            <span class="block w-full h-0.5 bg-gray-700 rounded"></span>
+                            <span class="block w-full h-0.5 bg-gray-700 rounded"></span>
+                            <span class="block w-full h-0.5 bg-gray-700 rounded"></span>
+                        </div>
+                        <span class="filter-text">Tất cả</span>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 bg-white min-w-[200px] rounded-xl shadow-xl opacity-0 invisible transition-all z-50" id="filterDropdown">
+                        <div class="filter-option active px-5 py-3 cursor-pointer hover:bg-orange-50 font-semibold border-l-4 border-transparent hover:border-orange-500 transition-all" data-filter="all">Tất cả</div>
+                        <div class="filter-option px-5 py-3 cursor-pointer hover:bg-orange-50 font-semibold border-l-4 border-transparent hover:border-orange-500 transition-all" data-filter="recommended">Đề xuất</div>
+                        <div class="filter-option px-5 py-3 cursor-pointer hover:bg-orange-50 font-semibold border-l-4 border-transparent hover:border-orange-500 transition-all" data-filter="trending">Trending</div>
+                        <div class="filter-option px-5 py-3 cursor-pointer hover:bg-orange-50 font-semibold border-l-4 border-transparent hover:border-orange-500 transition-all" data-filter="new">Mới nhất</div>
+                        <div class="filter-option px-5 py-3 cursor-pointer hover:bg-orange-50 font-semibold border-l-4 border-transparent hover:border-orange-500 transition-all" data-filter="popular">Nhiều xem</div>
+                        <div class="filter-option px-5 py-3 cursor-pointer hover:bg-orange-50 font-semibold border-l-4 border-transparent hover:border-orange-500 transition-all" data-filter="most-played">Nhiều chơi</div>
+                        <div class="filter-option px-5 py-3 cursor-pointer hover:bg-orange-50 font-semibold border-l-4 border-transparent hover:border-orange-500 transition-all" data-filter="hot-players">Tác giả nổi bật</div>
+                    </div>
+                </div>
+
+                <div class="flex gap-2 flex-1">
+                    <input type="text" placeholder="Tìm kiếm quiz..." id="quizSearchInput" class="flex-1 px-5 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-200 outline-none transition-all" />
+                    <button class="px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-400 text-white rounded-xl hover:shadow-lg transition-all text-lg" id="searchBtn">🔍</button>
+                </div>
+            </div>
+
+            <!-- QUIZ SECTIONS -->
+            <div id="allSections"></div>
+
+            <!-- SINGLE SECTION -->
+            <div id="singleSection" class="hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8" id="filteredQuizGrid"></div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="layout-footer">
+            <div class="layout-footer-container">
+                <div class="layout-footer-section">
+                    <h3>Giới thiệu</h3>
+                    <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
+                </div>
+                <div class="layout-footer-section">
+                    <h3>Liên hệ</h3>
+                    <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
+                    <p>Hotline: 0123 456 789</p>
+                </div>
+                <div class="layout-footer-section">
+                    <h3>Liên kết nhanh</h3>
+                    <p><a href="index.html">Trang chủ</a></p>
+                    <p><a href="modelform.html">Câu hỏi</a></p>
+                    <p><a href="settings.html">Cài đặt</a></p>
+                </div>
+                <div class="layout-footer-section">
+                    <h3>Cộng đồng</h3>
+                    <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+                    <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
+                    <p><a href="https://discord.com" target="_blank">Discord</a></p>
+                </div>
+            </div>
+            <div class="layout-footer-bottom">
+                <p>© 2025 Quizzz. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="Scripts/layout.js"></script>
+    <script src="Scripts/modelform.js"></script>
+</body>
+</html>
