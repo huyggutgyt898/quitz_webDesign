@@ -122,15 +122,14 @@ function checkAnswer(button, isCorrect) {
     }
 }
 
+// Sửa hàm showResult để lưu dữ liệu
 function showResult() {
     console.log("Showing result. Score:", score, "/", questions.length);
     
     // Ẩn các phần tử của quiz
-    const elementsToHide = ["question", "answers", "next-btn"];
-    elementsToHide.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) element.style.display = "none";
-    });
+    document.getElementById("question").style.display = "none";
+    document.getElementById("answers").style.display = "none";
+    document.getElementById("next-btn").style.display = "none";
     
     // Tính toán kết quả
     const percentage = Math.round((score / questions.length) * 100);
@@ -143,31 +142,50 @@ function showResult() {
     else if (percentage >= 60) grade = "C 🙂";
     else grade = "F 😢";
     
-    // HIỂN THỊ KẾT QUẢ
-    const resultElements = {
-        "player-name": username,
-        "final-score-text": `${score}/${questions.length}`,
-        "percentage-text": `${percentage}%`,
-        "grade-text": grade
+    // Lưu dữ liệu chi tiết vào localStorage
+    const resultData = {
+        username: username,
+        score: score,
+        totalQuestions: questions.length,
+        percentage: percentage,
+        grade: grade,
+        questions: detailedResults.map((result, index) => ({
+            questionNumber: index + 1,
+            question: result.question,
+            userAnswer: result.userAnswer,
+            correctAnswer: result.correctAnswer,
+            isCorrect: result.isCorrect,
+            allOptions: result.allOptions
+        }))
     };
     
-    Object.entries(resultElements).forEach(([id, value]) => {
-        const element = document.getElementById(id);
-        if (element) element.textContent = value;
-    });
+    localStorage.setItem('quizResultData', JSON.stringify(resultData));
     
-    const finalScoreElement = document.getElementById("final-score");
-    if (finalScoreElement) {
-        finalScoreElement.innerHTML = `
-            ${username} answered correctly ${score}/${questions.length} questions!<br>
-            Percentage: ${percentage}% | Grade: ${grade}
-        `;
-    }
+    // HIỂN THỊ KẾT QUẢ CƠ BẢN
+    document.getElementById("player-name").textContent = username;
+    document.getElementById("final-score-text").textContent = `${score}/${questions.length}`;
+    document.getElementById("percentage-text").textContent = `${percentage}%`;
+    document.getElementById("grade-text").textContent = grade;
     
-    const resultElement = document.getElementById("result");
-    if (resultElement) {
-        resultElement.style.display = "block";
-    }
+    // Thêm nút xem chi tiết
+    const detailButton = document.createElement('button');
+    detailButton.className = 'next-btn';
+    detailButton.style.margin = '10px';
+    detailButton.textContent = '📊 View Detailed Results';
+    detailButton.onclick = () => {
+        window.open('result-details.html', '_blank');
+    };
+    
+    const resultDiv = document.getElementById("result");
+    const buttonsDiv = resultDiv.querySelector('.restart-buttons') || resultDiv;
+    buttonsDiv.appendChild(detailButton);
+    
+    // Hiển thị result box
+    document.getElementById("result").style.display = "block";
+}
+
+function viewDetailedResults() {
+    window.open('result-details.html', '_blank');
 }
 
 function restartQuiz() {
