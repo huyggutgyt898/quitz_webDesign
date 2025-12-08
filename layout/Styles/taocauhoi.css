@@ -151,6 +151,44 @@
     min-height: 100px;
 }
 
+/* ========== IMAGE UPLOAD SECTION ========== */
+.image-upload-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.image-preview {
+    margin-top: 15px;
+    border: 2px dashed #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto;
+}
+
+.question-image {
+    margin: 15px 0;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.question-image img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+}
+
 /* ========== METADATA ROW ========== */
 .metadata-row {
     display: grid;
@@ -482,6 +520,28 @@
     font-size: 16px;
 }
 
+.back-btn-box {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    background: #2980b9;
+    transform: scale(1.05);
+}
+
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
     .quiz-info-header {
@@ -555,26 +615,4 @@
         width: 100%;
         justify-content: flex-start;
     }
-}
-
-.back-btn-box {
-    margin: 20px 0;
-    text-align: center;   /* Căn giữa nút */
-}
-
-.back-btn {
-    display: inline-block;
-    padding: 10px 18px;
-    background: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    transition: 0.2s;
-}
-
-.back-btn:hover {
-    background: #2980b9;
-    transform: scale(1.05);
 }

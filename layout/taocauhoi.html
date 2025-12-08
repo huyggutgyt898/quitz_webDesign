@@ -7,7 +7,7 @@
   <!-- CSS Files -->
   <link rel="stylesheet" href="Styles/layout.css">
   <link rel="stylesheet" href="Styles/taocauhoi.css">
-   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     if (!localStorage.getItem("loggedIn")) {
         window.location.href = "login.html";
@@ -16,7 +16,7 @@
   <script src="Scripts/auth.js"></script>
 </head>
 <body>
-  <!-- OVERLAY Mờ -->
+  <!-- OVERLAY Mở -->
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
   <!-- SIDEBAR -->
@@ -28,11 +28,12 @@
         <div class="layout-sidebar__usertag">Thành viên</div>
       </div>
     </div>
-    <a class="layout-sidebar__item" href="trangtaocauhoi.html">Trang chủ</a>
-    <a class="layout-sidebar__item" href="taocauhoi.html">Tạo câu hỏi</a>
+    <a class="layout-sidebar__item" href="">Trang chủ</a>
+    <a class="layout-sidebar__item" href="trangtaocauhoi.html">Tạo câu hỏi</a>
     <a class="layout-sidebar__item" href="taicauhoi.html">Tải đề thi</a>
     <a class="layout-sidebar__item" href="khode.html">Kho đề</a>
     <a class="layout-sidebar__item" href="kholythuyet.html">Lý thuyết</a>
+    <a class="layout-sidebar__item" href="">Tài khoản</a>
     <a class="layout-sidebar__item" href="">Cài đặt</a>
   </aside>
 
@@ -61,14 +62,13 @@
     </header>
 
     <!-- NAVIGATION BAR -->
-    <!-- NAVIGATION BAR - THANH TOPBAR THỨ 2 -->
-        <nav class="layout-navbar">
-            <a class="layout-navbar__item active" href="">Trang chủ</a>
-            <a class="layout-navbar__item" href="">Câu hỏi</a>
-            <a class="layout-navbar__item" href="trangtaocauhoi.html">Tạo câu hỏi</a>
-            <a class="layout-navbar__item" href="">Bảng xếp hạng</a>
-            <a class="layout-navbar__item" href="">Tài khoản</a>
-        </nav>
+    <nav class="layout-navbar">
+      <a class="layout-navbar__item active" href="">Trang chủ</a>
+      <a class="layout-navbar__item" href="">Câu hỏi</a>
+      <a class="layout-navbar__item" href="trangtaocauhoi.html">Tạo câu hỏi</a>
+      <a class="layout-navbar__item" href="">Bảng xếp hạng</a>
+      <a class="layout-navbar__item" href="">Tài khoản</a>
+    </nav>
 
     <!-- MAIN CONTENT AREA -->
     <section class="layout-content">
@@ -120,9 +120,8 @@
           </button>
         </div>
         <div class="back-btn-box">
-    <a href="trangtaocauhoi.html" class="back-btn">← Quay lại</a>
-</div>
-
+          <a href="trangtaocauhoi.html" class="back-btn">← Quay lại</a>
+        </div>
       </div>
 
       <!-- BƯỚC 2: TẠO CÂU HỎI -->
@@ -152,6 +151,18 @@
           <div class="form-group">
             <label>Nội dung câu hỏi <span class="required">*</span></label>
             <textarea id="questionInput" rows="4" placeholder="Nhập nội dung câu hỏi..." required></textarea>
+          </div>
+
+          <!-- Phần Upload Ảnh -->
+          <div class="form-group">
+            <label>Ảnh minh họa (Tùy chọn)</label>
+            <div class="image-upload-section">
+              <input type="file" id="imageInput" accept="image/*" style="display: none;">
+              <button type="button" class="btn btn-secondary" id="imageUploadBtn">📷 Chọn ảnh</button>
+              <button type="button" class="btn btn-danger btn-small" id="removeImageBtn" style="display: none;">❌ Xóa ảnh</button>
+              <small>Kích thước tối đa: 2MB. Định dạng: JPG, PNG, GIF</small>
+            </div>
+            <div id="imagePreview" class="image-preview" style="display: none;"></div>
           </div>
 
           <div class="metadata-row">

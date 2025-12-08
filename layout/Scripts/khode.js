@@ -1,43 +1,47 @@
 const KEY = 'all-quizzes';
 
-// Dùng biến thay vì localStorage (hỗ trợ Claude artifacts)
-let quizzesData = [];
-
-// Load dữ liệu từ localStorage nếu có (khi chạy trên web thật)
+// Load dữ liệu từ localStorage
 function loadQuizzes() {
   try {
-    if (typeof localStorage !== 'undefined') {
-      const raw = localStorage.getItem(KEY);
-      quizzesData = raw ? JSON.parse(raw) : [];
-    }
+    const raw = localStorage.getItem(KEY);
+    return raw ? JSON.parse(raw) : [];
   } catch (e) {
-    console.log('localStorage không khả dụng');
+    console.log('Lỗi khi load:', e);
+    return [];
   }
-  return quizzesData;
 }
 
-// Save dữ liệu vào localStorage nếu có
+// Save dữ liệu vào localStorage
 function saveQuizzes(quizzes) {
-  quizzesData = quizzes;
   try {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem(KEY, JSON.stringify(quizzes));
-    }
+    localStorage.setItem(KEY, JSON.stringify(quizzes));
   } catch (e) {
-    console.log('localStorage không khả dụng');
+    console.log('Lỗi khi save:', e);
   }
 }
 
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str).replace(/[&<>"']/g, s =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[s]
+  );
+}
+
+// Render danh sách đề
 function renderList() {
   const list = document.getElementById('list');
   const empty = document.getElementById('empty');
   const quizzes = loadQuizzes();
+  
   list.innerHTML = '';
   
   if (!quizzes || quizzes.length === 0) {
+    list.style.display = 'none';
     empty.style.display = 'block';
     return;
   }
+  
+  list.style.display = 'flex';
   empty.style.display = 'none';
 
   quizzes.slice().reverse().forEach(q => {
@@ -62,6 +66,7 @@ function renderList() {
   });
 }
 
+// Xem chi tiết đề
 function viewQuiz(id) {
   const quizzes = loadQuizzes();
   const q = quizzes.find(x => String(x.id) === String(id));
@@ -70,6 +75,7 @@ function viewQuiz(id) {
   document.getElementById('detail').style.display = 'block';
   document.getElementById('list').style.display = 'none';
   document.getElementById('empty').style.display = 'none';
+  document.querySelector('.topbar').style.display = 'none';
   document.getElementById('detailMeta').textContent = `${q.title} — ${q.description}`;
 
   const detailBox = document.getElementById('detailJson');
@@ -115,28 +121,61 @@ function viewQuiz(id) {
   }
 }
 
+// Quay lại danh sách
 function backToList() {
   document.getElementById('detail').style.display = 'none';
   document.getElementById('list').style.display = 'flex';
+  document.querySelector('.topbar').style.display = 'flex';
   renderList();
 }
 
+// Xuất 1 bộ đề (tách thành 2 file: info.json và questions.json)
 function exportQuiz(id) {
   const quizzes = loadQuizzes();
   const q = quizzes.find(x => String(x.id) === String(id));
   if (!q) return alert('Không tìm thấy đề');
-  
-  const blob = new Blob([JSON.stringify(q, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `${q.title.replace(/\s+/g, '_') || 'quiz'}_${q.id}.json`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+
+  const fileName = (q.title || 'quiz').replace(/[^a-zA-Z0-9]/g, '_');
+
+  // File 1: Thông tin đề thi (info)
+  const infoData = {
+    id: q.id,
+    title: q.title,
+    description: q.description || '',
+    createdAt: q.createdAt,
+    totalQuestions: q.questions ? q.questions.length : 0
+  };
+
+  // File 2: Danh sách câu hỏi (questions)
+  const questionsData = q.questions || [];
+
+  // Xuất file info.json
+  const blob1 = new Blob([JSON.stringify(infoData, null, 2)], { type: 'application/json' });
+  const url1 = URL.createObjectURL(blob1);
+  const a1 = document.createElement('a');
+  a1.href = url1;
+  a1.download = `${fileName}_info.json`;
+  document.body.appendChild(a1);
+  a1.click();
+  a1.remove();
+  URL.revokeObjectURL(url1);
+
+  // Delay nhỏ rồi xuất file questions.json
+  setTimeout(() => {
+    const blob2 = new Blob([JSON.stringify(questionsData, null, 2)], { type: 'application/json' });
+    const url2 = URL.createObjectURL(blob2);
+    const a2 = document.createElement('a');
+    a2.href = url2;
+    a2.download = `questions.json`; // Tên cố định để dễ thay thế
+    document.body.appendChild(a2);
+    a2.click();
+    a2.remove();
+    URL.revokeObjectURL(url2);
+    
+    alert('✅ Đã xuất file!\n\n📝 Hướng dẫn:\n1. File "questions.json" đã tải
 }
 
+// Xóa 1 đề
 function deleteQuiz(id) {
   if (!confirm('Xác nhận xóa đề này khỏi kho?')) return;
   let quizzes = loadQuizzes();
@@ -145,31 +184,76 @@ function deleteQuiz(id) {
   renderList();
 }
 
+// Xóa tất cả
 function clearAll() {
   if (!confirm('Xóa toàn bộ kho đề?')) return;
   saveQuizzes([]);
   renderList();
 }
 
+// Xuất tất cả (mỗi bộ đề 2 file riêng)
 function exportAll() {
   const quizzes = loadQuizzes();
   if (!quizzes || quizzes.length === 0) return alert('Không có đề để xuất');
   
-  const blob = new Blob([JSON.stringify(quizzes, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `kho_de_${Date.now()}.json`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  URL.revokeObjectURL(url);
+  if (!confirm(`Bạn muốn xuất ${quizzes.length} bộ đề?\nMỗi bộ sẽ có 2 file (info + questions)`)) {
+    return;
+  }
+
+  let delay = 0;
+  
+  quizzes.forEach((q, index) => {
+    const fileName = (q.title || `quiz_${index + 1}`).replace(/[^a-zA-Z0-9]/g, '_');
+
+    // File 1: Thông tin đề thi
+    const infoData = {
+      id: q.id,
+      title: q.title,
+      description: q.description || '',
+      createdAt: q.createdAt,
+      totalQuestions: q.questions ? q.questions.length : 0
+    };
+
+    // File 2: Danh sách câu hỏi
+    const questionsData = q.questions || [];
+
+    // Download file info
+    setTimeout(() => {
+      const blob = new Blob([JSON.stringify(infoData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${fileName}_info.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }, delay);
+    delay += 400;
+
+    // Download file questions
+    setTimeout(() => {
+      const blob = new Blob([JSON.stringify(questionsData, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${fileName}_questions.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    }, delay);
+    delay += 400;
+  });
+
+  alert(`Đang xuất ${quizzes.length * 2} file...\nVui lòng cho phép trình duyệt tải nhiều file`);
 }
 
+// Import file
 function importFile() {
   const fileInput = document.getElementById('importFile');
   if (fileInput) {
-    fileInput.value = ''; // Reset file input
+    fileInput.value = '';
     fileInput.click();
   }
 }
@@ -196,15 +280,12 @@ function handleFileImport(e) {
       // Xử lý các định dạng JSON khác nhau
       if (Array.isArray(data)) {
         console.log('Là array, length:', data.length);
-        // Nếu là array
         if (data.length > 0) {
           if (data[0].questions) {
             console.log('Format 1: Array of quiz objects');
-            // Format: [{ title, description, questions: [...] }]
             dataToImport = data;
           } else if (data[0].question) {
             console.log('Format 2: Array of questions');
-            // Format: [{ question, answers, correct/correctAnswer }]
             dataToImport = [{
               id: Date.now(),
               title: 'Nhập từ file',
@@ -234,11 +315,9 @@ function handleFileImport(e) {
         }
       } else if (data.questions) {
         console.log('Format 4: Single quiz object with questions');
-        // Format: { title, description, questions: [...] }
         dataToImport = [data];
       } else if (data.question) {
         console.log('Format 5: Single question object');
-        // Format: { question, answers, correct/correctAnswer }
         dataToImport = [{
           id: Date.now(),
           title: 'Nhập từ file',
@@ -249,7 +328,7 @@ function handleFileImport(e) {
             answers: data.answers || [],
             correctAnswer: data.correct !== undefined ? data.correct : (data.correctAnswer !== undefined ? data.correctAnswer : 0)
           }]
-        }];
+
       }
 
       console.log('Data to import:', dataToImport);
@@ -284,13 +363,6 @@ function handleFileImport(e) {
   reader.readAsText(f);
 }
 
-function escapeHtml(str) {
-  if (!str) return '';
-  return String(str).replace(/[&<>"']/g, s =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[s]
-  );
-}
-
 // Event listeners
 function setupEventListeners() {
   console.log('Setting up event listeners...');
@@ -301,40 +373,27 @@ function setupEventListeners() {
   const importBtn = document.getElementById('importBtn');
   const importFileInput = document.getElementById('importFile');
 
-  console.log('backListBtn:', backListBtn);
-  console.log('clearAllBtn:', clearAllBtn);
-  console.log('exportAllBtn:', exportAllBtn);
-  console.log('importBtn:', importBtn);
-  console.log('importFileInput:', importFileInput);
-
   if (backListBtn) {
     backListBtn.addEventListener('click', backToList);
-    console.log('✓ backListBtn listener added');
   }
   if (clearAllBtn) {
     clearAllBtn.addEventListener('click', clearAll);
-    console.log('✓ clearAllBtn listener added');
   }
   if (exportAllBtn) {
     exportAllBtn.addEventListener('click', exportAll);
-    console.log('✓ exportAllBtn listener added');
   }
   if (importBtn) {
     importBtn.addEventListener('click', importFile);
-    console.log('✓ importBtn listener added');
   }
   if (importFileInput) {
     importFileInput.addEventListener('change', handleFileImport);
-    console.log('✓ importFileInput listener added');
   }
 
   renderList();
-  console.log('Event listeners setup complete');
+  console.log('Setup complete, quizzes loaded:', loadQuizzes().length);
 }
 
-document.addEventListener('DOMContentLoaded', setupEventListeners);
-
-// Nếu document đã load rồi, chạy ngay
+// Chạy khi DOM ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', setupEventListeners);
 } else {

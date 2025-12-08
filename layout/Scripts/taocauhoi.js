@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
   let questions = [];
   let editingIndex = -1;
+  let currentQuestionImage = null; // Lưu ảnh câu hỏi hiện tại
 
   // Danh sách môn học
   const subjectLabels = {
@@ -58,10 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // Nút css step 1
+  // Nút quay lại step 1
   document.getElementById("backToStep1Btn").addEventListener("click", function() {
     if (questions.length > 0) {
-      if (!confirm("Bạn có các câu hỏi chưa lưu. css sẽ mất dữ liệu. Tiếp tục?")) {
+      if (!confirm("Bạn có các câu hỏi chưa lưu. Quay lại sẽ mất dữ liệu. Tiếp tục?")) {
         return;
       }
     }
@@ -69,6 +70,56 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("step1").style.display = "block";
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
+
+  // ========== XỬ LÝ UPLOAD ẢNH ==========
+  const imageUploadBtn = document.getElementById("imageUploadBtn");
+  const imageInput = document.getElementById("imageInput");
+  const imagePreview = document.getElementById("imagePreview");
+  const removeImageBtn = document.getElementById("removeImageBtn");
+
+  if (imageUploadBtn && imageInput) {
+    imageUploadBtn.addEventListener("click", () => {
+      imageInput.click();
+    });
+
+    imageInput.addEventListener("change", function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        // Kiểm tra kích thước file (max 2MB)
+        if (file.size > 2 * 1024 * 1024) {
+          alert("⚠️ Kích thước ảnh không được vượt quá 2MB!");
+          return;
+        }
+
+        // Kiểm tra loại file
+        if (!file.type.startsWith('image/')) {
+          alert("⚠️ Vui lòng chọn file ảnh!");
+          return;
+        }
+
+        // Đọc và hiển thị ảnh
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          currentQuestionImage = event.target.result;
+          imagePreview.innerHTML = `<img src="${currentQuestionImage}" alt="Preview">`;
+          imagePreview.style.display = "block";
+          removeImageBtn.style.display = "inline-block";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Xóa ảnh
+    if (removeImageBtn) {
+      removeImageBtn.addEventListener("click", () => {
+        currentQuestionImage = null;
+        imagePreview.innerHTML = "";
+        imagePreview.style.display = "none";
+        removeImageBtn.style.display = "none";
+        imageInput.value = "";
+      });
+    }
+  }
 
   // ========== BƯỚC 2: TẠO CÂU HỎI ==========
 
@@ -100,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
       id: editingIndex >= 0 ? questions[editingIndex].id : Date.now(),
       text: text,
       difficulty: difficulty,
+      image: currentQuestionImage, // Lưu ảnh
       answers: {
         A: answerA,
         B: answerB,
@@ -152,6 +204,13 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("answerD").value = "";
     const radios = document.querySelectorAll('input[name="correctAnswer"]');
     radios.forEach(r => r.checked = false);
+    
+    // Reset ảnh
+    currentQuestionImage = null;
+    imagePreview.innerHTML = "";
+    imagePreview.style.display = "none";
+    removeImageBtn.style.display = "none";
+    imageInput.value = "";
   }
 
   // Cập nhật tiến độ
@@ -185,6 +244,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const difficultyText = q.difficulty === 'easy' ? 'Dễ' : 
                              q.difficulty === 'medium' ? 'Trung bình' : 'Khó';
       
+      const imageHTML = q.image ? `<div class="question-image"><img src="${q.image}" alt="Câu hỏi ${i+1}"></div>` : '';
+      
       return `
         <div class="question-item">
           <div class="question-header">
@@ -197,6 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <button class="btn-small btn-delete" onclick="deleteQuestion(${i})">🗑️ Xóa</button>
             </div>
           </div>
+          ${imageHTML}
           <div class="answers-display">
             ${["A","B","C","D"].map(k => `
               <div class="answer-display ${q.correctAnswer === k ? "correct" : ""}">
@@ -221,6 +283,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("answerC").value = q.answers.C;
     document.getElementById("answerD").value = q.answers.D;
     document.querySelector(`input[value="${q.correctAnswer}"]`).checked = true;
+    
+    // Hiển thị ảnh nếu có
+    if (q.image) {
+      currentQuestionImage = q.image;
+      imagePreview.innerHTML = `<img src="${q.image}" alt="Preview">`;
+      imagePreview.style.display = "block";
+      removeImageBtn.style.display = "inline-block";
+    }
     
     document.getElementById("formTitle").textContent = "✏️ Sửa Câu Hỏi";
     document.getElementById("addQuestionBtn").textContent = "💾 Cập nhật câu hỏi";
@@ -252,7 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Lưu bộ đề
+  // ========== LƯU BỘ ĐỀ VÀO LECTURE ==========
   document.getElementById("saveBtn").addEventListener("click", function() {
     if (questions.length === 0) {
       alert("⚠️ Chưa có câu hỏi nào để lưu!");
@@ -264,6 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const convertedQuestions = questions.map(q => ({
         id: q.id,
         question: q.text,
+        image: q.image || null, // Lưu ảnh
         answers: [q.answers.A, q.answers.B, q.answers.C, q.answers.D],
         correctAnswer: ["A","B","C","D"].indexOf(q.correctAnswer),
         difficulty: q.difficulty,
@@ -280,14 +351,34 @@ document.addEventListener("DOMContentLoaded", () => {
         createdAt: new Date().toISOString()
       };
 
-      // Lưu vào localStorage
+      // Lưu vào localStorage (kho đề)
       const KEY = "all-quizzes";
       const raw = localStorage.getItem(KEY);
       const quizzes = raw ? JSON.parse(raw) : [];
       quizzes.push(newQuiz);
       localStorage.setItem(KEY, JSON.stringify(quizzes));
 
-      alert("✅ Đã lưu bộ đề vào kho thành công!");
+      // LƯU VÀO LECTURE DATA
+      const LECTURE_KEY = "lectureData";
+      let lectureData = {};
+      const rawLecture = localStorage.getItem(LECTURE_KEY);
+      if (rawLecture) {
+        try {
+          lectureData = JSON.parse(rawLecture);
+        } catch (e) {
+          lectureData = {};
+        }
+      }
+
+      // Tạo nội dung lecture
+      lectureData[quizInfo.title] = {
+        description: quizInfo.description || `${questions.length} câu hỏi - ${subjectLabels[quizInfo.subject]}`,
+        content: generateLectureContent(quizInfo, questions)
+      };
+
+      localStorage.setItem(LECTURE_KEY, JSON.stringify(lectureData));
+
+      alert("✅ Đã lưu bộ đề vào kho và thêm vào Lecture thành công!");
 
       // Hỏi có muốn chuyển sang kho đề không
       if (confirm("Bạn có muốn chuyển đến trang Kho Đề không?")) {
@@ -310,5 +401,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-});
+  // ========== TẠO NỘI DUNG LECTURE ==========
+  function generateLectureContent(info, questions) {
+    const subjectEmoji = {
+      math: '📐',
+      physics: '⚛️',
+      chemistry: '🧪',
+      biology: '🧬',
+      english: '🇬🇧',
+      literature: '📖',
+      history: '🏛️',
+      geography: '🌍',
+      it: '💻',
+      iq: '🧠',
+      other: '📚'
+    };
 
+    const emoji = subjectEmoji[info.subject] || '📚';
+    
+    let content = `<h3>${emoji} Bài giảng về ${info.title}</h3>`;
+    content += `<p>${info.description || 'Bộ đề tự tạo với ' + questions.length + ' câu hỏi.'}</p>`;
+    
+    content += `<p><strong>Môn học:</strong> ${subjectLabels[info.subject]}</p>`;
+    content += `<p><strong>Số lượng câu hỏi:</strong> ${questions.length}</p>`;
+    
+    // Thống kê độ khó
+    const easyCount = questions.filter(q => q.difficulty === 'easy').length;
+    const mediumCount = questions.filter(q => q.difficulty === 'medium').length;
+    const hardCount = questions.filter(q => q.difficulty === 'hard').length;
+    
+    content += `<p><strong>Độ khó:</strong></p><ul>`;
+    if (easyCount > 0) content += `<li>Dễ: ${easyCount} câu</li>`;
+    if (mediumCount > 0) content += `<li>Trung bình: ${mediumCount} câu</li>`;
+    if (hardCount > 0) content += `<li>Khó: ${hardCount} câu</li>`;
+    content += `</ul>`;
+    
+    content += `<p>💡 <strong>Lưu ý:</strong> Hãy đọc kỹ đề và suy nghĩ cẩn thận trước khi chọn đáp án!</p>`;
+    content += `<p>🎯 <strong>Chúc bạn làm bài tốt!</strong></p>`;
+    
+    return content;
+  }
+
+});
