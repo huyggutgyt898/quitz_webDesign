@@ -325,3 +325,23 @@ body.theme-noel{
   z-index: -1;
   transition: background 0.5s ease;
 }
+
+.so-choice{
+  /* Xóa width và height cố đinh */
+  width: auto !important;
+  height: auto !important;
+
+  /* Căn chỉnh pading và border */
+  padding: 10px;
+  background-color: #ff7a00;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+  /* Cố định vị trí */
+  position: fixed;
+  right: 51px;
+  top: 250px;
+
+  /* Giới hạn kích thước */
+  max-width:max-content;
+  border-radius: 8px;
+}
