@@ -1,0 +1,114 @@
+/* Styles/settings.css - Chỉ dành riêng cho trang Cài đặt */
+.settings-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.settings-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    padding: 35px;
+    margin-bottom: 35px;
+    transition: background 0.4s;
+}
+
+.settings-card h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e40af;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 4px solid #3b82f6;
+    transition: all 0.4s;
+}
+
+.form-group { margin-bottom: 25px; }
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #374151;
+}
+.form-group input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    font-size: 17px;
+    background: #f8fafc;
+    transition: all 0.3s;
+}
+.form-group input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59,130,246,0.2);
+}
+
+.btn-save {
+    background: #3b82f6;
+    color: white;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 14px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+}
+.btn-save:hover { background: #2563eb; }
+
+/* Toggle iOS */
+.toggle-ios { position: relative; display: inline-block; width: 56px; height: 34px; }
+.toggle-ios input { opacity: 0; width: 0; height: 0; }
+.toggle-slider {
+    position: absolute; inset: 0; background: #cbd5e1;
+    transition: .4s; border-radius: 34px;
+}
+.toggle-slider:before {
+    position: absolute; content: ""; height: 28px; width: 28px;
+    left: 4px; bottom: 3px; background: white; transition: .4s;
+    border-radius: 50%; box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+input:checked + .toggle-slider { background: #3b82f6; }
+input:checked + .toggle-slider:before { transform: translateX(22px); }
+
+/* Nút Sáng/Tối */
+.theme-toggle { position: relative; display: inline-block; width: 80px; height: 42px; }
+.theme-toggle input { opacity: 0; width: 0; height: 0; }
+.theme-slider {
+    position: absolute; inset: 0; background: #e2e8f0;
+    transition: .5s; border-radius: 50px;
+}
+.theme-slider:before {
+    position: absolute; content: ""; height: 36px; width: 36px;
+    left: 4px; bottom: 3px; background: white; transition: .5s;
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Cpath d='M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: center; background-size: 22px;
+}
+input:checked + .theme-slider:before {
+    transform: translateX(38px);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236b7280'%3E%3Cpath d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E");
+}
+
+/* DARK MODE */
+body.dark-mode { background: #0f172a; }
+body.dark-mode .layout-topbar,
+body.dark-mode .layout-navbar { background: #111827 !important; border-bottom: 1px solid #1f2937; }
+body.dark-mode .layout-topbar__logo,
+body.dark-mode .layout-navbar__item { color: #e5e7eb !important; }
+body.dark-mode .layout-navbar__item.active { color: white !important; border-bottom-color: #3b82f6 !important; }
+body.dark-mode .layout-sidebar { background: #111827 !important; }
+body.dark-mode .layout-sidebar__item { color: #9ca3af !important; }
+body.dark-mode .layout-sidebar__item:hover,
+body.dark-mode .layout-sidebar__item.active { background: #1f2937 !important; color: white !important; }
+
+body.dark-mode .settings-card { background: #1e293b; border: 1px solid #374151; }
+body.dark-mode .settings-card h2 { color: #93c5fd; border-color: #3b82f6; }
+body.dark-mode .form-group label { color: #d1d5db; }
+body.dark-mode .form-group input { background: #374151; border-color: #4b5563; color: white; }
+body.dark-mode .btn-save { background: #3b82f6; }
+body.dark-mode .layout-footer { background: #111827; color: #9ca3af; }
