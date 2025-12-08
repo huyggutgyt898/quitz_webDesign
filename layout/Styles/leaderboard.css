@@ -71,11 +71,17 @@
 
 .leaderboard-dropdown .title {
     font-weight: 600;
-    color: #2d3748;
+    color: #2c3326;
 }
 
 .leaderboard-dropdown .desc {
     font-size: 13px;
-    color: #718096;
+    color: #719676;
     margin-top: 2px;
+}
+/* Đổi màu chữ tiêu đề + dòng mô tả cho dễ nhìn trong dark mode */
+html.dark .layout-content h1,
+html.dark .layout-content p.text-center.mb-12 {
+    color: #f1f5f9 !important;   /* trắng sáng, cực dễ đọc */
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
