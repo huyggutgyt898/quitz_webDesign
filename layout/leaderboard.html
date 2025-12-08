@@ -72,7 +72,7 @@
         <button @click="tab='questions'" :class="{ 'active': tab==='questions' }">
             <span class="icon"><i class="fas fa-fire text-orange-600"></i></span>
             <div>
-                <div class="title">Câu Hỏi Hot Nhất</div>
+                <div class="title">Bài Giảng Hot Nhất</div>
                 <div class="desc">Lượt chơi nhiều nhất</div>
             </div>
         </button>
@@ -142,7 +142,7 @@
 
             <!-- TAB 2: Câu Hỏi Hot -->
             <div x-show="tab === 'questions'" x-transition>
-                <h1 class="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-800">Câu Hỏi Hot Nhất Tuần</h1>
+                <h1 class="text-4xl md:text-5xl font-bold text-center mb-4 text-gray-800">Bài Giảng Hot Nhất Tuần</h1>
                 <p class="text-center text-orange-600 font-bold mb-12">Trending rần rần!</p>
                 <div class="space-y-6">
                     <template x-for="(q, i) in hotQuestions" :key="i">
