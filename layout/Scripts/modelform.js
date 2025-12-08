@@ -262,6 +262,7 @@ window.addEventListener('load', () => {
             applyFilter();  // SỬA: Thêm dòng này để áp dụng lọc ngay sau load
         })
         .catch(error => console.error('Error:', error));
+        
 });
 
 function renderSections(quizzes) {

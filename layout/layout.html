@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QUIZZKIT</title>
+    <title>QUIZZKIBIT</title>
+    <script>
+    if (!localStorage.getItem("loggedIn")) {
+        window.location.href = "login.html";
+    }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="Styles/layout.css" />
 </head>
 <body>
@@ -12,12 +19,18 @@
 
     <!-- SIDEBAR -->
     <aside class="layout-sidebar" id="sidebar">
-        <div class="layout-sidebar__title">MENU</div>
+        <div class="layout-sidebar__user">
+        <img src="Images/Avatar.jpg" alt="Avatar" class="layout-sidebar__user-avatar" id="sidebarAvatar">
+        <div class="layout-sidebar__user-info">
+            <div class="layout-sidebar__username" id="sidebarUsername">Guest</div>
+            <div class="layout-sidebar__usertag">Thành viên</div>
+        </div>
+    </div>
         <a class="layout-sidebar__item" href="">Trang chủ</a>
-        <a class="layout-sidebar__item" href="">Câu hỏi</a>
         <a class="layout-sidebar__item" href="">Tạo câu hỏi</a>
-        <a class="layout-sidebar__item" href="">Lịch sử</a>
-        <a class="layout-sidebar__item" href="">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="">Tải đề thi</a>
+        <a class="layout-sidebar__item" href="">Kho đề</a>
+        <a class="layout-sidebar__item" href="">Tài khoản</a>
         <a class="layout-sidebar__item" href="">Cài đặt</a>
     </aside>
 
@@ -32,7 +45,7 @@
                     <span></span>
                     <span></span>
                 </div>
-                <div class="layout-topbar__logo">QUIZZKIT</div>
+                <div class="layout-topbar__logo">QUIZKIBIT</div>
             </div>
             <div class="layout-topbar__search">
                 <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
@@ -41,7 +54,7 @@
                 <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
                 <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
                     <a href="">Đăng nhập</a>
-                    <a href="">Đăng xuất</a>
+                    <a href="" onclick="logoutUser(event)">Đăng xuất</a>
                 </div>
             </div>
         </header>
@@ -96,7 +109,9 @@
             </div>
         </footer>
     </div>
-
-    <script src="Scripts/layout.js"></script>
+    
+    <script src="Scripts/auth.js"></script>
+    <script src="Scripts/layout.js"></script
 </body>
+
 </html>

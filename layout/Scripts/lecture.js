@@ -8,8 +8,6 @@ let dislikeCount = 12;
 let commentCount = 45;
 let isLiked = false;
 let isDisliked = false;
-let savedQuizzes = JSON.parse(localStorage.getItem('savedQuizzes') || '[]');
-let isSaved = savedQuizzes.includes(quizName);
 
 // Load lecture data
 if (quizName) {
@@ -32,40 +30,6 @@ if (startQuizBtn) {
     startQuizBtn.addEventListener('click', () => {
         window.location.href = `quiz.html?quiz=${encodeURIComponent(quizName)}`;
     });
-}
-
-// Save button
-const saveBtn = document.getElementById('saveBtn');
-if (saveBtn) {
-    // Set initial state
-    updateSaveButton();
-    
-    saveBtn.addEventListener('click', function() {
-        if (isSaved) {
-            // Unsave
-            savedQuizzes = savedQuizzes.filter(name => name !== quizName);
-            isSaved = false;
-        } else {
-            // Save
-            savedQuizzes.push(quizName);
-            isSaved = true;
-        }
-        
-        localStorage.setItem('savedQuizzes', JSON.stringify(savedQuizzes));
-        updateSaveButton();
-    });
-}
-
-function updateSaveButton() {
-    if (!saveBtn) return;
-    
-    if (isSaved) {
-        saveBtn.classList.add('active');
-        saveBtn.querySelector('.save-text').textContent = 'Đã lưu';
-    } else {
-        saveBtn.classList.remove('active');
-        saveBtn.querySelector('.save-text').textContent = 'Lưu';
-    }
 }
 
 // Like button
