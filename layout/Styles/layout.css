@@ -285,7 +285,7 @@ body {
 html.dark,
 body.dark {
     background: #333435;
-    color: #e2e8f0;
+    color: #918521;
 }
 
 html.dark .layout-topbar,
@@ -310,7 +310,7 @@ html.dark .layout-sidebar {
 }
 
 html.dark .layout-sidebar__item {
-    color: #9ca3af !important;
+    color: #af9c9c !important;
 }
 
 html.dark .layout-sidebar__item:hover,
@@ -325,7 +325,7 @@ html.dark .layout-sidebar__item.active {
     gap: 14px;
     padding: 10px 15px 25px;
     margin-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    border-bottom: 1px solid rgba(247, 1, 1, 0.15);
 }
 
 .layout-sidebar__user-avatar {
@@ -357,7 +357,7 @@ html.dark .layout-sidebar__item.active {
 
 /* Dark mode – nếu cần điều chỉnh thêm */
 html.dark .layout-sidebar__user {
-    border-bottom-color: rgba(255, 255, 255, 0.1);
+    border-bottom-color: rgba(216, 15, 15, 0.1);
 }
 
 html.dark .layout-sidebar__username {
