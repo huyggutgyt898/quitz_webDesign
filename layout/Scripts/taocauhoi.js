@@ -58,10 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // Nút quay lại step 1
+  // Nút css step 1
   document.getElementById("backToStep1Btn").addEventListener("click", function() {
     if (questions.length > 0) {
-      if (!confirm("Bạn có các câu hỏi chưa lưu. Quay lại sẽ mất dữ liệu. Tiếp tục?")) {
+      if (!confirm("Bạn có các câu hỏi chưa lưu. css sẽ mất dữ liệu. Tiếp tục?")) {
         return;
       }
     }
@@ -311,3 +311,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+

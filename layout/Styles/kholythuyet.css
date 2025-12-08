@@ -1,0 +1,352 @@
+/* ===================================
+   KHO LÝ THUYẾT - STYLES
+   =================================== */
+
+/* Phần giới thiệu */
+.theory-welcome {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 60px 40px;
+    border-radius: 20px;
+    text-align: center;
+    color: white;
+    margin-bottom: 50px;
+    box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.theory-welcome::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.theory-welcome h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.theory-welcome p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.theory-welcome .highlight {
+    background: rgba(255,255,255,0.2);
+    padding: 2px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+/* Grid các môn học */
+.subjects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* Card môn học */
+.subject-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.subject-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.subject-card:hover::before {
+    transform: scaleX(1);
+}
+
+.subject-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-color: #667eea;
+}
+
+.subject-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+.subject-card:hover .subject-icon {
+    transform: scale(1.2) rotate(5deg);
+}
+
+.subject-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.subject-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #666;
+}
+
+/* Màu sắc riêng cho từng môn học */
+.subject-card.toan:hover {
+    border-color: #3498db;
+}
+
+.subject-card.toan:hover::before {
+    background: linear-gradient(90deg, #3498db, #2980b9);
+}
+
+.subject-card.ly:hover {
+    border-color: #e74c3c;
+}
+
+.subject-card.ly:hover::before {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+.subject-card.hoa:hover {
+    border-color: #27ae60;
+}
+
+.subject-card.hoa:hover::before {
+    background: linear-gradient(90deg, #27ae60, #229954);
+}
+
+.subject-card.sinh:hover {
+    border-color: #2ecc71;
+}
+
+.subject-card.sinh:hover::before {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+.subject-card.van:hover {
+    border-color: #e67e22;
+}
+
+.subject-card.van:hover::before {
+    background: linear-gradient(90deg, #e67e22, #d35400);
+}
+
+.subject-card.anh:hover {
+    border-color: #9b59b6;
+}
+
+.subject-card.anh:hover::before {
+    background: linear-gradient(90deg, #9b59b6, #8e44ad);
+}
+
+.subject-card.su:hover {
+    border-color: #f39c12;
+}
+
+.subject-card.su:hover::before {
+    background: linear-gradient(90deg, #f39c12, #e67e22);
+}
+
+.subject-card.dia:hover {
+    border-color: #1abc9c;
+}
+
+.subject-card.dia:hover::before {
+    background: linear-gradient(90deg, #1abc9c, #16a085);
+}
+
+.subject-card.tin:hover {
+    border-color: #34495e;
+}
+
+.subject-card.tin:hover::before {
+    background: linear-gradient(90deg, #34495e, #2c3e50);
+}
+
+.subject-card.gdcd:hover {
+    border-color: #e91e63;
+}
+
+.subject-card.gdcd:hover::before {
+    background: linear-gradient(90deg, #e91e63, #c2185b);
+}
+
+/* Nút quay lại */
+.back-btn-box {
+    margin: 20px 0;
+    text-align: center;   /* Căn giữa nút */
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 10px 18px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    background: #2980b9;
+    transform: scale(1.05);
+}
+
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .subjects-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+    }
+    
+    .theory-welcome h1 {
+        font-size: 2rem;
+    }
+    
+    .theory-welcome p {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .theory-welcome {
+        padding: 40px 25px;
+        margin-bottom: 30px;
+    }
+    
+    .theory-welcome h1 {
+        font-size: 1.8rem;
+    }
+    
+    .subjects-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .subject-card {
+        padding: 25px;
+    }
+    
+    .subject-icon {
+        font-size: 2.5rem;
+    }
+    
+    .subject-card h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .theory-welcome {
+        padding: 30px 20px;
+    }
+    
+    .theory-welcome h1 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+    
+    .theory-welcome p {
+        font-size: 0.9rem;
+    }
+    
+    .subject-card {
+        padding: 20px;
+    }
+    
+    .back-btn {
+        padding: 12px 28px;
+        font-size: 14px;
+    }
+}
+
+/* Hiệu ứng loading cho card */
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+.subject-card.loading {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 0%,
+        #f8f8f8 50%,
+        #f0f0f0 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Thêm hiệu ứng cho các card khi load trang */
+.subject-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Delay cho từng card */
+.subject-card:nth-child(1) { animation-delay: 0.1s; }
+.subject-card:nth-child(2) { animation-delay: 0.2s; }
+.subject-card:nth-child(3) { animation-delay: 0.3s; }
+.subject-card:nth-child(4) { animation-delay: 0.4s; }
+.subject-card:nth-child(5) { animation-delay: 0.5s; }
+.subject-card:nth-child(6) { animation-delay: 0.6s; }
+.subject-card:nth-child(7) { animation-delay: 0.7s; }
+.subject-card:nth-child(8) { animation-delay: 0.8s; }
+.subject-card:nth-child(9) { animation-delay: 0.9s; }
+.subject-card:nth-child(10) { animation-delay: 1s; }

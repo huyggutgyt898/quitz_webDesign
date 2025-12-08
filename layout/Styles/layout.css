@@ -1,148 +1,3 @@
-/* ========== WELCOME SECTION ========== */
-.welcome-section {
-    background: white;
-    border-radius: 15px;
-    padding: 30px;
-    margin-bottom: 30px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-}
-
-.welcome-section h1 {
-    color: #333;
-    font-size: 32px;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.welcome-section p {
-    color: #666;
-    font-size: 16px;
-    line-height: 1.6;
-    margin-bottom: 10px;
-}
-
-.welcome-section .highlight {
-    color: #e07b39;
-    font-weight: 600;
-}
-
-.learn-more {
-    color: #667eea;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s;
-}
-
-.learn-more:hover {
-    color: #764ba2;
-    text-decoration: underline;
-}
-
-/* ========== FEATURES GRID ========== */
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.feature-card {
-    background: white;
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-}
-
-.feature-icon {
-    font-size: 48px;
-    margin-bottom: 20px;
-    display: block;
-}
-
-.feature-card h3 {
-    color: #333;
-    font-size: 22px;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.feature-card p {
-    color: #666;
-    font-size: 15px;
-    line-height: 1.6;
-}
-
-.feature-card:nth-child(1) {
-    border-top: 4px solid #667eea;
-}
-
-.feature-card:nth-child(1):hover {
-    border-top-color: #5568d3;
-}
-
-.feature-card:nth-child(2) {
-    border-top: 4px solid #48bb78;
-}
-
-.feature-card:nth-child(2):hover {
-    border-top-color: #38a169;
-}
-
-.feature-card:nth-child(3) {
-    border-top: 4px solid #ed8936;
-}
-
-.feature-card:nth-child(3):hover {
-    border-top-color: #dd6b20;
-}
-
-/* ========== RESPONSIVE ========== */
-@media (max-width: 768px) {
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .welcome-section h1 {
-        font-size: 24px;
-    }
-
-    .welcome-section p {
-        font-size: 14px;
-    }
-
-    .feature-card {
-        padding: 20px;
-    }
-
-    .feature-card h3 {
-        font-size: 18px;
-    }
-}
-
-@media (max-width: 600px) {
-    .welcome-section {
-        padding: 20px;
-    }
-
-    .feature-icon {
-        font-size: 36px;
-    }
-}
-
-
-
 /* RESET */
 * {
     margin: 0;
@@ -425,4 +280,90 @@ body {
     .layout-footer-bottom {
         font-size: 13px;
     }
+}
+/* ============== DARK MODE CHUNG CHO TOÀN BỘ WEBSITE ============== */
+html.dark,
+body.dark {
+    background: #333435;
+    color: #e2e8f0;
+}
+
+html.dark .layout-topbar,
+html.dark .layout-navbar,
+html.dark .layout-footer {
+    background: #111827 !important;
+    border-color: #1f2937 !important;
+}
+
+html.dark .layout-topbar__logo,
+html.dark .layout-navbar__item {
+    color: #e5e7eb !important;
+}
+
+html.dark .layout-navbar__item.active {
+    color: white !important;
+    border-bottom-color: #3b82f6 !important;
+}
+
+html.dark .layout-sidebar {
+    background: #111827 !important;
+}
+
+html.dark .layout-sidebar__item {
+    color: #9ca3af !important;
+}
+
+html.dark .layout-sidebar__item:hover,
+html.dark .layout-sidebar__item.active {
+    background: #1f2937 !important;
+    color: white !important;
+}
+/* ============== SIDEBAR USER PROFILE ============== */
+.layout-sidebar__user {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 15px 25px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.layout-sidebar__user-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.layout-sidebar__user-info {
+    color: #fff;
+    line-height: 1.3;
+}
+
+.layout-sidebar__username {
+    font-weight: 700;
+    font-size: 17px;
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+.layout-sidebar__usertag {
+    font-size: 13px;
+    opacity: 0.9;
+    color: #0b135a;
+}
+
+/* Dark mode – nếu cần điều chỉnh thêm */
+html.dark .layout-sidebar__user {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+html.dark .layout-sidebar__username {
+    color: #e5e7eb;
+}
+
+html.dark .layout-sidebar__usertag {
+    color: #94a3b8;
 }

@@ -345,3 +345,19 @@ function exportToJSON() {
   
   alert('✅ Đã xuất file JSON thành công!');
 }
+/* ==================== NHẠC NỀN TOÀN SITE – TỰ ĐỘNG LẶP VÔ HẠN + CÓ NÚT ĐẸP ==================== */
+(function () {
+    ...
+    document.body.insertAdjacentHTML('beforeend', `
+        <div id="quizzkit-bg-music" class="fixed bottom-5 left-5 ...">
+            <button id="musicToggle" class="w-12 h-12 ...">
+                <i class="fas fa-play text-lg ml-1"></i>
+            </button>
+            <div class="flex items-center gap-3">
+                <i class="fas fa-music text-purple-600"></i>
+                <span>Nhạc nền QUIZZKIT</span>
+            </div>
+            <input type="range" ... >
+            <button id="hideMusicUI"> <i class="fas fa-times"></i> </button>
+        </div>
+    `);

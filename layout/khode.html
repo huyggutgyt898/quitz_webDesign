@@ -3,103 +3,110 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kho Đề - Quiz Game</title>
+  <title>Kho Đề - QUIZZKIT</title>
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="Styles/layout.css">
   <link rel="stylesheet" href="Styles/khode.css">
+   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    if (!localStorage.getItem("loggedIn")) {
+        window.location.href = "login.html";
+    }
+  </script>
+  <script src="Scripts/auth.js"></script>
 </head>
 <body>
-  <!-- ========== TOPBAR ========== -->
-  <header class="topbar-main">
-    <div class="topbar__logo">QUIZZKIT</div>
-    <div class="topbar__search">
-      <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
-    </div>
-    <div class="topbar__avatar">
-      <img src="/layout/Images/A2.jpg" alt="avatar" />
-    </div>
-  </header>
+  <!-- OVERLAY Mờ -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-  <div class="container">
-    <div class="main-wrapper">
-      <!-- ========== SIDEBAR ========== -->
-      <aside class="sidebar-main">
-        <h2>🎯 Quiz</h2>
-        <ul>
-          <li>
-            <a href="index.html">
-              <span>🏠</span> HOME
-            </a>
-          </li>
-          <li>
-            <a href="kholythuyet.html">
-              <span>📚</span> KHO LÝ THUYẾT
-            </a>
-          <li>
-            <a href="quizzes.html">
-              <span>🧠</span> QUIZZES
-            </a>
-          </li>
-          <li>
-            <a href="taicauhoi.html">
-              <span>📤</span> TẢI ĐỀ THI
-            </a>
-          </li>
-          <li>
-            <a href="taocauhoi.html">
-              <span>📝</span> TẠO CÂU HỎI
-            </a>
-          </li>
-          <li>
-            <a href="khode.html" class="active">
-              <span>📂</span> KHO ĐỀ
-            </a>
-          </li>
-          <li>
-            <a href="leaderboard.html">
-              <span>🏆</span> LEADER BOARD
-            </a>
-          </li>
-        </ul>
-      </aside>
+  <!-- SIDEBAR -->
+  <aside class="layout-sidebar" id="sidebar">
+    <div class="layout-sidebar__user">
+      <img src="Images/Avatar.jpg" alt="Avatar" class="layout-sidebar__user-avatar" id="sidebarAvatar">
+      <div class="layout-sidebar__user-info">
+        <div class="layout-sidebar__username" id="sidebarUsername">Guest</div>
+        <div class="layout-sidebar__usertag">Thành viên</div>
+      </div>
+    </div>
+    <a class="layout-sidebar__item" href="trangtaocauhoi.html">Trang chủ</a>
+    <a class="layout-sidebar__item" href="taocauhoi.html">Tạo câu hỏi</a>
+    <a class="layout-sidebar__item" href="taicauhoi.html">Tải đề thi</a>
+    <a class="layout-sidebar__item" href="khode.html">Kho đề</a>
+    <a class="layout-sidebar__item" href="kholythuyet.html">Lý thuyết</a>
+    <a class="layout-sidebar__item" href="">Cài đặt</a>
+  </aside>
 
-      <!-- ========== MAIN CONTENT ========== -->
-      <main class="main-content">
-        <div class="card">
-          <div class="topbar">
-            <div>
-              <h1>📚 Kho đề của bạn</h1>
-              <div class="subtitle">Danh sách các đề đã lưu (lưu trữ cục bộ trên trình duyệt)</div>
-            </div>
-            <div style="display:flex;gap:8px">
-              <button class="btn btn-secondary" id="clearAll">🗑️ Xóa tất cả</button>
-              <button class="btn btn-secondary" id="importBtn">📂 Nhập JSON</button>
-              <button class="btn btn-primary" id="exportAll">📥 Xuất tất cả</button>
-            </div>
+  <!-- MAIN PAGE WRAPPER -->
+  <div class="layout-main" id="mainContent">
+    <!-- TOPBAR -->
+    <header class="layout-topbar">
+      <div class="layout-topbar__left">
+        <div class="hamburger-menu" id="hamburgerMenu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="layout-topbar__logo">QUIZZKIT</div>
+      </div>
+      <div class="layout-topbar__search">
+        <input type="text" placeholder="Tìm kiếm khóa học, quiz...">
+      </div>
+      <div class="layout-topbar__avatar">
+        <img src="Images/A2.jpg" alt="avatar" id="avatarBtn"/>
+        <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+          <a href="login.html">Đăng nhập</a>
+          <a href="login.html" onclick="logoutUser(event)">Đăng xuất</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- NAVIGATION BAR -->
+    <nav class="layout-navbar">
+      <a class="layout-navbar__item" href="trangtaocauhoi.html">Trang chủ</a>
+      <a class="layout-navbar__item" href="taocauhoi.html">Tạo câu hỏi</a>
+      <a class="layout-navbar__item" href="taicauhoi.html">Tải đề</a>
+      <a class="layout-navbar__item active" href="khode.html">Kho đề</a>
+      <a class="layout-navbar__item" href="kholythuyet.html">Lý thuyết</a>
+    </nav>
+
+    <!-- MAIN CONTENT AREA -->
+    <section class="layout-content">
+      <div class="card">
+        <div class="topbar">
+          <div>
+            <h1>📚 Kho đề của bạn</h1>
+            <div class="subtitle">Danh sách các đề đã lưu (lưu trữ cục bộ trên trình duyệt)</div>
           </div>
-            
-          <div id="list" class="list"></div>
-          <div id="empty" class="empty" style="display:none">
-            Chưa có đề nào trong kho. Bạn có thể lưu đề từ trang tải/soạn đề.
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-secondary" id="clearAll">🗑️ Xóa tất cả</button>
+            <button class="btn btn-secondary" id="importBtn">📂 Nhập JSON</button>
+            <button class="btn btn-primary" id="exportAll">📥 Xuất tất cả</button>
           </div>
+        </div>
           
-          <hr style="margin:18px 0;border:none;border-top:1px solid #eef2ff">
+        <div id="list" class="list"></div>
+        <div id="empty" class="empty" style="display:none">
+          Chưa có đề nào trong kho. Bạn có thể lưu đề từ trang tải/soạn đề.
+        </div>
+        
+        <hr style="margin:18px 0;border:none;border-top:1px solid #eef2ff">
 
-          <div id="detail" style="display:none">
-            <h2>Chi tiết đề</h2>
-            <div id="detailMeta" style="margin-bottom:12px;color:#666"></div>
-            <pre id="detailJson"></pre>
-            <div style="margin-top:12px">
-              <button class="btn btn-secondary" id="backList">← Quay lại danh sách</button>
-            </div>
+        <div id="detail" style="display:none">
+          <h2>Chi tiết đề</h2>
+          <div id="detailMeta" style="margin-bottom:12px;color:#666"></div>
+          <pre id="detailJson"></pre>
+          <div style="margin-top:12px">
+            <button class="btn btn-secondary" id="backList">← Quay lại danh sách</button>
           </div>
         </div>
-         <div class="back-btn-container">
-          <button class="back-btn" onclick="window.location.href='trangperson.html'">← Quay lại</button>
-        </div>
-      </main>
-       
-    </div>
+      </div>
+      <div class="back-btn-box">
+    <a href="trangtaocauhoi.html" class="back-btn">← Quay lại</a>
+</div>
 
-    <!-- ========== FOOTER ========== -->
+    </section>
+
+    <!-- FOOTER -->
     <footer class="layout-footer">
       <div class="layout-footer-container">
         <div class="layout-footer-section">
@@ -108,15 +115,15 @@
         </div>
         <div class="layout-footer-section">
           <h3>Liên hệ</h3>
-          <p>Email: <a href="">nhatthanh@quizzz.vn</a></p>
+          <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
           <p>Hotline: 0123 456 789</p>
         </div>
         <div class="layout-footer-section">
           <h3>Liên kết nhanh</h3>
-          <p><a href="#">Trang chủ</a></p>
-          <p><a href="#">Câu hỏi</a></p>
-          <p><a href="#">Cài đặt</a></p>
-          <p><a href="#">Đăng nhập</a></p>
+          <p><a href="trangtaocauhoi.html">Trang chủ</a></p>
+          <p><a href="taocauhoi.html">Tạo câu hỏi</a></p>
+          <p><a href="khode.html">Kho đề</a></p>
+          <p><a href="kholythuyet.html">Lý thuyết</a></p>
         </div>
         <div class="layout-footer-section">
           <h3>Cộng đồng</h3>
@@ -132,6 +139,9 @@
   </div>
 
   <input type="file" id="importFile" accept="application/json" style="display:none">
+  
+  <!-- JavaScript Files -->
+  <script src="Scripts/layout.js"></script>
   <script src="Scripts/khode.js"></script>
 </body>
 </html>
