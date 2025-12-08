@@ -1,6 +1,5 @@
-// QUESTIONS PAGE JAVASCRIPT - FIXED
+// QUESTIONS PAGE - FINAL VERSION
 
-// DOM Elements
 const filterDropdownBtn = document.getElementById('filterDropdownBtn');
 const filterDropdown = document.getElementById('filterDropdown');
 const filterOptions = document.querySelectorAll('.filter-option');
@@ -10,211 +9,158 @@ const searchBtn = document.getElementById('searchBtn');
 const allSections = document.getElementById('allSections');
 const singleSection = document.getElementById('singleSection');
 const filteredQuizGrid = document.getElementById('filteredQuizGrid');
-const quizSections = document.querySelectorAll('.quiz-section');
+
+// Navbar dropdown toggle
+const navbarDropdownWrapper = document.querySelector('.navbar-dropdown-wrapper');
+const categoryDropdown = document.getElementById('categoryDropdown');
 
 let currentFilter = 'all';
 let currentCategory = 'all';
 let searchTerm = '';
 let allQuizData = [];
 
-// Toggle Filter Dropdown
-filterDropdownBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    filterDropdown.classList.toggle('active');
-});
+// Toggle Navbar Category Dropdown
+if (navbarDropdownWrapper && categoryDropdown) {
+    navbarDropdownWrapper.addEventListener('click', (e) => {
+        e.stopPropagation();
+        categoryDropdown.classList.toggle('show');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navbarDropdownWrapper.contains(e.target)) {
+            categoryDropdown.classList.remove('show');
+        }
+    });
+}
 
-// Close dropdown when clicking outside
+// Toggle Filter Dropdown
+if (filterDropdownBtn) {
+    filterDropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        filterDropdown.classList.toggle('opacity-0');
+        filterDropdown.classList.toggle('invisible');
+    });
+}
+
 document.addEventListener('click', (e) => {
-    if (!filterDropdown.contains(e.target) && !filterDropdownBtn.contains(e.target)) {
-        filterDropdown.classList.remove('active');
+    if (filterDropdown && filterDropdownBtn) {
+        if (!filterDropdown.contains(e.target) && !filterDropdownBtn.contains(e.target)) {
+            filterDropdown.classList.add('opacity-0');
+            filterDropdown.classList.add('invisible');
+        }
     }
 });
 
-// Filter Option Click Handler
+// Filter Options
 filterOptions.forEach(option => {
     option.addEventListener('click', function() {
-        filterOptions.forEach(opt => opt.classList.remove('active'));
-        this.classList.add('active');
+        filterOptions.forEach(opt => {
+            opt.classList.remove('active', 'bg-orange-50', 'border-orange-500', 'text-orange-600');
+        });
+        this.classList.add('active', 'bg-orange-50', 'border-orange-500', 'text-orange-600');
         
         currentFilter = this.getAttribute('data-filter');
-        const filterText = this.querySelector('span:last-child').textContent;
-        filterDropdownBtn.querySelector('.filter-text').textContent = filterText;
+        const filterText = this.textContent;
+        if (filterDropdownBtn) {
+            filterDropdownBtn.querySelector('.filter-text').textContent = filterText;
+        }
         
-        filterDropdown.classList.remove('active');
+        filterDropdown.classList.add('opacity-0', 'invisible');
         applyFilter();
     });
 });
 
-// Category Dropdown Click Handler
+// Category Dropdown
 categoryDropdownItems.forEach(item => {
     item.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
+        
         categoryDropdownItems.forEach(i => i.classList.remove('active'));
         this.classList.add('active');
         
         currentCategory = this.getAttribute('data-category');
+        
+        // Close dropdown
+        if (categoryDropdown) {
+            categoryDropdown.classList.remove('show');
+        }
+        
         applyFilter();
     });
 });
 
-// Apply Filter Function - FIXED
+// SỬA: Hàm applyFilter() bây giờ sẽ lọc theo currentCategory trước.
+// Nếu currentCategory != 'all', ưu tiên lọc theo category và hiển thị ở singleSection.
+// Nếu currentCategory == 'all', thì fallback về lọc theo currentFilter như cũ.
+// (Giả sử mỗi quiz trong allQuizData có thuộc tính 'category' như 'math', 'physics',...)
 function applyFilter() {
-    // Clear search term when changing filter
     searchTerm = '';
     if (quizSearchInput) quizSearchInput.value = '';
     
-    if (currentFilter === 'all') {
-        showAllSections();
-    } else {
-        showFilteredSection();
-    }
-    
-    applyCategoryFilter();
-    addEntranceAnimation();
-}
+    let filteredQuizzes = allQuizData;
 
-// Show All Sections
-function showAllSections() {
-    allSections.style.display = 'block';
-    singleSection.style.display = 'none';
-    
-    quizSections.forEach(section => {
-        section.style.display = 'block';
-    });
-}
-
-// Show Filtered Section - FIXED
-function showFilteredSection() {
-    allSections.style.display = 'none';
-    singleSection.style.display = 'block';
-    
-    filteredQuizGrid.innerHTML = '';
-    
-    const matchingQuizzes = allQuizData.filter(quiz => quiz.section === currentFilter);
-    
-    if (matchingQuizzes.length === 0) {
-        showEmptyState(filteredQuizGrid);
+    // Ưu tiên lọc theo category nếu != 'all'
+    if (currentCategory !== 'all') {
+        filteredQuizzes = filteredQuizzes.filter(q => q.category === currentCategory);
+        
+        // Nếu có filter != 'all', lọc thêm theo section (tùy chọn, để kết hợp cả hai)
+        if (currentFilter !== 'all') {
+            filteredQuizzes = filteredQuizzes.filter(q => q.section === currentFilter);
+        }
+        
+        showFilteredQuizzes(filteredQuizzes);
         return;
     }
-    
-    matchingQuizzes.forEach(quiz => {
-        const quizElement = createQuizElement(quiz);
-        filteredQuizGrid.appendChild(quizElement);
-    });
-}
 
-// Apply Category Filter
-function applyCategoryFilter() {
-    if (currentCategory === 'all') {
-        if (currentFilter === 'all') {
-            quizSections.forEach(section => {
-                const quizItems = section.querySelectorAll('.quiz-item');
-                quizItems.forEach(item => item.style.display = 'flex');
-                section.style.display = 'block';
-            });
-        } else {
-            const quizzes = filteredQuizGrid.querySelectorAll('.quiz-item');
-            quizzes.forEach(quiz => quiz.style.display = 'flex');
-        }
-    } else {
-        if (currentFilter === 'all') {
-            quizSections.forEach(section => {
-                const quizItems = section.querySelectorAll('.quiz-item');
-                let hasMatchingQuiz = false;
-                
-                quizItems.forEach(item => {
-                    const quizCategory = item.getAttribute('data-category');
-                    if (quizCategory === currentCategory) {
-                        item.style.display = 'flex';
-                        hasMatchingQuiz = true;
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-                
-                section.style.display = hasMatchingQuiz ? 'block' : 'none';
-            });
-        } else {
-            const quizzes = filteredQuizGrid.querySelectorAll('.quiz-item');
-            let hasResults = false;
-            
-            quizzes.forEach(quiz => {
-                const quizCategory = quiz.getAttribute('data-category');
-                if (quizCategory === currentCategory) {
-                    quiz.style.display = 'flex';
-                    hasResults = true;
-                } else {
-                    quiz.style.display = 'none';
-                }
-            });
-            
-            if (!hasResults) {
-                showEmptyState(filteredQuizGrid);
-            }
-        }
-    }
-}
-
-// Search Functionality
-function handleSearch() {
-    searchTerm = quizSearchInput.value.toLowerCase().trim();
-    
-    if (searchTerm === '') {
-        applyFilter();
-        return;
-    }
-    
+    // Nếu category == 'all', lọc theo filter như cũ
     if (currentFilter === 'all') {
-        quizSections.forEach(section => {
-            const quizzes = section.querySelectorAll('.quiz-item');
-            let hasResults = false;
-            
-            quizzes.forEach(quiz => {
-                if (matchesSearch(quiz)) {
-                    quiz.style.display = 'flex';
-                    hasResults = true;
-                } else {
-                    quiz.style.display = 'none';
-                }
-            });
-            
-            section.style.display = hasResults ? 'block' : 'none';
-        });
+        if (allSections) allSections.classList.remove('hidden');
+        if (singleSection) singleSection.classList.add('hidden');
     } else {
-        const quizzes = filteredQuizGrid.querySelectorAll('.quiz-item');
-        let hasResults = false;
+        filteredQuizzes = filteredQuizzes.filter(q => q.section === currentFilter);
+        showFilteredQuizzes(filteredQuizzes);
+    }
+}
+
+// Hàm mới: Hiển thị quiz đã lọc ở singleSection
+function showFilteredQuizzes(quizzes) {
+    if (allSections) allSections.classList.add('hidden');
+    if (singleSection) singleSection.classList.remove('hidden');
+    
+    if (filteredQuizGrid) {
+        filteredQuizGrid.innerHTML = '';
+        if (quizzes.length === 0) {
+            showEmptyState(filteredQuizGrid);
+            return;
+        }
         
         quizzes.forEach(quiz => {
-            if (matchesSearch(quiz)) {
-                quiz.style.display = 'flex';
-                hasResults = true;
-            } else {
-                quiz.style.display = 'none';
-            }
+            const quizElement = createQuizElement(quiz);
+            filteredQuizGrid.appendChild(quizElement);
         });
-        
-        if (!hasResults) {
-            showEmptyState(filteredQuizGrid);
-        }
     }
 }
 
-function matchesSearch(quizElement) {
-    const quizName = quizElement.querySelector('.quiz-name').textContent.toLowerCase();
-    const quizDesc = quizElement.querySelector('.quiz-description').textContent.toLowerCase();
-    const authorName = quizElement.querySelector('.author-name').textContent.toLowerCase();
+// Search
+function handleSearch() {
+    if (!quizSearchInput) return;
+    searchTerm = quizSearchInput.value.toLowerCase().trim();
     
-    return quizName.includes(searchTerm) || 
-           quizDesc.includes(searchTerm) || 
-           authorName.includes(searchTerm);
-}
-
-// Search event listeners
-if (quizSearchInput) {
-    quizSearchInput.addEventListener('input', () => {
-        clearTimeout(window.searchTimeout);
-        window.searchTimeout = setTimeout(handleSearch, 300);
-    });
+    let filteredQuizzes = allQuizData.filter(quiz => 
+        quiz.name.toLowerCase().includes(searchTerm)
+    );
+    
+    // Nếu có category/filter, lọc thêm (tích hợp với category/filter)
+    if (currentCategory !== 'all') {
+        filteredQuizzes = filteredQuizzes.filter(q => q.category === currentCategory);
+    }
+    if (currentFilter !== 'all') {
+        filteredQuizzes = filteredQuizzes.filter(q => q.section === currentFilter);
+    }
+    
+    showFilteredQuizzes(filteredQuizzes);  // Sử dụng hàm mới để hiển thị
 }
 
 if (searchBtn) {
@@ -229,62 +175,26 @@ if (quizSearchInput) {
     });
 }
 
-// Show Empty State
-function showEmptyState(container) {
-    const existingEmpty = container.querySelector('.empty-state');
-    if (existingEmpty) existingEmpty.remove();
-    
-    const emptyState = document.createElement('div');
-    emptyState.className = 'empty-state';
-    emptyState.innerHTML = `
-        <div class="empty-state-icon">🔍</div>
-        <div class="empty-state-text">Không tìm thấy quiz nào</div>
-        <div class="empty-state-subtext">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</div>
-    `;
-    container.appendChild(emptyState);
-}
-
-// Create Quiz Element
 function createQuizElement(quiz) {
     const quizDiv = document.createElement('div');
-    quizDiv.className = 'quiz-item';
-    quizDiv.setAttribute('data-category', quiz.category);
-    quizDiv.setAttribute('data-filter', quiz.section);
-    
+    quizDiv.className = 'quiz-item relative bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col';
     quizDiv.innerHTML = `
-        <div class="quiz-thumbnail">
-            <img src="${quiz.thumbnail}" alt="${quiz.alt}">
-            <div class="quiz-overlay">
-                <button class="play-btn">▶ Chơi ngay</button>
+        <div class="quiz-thumbnail relative overflow-hidden rounded-t-2xl">
+            <img src="${quiz.thumbnail}" alt="${quiz.name}" class="w-full h-40 object-cover transform transition-transform duration-500">
+            <div class="quiz-stats-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 flex justify-between text-white text-xs font-semibold opacity-0">
+                <span>👥 ${quiz.players}</span>
+                <span>⭐ ${quiz.rating}</span>
+                <span>🕒 ${quiz.time}</span>
             </div>
         </div>
-        <div class="quiz-details">
-            <h3 class="quiz-name">${quiz.name}</h3>
-            <p class="quiz-description">${quiz.description}</p>
-            <div class="quiz-author">
-                <img src="${quiz.authorImg}" alt="${quiz.authorName}" class="author-avatar">
-                <span class="author-name">${quiz.authorName}</span>
-                ${quiz.authorBadge ? `<span class="author-badge">${quiz.authorBadge}</span>` : ''}
-            </div>
-            <div class="quiz-stats">
-                <div class="stat-item">
-                    <span class="stat-icon">▶️</span>
-                    <span class="stat-value">${quiz.plays}</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-icon">👁️</span>
-                    <span class="stat-value">${quiz.views}</span>
-                </div>
-                <div class="quiz-reactions">
-                    <button class="reaction-btn like-btn">
-                        <span class="reaction-icon">👍</span>
-                        <span class="reaction-count">${quiz.likes}</span>
-                    </button>
-                    <button class="reaction-btn dislike-btn">
-                        <span class="reaction-icon">👎</span>
-                        <span class="reaction-count">${quiz.dislikes}</span>
-                    </button>
-                </div>
+        <div class="p-4 flex flex-col flex-1">
+            <h3 class="quiz-name font-bold text-lg mb-2 text-gray-800 cursor-pointer hover:text-orange-500 transition-colors data-quiz-name="${quiz.name}">${quiz.name}</h3>
+            <p class="text-sm text-gray-600 leading-relaxed min-h-[2.5rem] line-clamp-2">${quiz.description}</p>
+            
+            <div class="flex items-center gap-3 pt-3 border-t border-gray-200 mt-auto">
+                <img src="${quiz.authorImg}" alt="${quiz.authorName}" class="w-8 h-8 rounded-full border-2 border-orange-500 object-cover">
+                <span class="text-sm font-semibold text-gray-800 flex-1 truncate">${quiz.authorName}</span>
+                ${quiz.authorBadge ? `<span class="text-xs bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-800 px-2 py-1 rounded-full font-bold">${quiz.authorBadge}</span>` : ''}
             </div>
         </div>
     `;
@@ -293,170 +203,92 @@ function createQuizElement(quiz) {
     return quizDiv;
 }
 
-// Attach Event Listeners to Quiz
 function attachQuizEventListeners(quizElement) {
-    const playBtn = quizElement.querySelector('.play-btn');
-    const likeBtn = quizElement.querySelector('.like-btn');
-    const dislikeBtn = quizElement.querySelector('.dislike-btn');
-    const quizName = quizElement.querySelector('.quiz-name').textContent;
+    const quizNameEl = quizElement.querySelector('.quiz-name');
+    const quizThumbnail = quizElement.querySelector('.quiz-thumbnail');
+    const quizName = quizNameEl?.getAttribute('data-quiz-name');
 
-    if (playBtn) {
-        playBtn.addEventListener('click', (e) => {
+    // Click on quiz name to go to lecture
+    if (quizNameEl && quizName) {
+        quizNameEl.addEventListener('click', (e) => {
             e.stopPropagation();
             window.location.href = `lecture.html?quiz=${encodeURIComponent(quizName)}`;
         });
     }
 
-    if (likeBtn) {
-        likeBtn.addEventListener('click', (e) => {
+    // Click on thumbnail to go to lecture
+    if (quizThumbnail && quizName) {
+        quizThumbnail.addEventListener('click', (e) => {
             e.stopPropagation();
-            handleReaction(likeBtn, dislikeBtn);
-        });
-    }
-
-    if (dislikeBtn) {
-        dislikeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            handleReaction(dislikeBtn, likeBtn);
+            window.location.href = `lecture.html?quiz=${encodeURIComponent(quizName)}`;
         });
     }
 }
 
-// Handle Like/Dislike
-function handleReaction(clickedBtn, oppositeBtn) {
-    const countSpan = clickedBtn.querySelector('.reaction-count');
-    let count = parseInt(countSpan.textContent);
-    
-    if (clickedBtn.classList.contains('active')) {
-        clickedBtn.classList.remove('active');
-        count--;
-    } else {
-        clickedBtn.classList.add('active');
-        count++;
-        
-        if (oppositeBtn.classList.contains('active')) {
-            oppositeBtn.classList.remove('active');
-            const oppositeCount = oppositeBtn.querySelector('.reaction-count');
-            oppositeCount.textContent = parseInt(oppositeCount.textContent) - 1;
-        }
-    }
-    
-    countSpan.textContent = count;
-    
-    clickedBtn.style.transform = 'scale(1.2)';
-    setTimeout(() => {
-        clickedBtn.style.transform = '';
-    }, 200);
+function showEmptyState(container) {
+    container.innerHTML = `
+        <div class="col-span-full text-center py-20">
+            <div class="text-6xl mb-4">🔍</div>
+            <div class="text-xl text-gray-600 mb-2">Không tìm thấy quiz nào</div>
+            <div class="text-sm text-gray-500">Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</div>
+        </div>
+    `;
 }
 
-// Load Quizzes from JSON
+// Load Data
 window.addEventListener('load', () => {
-    loadPreferences();
-    
     fetch('data/allQuizzes.json')
-        .then(response => {
-            if (!response.ok) throw new Error('Không load được JSON');
-            return response.json();
-        })
+        .then(response => response.json())
         .then(quizzes => {
             allQuizData = quizzes;
-            
-            const sectionGrids = {
-                recommended: document.querySelector('.quiz-section[data-section="recommended"] .quiz-grid'),
-                trending: document.querySelector('.quiz-section[data-section="trending"] .quiz-grid'),
-                new: document.querySelector('.quiz-section[data-section="new"] .quiz-grid'),
-                popular: document.querySelector('.quiz-section[data-section="popular"] .quiz-grid'),
-                'most-played': document.querySelector('.quiz-section[data-section="most-played"] .quiz-grid'),
-                'hot-players': document.querySelector('.quiz-section[data-section="hot-players"] .quiz-grid')
-            };
-
-            quizzes.forEach(quiz => {
-                const targetGrid = sectionGrids[quiz.section];
-                if (targetGrid) {
-                    const quizElement = createQuizElement(quiz);
-                    targetGrid.appendChild(quizElement);
-                }
-            });
-
-            applyFilter();
-            addEntranceAnimation();
+            renderSections(quizzes);
+            applyFilter();  // SỬA: Gọi applyFilter() sau khi load để áp dụng category/filter ban đầu
         })
-        .catch(error => {
-            console.error('Lỗi load quiz JSON:', error);
-        });
+        .catch(error => console.error('Error:', error));
 });
 
-// Section links
-document.querySelectorAll('.section-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const section = link.closest('.quiz-section');
-        const sectionName = section.getAttribute('data-section');
+function renderSections(quizzes) {
+    const sections = {
+        recommended: { icon: '⭐', title: 'Quiz đề xuất' },
+        trending: { icon: '🔥', title: 'Quiz trending' },
+        new: { icon: '✨', title: 'Quiz mới nhất' },
+        popular: { icon: '👁️', title: 'Quiz nhiều xem' },
+        'most-played': { icon: '🎮', title: 'Quiz nhiều chơi' },
+        'hot-players': { icon: '👑', title: 'Quiz từ Hot Player' }
+    };
+
+    Object.keys(sections).forEach(sectionKey => {
+        const sectionQuizzes = quizzes.filter(q => q.section === sectionKey);
+        if (sectionQuizzes.length === 0) return;
+
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'mb-12 section-collapsed';
+        sectionDiv.setAttribute('data-section', sectionKey);
         
-        filterOptions.forEach(option => {
-            if (option.getAttribute('data-filter') === sectionName) {
-                option.click();
-            }
+        sectionDiv.innerHTML = `
+            <div class="flex justify-between items-center mb-6 pb-4 border-b-2 border-gray-200">
+                <h2 class="flex items-center gap-3 text-2xl font-bold text-gray-800">
+                    <span class="text-3xl">${sections[sectionKey].icon}</span>
+                    ${sections[sectionKey].title}
+                </h2>
+                <a href="#" class="section-link text-orange-500 text-sm font-semibold hover:text-orange-600 transition-colors">xem thêm...</a>
+            </div>
+            <div class="quiz-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+        `;
+
+        const grid = sectionDiv.querySelector('.quiz-grid');
+        sectionQuizzes.forEach(quiz => {
+            grid.appendChild(createQuizElement(quiz));
         });
-    });
-});
 
-// Save/Load Preferences
-function savePreferences() {
-    localStorage.setItem('lastFilter', currentFilter);
-    localStorage.setItem('lastCategory', currentCategory);
-}
-
-function loadPreferences() {
-    const savedFilter = localStorage.getItem('lastFilter');
-    const savedCategory = localStorage.getItem('lastCategory');
-    
-    if (savedFilter && savedFilter !== 'all') {
-        currentFilter = savedFilter;
-        filterOptions.forEach(option => {
-            if (option.getAttribute('data-filter') === savedFilter) {
-                option.classList.add('active');
-                const filterText = option.querySelector('span:last-child').textContent;
-                filterDropdownBtn.querySelector('.filter-text').textContent = filterText;
-            } else {
-                option.classList.remove('active');
-            }
+        const link = sectionDiv.querySelector('.section-link');
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            sectionDiv.classList.toggle('section-collapsed');
+            link.textContent = sectionDiv.classList.contains('section-collapsed') ? 'xem thêm...' : 'thu gọn';
         });
-    }
-    
-    if (savedCategory && savedCategory !== 'all') {
-        currentCategory = savedCategory;
-        categoryDropdownItems.forEach(item => {
-            if (item.getAttribute('data-category') === savedCategory) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
-    }
-}
 
-filterOptions.forEach(option => {
-    option.addEventListener('click', savePreferences);
-});
-
-categoryDropdownItems.forEach(item => {
-    item.addEventListener('click', savePreferences);
-});
-
-// Entrance Animation
-function addEntranceAnimation() {
-    const visibleQuizzes = document.querySelectorAll('.quiz-item:not([style*="display: none"])');
-    
-    visibleQuizzes.forEach((quiz, index) => {
-        quiz.style.opacity = '0';
-        quiz.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-            quiz.style.transition = 'all 0.5s ease';
-            quiz.style.opacity = '1';
-            quiz.style.transform = 'translateY(0)';
-        }, index * 50);
+        allSections.appendChild(sectionDiv);
     });
 }
 
