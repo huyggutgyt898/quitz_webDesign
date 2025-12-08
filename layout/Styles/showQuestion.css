@@ -338,10 +338,11 @@ body.theme-noel{
 
   /* Cố định vị trí */
   position: fixed;
-  right: 51px;
+  right: 14px;
   top: 250px;
 
   /* Giới hạn kích thước */
   max-width:max-content;
   border-radius: 8px;
 }
+
