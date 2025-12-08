@@ -71,7 +71,6 @@ navItems.forEach(item => {
     }
 })();
 //hết khúc sáng tối
-
 // ==================== NHẠC NỀN TOÀN SITE – TỰ ĐỘNG LẶP VÔ HẠN + CÓ NÚT ĐẸP ====================
 (function () {
     // Tránh chạy 2 lần
@@ -164,3 +163,5 @@ navItems.forEach(item => {
         showBtn.classList.add('hidden');
     });
 })();
+
+
