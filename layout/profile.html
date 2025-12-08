@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QUIZZKIT</title>
+
+    <script>
+    if (!localStorage.getItem("loggedIn")) {
+        window.location.href = "login.html";
+    }
+    </script>
+
+    <script src="Scripts/auth.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/profile.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- OVERLAY MỜ - CHỈ HIỆN KHI SIDEBAR MỞ -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- SIDEBAR -->
+    <aside class="layout-sidebar" id="sidebar">
+        <div class="layout-sidebar__title">MENU</div>
+        <a class="layout-sidebar__item" href="">Trang chủ</a>
+        <a class="layout-sidebar__item" href="">Bài giảng</a>
+        <a class="layout-sidebar__item" href="">Tạo bài giảng</a>
+        <a class="layout-sidebar__item" href="">Bảng xếp hạng</a>
+        <a class="layout-sidebar__item" href="">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="">Cài đặt</a>
+    </aside>
+
+    <!-- MAIN PAGE WRAPPER -->
+    <div class="layout-main" id="mainContent">
+        <!-- TOPBAR -->
+        <header class="layout-topbar">
+            <div class="layout-topbar__left">
+                <!-- HAMBURGER MENU -->
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="layout-topbar__logo">QUIZZKIT</div>
+            </div>
+            <div class="layout-topbar__search">
+                <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
+            </div>
+            <div class="layout-topbar__avatar">
+                <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
+                <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+                    <a href="settings.html">Cài đặt</a>
+                    <a href="login.html" onclick="logoutUser(event)">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVIGATION BAR - THANH TOPBAR THỨ 2 -->
+        <nav class="layout-navbar">
+            <a class="layout-navbar__item" href="">Trang chủ</a>
+            <a class="layout-navbar__item" href="">Bài giảng</a>
+            <a class="layout-navbar__item" href="">Tạo bài giảng</a>
+            <a class="layout-navbar__item" href="">Bảng xếp hạng</a>
+            <a class="layout-navbar__item active" href="">Tài khoản</a>
+        </nav>
+
+        <!-- MAIN CONTENT AREA -->
+        <section class="layout-content">
+            <!-- MAIN CONTENT -->
+  <main class="profile-container reveal">
+
+    <h1 class="profile-title">Hồ sơ cá nhân</h1>
+
+    <!-- Header -->
+  <section class="profile-header">
+    <div class="profile-left">
+      <img src="Images/Avatar.jpg" class="avatar" alt="avatar" id="avatarImg">
+      <div class="user-info">
+        <h2 class="name-wrapper">
+          <span id="displayName">username123456</span>
+          <button class="edit-name-btn" id="changeNameBtn" title="Đổi tên">
+          <i class="fa-solid fa-pen fa-xs"></i>
+          </button>
+        </h2>
+        <p>@123456</p>
+        <span>0 người theo dõi</span> · <span>0 người đang theo dõi</span>
+      </div>
+    </div>
+    <button class="edit-btn" id="changeAvatarBtn">Đổi avatar</button>
+  </section>
+
+  <!-- Popup chọn avatar -->
+  <div id="avatarSelector">
+  <div>
+    <h3>Chọn avatar mới</h3>
+    <div id="avatarList"></div>
+    <button id="closeSelectorBtn">Đóng</button>
+  </div>
+  </div>
+  
+  <!-- Stats -->
+  <section class="stats-section">
+    <div class="stat-card"><h3>0</h3><p>Câu đố đã chơi</p></div>
+    <div class="stat-card"><h3>0/0</h3><p>Tỷ lệ chính xác</p></div>
+    <div class="stat-card"><h3>1</h3><p>Ngày hoạt động</p></div>
+    <div class="stat-card"><h3>0</h3><p>Thành tựu</p></div>
+    <div class="stat-card"><h3>#X</h3><p>Xếp hạng tháng</p></div>
+  </section>
+
+  <!-- Achievements -->
+  <section class="achievements">
+    <h2><i class="fa-solid fa-medal"></i> Thành tích nổi bật</h2>
+    <div class="achieve-grid">
+      <div class="achieve-item">
+        <i><i class="fa-solid fa-medal"></i></i>
+        <div><b>Top BXH</b><p>Còn trống</p></div>
+      </div>
+      <div class="achieve-item">
+        <i><i class="fa-regular fa-star"></i></i>
+        <div><b>Chuỗi thắng</b><p>Còn trống</p></div>
+      </div>
+      <div class="achieve-item">
+        <i><i class="fa-solid fa-fire"></i></i>
+        <div><b>Thành viên thường trực</b><p>Còn trống</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Friends -->
+  <section class="friends">
+    <h2><i class="fa-solid fa-user-group"></i> Bạn bè</h2>
+    <div class="friend-grid">
+      <div class="friend">
+        <img src="Images/Avatar.jpg" alt="">
+        <div><b>username</b><p>Còn trống</p></div>
+      </div>
+      <div class="friend">
+        <img src="Images/A3.jpg" alt="">
+        <div><b>username</b><p>Còn trống</p></div>
+      </div>
+      <div class="friend add">+ Thêm bạn bè</div>
+    </div>
+  </section>
+
+  <!-- Câu hỏi đã tạo -->
+  <section class="created-quizz">
+    <h2><i class="fa-solid fa-pen-fancy"></i> Câu hỏi đã tạo</h2>
+    <div class="quiz-grid">
+    <div class="quiz-item" data-category="math" data-filter="recommended">
+        <div class="quiz-thumbnail">
+            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=300&fit=crop" alt="Thử thách toán">
+            <div class="quiz-overlay">
+                <button class="play-btn">▶ Chơi ngay</button>
+            </div>
+        </div>
+        <div class="quiz-details">
+            <h3 class="quiz-name">Thử thách toán học</h3>
+            <p class="quiz-description">Kiểm tra kiến thức toán học của bạn với 25 câu hỏi thú vị!</p>
+            <div class="quiz-author">
+                <img src="Images/Avatar.jpg" alt="" class="author-avatar">
+                <span class="author-name">username</span>
+            </div>
+            <div class="quiz-stats">
+                <div class="stat-item">
+                    <span class="stat-icon"><i class="fa-brands fa-youtube"></i></span>
+                    <span class="stat-value">576</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon"><i class="fa-regular fa-eye"></i></span>
+                    <span class="stat-value">1.6K</span>
+                </div>
+                <div class="quiz-reactions">
+                    <button class="reaction-btn like-btn">
+                        <span class="reaction-icon"><i class="fa-solid fa-thumbs-up"></i></span>
+                        <span class="reaction-count">42</span>
+                    </button>
+                    <button class="reaction-btn dislike-btn">
+                        <span class="reaction-icon"><i class="fa-solid fa-thumbs-down"></i></span>
+                        <span class="reaction-count">3</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="quiz-item" data-category="technology" data-filter="recommended">
+        <div class="quiz-thumbnail">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=300&fit=crop" alt="Lập trình">
+            <div class="quiz-overlay">
+                <button class="play-btn">▶ Chơi ngay</button>
+            </div>
+        </div>
+        <div class="quiz-details">
+            <h3 class="quiz-name">Kiến thức lập trình cơ bản</h3>
+            <p class="quiz-description">30 câu hỏi về HTML, CSS, JavaScript cho người mới bắt đầu</p>
+            <div class="quiz-author">
+                <img src="Images/Avatar.jpg" alt="" class="author-avatar">
+                <span class="author-name">username</span>
+            </div>
+            <div class="quiz-stats">
+                <div class="stat-item">
+                    <span class="stat-icon"><i class="fa-brands fa-youtube"></i></span>
+                    <span class="stat-value">1.2K</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon"><i class="fa-regular fa-eye"></i></span>
+                    <span class="stat-value">3.2K</span>
+                </div>
+                <div class="quiz-reactions">
+                    <button class="reaction-btn like-btn">
+                        <span class="reaction-icon"><i class="fa-solid fa-thumbs-up"></i></span>
+                        <span class="reaction-count">89</span>
+                    </button>
+                    <button class="reaction-btn dislike-btn">
+                        <span class="reaction-icon"><i class="fa-solid fa-thumbs-down"></i></span>
+                        <span class="reaction-count">5</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
+
+  </main>
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="layout-footer">
+            <div class="layout-footer-container">
+                <!-- Giới thiệu -->
+                <div class="layout-footer-section">
+                    <h3>Giới thiệu</h3>
+                    <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
+                </div>
+                <!-- Liên hệ -->
+                <div class="layout-footer-section">
+                    <h3>Liên hệ</h3>
+                    <p>Email: <a href="">nhatthanh@quizzz.vn</a></p>
+                    <p>Hotline: 0123 456 789</p>
+                </div>
+                <!-- Liên kết nhanh -->
+                <div class="layout-footer-section">
+                    <h3>Liên kết nhanh</h3>
+                    <p><a href="#">Trang chủ</a></p>
+                    <p><a href="#">Câu hỏi</a></p>
+                    <p><a href="#">Cài đặt</a></p>
+                    <p><a href="#">Đăng nhập</a></p>
+                </div>
+                <!-- Mạng xã hội -->
+                <div class="layout-footer-section">
+                    <h3>Cộng đồng</h3>
+                    <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+                    <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
+                    <p><a href="https://discord.com" target="_blank">Discord</a></p>
+                </div>
+            </div>
+            <div class="layout-footer-bottom">
+                <p>© 2025 Quizzz. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="Scripts/layout.js"></script>
+    <script src="Scripts/profile.js"></script>
+</body>
+</html>
+
