@@ -91,52 +91,47 @@ categoryDropdownItems.forEach(item => {
     });
 });
 
-// SỬA: Hàm applyFilter() bây giờ sẽ lọc theo currentCategory trước.
-// Nếu currentCategory != 'all', ưu tiên lọc theo category và hiển thị ở singleSection.
-// Nếu currentCategory == 'all', thì fallback về lọc theo currentFilter như cũ.
-// (Giả sử mỗi quiz trong allQuizData có thuộc tính 'category' như 'math', 'physics',...)
 function applyFilter() {
     searchTerm = '';
     if (quizSearchInput) quizSearchInput.value = '';
     
-    let filteredQuizzes = allQuizData;
-
-    // Ưu tiên lọc theo category nếu != 'all'
+    // Thêm logic lọc theo currentCategory
     if (currentCategory !== 'all') {
-        filteredQuizzes = filteredQuizzes.filter(q => q.category === currentCategory);
-        
-        // Nếu có filter != 'all', lọc thêm theo section (tùy chọn, để kết hợp cả hai)
-        if (currentFilter !== 'all') {
-            filteredQuizzes = filteredQuizzes.filter(q => q.section === currentFilter);
-        }
-        
-        showFilteredQuizzes(filteredQuizzes);
-        return;
-    }
-
-    // Nếu category == 'all', lọc theo filter như cũ
-    if (currentFilter === 'all') {
-        if (allSections) allSections.classList.remove('hidden');
-        if (singleSection) singleSection.classList.add('hidden');
+        showFilteredSection();  // Hiển thị single section với quiz lọc theo category
+    } else if (currentFilter === 'all') {
+        showAllSections();
     } else {
-        filteredQuizzes = filteredQuizzes.filter(q => q.section === currentFilter);
-        showFilteredQuizzes(filteredQuizzes);
+        showFilteredSection();
     }
 }
 
-// Hàm mới: Hiển thị quiz đã lọc ở singleSection
-function showFilteredQuizzes(quizzes) {
+function showAllSections() {
+    if (allSections) allSections.classList.remove('hidden');
+    if (singleSection) singleSection.classList.add('hidden');
+}
+
+function showFilteredSection() {
     if (allSections) allSections.classList.add('hidden');
     if (singleSection) singleSection.classList.remove('hidden');
     
     if (filteredQuizGrid) {
         filteredQuizGrid.innerHTML = '';
-        if (quizzes.length === 0) {
+        
+        // SỬA: Lọc quiz theo currentCategory nếu != 'all', kết hợp với currentFilter
+        let matchingQuizzes = allQuizData;
+        if (currentCategory !== 'all') {
+            matchingQuizzes = matchingQuizzes.filter(q => q.category === currentCategory);
+        }
+        if (currentFilter !== 'all') {
+            matchingQuizzes = matchingQuizzes.filter(q => q.section === currentFilter);
+        }
+        
+        if (matchingQuizzes.length === 0) {
             showEmptyState(filteredQuizGrid);
             return;
         }
         
-        quizzes.forEach(quiz => {
+        matchingQuizzes.forEach(quiz => {
             const quizElement = createQuizElement(quiz);
             filteredQuizGrid.appendChild(quizElement);
         });
@@ -147,48 +142,70 @@ function showFilteredQuizzes(quizzes) {
 function handleSearch() {
     if (!quizSearchInput) return;
     searchTerm = quizSearchInput.value.toLowerCase().trim();
+    if (allSections) allSections.classList.add('hidden');
+    if (singleSection) singleSection.classList.remove('hidden');
     
-    let filteredQuizzes = allQuizData.filter(quiz => 
-        quiz.name.toLowerCase().includes(searchTerm)
-    );
-    
-    // Nếu có category/filter, lọc thêm (tích hợp với category/filter)
-    if (currentCategory !== 'all') {
-        filteredQuizzes = filteredQuizzes.filter(q => q.category === currentCategory);
+    if (filteredQuizGrid) {
+        filteredQuizGrid.innerHTML = '';
+        // SỬA: Lọc theo searchTerm, và thêm lọc category/filter nếu có
+        let matchingQuizzes = allQuizData.filter(quiz => 
+            quiz.name.toLowerCase().includes(searchTerm)
+        );
+        if (currentCategory !== 'all') {
+            matchingQuizzes = matchingQuizzes.filter(q => q.category === currentCategory);
+        }
+        if (currentFilter !== 'all') {
+            matchingQuizzes = matchingQuizzes.filter(q => q.section === currentFilter);
+        }
+        
+        if (matchingQuizzes.length === 0) {
+            showEmptyState(filteredQuizGrid);
+            return;
+        }
+        
+        matchingQuizzes.forEach(quiz => {
+            const quizElement = createQuizElement(quiz);
+            filteredQuizGrid.appendChild(quizElement);
+        });
     }
-    if (currentFilter !== 'all') {
-        filteredQuizzes = filteredQuizzes.filter(q => q.section === currentFilter);
-    }
-    
-    showFilteredQuizzes(filteredQuizzes);  // Sử dụng hàm mới để hiển thị
 }
 
 if (searchBtn) {
     searchBtn.addEventListener('click', handleSearch);
 }
 
-if (quizSearchInput) {
-    quizSearchInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleSearch();
-        }
-    });
-}
-
+// Create Quiz Element
 function createQuizElement(quiz) {
     const quizDiv = document.createElement('div');
-    quizDiv.className = 'quiz-item relative bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col';
+    quizDiv.className = 'quiz-item relative bg-white rounded-2xl shadow-md overflow-visible cursor-pointer flex flex-col h-full';
+    quizDiv.setAttribute('data-category', quiz.category);
+    quizDiv.setAttribute('data-filter', quiz.section);
+    
     quizDiv.innerHTML = `
-        <div class="quiz-thumbnail relative overflow-hidden rounded-t-2xl">
-            <img src="${quiz.thumbnail}" alt="${quiz.name}" class="w-full h-40 object-cover transform transition-transform duration-500">
-            <div class="quiz-stats-overlay absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 flex justify-between text-white text-xs font-semibold opacity-0">
-                <span>👥 ${quiz.players}</span>
-                <span>⭐ ${quiz.rating}</span>
-                <span>🕒 ${quiz.time}</span>
+        <!-- Thumbnail - Clickable -->
+        <div class="quiz-thumbnail relative w-full h-56 overflow-hidden rounded-t-2xl" data-quiz-name="${quiz.name}">
+            <img src="${quiz.thumbnail}" alt="${quiz.alt}" class="w-full h-full object-cover transition-transform duration-300">
+            
+            <!-- Stats Overlay -->
+            <div class="quiz-stats-overlay absolute bottom-0 left-0 right-0 bg-gray-900/80 px-4 py-3 flex justify-between items-center">
+                <div class="flex flex-col items-center gap-1 flex-1">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                    <span class="text-white text-xs font-semibold">${quiz.views}</span>
+                </div>
+                <div class="flex flex-col items-center gap-1 flex-1">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+                    <span class="text-white text-xs font-semibold">${Math.floor(Math.random() * 50)}</span>
+                </div>
+                <div class="flex flex-col items-center gap-1 flex-1">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+                    <span class="text-white text-xs font-semibold">${Math.floor(Math.random() * 20)}</span>
+                </div>
             </div>
         </div>
-        <div class="p-4 flex flex-col flex-1">
-            <h3 class="quiz-name font-bold text-lg mb-2 text-gray-800 cursor-pointer hover:text-orange-500 transition-colors data-quiz-name="${quiz.name}">${quiz.name}</h3>
+
+        <!-- Details -->
+        <div class="p-5 flex flex-col gap-3 flex-1">
+            <h3 class="quiz-name text-lg font-bold text-gray-800 leading-snug min-h-[3.5rem] line-clamp-2 cursor-pointer transition-all" data-quiz-name="${quiz.name}">${quiz.name}</h3>
             <p class="text-sm text-gray-600 leading-relaxed min-h-[2.5rem] line-clamp-2">${quiz.description}</p>
             
             <div class="flex items-center gap-3 pt-3 border-t border-gray-200 mt-auto">
@@ -242,7 +259,7 @@ window.addEventListener('load', () => {
         .then(quizzes => {
             allQuizData = quizzes;
             renderSections(quizzes);
-            applyFilter();  // SỬA: Gọi applyFilter() sau khi load để áp dụng category/filter ban đầu
+            applyFilter();  // SỬA: Thêm dòng này để áp dụng lọc ngay sau load
         })
         .catch(error => console.error('Error:', error));
 });
