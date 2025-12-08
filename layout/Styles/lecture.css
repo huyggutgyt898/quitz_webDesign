@@ -98,9 +98,11 @@
     transform: translateY(0);
     opacity: 1;
 }
-/* Navbar Dropdown Fix */
+
+/* Navbar Dropdown for Lecture Page */
 .navbar-dropdown-wrapper {
     position: relative;
+    cursor: pointer;
 }
 
 .navbar-dropdown {
@@ -144,8 +146,4 @@
 .dropdown-arrow {
     margin-left: 4px;
     font-size: 10px;
-}
-
-.navbar-dropdown-wrapper {
-    cursor: pointer;
 }

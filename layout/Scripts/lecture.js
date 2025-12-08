@@ -8,6 +8,49 @@ let dislikeCount = 12;
 let commentCount = 45;
 let isLiked = false;
 let isDisliked = false;
+let savedQuizzes = JSON.parse(localStorage.getItem('savedQuizzes') || '[]');
+let isSaved = savedQuizzes.includes(quizName);
+
+// Navbar dropdown toggle
+const navbarDropdownWrapper = document.querySelector('.navbar-dropdown-wrapper');
+const categoryDropdown = document.getElementById('categoryDropdown');
+const categoryDropdownItems = document.querySelectorAll('#categoryDropdown .dropdown-item');
+
+// Toggle Navbar Category Dropdown
+if (navbarDropdownWrapper && categoryDropdown) {
+    navbarDropdownWrapper.addEventListener('click', (e) => {
+        e.stopPropagation();
+        categoryDropdown.classList.toggle('show');
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!navbarDropdownWrapper.contains(e.target)) {
+            categoryDropdown.classList.remove('show');
+        }
+    });
+}
+
+// Category Dropdown Items
+categoryDropdownItems.forEach(item => {
+    item.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        categoryDropdownItems.forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+        
+        const category = this.getAttribute('data-category');
+        
+        // Close dropdown
+        if (categoryDropdown) {
+            categoryDropdown.classList.remove('show');
+        }
+        
+        // Navigate to modelform with category filter
+        window.location.href = `modelform.html?category=${category}`;
+    });
+});
 
 // Load lecture data
 if (quizName) {
@@ -30,6 +73,40 @@ if (startQuizBtn) {
     startQuizBtn.addEventListener('click', () => {
         window.location.href = `quiz.html?quiz=${encodeURIComponent(quizName)}`;
     });
+}
+
+// Save button
+const saveBtn = document.getElementById('saveBtn');
+if (saveBtn) {
+    // Set initial state
+    updateSaveButton();
+    
+    saveBtn.addEventListener('click', function() {
+        if (isSaved) {
+            // Unsave
+            savedQuizzes = savedQuizzes.filter(name => name !== quizName);
+            isSaved = false;
+        } else {
+            // Save
+            savedQuizzes.push(quizName);
+            isSaved = true;
+        }
+        
+        localStorage.setItem('savedQuizzes', JSON.stringify(savedQuizzes));
+        updateSaveButton();
+    });
+}
+
+function updateSaveButton() {
+    if (!saveBtn) return;
+    
+    if (isSaved) {
+        saveBtn.classList.add('active');
+        saveBtn.querySelector('.save-text').textContent = 'Đã lưu';
+    } else {
+        saveBtn.classList.remove('active');
+        saveBtn.querySelector('.save-text').textContent = 'Lưu';
+    }
 }
 
 // Like button
