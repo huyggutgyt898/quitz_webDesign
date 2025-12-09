@@ -1,8 +1,8 @@
 [
   {
     "question": "Thủ đô của Việt Nam là gì?",
-    "answers": ["Hà Nội", "TP. Hồ Chí Minh", "Đà Nẵng", "Huế"],
-    "correct": 0
+    "answers": ["Hồ Chí Minh", "Hà Nội", "Đà Nẵng", "Cần Thơ"],
+    "correct": 1
   },
   {
     "question": "Ai là người sáng lập ra Microsoft?",
