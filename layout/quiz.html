@@ -5,32 +5,162 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QUIZZKIT - Quiz</title>
     <link rel="stylesheet" href="Styles/layout.css" />
-    <link rel="stylesheet" href="Styles/modelform.css" />
+    <link rel="stylesheet" href="Styles/quiz.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <!-- Giữ nguyên sidebar, topbar, navbar, footer như lecture.html -->
+<body class="bg-gray-50">
+    <!-- OVERLAY -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- MAIN CONTENT AREA: Quiz -->
-    <section class="layout-content">
-        <div class="quiz-page">
-            <h2 id="quizTitle">Đang load...</h2>
-            <div class="quiz-progress">
-                <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
-            </div>
-            <div class="quiz-body" id="quizBody"><!-- JS render câu hỏi --></div>
-            <div class="quiz-footer">
-                <button class="quiz-btn" id="nextBtn" disabled>Tiếp theo</button>
-            </div>
-            <div class="quiz-result" id="quizResult" style="display: none;">
-                <h2>Kết quả</h2>
-                <p id="scoreText"></p>
-                <button class="quiz-btn" id="restartBtn">Chơi lại</button>
-                <button class="quiz-btn" id="backToLectureBtn">Quay về bài giảng</button>
-            </div>
-        </div>
-    </section>
+    <!-- SIDEBAR -->
+    <aside class="layout-sidebar" id="sidebar">
+        <div class="layout-sidebar__title">MENU</div>
+        <a class="layout-sidebar__item" href="index.html">Trang chủ</a>
+        <a class="layout-sidebar__item" href="modelform.html">Câu hỏi</a>
+        <a class="layout-sidebar__item" href="create.html">Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="history.html">Lịch sử</a>
+        <a class="layout-sidebar__item" href="profile.html">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="settings.html">Cài đặt</a>
+    </aside>
 
-    <!-- Scripts -->
+    <!-- MAIN WRAPPER -->
+    <div class="layout-main" id="mainContent">
+        <!-- TOPBAR -->
+        <header class="layout-topbar">
+            <div class="layout-topbar__left">
+                <div class="hamburger-menu" id="hamburgerMenu">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="layout-topbar__logo" onclick="window.location.href='index.html'">QUIZZKIT</div>
+            </div>
+            <div class="layout-topbar__search">
+                <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
+            </div>
+            <div class="layout-topbar__avatar">
+                <img src="Images/Avatar/Avatar.jpg" alt="avatar" id="avatarBtn"/>
+                <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+                    <a href="login.html">Đăng nhập</a>
+                    <a href="logout.html">Đăng xuất</a>
+                </div>
+            </div>
+        </header>
+
+        <!-- NAVBAR -->
+        <nav class="layout-navbar">
+            <a class="layout-navbar__item" href="index.html">Trang chủ</a>
+            <div class="layout-navbar__item active navbar-dropdown-wrapper">
+                <span>Môn học</span>
+                <span class="dropdown-arrow">▼</span>
+                <div class="navbar-dropdown" id="categoryDropdown">
+                    <a href="#" class="dropdown-item active" data-category="all">Tất cả</a>
+                    <a href="#" class="dropdown-item" data-category="math">Toán học</a>
+                    <a href="#" class="dropdown-item" data-category="physics">Vật lý</a>
+                    <a href="#" class="dropdown-item" data-category="chemistry">Hóa học</a>
+                    <a href="#" class="dropdown-item" data-category="biology">Sinh học</a>
+                    <a href="#" class="dropdown-item" data-category="literature">Ngữ văn</a>
+                    <a href="#" class="dropdown-item" data-category="english">Tiếng Anh</a>
+                    <a href="#" class="dropdown-item" data-category="history">Lịch sử</a>
+                    <a href="#" class="dropdown-item" data-category="geography">Địa lý</a>
+                    <a href="#" class="dropdown-item" data-category="computer">Tin học</a>
+                    <a href="#" class="dropdown-item" data-category="civics">GDCD</a>
+                </div>
+            </div>
+            <a class="layout-navbar__item" href="create.html">Tạo câu hỏi</a>
+            <a class="layout-navbar__item" href="leaderboard.html">Bảng xếp hạng</a>
+            <a class="layout-navbar__item" href="account.html">Tài khoản</a>
+        </nav>
+
+        <!-- QUIZ CONTENT -->
+        <section class="layout-content">
+            <div class="quiz-container">
+                <!-- Quiz Header -->
+                <div class="quiz-header" id="quizHeader">
+                    <h1 class="text-3xl font-bold" id="quizTitle">Đang tải...</h1>
+                    <p class="text-white/80 mt-2" id="quizInfo">Câu 1 / 10</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <!-- Question Card -->
+                <div class="question-card fade-in" id="questionCard">
+                    <div class="question-header">
+                        <div class="question-number" id="questionNumber">Question 1/10</div>
+                        <div class="score-inline" id="scoreInline">
+                            <span class="score-icon">📊</span>
+                            <span class="score-text">Score: 0</span>
+                        </div>
+                    </div>
+                    <div class="question-text" id="questionText">Đang tải câu hỏi...</div>
+                    <div class="option-list" id="optionList">
+                        <!-- Options will be inserted here -->
+                    </div>
+                    <div class="flex justify-end mt-6">
+                        <button class="btn-next" id="nextBtn" disabled>Tiếp theo</button>
+                    </div>
+                </div>
+
+                <!-- Result Container -->
+                <div class="result-container" id="resultContainer" style="display: none;">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Hoàn thành!</h2>
+                    <div class="result-score" id="resultScore">8/10</div>
+                    <p class="result-message" id="resultMessage">Xuất sắc! Bạn đã làm rất tốt!</p>
+                    
+                    <div class="result-buttons">
+                        <button class="btn-next" id="reviewBtn">📝 Xem đáp án</button>
+                        <button class="btn-secondary" id="restartBtn">🔄 Làm lại</button>
+                        <button class="btn-secondary" id="backToLectureBtn">📚 Quay về bài giảng</button>
+                    </div>
+                </div>
+
+                <!-- Answer Review -->
+                <div class="answer-review" id="answerReview" style="display: none;">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">📋 Đáp án chi tiết</h3>
+                    <div id="reviewList">
+                        <!-- Review items will be inserted here -->
+                    </div>
+                    <div class="flex justify-center mt-6">
+                        <button class="btn-secondary" id="backToResultBtn">← Quay lại kết quả</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hidden element for total questions -->
+            <span id="totalQuestions" style="display: none;">10</span>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="layout-footer">
+            <div class="layout-footer-container">
+                <div class="layout-footer-section">
+                    <h3>Giới thiệu</h3>
+                    <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
+                </div>
+                <div class="layout-footer-section">
+                    <h3>Liên hệ</h3>
+                    <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
+                    <p>Hotline: 0123 456 789</p>
+                </div>
+                <div class="layout-footer-section">
+                    <h3>Liên kết nhanh</h3>
+                    <p><a href="index.html">Trang chủ</a></p>
+                    <p><a href="modelform.html">Câu hỏi</a></p>
+                    <p><a href="settings.html">Cài đặt</a></p>
+                </div>
+                <div class="layout-footer-section">
+                    <h3>Cộng đồng</h3>
+                    <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+                    <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
+                    <p><a href="https://discord.com" target="_blank">Discord</a></p>
+                </div>
+            </div>
+            <div class="layout-footer-bottom">
+                <p>© 2025 Quizzz. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
     <script src="Scripts/layout.js"></script>
     <script src="Scripts/quiz.js"></script>
 </body>
