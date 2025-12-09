@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ========== CÁC HÀM QUIZ ==========
 async function loadQuestions() {
     try {
-        const res = await fetch("./Data/test.json");
+        const res = await fetch("./Data/web_design_questions.json");
         questions = await res.json();
 
         currentQuestion = 0;
