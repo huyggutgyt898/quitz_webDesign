@@ -514,3 +514,14 @@ body.show-result .so-choice {
   font-size: 30px;
   Color: #ff7a00;
 }
+
+.back-modelform{
+  position: fixed;
+  top: 50px;
+  left: 50px;
+}
+
+.fa-arrow-left{
+  font-size: 30px;
+  Color: #ff7a00;
+}
