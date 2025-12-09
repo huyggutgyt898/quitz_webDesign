@@ -1,0 +1,202 @@
+[
+  {
+    "question": "Thủ đô của Pháp là thành phố nào?",
+    "answers": ["London", "Berlin", "Paris", "Madrid"],
+    "correct": 2
+  },
+  {
+    "question": "Rạn san hô lớn nhất thế giới nằm ở đâu?",
+    "answers": ["Caribe", "Biển Đỏ", "Úc", "Philippines"],
+    "correct": 2
+  },
+  {
+    "question": "Quốc gia nào có diện tích lớn nhất thế giới?",
+    "answers": ["Trung Quốc", "Mỹ", "Canada", "Nga"],
+    "correct": 3
+  },
+  {
+    "question": "Sông nào chảy qua nhiều quốc gia châu Âu nhất?",
+    "answers": ["Sông Seine", "Sông Danube", "Sông Rhine", "Sông Thames"],
+    "correct": 1
+  },
+  {
+    "question": "Dãy núi nào dài nhất thế giới?",
+    "answers": ["Himalaya", "Andes", "Alps", "Rocky"],
+    "correct": 1
+  },
+  {
+    "question": "Sa mạc Sahara nằm ở châu lục nào?",
+    "answers": ["Châu Á", "Châu Phi", "Châu Úc", "Nam Mỹ"],
+    "correct": 1
+  },
+  {
+    "question": "Quốc gia nào được gọi là 'Xứ sở hoa anh đào'?",
+    "answers": ["Hàn Quốc", "Trung Quốc", "Nhật Bản", "Thái Lan"],
+    "correct": 2
+  },
+  {
+    "question": "Thác nước cao nhất thế giới là thác nào?",
+    "answers": ["Thác Niagara", "Thác Victoria", "Thác Angel", "Thác Iguazu"],
+    "correct": 2
+  },
+  {
+    "question": "Biển nào có độ mặn cao nhất thế giới?",
+    "answers": ["Biển Đỏ", "Biển Chết", "Biển Caspi", "Biển Địa Trung Hải"],
+    "correct": 1
+  },
+  {
+    "question": "Quốc gia nào có hình dạng giống chiếc ủng?",
+    "answers": ["Hy Lạp", "Ý", "Tây Ban Nha", "Bồ Đào Nha"],
+    "correct": 1
+  },
+  {
+    "question": "Đỉnh núi cao nhất châu Phi là gì?",
+    "answers": ["Kilimanjaro", "Everest", "Elbrus", "Kosciuszko"],
+    "correct": 0
+  },
+  {
+    "question": "Kênh đào Panama nối liền hai đại dương nào?",
+    "answers": ["Thái Bình Dương - Đại Tây Dương", "Đại Tây Dương - Ấn Độ Dương", "Thái Bình Dương - Ấn Độ Dương", "Bắc Băng Dương - Thái Bình Dương"],
+    "correct": 0
+  },
+  {
+    "question": "Quốc gia nào có nhiều hòn đảo nhất thế giới?",
+    "answers": ["Philippines", "Indonesia", "Nhật Bản", "Thụy Điển"],
+    "correct": 1
+  },
+  {
+    "question": "Sông nào dài nhất châu Á?",
+    "answers": ["Sông Hằng", "Sông Trường Giang", "Sông Mê Kông", "Sông Hoàng Hà"],
+    "correct": 1
+  },
+  {
+    "question": "Thành phố nào được gọi là 'Kinh đô ánh sáng'?",
+    "answers": ["New York", "Paris", "Tokyo", "Las Vegas"],
+    "correct": 1
+  },
+  {
+    "question": "Quốc gia nào nằm hoàn toàn trong lãnh thổ Ý?",
+    "answers": ["Vatican", "San Marino", "Monaco", "Cả Vatican và San Marino"],
+    "correct": 3
+  },
+  {
+    "question": "Núi lửa nào cao nhất châu Âu?",
+    "answers": ["Etna", "Vesuvius", "Elbrus", "Stromboli"],
+    "correct": 2
+  },
+  {
+    "question": "Biển nào nhỏ nhất thế giới?",
+    "answers": ["Biển Đỏ", "Biển Đen", "Biển Marmara", "Biển Baltic"],
+    "correct": 2
+  },
+  {
+    "question": "Quốc gia nào có đường bờ biển dài nhất thế giới?",
+    "answers": ["Canada", "Nga", "Indonesia", "Úc"],
+    "correct": 0
+  },
+  {
+    "question": "Hồ nào sâu nhất thế giới?",
+    "answers": ["Hồ Victoria", "Hồ Baikal", "Hồ Superior", "Hồ Tanganyika"],
+    "correct": 1
+  },
+  {
+    "question": "Quốc gia nào nằm trên hai châu lục?",
+    "answers": ["Thổ Nhĩ Kỳ", "Nga", "Ai Cập", "Cả 3 đáp án trên"],
+    "correct": 3
+  },
+  {
+    "question": "Thành phố nào cao nhất so với mực nước biển?",
+    "answers": ["La Paz", "Lhasa", "Quito", "Bogotá"],
+    "correct": 0
+  },
+  {
+    "question": "Quốc gia nào có nhiều múi giờ nhất?",
+    "answers": ["Nga", "Mỹ", "Pháp", "Canada"],
+    "correct": 2
+  },
+  {
+    "question": "Vịnh nào lớn nhất thế giới?",
+    "answers": ["Vịnh Mexico", "Vịnh Bengal", "Vịnh Guinea", "Vịnh Alaska"],
+    "correct": 1
+  },
+  {
+    "question": "Quốc gia nào có mật độ dân số cao nhất thế giới?",
+    "answers": ["Singapore", "Monaco", "Bangladesh", "Malta"],
+    "correct": 1
+  },
+  {
+    "question": "Đảo nào lớn nhất thế giới?",
+    "answers": ["Đảo Borneo", "Đảo New Guinea", "Đảo Greenland", "Đảo Madagascar"],
+    "correct": 2
+  },
+  {
+    "question": "Sông nào chảy qua Cairo?",
+    "answers": ["Sông Tigris", "Sông Euphrates", "Sông Nile", "Sông Jordan"],
+    "correct": 2
+  },
+  {
+    "question": "Quốc gia nào có thủ đô là Canberra?",
+    "answers": ["New Zealand", "Úc", "Canada", "Nam Phi"],
+    "correct": 1
+  },
+  {
+    "question": "Dãy núi nào phân chia châu Âu và châu Á?",
+    "answers": ["Dãy Alps", "Dãy Ural", "Dãy Caucasus", "Dãy Carpathian"],
+    "correct": 1
+  },
+  {
+    "question": "Quốc gia nào được gọi là 'Vùng đất của bình minh'?",
+    "answers": ["Nhật Bản", "Hàn Quốc", "Thái Lan", "Việt Nam"],
+    "correct": 0
+  },
+  {
+    "question": "Biển nào được bao quanh bởi 3 châu lục?",
+    "answers": ["Biển Địa Trung Hải", "Biển Caribbean", "Biển Đỏ", "Biển Ả Rập"],
+    "correct": 0
+  },
+  {
+    "question": "Quốc gia nào không có sông nào chảy qua?",
+    "answers": ["Bahrain", "Kuwait", "Qatar", "Cả 3 đáp án trên"],
+    "correct": 3
+  },
+  {
+    "question": "Thành phố Venice của Ý được xây dựng trên bao nhiêu hòn đảo?",
+    "answers": ["117", "118", "119", "120"],
+    "correct": 1
+  },
+  {
+    "question": "Quốc gia nào có nhiều núi lửa hoạt động nhất?",
+    "answers": ["Indonesia", "Nhật Bản", "Philippines", "Mỹ"],
+    "correct": 0
+  },
+  {
+    "question": "Sông nào dài nhất châu Âu?",
+    "answers": ["Sông Danube", "Sông Volga", "Sông Rhine", "Sông Seine"],
+    "correct": 1
+  },
+  {
+    "question": "Quốc gia nào có hình dạng giống con rồng?",
+    "answers": ["Việt Nam", "Thái Lan", "Campuchia", "Lào"],
+    "correct": 0
+  },
+  {
+    "question": "Hang động nào lớn nhất thế giới?",
+    "answers": ["Hang Sơn Đoòng", "Hang Mammoth", "Hang Clearwater", "Hang Deer"],
+    "correct": 0
+  },
+  {
+    "question": "Quốc gia nào sản xuất cà phê nhiều nhất thế giới?",
+    "answers": ["Việt Nam", "Brazil", "Colombia", "Ethiopia"],
+    "correct": 1
+  },
+  {
+    "question": "Thành phố nào nằm ở cả hai bên bờ sông Danube?",
+    "answers": ["Budapest", "Vienna", "Prague", "Bratislava"],
+    "correct": 0
+  },
+  {
+    "question": "Quốc gia nào có diện tích nhỏ nhất thế giới?",
+    "answers": ["Monaco", "Vatican", "Nauru", "Tuvalu"],
+    "correct": 1
+  }
+]
