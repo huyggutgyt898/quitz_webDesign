@@ -47,6 +47,21 @@ function updateUserDisplay() {
 
 // TẤT CẢ CODE TRONG MỘT DOMContentLoaded DUY NHẤT
 document.addEventListener('DOMContentLoaded', function() {
+    // Xóa text-decoration của câu hỏi
+    const questionElement = document.getElementById('question');
+    if (questionElement) {
+        questionElement.style.textDecoration = 'none';
+        questionElement.style.borderBottom = 'none';
+        questionElement.style.border = 'none';
+        questionElement.style.backgroundImage = 'none';
+    }
+    
+    // Áp dụng cho tất cả các phần tử câu hỏi
+    document.querySelectorAll('.question').forEach(element => {
+        element.style.textDecoration = 'none';
+        element.style.borderBottom = 'none';
+    });
+
     console.log('DOM đã sẵn sàng');
     console.log('Username:', username);
     
@@ -89,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ========== CÁC HÀM QUIZ ==========
 async function loadQuestions() {
     try {
-        const res = await fetch("./Data/questions.json");
+        const res = await fetch("./Data/test.json");
         questions = await res.json();
 
         currentQuestion = 0;
