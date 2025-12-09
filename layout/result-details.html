@@ -12,15 +12,15 @@
         <!-- Header -->
         <header class="result-header">
             <div class="header-content">
-                <h1><i class="fas fa-chart-line"></i> Quiz Results Report</h1>
+                <h1><i class="fas fa-chart-line"></i> Phân tích kết quả</h1>
                 <div class="header-info">
                     <div class="info-item">
                         <i class="fas fa-user"></i>
-                        <span id="player-name">Player</span>
+                        <span id="player-name">Người chơi</span>
                     </div>
                     <div class="info-item">
                         <i class="fas fa-calendar"></i>
-                        <span id="result-date">Date</span>
+                        <span id="result-date">Ngày</span>
                     </div>
                 </div>
             </div>
@@ -28,14 +28,14 @@
 
         <!-- Summary Section -->
         <section class="summary-section">
-            <h2><i class="fas fa-star"></i> Performance Summary</h2>
+            <h2><i class="fas fa-star"></i> Kết quả</h2>
             <div class="summary-cards">
                 <div class="card score-card">
                     <div class="card-icon">
                         <i class="fas fa-trophy"></i>
                     </div>
                     <div class="card-content">
-                        <h3>Score</h3>
+                        <h3>Điểm</h3>
                         <p class="card-value" id="final-score">0/0</p>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                         <i class="fas fa-chart-pie"></i>
                     </div>
                     <div class="card-content">
-                        <h3>Percentage</h3>
+                        <h3>Tỉ lệ</h3>
                         <p class="card-value" id="percentage">0%</p>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                         <i class="fas fa-award"></i>
                     </div>
                     <div class="card-content">
-                        <h3>Grade</h3>
+                        <h3>Xếp loại</h3>
                         <p class="card-value" id="grade">-</p>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                         <i class="fas fa-clock"></i>
                     </div>
                     <div class="card-content">
-                        <h3>Completion</h3>
+                        <h3>Thời gian</h3>
                         <p class="card-value" id="completion-time">-</p>
                     </div>
                 </div>
@@ -74,12 +74,12 @@
 
         <!-- Detailed Results Section -->
         <section class="detailed-results">
-            <h2><i class="fas fa-list-check"></i> Question-by-Question Analysis</h2>
+            <h2><i class="fas fa-list-check"></i> Phân tích từng câu hỏi</h2>
             
             <!-- Progress Bar -->
             <div class="progress-section">
                 <div class="progress-label">
-                    <span>Correct Answers: <strong id="correct-count">0</strong>/<strong id="total-questions">0</strong></span>
+                    <span>Số đáp án đúng: <strong id="correct-count">0</strong>/<strong id="total-questions">0</strong></span>
                     <span id="progress-percentage">0%</span>
                 </div>
                 <div class="progress-bar">
@@ -96,45 +96,22 @@
         <!-- Action Buttons -->
         <section class="action-section">
             <button class="btn btn-primary" onclick="window.print()">
-                <i class="fas fa-print"></i> Print Report
+                <i class="fas fa-print"></i> In kết quả
             </button>
             <button class="btn btn-secondary" onclick="goBack()">
-                <i class="fas fa-arrow-left"></i> Back to Quiz
+                <i class="fas fa-arrow-left"></i> Quay lại Quiz
             </button>
             <button class="btn btn-success" onclick="shareResults()">
-                <i class="fas fa-share-alt"></i> Share Results
+                <i class="fas fa-share-alt"></i> Chia sẻ 
             </button>
         </section>
 
         <!-- Footer -->
         <footer class="result-footer">
             <p>Quiz completed at <span id="completion-time-footer">-</span></p>
-            <p class="footer-note">Keep learning and improving! 🚀</p>
+            <p class="footer-note">Tiếp tục học và tiến bộ! 🚀</p>
         </footer>
     </div>
-
-<!-- Thêm vào cuối phần detailed-results -->
-<div class="answer-legend">
-    <h4 class="legend-title"><i class="fas fa-key"></i> Answer Key</h4>
-    <div class="legend-items">
-        <div class="legend-item">
-            <div class="legend-color legend-correct-user"></div>
-            <span>Your Correct Answer</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color legend-correct-only"></div>
-            <span>Correct Answer (Not Selected)</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color legend-wrong-user"></div>
-            <span>Your Wrong Answer</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color legend-wrong-only"></div>
-            <span>Wrong Option</span>
-        </div>
-    </div>
-</div>
 
     <script src="./Scripts/result-details.js"></script>
 </body>

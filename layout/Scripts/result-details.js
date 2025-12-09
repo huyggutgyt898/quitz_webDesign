@@ -432,7 +432,7 @@ function displayEnhancedQuestions(resultData, detailedResults) {
             <div class="question-item">
                 <div class="question-header">
                     <div class="question-info">
-                        <div class="question-number">Question ${questionNumber}</div>
+                        <div class="question-number">Câu hỏi ${questionNumber}</div>
                         <div class="question-result ${isCorrect ? 'result-correct' : 'result-incorrect'}">
                             ${isCorrect ? '✅ Correct' : '❌ Incorrect'}
                         </div>
@@ -451,7 +451,7 @@ function displayEnhancedQuestions(resultData, detailedResults) {
                 
                 <div class="answer-analysis">
                     <h4 class="analysis-title">
-                        <i class="fas fa-list-check"></i> All Options Analysis
+                        <i class="fas fa-list-check"></i> Phân tích đáp án
                     </h4>
                     <div class="options-analysis-container">
                         ${optionsHTML}
