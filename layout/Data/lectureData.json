@@ -1,0 +1,62 @@
+{
+  "Thử thách toán học": {
+    "description": "Kiểm tra kiến thức toán học của bạn với 25 câu hỏi thú vị!",
+    "content": "<h3>📐 Bài giảng về Toán học cơ bản</h3><p>Toán học là nền tảng của mọi khoa học. Trong bài học này, chúng ta sẽ ôn lại các khái niệm cơ bản như phép cộng, trừ, nhân, chia và số nguyên tố.</p><p><strong>Ví dụ:</strong> 2 + 2 = 4. Đây là phép cộng đơn giản nhất.</p><p><strong>Số nguyên tố</strong> là số tự nhiên lớn hơn 1, chỉ chia hết cho 1 và chính nó. Ví dụ: 2, 3, 5, 7, 11...</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Bài giảng toán học' frameborder='0' allowfullscreen></iframe><p>💡 <strong>Lưu ý:</strong> Hãy thực hành nhiều bài tập để nắm vững kiến thức!</p>"
+  },
+  "Kiến thức tin học cơ bản": {
+    "description": "30 câu hỏi về lập trình, thuật toán cho người mới bắt đầu",
+    "content": "<h3>💻 Bài giảng Tin học cơ bản</h3><p>Tin học bao gồm nhiều lĩnh vực: lập trình, thuật toán, cơ sở dữ liệu, mạng máy tính...</p><p><strong>Lập trình</strong> là quá trình viết các chương trình máy tính để giải quyết vấn đề. Ngôn ngữ phổ biến: Python, Java, C++, JavaScript.</p><p><strong>Ví dụ code Python:</strong></p><p><code>print('Hello World!')</code></p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Lập trình cơ bản' frameborder='0' allowfullscreen></iframe><p>🚀 Hãy bắt đầu với những chương trình đơn giản và dần nâng cao!</p>"
+  },
+  "Vật lý lớp 10": {
+    "description": "Ôn tập kiến thức vật lý cơ bản qua 20 câu hỏi hấp dẫn",
+    "content": "<h3>⚛️ Bài giảng Vật lý lớp 10</h3><p>Vật lý học nghiên cứu các hiện tượng tự nhiên và quy luật vận động của vật chất.</p><p><strong>Cơ học:</strong> Nghiên cứu chuyển động và lực. Công thức: F = m × a (Định luật Newton 2)</p><p><strong>Nhiệt học:</strong> Nghiên cứu nhiệt độ, năng lượng nhiệt.</p><p><strong>Điện học:</strong> Nghiên cứu điện tích, dòng điện. Định luật Ohm: U = I × R</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Vật lý cơ bản' frameborder='0' allowfullscreen></iframe><p>⚡ Thực hành với các bài tập thí nghiệm để hiểu rõ hơn!</p>"
+  },
+  "Lịch sử Việt Nam": {
+    "description": "Những mốc thời gian quan trọng trong lịch sử dân tộc",
+    "content": "<h3>🏛️ Bài giảng Lịch sử Việt Nam</h3><p>Lịch sử Việt Nam qua các thời kỳ từ dựng nước đến giữ nước.</p><p><strong>Thời kỳ Hùng Vương:</strong> Dựng nước Văn Lang (2879 TCN - 258 TCN)</p><p><strong>Thời Bắc thuộc:</strong> Hơn 1000 năm dưới ách đô hộ (179 TCN - 938)</p><p><strong>Trận Bạch Đằng:</strong> Ngô Quyền đánh thắng quân Nam Hán năm 938</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Lịch sử Việt Nam' frameborder='0' allowfullscreen></iframe><p>📜 Ghi nhớ các mốc thời gian quan trọng!</p>"
+  },
+  "Văn học Việt Nam": {
+    "description": "Kiểm tra hiểu biết về các tác phẩm văn học nổi tiếng",
+    "content": "<h3>📖 Bài giảng Văn học Việt Nam</h3><p>Văn học Việt Nam qua các thời kỳ: văn học trung đại, cận đại và hiện đại.</p><p><strong>Truyện Kiều</strong> - Nguyễn Du: Tác phẩm văn học kinh điển, kể về số phận Thúy Kiều.</p><p><strong>Số đỏ</strong> - Vũ Trọng Phụng: Tiểu thuyết hiện thực phê phán.</p><p><strong>Chiếc lược ngà</strong> - Nguyễn Quang Sáng: Truyện ngắn về tình mẫu tử.</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Văn học Việt Nam' frameborder='0' allowfullscreen></iframe><p>✍️ Đọc tác phẩm và phân tích ý nghĩa!</p>"
+  },
+  "Địa lý Việt Nam": {
+    "description": "Tìm hiểu về địa hình, khí hậu của đất nước",
+    "content": "<h3>🌍 Bài giảng Địa lý Việt Nam</h3><p>Việt Nam nằm ở Đông Nam Á, có hình chữ S với diện tích 331.212 km².</p><p><strong>Địa hình:</strong> Đồi núi chiếm 3/4 diện tích. Dãy Trường Sơn chạy dọc theo biên giới.</p><p><strong>Khí hậu:</strong> Nhiệt đới gió mùa với 2 mùa: mùa mưa và mùa khô.</p><p><strong>Sông ngòi:</strong> Sông Hồng (Bắc), sông Cửu Long (Nam).</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Địa lý Việt Nam' frameborder='0' allowfullscreen></iframe><p>🗺️ Học qua bản đồ để ghi nhớ tốt hơn!</p>"
+  },
+  "Hóa học cơ bản": {
+    "description": "Ôn tập các phản ứng hóa học và bảng tuần hoàn",
+    "content": "<h3>🧪 Bài giảng Hóa học cơ bản</h3><p>Hóa học nghiên cứu về cấu tạo, tính chất và biến đổi của các chất.</p><p><strong>Bảng tuần hoàn:</strong> Sắp xếp các nguyên tố theo số proton tăng dần. Gồm 18 nhóm và 7 chu kỳ.</p><p><strong>Phản ứng hóa học:</strong> Quá trình biến đổi chất này thành chất khác.</p><p><strong>Ví dụ:</strong> 2H₂ + O₂ → 2H₂O (Phản ứng tạo nước)</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Hóa học cơ bản' frameborder='0' allowfullscreen></iframe><p>⚗️ An toàn là trên hết khi làm thí nghiệm!</p>"
+  },
+  "Tiếng Anh giao tiếp": {
+    "description": "Nâng cao kỹ năng tiếng Anh của bạn",
+    "content": "<h3>🇬🇧 Bài giảng Tiếng Anh giao tiếp</h3><p>Tiếng Anh là ngôn ngữ quốc tế được sử dụng rộng rãi trên thế giới.</p><p><strong>Các thì cơ bản:</strong></p><ul><li>Present Simple: I study English every day.</li><li>Present Continuous: I am studying English now.</li><li>Past Simple: I studied English yesterday.</li></ul><p><strong>Từ vựng giao tiếp:</strong> Hello, Good morning, How are you?, Thank you, Goodbye...</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Tiếng Anh giao tiếp' frameborder='0' allowfullscreen></iframe><p>🗣️ Practice makes perfect! Luyện nói mỗi ngày!</p>"
+  },
+  "Sinh học lớp 11": {
+    "description": "Kiến thức về tế bào, di truyền và sinh thái",
+    "content": "<h3>🧬 Bài giảng Sinh học lớp 11</h3><p>Sinh học nghiên cứu về sự sống và các sinh vật.</p><p><strong>Tế bào:</strong> Đơn vị cấu tạo cơ bản của sự sống. Gồm tế bào nhân sơ và tế bào nhân thực.</p><p><strong>Di truyền:</strong> Định luật Mendel về di truyền tính trạng.</p><p><strong>DNA:</strong> Vật chất di truyền, cấu trúc xoắn kép.</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Sinh học cơ bản' frameborder='0' allowfullscreen></iframe><p>🔬 Quan sát dưới kính hiển vi để hiểu rõ hơn!</p>"
+  },
+  "Giáo dục công dân": {
+    "description": "Hiểu biết về pháp luật và đạo đức công dân",
+    "content": "<h3>⚖️ Bài giảng Giáo dục công dân</h3><p>GDCD giúp hình thành nhân cách và ý thức công dân.</p><p><strong>Quyền và nghĩa vụ công dân:</strong></p><ul><li>Quyền: Tự do ngôn luận, tín ngưỡng, được bầu cử...</li><li>Nghĩa vụ: Tuân thủ pháp luật, bảo vệ Tổ quốc, nộp thuế...</li></ul><p><strong>Đạo đức:</strong> Trung thực, trách nhiệm, tôn trọng người khác.</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='GDCD' frameborder='0' allowfullscreen></iframe><p>🤝 Làm công dân tốt là trách nhiệm của mỗi người!</p>"
+  },
+  "Địa lý thế giới": {
+    "description": "Khám phá các quốc gia và châu lục",
+    "content": "<h3>🌏 Bài giảng Địa lý thế giới</h3><p>Thế giới có 7 châu lục: Á, Âu, Phi, Bắc Mỹ, Nam Mỹ, Úc, Nam Cực.</p><p><strong>Châu Á:</strong> Châu lục lớn nhất, dân số đông nhất (60% dân số thế giới).</p><p><strong>Châu Âu:</strong> Trung tâm văn hóa, kinh tế phát triển.</p><p><strong>Châu Phi:</strong> Lục địa nóng nhất, giàu tài nguyên.</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Địa lý thế giới' frameborder='0' allowfullscreen></iframe><p>🗺️ Học qua bản đồ thế giới!</p>"
+  },
+  "Phép tính nhanh": {
+    "description": "Thử thách tính toán nhanh trong 60 giây",
+    "content": "<h3>⚡ Bài giảng Phép tính nhanh</h3><p>Kỹ thuật tính nhẩm giúp bạn tính toán nhanh và chính xác.</p><p><strong>Nhân số với 11:</strong> 23 × 11 = 253 (Tách 2 và 3, giữa là 2+3=5)</p><p><strong>Bình phương số tận 5:</strong> 25² = 625 (2×3=6, ghép với 25)</p><p><strong>Nhân số gần 100:</strong> 98 × 97 = (100-2)(100-3) = 100² - 200 - 300 + 6 = 9506</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Tính nhẩm nhanh' frameborder='0' allowfullscreen></iframe><p>💡 Luyện tập mỗi ngày để thành thạo!</p>"
+  },
+  "Cơ học vật lý": {
+    "description": "Kiến thức cơ học, động lực học",
+    "content": "<h3>⚛️ Bài giảng Cơ học Vật lý</h3><p>Cơ học nghiên cứu chuyển động của vật thể dưới tác dụng của lực.</p><p><strong>3 định luật Newton:</strong></p><ul><li>Định luật 1: Vật giữ nguyên trạng thái nếu không có lực tác dụng.</li><li>Định luật 2: F = ma (Lực = khối lượng × gia tốc)</li><li>Định luật 3: Lực và phản lực</li></ul><p><strong>Động năng:</strong> E = ½mv² (năng lượng do chuyển động)</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Cơ học vật lý' frameborder='0' allowfullscreen></iframe><p>🎯 Áp dụng vào thực tế để hiểu rõ hơn!</p>"
+  },
+  "English Grammar": {
+    "description": "Ngữ pháp tiếng Anh cơ bản đến nâng cao",
+    "content": "<h3>📚 English Grammar Basics</h3><p>English grammar is the foundation of learning English effectively.</p><p><strong>Tenses (Thì):</strong> Present, Past, Future với các dạng: Simple, Continuous, Perfect, Perfect Continuous.</p><p><strong>Parts of Speech:</strong> Noun, Verb, Adjective, Adverb, Pronoun, Preposition, Conjunction, Interjection.</p><p><strong>Sentence Structure:</strong> Subject + Verb + Object (SVO)</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='English Grammar' frameborder='0' allowfullscreen></iframe><p>📖 Read and practice daily!</p>"
+  },
+  "Hóa học hữu cơ": {
+    "description": "Các phản ứng hữu cơ quan trọng",
+    "content": "<h3>🧪 Bài giảng Hóa học hữu cơ</h3><p>Hóa học hữu cơ nghiên cứu các hợp chất của carbon.</p><p><strong>Hydrocarbon:</strong> Hợp chất chỉ có C và H. Ví dụ: Metan (CH₄), Ethan (C₂H₆)</p><p><strong>Ancol:</strong> Chứa nhóm -OH. Ví dụ: Ethanol (C₂H₅OH)</p><p><strong>Phản ứng thế:</strong> CH₄ + Cl₂ → CH₃Cl + HCl (dưới ánh sáng)</p><iframe width='100%' height='400' src='https://www.youtube.com/embed/dQw4w9WgXcQ' title='Hóa học hữu cơ' frameborder='0' allowfullscreen></iframe><p>⚗️ Cẩn thận với các chất hữu cơ dễ cháy!</p>"
+  }
+}

@@ -20,22 +20,15 @@
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
   <!-- SIDEBAR -->
-  <aside class="layout-sidebar" id="sidebar">
-    <div class="layout-sidebar__user">
-      <img src="Images/Avatar.jpg" alt="Avatar" class="layout-sidebar__user-avatar" id="sidebarAvatar">
-      <div class="layout-sidebar__user-info">
-        <div class="layout-sidebar__username" id="sidebarUsername">Guest</div>
-        <div class="layout-sidebar__usertag">Thành viên</div>
-      </div>
-    </div>
-    <a class="layout-sidebar__item" href="trangtaocauhoi.html">Trang chủ</a>
-    <a class="layout-sidebar__item" href="taocauhoi.html">Tạo câu hỏi</a>
-    <a class="layout-sidebar__item" href="taicauhoi.html">Tải đề thi</a>
-    <a class="layout-sidebar__item" href="khode.html">Kho đề</a>
-    <a class="layout-sidebar__item" href="kholythuyet.html">Lý thuyết</a>
-      <a class="layout-sidebar__item" href="">Tài khoản</a>
-    <a class="layout-sidebar__item" href="">Cài đặt</a>
-  </aside>
+   <aside class="layout-sidebar" id="sidebar">
+        <div class="layout-sidebar__title">MENU</div>
+        <a class="layout-sidebar__item" href="index.html">Trang chủ</a>
+        <a class="layout-sidebar__item active" href="modelform.html">Câu hỏi</a>
+        <a class="layout-sidebar__item" href="create.html">Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="history.html">Lịch sử</a>
+        <a class="layout-sidebar__item" href="profile.html">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="settings.html">Cài đặt</a>
+    </aside>
 
   <!-- MAIN PAGE WRAPPER -->
   <div class="layout-main" id="mainContent">
@@ -103,7 +96,7 @@
         </div>
       </div>
       <div class="back-btn-box">
-    <a href="trangtaocauhoi.html" class="back-btn">← Quay lại</a>
+    <a href="create.html" class="back-btn">← Quay lại</a>
 </div>
 
     </section>
@@ -143,7 +136,7 @@
   <input type="file" id="importFile" accept="application/json" style="display:none">
   
   <!-- JavaScript Files -->
-  <script src="Scripts/layout.js"></script>
+  <script src="/layout/Scripts/layout.js"></script>
   <script src="Scripts/khode.js"></script>
 </body>
 </html>

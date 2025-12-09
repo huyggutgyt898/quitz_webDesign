@@ -1,0 +1,154 @@
+{
+  "Thử thách toán học": [
+    {"question": "2 + 2 = ?", "options": ["3", "4", "5", "6"], "answer": "4"},
+    {"question": "Số nguyên tố nhỏ nhất là?", "options": ["1", "2", "3", "0"], "answer": "2"},
+    {"question": "Diện tích hình vuông cạnh 3?", "options": ["6", "9", "12", "15"], "answer": "9"},
+    {"question": "Pi xấp xỉ bằng?", "options": ["3.14", "2.14", "4.14", "3.41"], "answer": "3.14"},
+    {"question": "Góc vuông bằng bao nhiêu độ?", "options": ["90", "180", "45", "360"], "answer": "90"},
+    {"question": "Phép trừ: 10 - 4 = ?", "options": ["6", "14", "5", "7"], "answer": "6"},
+    {"question": "Số chẵn lớn nhất dưới 10?", "options": ["8", "9", "10", "7"], "answer": "8"},
+    {"question": "Hình tam giác có bao nhiêu cạnh?", "options": ["3", "4", "5", "2"], "answer": "3"},
+    {"question": "1 + 1 + 1 = ?", "options": ["3", "2", "4", "1"], "answer": "3"},
+    {"question": "Căn bậc hai của 16?", "options": ["4", "2", "8", "16"], "answer": "4"}
+  ],
+  "Kiến thức tin học cơ bản": [
+    {"question": "CPU là gì?", "options": ["Bộ xử lý trung tâm", "Bộ nhớ", "Ổ cứng", "Card màn hình"], "answer": "Bộ xử lý trung tâm"},
+    {"question": "RAM dùng để làm gì?", "options": ["Lưu trữ tạm thời", "Lưu trữ vĩnh viễn", "Xử lý dữ liệu", "Hiển thị hình ảnh"], "answer": "Lưu trữ tạm thời"},
+    {"question": "Ngôn ngữ lập trình nào dễ học nhất?", "options": ["Python", "Assembly", "C++", "Java"], "answer": "Python"},
+    {"question": "HTML là viết tắt của?", "options": ["HyperText Markup Language", "High Tech Modern Language", "Home Tool Markup Language", "HyperLink Text"], "answer": "HyperText Markup Language"},
+    {"question": "1 GB bằng bao nhiêu MB?", "options": ["1024", "1000", "512", "2048"], "answer": "1024"},
+    {"question": "Hệ điều hành nào của Microsoft?", "options": ["Windows", "macOS", "Linux", "Android"], "answer": "Windows"},
+    {"question": "WWW là viết tắt của?", "options": ["World Wide Web", "World Web Wide", "Wide World Web", "Web World Wide"], "answer": "World Wide Web"},
+    {"question": "Phím tắt sao chép là?", "options": ["Ctrl+C", "Ctrl+V", "Ctrl+X", "Ctrl+Z"], "answer": "Ctrl+C"}
+  ],
+  "Vật lý lớp 10": [
+    {"question": "Đơn vị của lực là?", "options": ["Newton (N)", "Joule (J)", "Watt (W)", "Pascal (Pa)"], "answer": "Newton (N)"},
+    {"question": "Công thức định luật Ohm?", "options": ["U = I × R", "F = m × a", "P = U × I", "E = m × c²"], "answer": "U = I × R"},
+    {"question": "Vận tốc ánh sáng trong chân không?", "options": ["3×10⁸ m/s", "3×10⁶ m/s", "3×10⁹ m/s", "3×10⁷ m/s"], "answer": "3×10⁸ m/s"},
+    {"question": "Định luật Newton thứ 2?", "options": ["F = m × a", "F = G × m₁m₂/r²", "E = mc²", "P = F/S"], "answer": "F = m × a"},
+    {"question": "Đơn vị công suất?", "options": ["Watt (W)", "Joule (J)", "Newton (N)", "Volt (V)"], "answer": "Watt (W)"},
+    {"question": "Nhiệt độ sôi của nước?", "options": ["100°C", "0°C", "37°C", "212°C"], "answer": "100°C"},
+    {"question": "Điện trở tính bằng?", "options": ["Ohm (Ω)", "Volt (V)", "Ampere (A)", "Watt (W)"], "answer": "Ohm (Ω)"},
+    {"question": "Áp suất khí quyển tiêu chuẩn?", "options": ["101325 Pa", "100000 Pa", "90000 Pa", "110000 Pa"], "answer": "101325 Pa"}
+  ],
+  "Lịch sử Việt Nam": [
+    {"question": "Trận Bạch Đằng năm 938 do ai chỉ huy?", "options": ["Ngô Quyền", "Lý Thường Kiệt", "Trần Hưng Đạo", "Lê Lợi"], "answer": "Ngô Quyền"},
+    {"question": "Triều đại đầu tiên của Việt Nam?", "options": ["Hùng Vương", "Lý", "Trần", "Nguyễn"], "answer": "Hùng Vương"},
+    {"question": "Ai đánh bại quân Mông Cổ 3 lần?", "options": ["Trần Hưng Đạo", "Ngô Quyền", "Lê Lợi", "Quang Trung"], "answer": "Trần Hưng Đạo"},
+    {"question": "Khởi nghĩa Lam Sơn do ai lãnh đạo?", "options": ["Lê Lợi", "Trần Hưng Đạo", "Ngô Quyền", "Quang Trung"], "answer": "Lê Lợi"},
+    {"question": "Việt Nam thống nhất năm?", "options": ["1975", "1945", "1954", "1976"], "answer": "1975"},
+    {"question": "Cách mạng Tháng Tám thành công năm?", "options": ["1945", "1954", "1975", "1930"], "answer": "1945"},
+    {"question": "Chiến thắng Điện Biên Phủ năm?", "options": ["1954", "1945", "1975", "1946"], "answer": "1954"},
+    {"question": "Ai sáng lập Đảng Cộng sản Việt Nam?", "options": ["Hồ Chí Minh", "Võ Nguyên Giáp", "Phạm Văn Đồng", "Trường Chinh"], "answer": "Hồ Chí Minh"}
+  ],
+  "Văn học Việt Nam": [
+    {"question": "Tác giả Truyện Kiều?", "options": ["Nguyễn Du", "Hồ Xuân Hương", "Nguyễn Trãi", "Cao Bá Quát"], "answer": "Nguyễn Du"},
+    {"question": "Số đỏ do ai viết?", "options": ["Vũ Trọng Phụng", "Nam Cao", "Ngô Tất Tố", "Tô Hoài"], "answer": "Vũ Trọng Phụng"},
+    {"question": "Truyện Kiều có bao nhiêu câu?", "options": ["3254", "3000", "3500", "4000"], "answer": "3254"},
+    {"question": "Tác phẩm Chí Phèo của ai?", "options": ["Nam Cao", "Vũ Trọng Phụng", "Ngô Tất Tố", "Tô Hoài"], "answer": "Nam Cao"},
+    {"question": "Ai là tác giả Tắt đèn?", "options": ["Ngô Tất Tố", "Nam Cao", "Vũ Trọng Phụng", "Hồ Biểu Chánh"], "answer": "Ngô Tất Tố"},
+    {"question": "Thơ Hồ Xuân Hương thuộc thể loại?", "options": ["Nôm", "Chữ Hán", "Quốc ngữ", "Thất ngôn"], "answer": "Nôm"},
+    {"question": "Bài thơ 'Quê hương' của ai?", "options": ["Tế Hanh", "Xuân Diệu", "Huy Cận", "Chế Lan Viên"], "answer": "Tế Hanh"},
+    {"question": "Ai được gọi là 'vua thơ lục bát'?", "options": ["Nguyễn Bỉnh Khiêm", "Nguyễn Du", "Cao Bá Quát", "Nguyễn Trãi"], "answer": "Nguyễn Bỉnh Khiêm"}
+  ],
+  "Địa lý Việt Nam": [
+    {"question": "Việt Nam có bao nhiêu tỉnh thành?", "options": ["63", "64", "62", "65"], "answer": "63"},
+    {"question": "Đỉnh núi cao nhất Việt Nam?", "options": ["Fansipan", "Bạch Mã", "Ngọc Linh", "Phu Si Lung"], "answer": "Fansipan"},
+    {"question": "Sông dài nhất Việt Nam?", "options": ["Sông Mê Kông", "Sông Hồng", "Sông Đồng Nai", "Sông Đà"], "answer": "Sông Mê Kông"},
+    {"question": "Việt Nam tiếp giáp với bao nhiêu nước?", "options": ["3", "2", "4", "5"], "answer": "3"},
+    {"question": "Thủ đô của Việt Nam?", "options": ["Hà Nội", "Sài Gòn", "Đà Nẵng", "Huế"], "answer": "Hà Nội"},
+    {"question": "Việt Nam nằm ở châu lục nào?", "options": ["Châu Á", "Châu Âu", "Châu Phi", "Châu Mỹ"], "answer": "Châu Á"},
+    {"question": "Vùng Đồng bằng sông Cửu Long ở miền nào?", "options": ["Nam Bộ", "Bắc Bộ", "Trung Bộ", "Tây Nguyên"], "answer": "Nam Bộ"},
+    {"question": "Biển nào ở phía Đông Việt Nam?", "options": ["Biển Đông", "Biển Tây", "Thái Bình Dương", "Ấn Độ Dương"], "answer": "Biển Đông"}
+  ],
+  "Hóa học cơ bản": [
+    {"question": "Công thức hóa học của nước?", "options": ["H₂O", "CO₂", "O₂", "H₂SO₄"], "answer": "H₂O"},
+    {"question": "Khí O₂ là gì?", "options": ["Oxy", "Ozon", "Carbon dioxide", "Nitrogen"], "answer": "Oxy"},
+    {"question": "Muối ăn có công thức?", "options": ["NaCl", "KCl", "CaCl₂", "MgCl₂"], "answer": "NaCl"},
+    {"question": "Kim loại nào nhẹ nhất?", "options": ["Lithium", "Nhôm", "Magie", "Natri"], "answer": "Lithium"},
+    {"question": "Số nguyên tử của Carbon?", "options": ["6", "8", "12", "14"], "answer": "6"},
+    {"question": "Axit mạnh nhất trong số sau?", "options": ["HCl", "H₂SO₄", "HNO₃", "CH₃COOH"], "answer": "HCl"},
+    {"question": "Khí CO₂ gọi là?", "options": ["Carbon dioxide", "Carbon monoxide", "Oxy", "Nitrogen"], "answer": "Carbon dioxide"},
+    {"question": "PH = 7 là dung dịch?", "options": ["Trung tính", "Axit", "Bazơ", "Muối"], "answer": "Trung tính"}
+  ],
+  "Tiếng Anh giao tiếp": [
+    {"question": "'Hello' nghĩa là gì?", "options": ["Xin chào", "Tạm biệt", "Cảm ơn", "Xin lỗi"], "answer": "Xin chào"},
+    {"question": "'Thank you' nghĩa là?", "options": ["Cảm ơn", "Xin chào", "Tạm biệt", "Xin lỗi"], "answer": "Cảm ơn"},
+    {"question": "Thì hiện tại đơn dùng?", "options": ["Sự thật, thói quen", "Hành động đang xảy ra", "Hành động tương lai", "Hành động quá khứ"], "answer": "Sự thật, thói quen"},
+    {"question": "'I am studying' là thì gì?", "options": ["Present Continuous", "Present Simple", "Past Simple", "Future Simple"], "answer": "Present Continuous"},
+    {"question": "'Good morning' dùng khi nào?", "options": ["Buổi sáng", "Buổi chiều", "Buổi tối", "Bất kỳ lúc nào"], "answer": "Buổi sáng"},
+    {"question": "Đại từ nhân xưng số ít?", "options": ["I, You, He, She, It", "We, They", "Us, Them", "Our, Their"], "answer": "I, You, He, She, It"},
+    {"question": "'How are you?' nghĩa là?", "options": ["Bạn khỏe không?", "Tên bạn là gì?", "Bạn ở đâu?", "Bạn làm gì?"], "answer": "Bạn khỏe không?"},
+    {"question": "Quá khứ của 'go'?", "options": ["went", "goed", "goes", "going"], "answer": "went"}
+  ],
+  "Sinh học lớp 11": [
+    {"question": "Tế bào có bào quan nào?", "options": ["Ty thể, Lục lạp, Nhân", "Chỉ có nhân", "Chỉ có ty thể", "Không có gì"], "answer": "Ty thể, Lục lạp, Nhân"},
+    {"question": "DNA là gì?", "options": ["Axit nucleic", "Protein", "Lipid", "Carbohydrate"], "answer": "Axit nucleic"},
+    {"question": "Quá trình quang hợp xảy ra ở?", "options": ["Lục lạp", "Ty thể", "Nhân", "Ribosome"], "answer": "Lục lạp"},
+    {"question": "Đơn vị di truyền cơ bản?", "options": ["Gen", "染色体", "Tế bào", "Mô"], "answer": "Gen"},
+    {"question": "Nhiễm sắc thể người có bao nhiêu?", "options": ["46", "23", "48", "44"], "answer": "46"},
+    {"question": "Hô hấp tế bào xảy ra ở?", "options": ["Ty thể", "Lục lạp", "Nhân", "Golgi"], "answer": "Ty thể"},
+    {"question": "Chu kì tế bào gồm?", "options": ["Kỳ trung gian và nguyên phân", "Chỉ có nguyên phân", "Chỉ có giảm phân", "Không có"], "answer": "Kỳ trung gian và nguyên phân"},
+    {"question": "ARN khác DNA ở?", "options": ["Đường ribose", "Đường deoxyribose", "Không khác", "Chỉ có protein"], "answer": "Đường ribose"}
+  ],
+  "Giáo dục công dân": [
+    {"question": "Quyền cơ bản của công dân?", "options": ["Tự do, dân chủ", "Chỉ có tự do", "Chỉ có dân chủ", "Không có"], "answer": "Tự do, dân chủ"},
+    {"question": "Nghĩa vụ công dân là?", "options": ["Tuân thủ pháp luật, bảo vệ Tổ quốc", "Chỉ nộp thuế", "Chỉ bầu cử", "Không có"], "answer": "Tuân thủ pháp luật, bảo vệ Tổ quốc"},
+    {"question": "Tuổi bầu cử là?", "options": ["18", "16", "21", "25"], "answer": "18"},
+    {"question": "Hiến pháp là gì?", "options": ["Luật cơ bản", "Luật thường", "Nghị định", "Thông tư"], "answer": "Luật cơ bản"},
+    {"question": "Đạo đức công dân là?", "options": ["Trung thực, trách nhiệm", "Chỉ trung thực", "Chỉ trách nhiệm", "Không có"], "answer": "Trung thực, trách nhiệm"},
+    {"question": "Quyền được giáo dục từ tuổi?", "options": ["6", "5", "7", "8"], "answer": "6"},
+    {"question": "Vi phạm pháp luật sẽ?", "options": ["Bị xử phạt", "Không sao", "Được khen thưởng", "Tùy ý"], "answer": "Bị xử phạt"},
+    {"question": "Quyền bầu cử từ tuổi?", "options": ["18", "16", "21", "25"], "answer": "18"}
+  ],
+  "Địa lý thế giới": [
+    {"question": "Châu lục lớn nhất?", "options": ["Châu Á", "Châu Phi", "Châu Âu", "Châu Mỹ"], "answer": "Châu Á"},
+    {"question": "Sông dài nhất thế giới?", "options": ["Amazon", "Nile", "Yangtze", "Mississippi"], "answer": "Amazon"},
+    {"question": "Quốc gia đông dân nhất?", "options": ["Trung Quốc", "Ấn Độ", "Mỹ", "Indonesia"], "answer": "Trung Quốc"},
+    {"question": "Đại dương lớn nhất?", "options": ["Thái Bình Dương", "Đại Tây Dương", "Ấn Độ Dương", "Bắc Băng Dương"], "answer": "Thái Bình Dương"},
+    {"question": "Thủ đô Nhật Bản?", "options": ["Tokyo", "Beijing", "Seoul", "Bangkok"], "answer": "Tokyo"},
+    {"question": "Núi cao nhất thế giới?", "options": ["Everest", "K2", "Kilimanjaro", "Mont Blanc"], "answer": "Everest"},
+    {"question": "Sa mạc lớn nhất?", "options": ["Sahara", "Gobi", "Arabian", "Kalahari"], "answer": "Sahara"},
+    {"question": "Thủ đô Pháp?", "options": ["Paris", "London", "Berlin", "Rome"], "answer": "Paris"}
+  ],
+  "Phép tính nhanh": [
+    {"question": "25 × 25 = ?", "options": ["625", "650", "600", "675"], "answer": "625"},
+    {"question": "99 × 101 = ?", "options": ["9999", "10000", "9899", "10101"], "answer": "9999"},
+    {"question": "15² = ?", "options": ["225", "215", "235", "245"], "answer": "225"},
+    {"question": "23 × 11 = ?", "options": ["253", "233", "243", "263"], "answer": "253"},
+    {"question": "50 × 50 = ?", "options": ["2500", "2000", "3000", "2400"], "answer": "2500"},
+    {"question": "12 × 12 = ?", "options": ["144", "124", "164", "134"], "answer": "144"},
+    {"question": "35² = ?", "options": ["1225", "1125", "1325", "1025"], "answer": "1225"},
+    {"question": "98 × 102 = ?", "options": ["9996", "10000", "9896", "10096"], "answer": "9996"}
+  ],
+  "Cơ học vật lý": [
+    {"question": "Công thức động năng?", "options": ["E = ½mv²", "E = mgh", "E = mc²", "E = Pt"], "answer": "E = ½mv²"},
+    {"question": "Gia tốc trọng trường Trái Đất?", "options": ["9.8 m/s²", "10 m/s²", "9 m/s²", "11 m/s²"], "answer": "9.8 m/s²"},
+    {"question": "Định luật bảo toàn?", "options": ["Năng lượng", "Khối lượng", "Động lượng", "Tất cả"], "answer": "Tất cả"},
+    {"question": "Lực hấp dẫn phụ thuộc?", "options": ["Khối lượng và khoảng cách", "Chỉ khối lượng", "Chỉ khoảng cách", "Không phụ thuộc"], "answer": "Khối lượng và khoảng cách"},
+    {"question": "Thế năng trọng trường?", "options": ["E = mgh", "E = ½mv²", "E = mc²", "E = Pt"], "answer": "E = mgh"},
+    {"question": "Đơn vị gia tốc?", "options": ["m/s²", "m/s", "m", "s"], "answer": "m/s²"},
+    {"question": "Định luật 3 Newton?", "options": ["Lực và phản lực", "F = ma", "Quán tính", "Vận tốc"], "answer": "Lực và phản lực"},
+    {"question": "Vận tốc là?", "options": ["Độ biến thiên vị trí", "Gia tốc", "Lực", "Khối lượng"], "answer": "Độ biến thiên vị trí"}
+  ],
+  "English Grammar": [
+    {"question": "Present Simple for 'I'?", "options": ["study", "studies", "studying", "studied"], "answer": "study"},
+    {"question": "Past of 'eat'?", "options": ["ate", "eated", "eat", "eating"], "answer": "ate"},
+    {"question": "He ___ to school.", "options": ["goes", "go", "going", "gone"], "answer": "goes"},
+    {"question": "She ___ a book now.", "options": ["is reading", "reads", "read", "reading"], "answer": "is reading"},
+    {"question": "Past of 'write'?", "options": ["wrote", "writed", "written", "writing"], "answer": "wrote"},
+    {"question": "Article before 'apple'?", "options": ["an", "a", "the", "no article"], "answer": "an"},
+    {"question": "They ___ soccer yesterday.", "options": ["played", "play", "plays", "playing"], "answer": "played"},
+    {"question": "Future: I ___ go tomorrow.", "options": ["will", "am", "is", "was"], "answer": "will"}
+  ],
+  "Hóa học hữu cơ": [
+    {"question": "Công thức Metan?", "options": ["CH₄", "C₂H₆", "C₃H₈", "C₄H₁₀"], "answer": "CH₄"},
+    {"question": "Ethanol là?", "options": ["Ancol", "Axit", "Este", "Ete"], "answer": "Ancol"},
+    {"question": "Công thức Ethanol?", "options": ["C₂H₅OH", "CH₃OH", "C₃H₇OH", "C₄H₉OH"], "answer": "C₂H₅OH"},
+    {"question": "Benzen có công thức?", "options": ["C₆H₆", "C₆H₁₂", "C₅H₁₀", "C₇H₈"], "answer": "C₆H₆"},
+    {"question": "Phản ứng thế xảy ra với?", "options": ["Ankan", "Anken", "Ankin", "Ankadien"], "answer": "Ankan"},
+    {"question": "Axit axetic là?", "options": ["CH₃COOH", "HCOOH", "C₂H₅COOH", "C₃H₇COOH"], "answer": "CH₃COOH"},
+    {"question": "Glucozo có công thức?", "options": ["C₆H₁₂O₆", "C₁₂H₂₂O₁₁", "C₅H₁₀O₅", "C₆H₁₀O₅"], "answer": "C₆H₁₂O₆"},
+    {"question": "Protein được tạo từ?", "options": ["Amino acid", "Glucozo", "Lipit", "Vitamin"], "answer": "Amino acid"}
+  ]
+}

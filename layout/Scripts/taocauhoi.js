@@ -1,4 +1,4 @@
-// ========== QUẢN LÝ TẠO CÂU HỎI - QUIZZKIT ==========
+// ========== QUẢN LÝ TẠO CÂU HỎI - QUIZZKIT V2 ==========
 document.addEventListener("DOMContentLoaded", () => {
   
   // Biến toàn cục
@@ -6,12 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
     title: '',
     subject: '',
     questionCount: 0,
-    description: ''
+    description: '',
+    image: '' // Base64 string của ảnh
   };
   
   let questions = [];
   let editingIndex = -1;
-  let currentQuestionImage = null; // Lưu ảnh câu hỏi hiện tại
 
   // Danh sách môn học
   const subjectLabels = {
@@ -27,6 +27,58 @@ document.addEventListener("DOMContentLoaded", () => {
     iq: 'IQ/Trí tuệ',
     other: 'Khác'
   };
+
+  // ========== XỬ LÝ UPLOAD ẢNH ==========
+  const imageInput = document.getElementById("quizImage");
+  const imagePreview = document.getElementById("imagePreview");
+  const imagePlaceholder = document.getElementById("imagePlaceholder");
+  const previewImg = document.getElementById("previewImg");
+  const removeImageBtn = document.getElementById("removeImageBtn");
+
+  // Click vào preview để mở file picker
+  imagePreview.addEventListener("click", () => {
+    if (!previewImg.style.display || previewImg.style.display === "none") {
+      imageInput.click();
+    }
+  });
+
+  // Xử lý khi chọn file
+  imageInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        alert("⚠️ Vui lòng chọn file ảnh!");
+        return;
+      }
+      
+      // Kiểm tra kích thước (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert("⚠️ Kích thước ảnh không được vượt quá 5MB!");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        quizInfo.image = event.target.result;
+        previewImg.src = event.target.result;
+        previewImg.style.display = "block";
+        imagePlaceholder.style.display = "none";
+        removeImageBtn.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Xóa ảnh
+  removeImageBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    quizInfo.image = '';
+    previewImg.src = '';
+    previewImg.style.display = "none";
+    imagePlaceholder.style.display = "flex";
+    removeImageBtn.style.display = "none";
+    imageInput.value = '';
+  });
 
   // ========== BƯỚC 1: THIẾT LẬP BỘ ĐỀ ==========
   document.getElementById("startCreatingBtn").addEventListener("click", function() {
@@ -46,7 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Lưu thông tin
-    quizInfo = { title, subject, questionCount, description };
+    quizInfo.title = title;
+    quizInfo.subject = subject;
+    quizInfo.questionCount = questionCount;
+    quizInfo.description = description;
 
     // Hiển thị thông tin lên step 2
     document.getElementById("displayQuizTitle").textContent = title;
@@ -71,66 +126,15 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // ========== XỬ LÝ UPLOAD ẢNH ==========
-  const imageUploadBtn = document.getElementById("imageUploadBtn");
-  const imageInput = document.getElementById("imageInput");
-  const imagePreview = document.getElementById("imagePreview");
-  const removeImageBtn = document.getElementById("removeImageBtn");
-
-  if (imageUploadBtn && imageInput) {
-    imageUploadBtn.addEventListener("click", () => {
-      imageInput.click();
-    });
-
-    imageInput.addEventListener("change", function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        // Kiểm tra kích thước file (max 2MB)
-        if (file.size > 2 * 1024 * 1024) {
-          alert("⚠️ Kích thước ảnh không được vượt quá 2MB!");
-          return;
-        }
-
-        // Kiểm tra loại file
-        if (!file.type.startsWith('image/')) {
-          alert("⚠️ Vui lòng chọn file ảnh!");
-          return;
-        }
-
-        // Đọc và hiển thị ảnh
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          currentQuestionImage = event.target.result;
-          imagePreview.innerHTML = `<img src="${currentQuestionImage}" alt="Preview">`;
-          imagePreview.style.display = "block";
-          removeImageBtn.style.display = "inline-block";
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Xóa ảnh
-    if (removeImageBtn) {
-      removeImageBtn.addEventListener("click", () => {
-        currentQuestionImage = null;
-        imagePreview.innerHTML = "";
-        imagePreview.style.display = "none";
-        removeImageBtn.style.display = "none";
-        imageInput.value = "";
-      });
-    }
-  }
-
   // ========== BƯỚC 2: TẠO CÂU HỎI ==========
 
   // Thêm câu hỏi
   document.getElementById("addQuestionBtn").addEventListener("click", function() {
     const text = document.getElementById("questionInput").value.trim();
-    const difficulty = document.getElementById("difficulty").value;
-    const answerA = document.getElementById("answerA").value.trim();
-    const answerB = document.getElementById("answerB").value.trim();
-    const answerC = document.getElementById("answerC").value.trim();
-    const answerD = document.getElementById("answerD").value.trim();
+    const answer0 = document.getElementById("answer0").value.trim();
+    const answer1 = document.getElementById("answer1").value.trim();
+    const answer2 = document.getElementById("answer2").value.trim();
+    const answer3 = document.getElementById("answer3").value.trim();
     const correctAnswerElement = document.querySelector('input[name="correctAnswer"]:checked');
 
     // Validate
@@ -138,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("⚠️ Vui lòng nhập nội dung câu hỏi!");
       return;
     }
-    if (!answerA || !answerB || !answerC || !answerD) {
+    if (!answer0 || !answer1 || !answer2 || !answer3) {
       alert("⚠️ Vui lòng nhập đầy đủ 4 đáp án!");
       return;
     }
@@ -147,18 +151,11 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    // Tạo object câu hỏi theo format mới
     const question = {
-      id: editingIndex >= 0 ? questions[editingIndex].id : Date.now(),
-      text: text,
-      difficulty: difficulty,
-      image: currentQuestionImage, // Lưu ảnh
-      answers: {
-        A: answerA,
-        B: answerB,
-        C: answerC,
-        D: answerD
-      },
-      correctAnswer: correctAnswerElement.value
+      question: text,
+      answers: [answer0, answer1, answer2, answer3],
+      correct: parseInt(correctAnswerElement.value)
     };
 
     if (editingIndex >= 0) {
@@ -197,20 +194,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Reset form
   function resetForm() {
     document.getElementById("questionInput").value = "";
-    document.getElementById("difficulty").value = "medium";
-    document.getElementById("answerA").value = "";
-    document.getElementById("answerB").value = "";
-    document.getElementById("answerC").value = "";
-    document.getElementById("answerD").value = "";
+    document.getElementById("answer0").value = "";
+    document.getElementById("answer1").value = "";
+    document.getElementById("answer2").value = "";
+    document.getElementById("answer3").value = "";
     const radios = document.querySelectorAll('input[name="correctAnswer"]');
     radios.forEach(r => r.checked = false);
-    
-    // Reset ảnh
-    currentQuestionImage = null;
-    imagePreview.innerHTML = "";
-    imagePreview.style.display = "none";
-    removeImageBtn.style.display = "none";
-    imageInput.value = "";
   }
 
   // Cập nhật tiến độ
@@ -239,30 +228,23 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     container.innerHTML = questions.map((q, i) => {
-      const difficultyClass = q.difficulty === 'easy' ? 'difficulty-easy' : 
-                              q.difficulty === 'medium' ? 'difficulty-medium' : 'difficulty-hard';
-      const difficultyText = q.difficulty === 'easy' ? 'Dễ' : 
-                             q.difficulty === 'medium' ? 'Trung bình' : 'Khó';
-      
-      const imageHTML = q.image ? `<div class="question-image"><img src="${q.image}" alt="Câu hỏi ${i+1}"></div>` : '';
+      const letters = ['A', 'B', 'C', 'D'];
       
       return `
         <div class="question-item">
           <div class="question-header">
             <div class="question-title-row">
-              <div class="question-title">Câu ${i + 1}: ${q.text}</div>
-              <span class="meta-badge ${difficultyClass}">${difficultyText}</span>
+              <div class="question-title">Câu ${i + 1}: ${q.question}</div>
             </div>
             <div class="question-actions">
               <button class="btn-small btn-edit" onclick="editQuestion(${i})">✏️ Sửa</button>
               <button class="btn-small btn-delete" onclick="deleteQuestion(${i})">🗑️ Xóa</button>
             </div>
           </div>
-          ${imageHTML}
           <div class="answers-display">
-            ${["A","B","C","D"].map(k => `
-              <div class="answer-display ${q.correctAnswer === k ? "correct" : ""}">
-                <span class="answer-prefix">${k}.</span> ${q.answers[k]}
+            ${q.answers.map((ans, idx) => `
+              <div class="answer-display ${q.correct === idx ? "correct" : ""}">
+                <span class="answer-prefix">${letters[idx]}.</span> ${ans}
               </div>
             `).join("")}
           </div>
@@ -276,21 +258,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const q = questions[index];
     editingIndex = index;
     
-    document.getElementById("questionInput").value = q.text;
-    document.getElementById("difficulty").value = q.difficulty;
-    document.getElementById("answerA").value = q.answers.A;
-    document.getElementById("answerB").value = q.answers.B;
-    document.getElementById("answerC").value = q.answers.C;
-    document.getElementById("answerD").value = q.answers.D;
-    document.querySelector(`input[value="${q.correctAnswer}"]`).checked = true;
-    
-    // Hiển thị ảnh nếu có
-    if (q.image) {
-      currentQuestionImage = q.image;
-      imagePreview.innerHTML = `<img src="${q.image}" alt="Preview">`;
-      imagePreview.style.display = "block";
-      removeImageBtn.style.display = "inline-block";
-    }
+    document.getElementById("questionInput").value = q.question;
+    document.getElementById("answer0").value = q.answers[0];
+    document.getElementById("answer1").value = q.answers[1];
+    document.getElementById("answer2").value = q.answers[2];
+    document.getElementById("answer3").value = q.answers[3];
+    document.querySelector(`input[name="correctAnswer"][value="${q.correct}"]`).checked = true;
     
     document.getElementById("formTitle").textContent = "✏️ Sửa Câu Hỏi";
     document.getElementById("addQuestionBtn").textContent = "💾 Cập nhật câu hỏi";
@@ -322,7 +295,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ========== LƯU BỘ ĐỀ VÀO LECTURE ==========
+  // Lưu bộ đề
   document.getElementById("saveBtn").addEventListener("click", function() {
     if (questions.length === 0) {
       alert("⚠️ Chưa có câu hỏi nào để lưu!");
@@ -330,55 +303,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     try {
-      // Chuyển đổi format câu hỏi
-      const convertedQuestions = questions.map(q => ({
-        id: q.id,
-        question: q.text,
-        image: q.image || null, // Lưu ảnh
-        answers: [q.answers.A, q.answers.B, q.answers.C, q.answers.D],
-        correctAnswer: ["A","B","C","D"].indexOf(q.correctAnswer),
-        difficulty: q.difficulty,
-        subject: quizInfo.subject
-      }));
-
       // Tạo object bộ đề
       const newQuiz = {
         id: Date.now(),
         title: quizInfo.title,
         description: quizInfo.description || `${questions.length} câu hỏi - ${subjectLabels[quizInfo.subject]}`,
         subject: quizInfo.subject,
-        questions: convertedQuestions,
+        image: quizInfo.image || '', // Lưu base64 của ảnh
+        questions: questions,
         createdAt: new Date().toISOString()
       };
 
-      // Lưu vào localStorage (kho đề)
+      // Lưu vào localStorage
       const KEY = "all-quizzes";
       const raw = localStorage.getItem(KEY);
       const quizzes = raw ? JSON.parse(raw) : [];
       quizzes.push(newQuiz);
       localStorage.setItem(KEY, JSON.stringify(quizzes));
 
-      // LƯU VÀO LECTURE DATA
-      const LECTURE_KEY = "lectureData";
-      let lectureData = {};
-      const rawLecture = localStorage.getItem(LECTURE_KEY);
-      if (rawLecture) {
-        try {
-          lectureData = JSON.parse(rawLecture);
-        } catch (e) {
-          lectureData = {};
-        }
-      }
-
-      // Tạo nội dung lecture
-      lectureData[quizInfo.title] = {
-        description: quizInfo.description || `${questions.length} câu hỏi - ${subjectLabels[quizInfo.subject]}`,
-        content: generateLectureContent(quizInfo, questions)
-      };
-
-      localStorage.setItem(LECTURE_KEY, JSON.stringify(lectureData));
-
-      alert("✅ Đã lưu bộ đề vào kho và thêm vào Lecture thành công!");
+      alert("✅ Đã lưu bộ đề vào kho thành công!");
 
       // Hỏi có muốn chuyển sang kho đề không
       if (confirm("Bạn có muốn chuyển đến trang Kho Đề không?")) {
@@ -386,11 +329,16 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         // Reset và quay về step 1
         questions = [];
-        quizInfo = { title: '', subject: '', questionCount: 0, description: '' };
+        quizInfo = { title: '', subject: '', questionCount: 0, description: '', image: '' };
         document.getElementById("quizTitle").value = "";
         document.getElementById("quizSubject").value = "math";
         document.getElementById("quizQuestionCount").value = "10";
         document.getElementById("quizDescription").value = "";
+        previewImg.src = '';
+        previewImg.style.display = "none";
+        imagePlaceholder.style.display = "flex";
+        removeImageBtn.style.display = "none";
+        imageInput.value = '';
         document.getElementById("step2").style.display = "none";
         document.getElementById("step1").style.display = "block";
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -400,46 +348,5 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("❌ Lỗi khi lưu: " + err.message);
     }
   });
-
-  // ========== TẠO NỘI DUNG LECTURE ==========
-  function generateLectureContent(info, questions) {
-    const subjectEmoji = {
-      math: '📐',
-      physics: '⚛️',
-      chemistry: '🧪',
-      biology: '🧬',
-      english: '🇬🇧',
-      literature: '📖',
-      history: '🏛️',
-      geography: '🌍',
-      it: '💻',
-      iq: '🧠',
-      other: '📚'
-    };
-
-    const emoji = subjectEmoji[info.subject] || '📚';
-    
-    let content = `<h3>${emoji} Bài giảng về ${info.title}</h3>`;
-    content += `<p>${info.description || 'Bộ đề tự tạo với ' + questions.length + ' câu hỏi.'}</p>`;
-    
-    content += `<p><strong>Môn học:</strong> ${subjectLabels[info.subject]}</p>`;
-    content += `<p><strong>Số lượng câu hỏi:</strong> ${questions.length}</p>`;
-    
-    // Thống kê độ khó
-    const easyCount = questions.filter(q => q.difficulty === 'easy').length;
-    const mediumCount = questions.filter(q => q.difficulty === 'medium').length;
-    const hardCount = questions.filter(q => q.difficulty === 'hard').length;
-    
-    content += `<p><strong>Độ khó:</strong></p><ul>`;
-    if (easyCount > 0) content += `<li>Dễ: ${easyCount} câu</li>`;
-    if (mediumCount > 0) content += `<li>Trung bình: ${mediumCount} câu</li>`;
-    if (hardCount > 0) content += `<li>Khó: ${hardCount} câu</li>`;
-    content += `</ul>`;
-    
-    content += `<p>💡 <strong>Lưu ý:</strong> Hãy đọc kỹ đề và suy nghĩ cẩn thận trước khi chọn đáp án!</p>`;
-    content += `<p>🎯 <strong>Chúc bạn làm bài tốt!</strong></p>`;
-    
-    return content;
-  }
 
 });

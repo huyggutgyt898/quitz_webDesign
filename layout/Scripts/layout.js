@@ -4,40 +4,39 @@ const sidebar = document.getElementById('sidebar');
 const sidebarOverlay = document.getElementById('sidebarOverlay');
 
 // Click hamburger để mở sidebar
-hamburgerMenu.addEventListener('click', () => {
-    sidebar.classList.add('active');
-    sidebarOverlay.classList.add('active');
-});
+if (hamburgerMenu) {
+    hamburgerMenu.addEventListener('click', () => {
+        sidebar.classList.add('active');
+        sidebarOverlay.classList.add('active');
+    });
+}
 
 // Click overlay để đóng sidebar
-sidebarOverlay.addEventListener('click', () => {
-    sidebar.classList.remove('active');
-    sidebarOverlay.classList.remove('active');
-});
+if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+    });
+}
 
 // AVATAR DROPDOWN
 const avatarBtn = document.getElementById('avatarBtn');
 const avatarDropdown = document.getElementById('avatarDropdown');
 
-avatarBtn.addEventListener('click', () => {
-    avatarDropdown.style.display = avatarDropdown.style.display === 'block' ? 'none' : 'block';
-});
-
-// Ẩn dropdown khi click ngoài
-window.addEventListener('click', (e) => {
-    if (!avatarBtn.contains(e.target) && !avatarDropdown.contains(e.target)) {
-        avatarDropdown.style.display = 'none';
-    }
-});
-
-// NAVBAR ACTIVE STATE
-const navItems = document.querySelectorAll('.layout-navbar__item');
-navItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-        navItems.forEach(nav => nav.classList.remove('active'));
-        this.classList.add('active');
+if (avatarBtn && avatarDropdown) {
+    avatarBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        avatarDropdown.style.display = avatarDropdown.style.display === 'block' ? 'none' : 'block';
     });
-});
+
+    // Ẩn dropdown khi click ngoài
+    window.addEventListener('click', (e) => {
+        if (avatarDropdown && !avatarBtn.contains(e.target) && !avatarDropdown.contains(e.target)) {
+            avatarDropdown.style.display = 'none';
+        }
+    });
+}
+
 // ============== CHUNG CHO TOÀN BỘ WEBSITE: SÁNG / TỐI ==============
 (function () {
     const savedTheme = localStorage.getItem('quizzkit-theme');
@@ -127,40 +126,48 @@ navItems.forEach(item => {
     }
 
     // Bấm nút bật/tắt
-    toggleBtn.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.play();
-            toggleBtn.innerHTML = pauseIcon;
-            localStorage.setItem('quizzkit-music', 'on');
-        } else {
-            audio.pause();
-            toggleBtn.innerHTML = playIcon;
-            localStorage.setItem('quizzkit-music', 'off');
-        }
-    });
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                toggleBtn.innerHTML = pauseIcon;
+                localStorage.setItem('quizzkit-music', 'on');
+            } else {
+                audio.pause();
+                toggleBtn.innerHTML = playIcon;
+                localStorage.setItem('quizzkit-music', 'off');
+            }
+        });
+    }
 
     // Điều chỉnh âm lượng
-    volumeSlider.addEventListener('input', () => {
-        audio.volume = volumeSlider.value;
-        localStorage.setItem('quizzkit-volume', volumeSlider.value);
-    });
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', () => {
+            audio.volume = volumeSlider.value;
+            localStorage.setItem('quizzkit-volume', volumeSlider.value);
+        });
+    }
 
     // Tự động tạm dừng khi rời tab
     document.addEventListener('visibilitychange', () => {
         if (document.hidden && !audio.paused) {
             audio.pause();
-            toggleBtn.innerHTML = playIcon;
+            if (toggleBtn) toggleBtn.innerHTML = playIcon;
         }
     });
 
     // Nút ẩn/hiện giao diện
-    hideBtn.addEventListener('click', () => {
-        document.getElementById('quizzkit-bg-music').style.display = 'none';
-        showBtn.classList.remove('hidden');
-    });
+    if (hideBtn) {
+        hideBtn.addEventListener('click', () => {
+            document.getElementById('quizzkit-bg-music').style.display = 'none';
+            showBtn.classList.remove('hidden');
+        });
+    }
 
-    showBtn.addEventListener('click', () => {
-        document.getElementById('quizzkit-bg-music').style.display = 'flex';
-        showBtn.classList.add('hidden');
-    });
+    if (showBtn) {
+        showBtn.addEventListener('click', () => {
+            document.getElementById('quizzkit-bg-music').style.display = 'flex';
+            showBtn.classList.add('hidden');
+        });
+    }
 })();
