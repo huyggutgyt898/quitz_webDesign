@@ -1,0 +1,335 @@
+/* ========== KHO ĐỀ - STYLES V2 ========== */
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.topbar h1 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: #666;
+  font-size: 14px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #d0d0d0;
+}
+
+/* ========== QUIZ CARDS GRID ========== */
+.list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.quiz-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s;
+  border: 2px solid #f0f0f0;
+}
+
+.quiz-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+  border-color: #667eea;
+}
+
+.quiz-card-image {
+  width: 100%;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  background-color: #f0f0f0;
+}
+
+.quiz-card-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.quiz-card-placeholder span {
+  font-size: 64px;
+  opacity: 0.8;
+}
+
+.quiz-card-content {
+  padding: 20px;
+}
+
+.quiz-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.quiz-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.4;
+  flex: 1;
+  margin: 0;
+}
+
+.quiz-card-badge {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.quiz-card-desc {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.quiz-card-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 13px;
+  color: #999;
+  margin-bottom: 15px;
+  padding-top: 12px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.quiz-card-actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.btn-card {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.btn-view {
+  background: #e8f4f8;
+  color: #2c7a7b;
+  grid-column: span 2;
+}
+
+.btn-view:hover {
+  background: #bee3f8;
+}
+
+.btn-export-json {
+  background: #fef5e7;
+  color: #d68910;
+}
+
+.btn-export-json:hover {
+  background: #fdeaa7;
+}
+
+.btn-export-html {
+  background: #e8f8f5;
+  color: #16a085;
+}
+
+.btn-export-html:hover {
+  background: #a9dfbf;
+}
+
+.btn-delete {
+  background: #fed7d7;
+  color: #742a2a;
+  grid-column: span 2;
+}
+
+.btn-delete:hover {
+  background: #fc8181;
+}
+
+/* ========== EMPTY STATE ========== */
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+  font-size: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px dashed #e0e0e0;
+}
+
+/* ========== DETAIL VIEW ========== */
+#detail {
+  animation: fadeIn 0.3s ease-in;
+}
+
+#detail h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+#detailMeta {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+#detailJson {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+/* ========== BACK BUTTON ========== */
+.back-btn-box {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 10px 18px;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  background: #2980b9;
+  transform: scale(1.05);
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .list {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-card-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-view,
+  .btn-delete {
+    grid-column: span 1;
+  }
+
+  .card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar h1 {
+    font-size: 22px;
+  }
+
+  .quiz-card-content {
+    padding: 15px;
+  }
+
+  .quiz-card-title {
+    font-size: 16px;
+  }
+
+  .btn {
+    font-size: 13px;
+    padding: 8px 15px;
+  }
+}

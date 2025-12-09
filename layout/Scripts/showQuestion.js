@@ -2,7 +2,13 @@ let detailedResults = [];
 let questions = [];
 let currentQuestion = 0;
 let score = 0;
-let username = prompt("Enter your name:") || "Player";
+let username = localStorage.getItem("currentUser") || "Guest";
+
+// Kiểm tra và làm sạch username
+if (!username || username === "null" || username === "undefined") {
+    username = "Player";
+    console.log("No user logged in, using default name: Player");
+}
 
 // Cấu hình đường dẫn và file âm thanh
 const soundConfig = {
@@ -15,9 +21,52 @@ const soundConfig = {
     }
 };
 
+// Thêm vào trong DOMContentLoaded hoặc tạo hàm riêng
+function updateUserDisplay() {
+    const avatar = document.querySelector('.avatar');
+    if (avatar) {
+        // Lấy chữ cái đầu tiên của username
+        const firstLetter = username.charAt(0).toUpperCase();
+        avatar.textContent = firstLetter;
+        
+        // Tạo màu nền dựa trên username
+        const colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#06D6A0', '#118AB2', '#EF476F'];
+        const colorIndex = username.charCodeAt(0) % colors.length;
+        avatar.style.backgroundColor = colors[colorIndex];
+        
+        // Cập nhật tooltip
+        avatar.title = `Logged in as: ${username}`;
+        
+        // Thêm hover effect
+        avatar.style.cursor = 'pointer';
+        avatar.onclick = function() {
+            window.location.href = 'profile.html';
+        };
+    }
+}
+
 // TẤT CẢ CODE TRONG MỘT DOMContentLoaded DUY NHẤT
 document.addEventListener('DOMContentLoaded', function() {
+    // Xóa text-decoration của câu hỏi
+    const questionElement = document.getElementById('question');
+    if (questionElement) {
+        questionElement.style.textDecoration = 'none';
+        questionElement.style.borderBottom = 'none';
+        questionElement.style.border = 'none';
+        questionElement.style.backgroundImage = 'none';
+    }
+    
+    // Áp dụng cho tất cả các phần tử câu hỏi
+    document.querySelectorAll('.question').forEach(element => {
+        element.style.textDecoration = 'none';
+        element.style.borderBottom = 'none';
+    });
+
     console.log('DOM đã sẵn sàng');
+    console.log('Username:', username);
+    
+    // Cập nhật hiển thị người dùng
+    updateUserDisplay();
     
     // 1. Xử lý background theme
     const savedTheme = localStorage.getItem('quizTheme') || 'default';
@@ -55,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ========== CÁC HÀM QUIZ ==========
 async function loadQuestions() {
     try {
-        const res = await fetch("./Data/questions.json");
+        const res = await fetch("./Data/test.json");
         questions = await res.json();
 
         currentQuestion = 0;
