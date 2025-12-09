@@ -23,12 +23,6 @@
       <div id="answers" class="answers"></div>
 
       <button id="next-btn" class="next-btn">Next ➜</button>
-
-      <div id="result" class="result" style="display:none;">
-        <h2>Result</h2>
-        <p id="final-score"></p>
-        <button onclick="restartQuiz()" class="next-btn">Play Again</button>
-      </div>
     </div>
 
     <!-- Create question form -->
@@ -72,41 +66,40 @@
     </form>
   </div>
 
-  <!-- CHỈ THÊM/THAY ĐỔI CÁC DÒNG SAU trong phần result: -->
-<div id="result" class="result" style="display:none;">
-  <h2>🎉 Quiz Completed!</h2>
-
-  <!-- THÊM container cho kết quả chi tiết -->
-  <div class="result-details">
-    <div class="result-row">
-      <span class="result-label">Player:</span>
-      <span class="result-value" id="player-name">Player</span>
-    </div>
-    <div class="result-row">
-      <span class="result-label">Score:</span>
-      <span class="result-value" id="final-score-text">0/0</span>
-    </div>
-    <div class="result-row">
-      <span class="result-label">Percentage:</span>
-      <span class="result-value" id="percentage-text">0%</span>
-    </div>
-    <div class="result-row">
-      <span class="result-label">Grade:</span>
-      <span class="result-value" id="grade-text">-</span>
+  <!-- Result Overlay - Che toàn màn hình -->
+  <div id="result-overlay" class="result-overlay" style="display:none;">
+    <div class="result-container">
+      <h2>🎉 Quiz Completed!</h2>
+      
+      <div class="result-details">
+        <div class="result-row">
+          <span class="result-label">Người chơi:</span>
+          <span class="result-value" id="player-name">Player</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Điểm:</span>
+          <span class="result-value" id="final-score-text">0/0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Tỉ lệ đúng:</span>
+          <span class="result-value" id="percentage-text">0%</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Xếp hạng:</span>
+          <span class="result-value" id="grade-text">-</span>
+        </div>
+      </div>
+      
+      <div class="result-buttons">
+        <button onclick="restartQuiz()" class="result-btn play-again-btn">
+          <span class="btn-icon">🔄</span> Play Again
+        </button>
+        <button onclick="viewDetailedResults()" class="result-btn view-details-btn">
+          <span class="btn-icon">📊</span> View Detailed Results
+        </button>
+      </div>
     </div>
   </div>
-
-  <!-- GIỮ NGUYÊN phần final-score để tương thích với code cũ -->
-  <p id="final-score" style="display:none;"></p>
-
-  <button onclick="restartQuiz()" class="next-btn">Play Again</button>
-</div>
-
-<!-- Thêm vào trong div#result -->
-<div class="restart-buttons">
-    <!-- Thêm dòng này -->
-    <button onclick="viewDetailedResults()" class="next-btn view-details-btn">📊 View Detailed Results</button>
-</div>
 
   <audio id="background-music" loop></audio>
 

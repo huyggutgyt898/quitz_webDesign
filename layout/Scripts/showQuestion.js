@@ -1,3 +1,4 @@
+let detailedResults = [];
 let questions = [];
 let currentQuestion = 0;
 let score = 0;
@@ -59,6 +60,8 @@ async function loadQuestions() {
 
         currentQuestion = 0;
         score = 0;
+        detailedResults = []; // Reset kết quả chi tiết
+        
         const scoreElement = document.getElementById("score");
         if (scoreElement) {
             scoreElement.innerText = "Score: 0";
@@ -108,6 +111,17 @@ function showQuestion() {
 function checkAnswer(button, isCorrect) {
     const allBtns = document.querySelectorAll(".answers button");
     allBtns.forEach(b => b.disabled = true);
+    
+    const q = questions[currentQuestion];
+    
+    // Lưu kết quả chi tiết
+    detailedResults.push({
+        question: q.question,
+        userAnswer: button.innerText,
+        correctAnswer: q.answers[q.correct],
+        isCorrect: isCorrect,
+        allOptions: q.answers
+    });
 
     if (isCorrect) {
         button.classList.add("correct");
@@ -126,11 +140,6 @@ function checkAnswer(button, isCorrect) {
 function showResult() {
     console.log("Showing result. Score:", score, "/", questions.length);
     
-    // Ẩn các phần tử của quiz
-    document.getElementById("question").style.display = "none";
-    document.getElementById("answers").style.display = "none";
-    document.getElementById("next-btn").style.display = "none";
-    
     // Tính toán kết quả
     const percentage = Math.round((score / questions.length) * 100);
     let grade = "";
@@ -140,51 +149,37 @@ function showResult() {
     else if (percentage >= 80) grade = "A 👍";
     else if (percentage >= 70) grade = "B 😊";
     else if (percentage >= 60) grade = "C 🙂";
+    else if (percentage >= 50) grade = "D 😅";
     else grade = "F 😢";
     
-    // Lưu dữ liệu chi tiết vào localStorage
-    const resultData = {
-        username: username,
-        score: score,
-        totalQuestions: questions.length,
-        percentage: percentage,
-        grade: grade,
-        questions: detailedResults.map((result, index) => ({
-            questionNumber: index + 1,
-            question: result.question,
-            userAnswer: result.userAnswer,
-            correctAnswer: result.correctAnswer,
-            isCorrect: result.isCorrect,
-            allOptions: result.allOptions
-        }))
-    };
-    
-    localStorage.setItem('quizResultData', JSON.stringify(resultData));
-    
-    // HIỂN THỊ KẾT QUẢ CƠ BẢN
+    // Hiển thị kết quả
     document.getElementById("player-name").textContent = username;
     document.getElementById("final-score-text").textContent = `${score}/${questions.length}`;
     document.getElementById("percentage-text").textContent = `${percentage}%`;
     document.getElementById("grade-text").textContent = grade;
     
-    // Thêm nút xem chi tiết
-    const detailButton = document.createElement('button');
-    detailButton.className = 'next-btn';
-    detailButton.style.margin = '10px';
-    detailButton.textContent = '📊 View Detailed Results';
-    detailButton.onclick = () => {
-        window.open('result-details.html', '_blank');
-    };
-    
-    const resultDiv = document.getElementById("result");
-    const buttonsDiv = resultDiv.querySelector('.restart-buttons') || resultDiv;
-    buttonsDiv.appendChild(detailButton);
-    
-    // Hiển thị result box
-    document.getElementById("result").style.display = "block";
+    // Hiển thị result overlay (che toàn màn hình)
+    const resultOverlay = document.getElementById("result-overlay");
+    if (resultOverlay) {
+        resultOverlay.style.display = "flex";
+        // Thêm class để ẩn các phần tử khác
+        document.body.classList.add("show-result");
+    }
 }
 
 function viewDetailedResults() {
+    // Lưu dữ liệu vào localStorage trước
+    const resultData = {
+        username: username,
+        score: score,
+        totalQuestions: questions.length,
+        percentage: Math.round((score / questions.length) * 100),
+        grade: document.getElementById("grade-text").textContent
+    };
+    
+    localStorage.setItem('quizResultData', JSON.stringify(resultData));
+    
+    // Mở cửa sổ mới hoặc tab mới
     window.open('result-details.html', '_blank');
 }
 
@@ -195,22 +190,18 @@ function restartQuiz() {
     currentQuestion = 0;
     score = 0;
     
-    // Hiển thị lại các phần tử quiz
-    const elementsToShow = ["question", "answers", "next-btn"];
-    elementsToShow.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) element.style.display = "block";
-    });
+    // Ẩn result overlay
+    const resultOverlay = document.getElementById("result-overlay");
+    if (resultOverlay) {
+        resultOverlay.style.display = "none";
+        // Xóa class để hiện lại các phần tử
+        document.body.classList.remove("show-result");
+    }
     
     // Reset hiển thị
     const scoreElement = document.getElementById("score");
     if (scoreElement) {
         scoreElement.innerText = "Score: 0";
-    }
-    
-    const resultElement = document.getElementById("result");
-    if (resultElement) {
-        resultElement.style.display = "none";
     }
     
     // Load lại câu hỏi
