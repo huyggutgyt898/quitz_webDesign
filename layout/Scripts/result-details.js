@@ -1,18 +1,37 @@
+// Debug: Hiển thị tất cả dữ liệu localStorage
+console.log('=== DEBUG: ALL LOCALSTORAGE DATA ===');
+for (let i = 0; i < localStorage.length; i++) {
+    const key = localStorage.key(i);
+    console.log(`${key}:`, localStorage.getItem(key));
+}
+console.log('=== END DEBUG ===');
+
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('Trang result-details đã tải');
+    
     // Lấy dữ liệu từ localStorage
     const resultData = JSON.parse(localStorage.getItem('quizResultData'));
     const detailedResults = JSON.parse(localStorage.getItem('detailedResults')) || [];
+    
+    console.log('Dữ liệu đọc từ localStorage:');
+    console.log('- Result Data:', resultData);
+    console.log('- Detailed Results:', detailedResults);
+    console.log('- Số lượng câu hỏi chi tiết:', detailedResults.length);
     
     if (!resultData) {
         showError("No quiz results found. Please complete a quiz first.");
         return;
     }
     
+    if (!detailedResults.length) {
+        console.warn('Không có detailedResults trong localStorage');
+    }
+    
     // Hiển thị thông tin cơ bản
     displayBasicInfo(resultData);
     
     // Hiển thị chi tiết từng câu hỏi
-    displayDetailedQuestions(resultData, detailedResults);
+    displayEnhancedQuestions(resultData, detailedResults);
     
     // Hiển thị thời gian
     displayTimestamp();
@@ -330,25 +349,84 @@ function generateOptionsHTML(question) {
     return optionsHTML;
 }
 
-// Cập nhật hàm displayDetailedQuestions
-function displayDetailedQuestions(resultData, detailedResults) {
+function displayEnhancedQuestions(resultData, detailedResults) {
     const questionsList = document.getElementById('questions-list');
     
-    if (!detailedResults.length) {
+    console.log('Hiển thị enhanced questions:', detailedResults);
+
+    if (!detailedResults || !detailedResults.length) {
+        console.error('Không có dữ liệu detailedResults');
         questionsList.innerHTML = `
             <div class="no-data">
-                <i class="fas fa-info-circle"></i>
-                <p>Detailed question data is not available.</p>
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>⚠️ No Detailed Data Available</h3>
+                <p>Could not load detailed question results.</p>
+                <p><strong>Possible reasons:</strong></p>
+                <ul>
+                    <li>Quiz was not completed properly</li>
+                    <li>Browser cookies/localStorage are disabled</li>
+                    <li>Data was cleared from browser</li>
+                </ul>
+                <button class="btn btn-primary" onclick="window.location.href='./showQuestion.html'">
+                    <i class="fas fa-redo"></i> Take Quiz Again
+                </button>
             </div>
         `;
         return;
     }
     
     let questionsHTML = '';
+    const labels = ['A', 'B', 'C', 'D'];
     
     detailedResults.forEach((question, index) => {
         const questionNumber = index + 1;
         const isCorrect = question.isCorrect;
+        const userAnswer = question.userAnswer;
+        const correctAnswer = question.correctAnswer;
+        const allOptions = question.allOptions || [];
+        
+        // Tạo HTML cho tất cả các đáp án
+        let optionsHTML = '';
+        
+        allOptions.forEach((option, optionIndex) => {
+            const label = labels[optionIndex];
+            const isCorrectAnswer = option === correctAnswer;
+            const isUserAnswer = option === userAnswer;
+            
+            let optionClass = 'option';
+            let badge = '';
+            let optionStatus = '';
+            
+            if (isCorrectAnswer && isUserAnswer) {
+                optionClass += ' correct-user';
+                badge = '<span class="badge correct-badge">✅ Your Correct Answer</span>';
+                optionStatus = 'correct-user';
+            } else if (isCorrectAnswer) {
+                optionClass += ' correct-only';
+                badge = '<span class="badge correct-badge">⭐ Correct Answer</span>';
+                optionStatus = 'correct-only';
+            } else if (isUserAnswer) {
+                optionClass += ' wrong-user';
+                badge = '<span class="badge wrong-badge">❌ Your Wrong Answer</span>';
+                optionStatus = 'wrong-user';
+            } else {
+                optionClass += ' wrong-only';
+                badge = '<span class="badge wrong-badge">○ Wrong Option</span>';
+                optionStatus = 'wrong-only';
+            }
+            
+            optionsHTML += `
+                <div class="${optionClass}" data-status="${optionStatus}">
+                    <div class="option-content">
+                        <div class="option-header">
+                            <span class="option-label">${label}.</span>
+                            ${badge}
+                        </div>
+                        <div class="option-text">${option}</div>
+                    </div>
+                </div>
+            `;
+        });
         
         questionsHTML += `
             <div class="question-item">
@@ -371,13 +449,12 @@ function displayDetailedQuestions(resultData, detailedResults) {
                     ${question.question || 'No question text available'}
                 </div>
                 
-                <!-- Phần đáp án chi tiết -->
                 <div class="answer-analysis">
                     <h4 class="analysis-title">
                         <i class="fas fa-list-check"></i> All Options Analysis
                     </h4>
                     <div class="options-analysis-container">
-                        ${generateOptionsHTML(question)}
+                        ${optionsHTML}
                     </div>
                     
                     <div class="answer-summary">
@@ -386,14 +463,14 @@ function displayDetailedQuestions(resultData, detailedResults) {
                             <span>
                                 ${isCorrect 
                                     ? 'You answered correctly!' 
-                                    : `You selected: <strong>"${question.userAnswer}"</strong>`
+                                    : `You selected: <strong>"${userAnswer}"</strong>`
                                 }
                             </span>
                         </div>
                         ${!isCorrect ? `
                         <div class="summary-item summary-correct">
                             <i class="fas fa-check-circle"></i>
-                            <span>Correct answer: <strong>"${question.correctAnswer}"</strong></span>
+                            <span>Correct answer: <strong>"${correctAnswer}"</strong></span>
                         </div>
                         ` : ''}
                     </div>
@@ -401,6 +478,31 @@ function displayDetailedQuestions(resultData, detailedResults) {
             </div>
         `;
     });
+    
+    // Thêm legend
+    questionsHTML += `
+        <div class="answer-legend">
+            <h4 class="legend-title"><i class="fas fa-key"></i> Answer Key</h4>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-color legend-correct-user"></div>
+                    <span>Your Correct Answer</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-correct-only"></div>
+                    <span>Correct Answer (Not Selected)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-wrong-user"></div>
+                    <span>Your Wrong Answer</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-wrong-only"></div>
+                    <span>Wrong Option</span>
+                </div>
+            </div>
+        </div>
+    `;
     
     questionsList.innerHTML = questionsHTML;
 }

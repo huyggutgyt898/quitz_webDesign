@@ -152,6 +152,23 @@ function showResult() {
     else if (percentage >= 50) grade = "D 😅";
     else grade = "F 😢";
     
+    // QUAN TRỌNG: Lưu detailedResults vào localStorage
+    localStorage.setItem('detailedResults', JSON.stringify(detailedResults));
+    
+    // Lưu dữ liệu tổng hợp
+    const resultData = {
+        username: username,
+        score: score,
+        totalQuestions: questions.length,
+        percentage: percentage,
+        grade: grade,
+        timestamp: new Date().toISOString()
+    };
+    
+    localStorage.setItem('quizResultData', JSON.stringify(resultData));
+    console.log('Đã lưu dữ liệu vào localStorage:', resultData);
+    console.log('Đã lưu detailedResults:', detailedResults.length, 'câu hỏi');
+    
     // Hiển thị kết quả
     document.getElementById("player-name").textContent = username;
     document.getElementById("final-score-text").textContent = `${score}/${questions.length}`;
@@ -168,16 +185,33 @@ function showResult() {
 }
 
 function viewDetailedResults() {
-    // Lưu dữ liệu vào localStorage trước
+    // Đảm bảo đã lưu dữ liệu
+    const percentage = Math.round((score / questions.length) * 100);
+    let grade = "";
+    
+    if (percentage >= 90) grade = "A+ 🎯";
+    else if (percentage >= 80) grade = "A 👍";
+    else if (percentage >= 70) grade = "B 😊";
+    else if (percentage >= 60) grade = "C 🙂";
+    else if (percentage >= 50) grade = "D 😅";
+    else grade = "F 😢";
+    
+    // Lưu dữ liệu vào localStorage
     const resultData = {
         username: username,
         score: score,
         totalQuestions: questions.length,
-        percentage: Math.round((score / questions.length) * 100),
-        grade: document.getElementById("grade-text").textContent
+        percentage: percentage,
+        grade: grade,
+        timestamp: new Date().toISOString()
     };
     
     localStorage.setItem('quizResultData', JSON.stringify(resultData));
+    localStorage.setItem('detailedResults', JSON.stringify(detailedResults));
+    
+    console.log('Đang mở trang chi tiết với dữ liệu:');
+    console.log('- Result Data:', resultData);
+    console.log('- Detailed Results:', detailedResults.length, 'câu hỏi');
     
     // Mở cửa sổ mới hoặc tab mới
     window.open('result-details.html', '_blank');
@@ -189,6 +223,11 @@ function restartQuiz() {
     // Reset biến
     currentQuestion = 0;
     score = 0;
+    detailedResults = []; // QUAN TRỌNG: Reset detailedResults
+    
+    // Xóa dữ liệu cũ trong localStorage
+    localStorage.removeItem('detailedResults');
+    localStorage.removeItem('quizResultData');
     
     // Ẩn result overlay
     const resultOverlay = document.getElementById("result-overlay");
