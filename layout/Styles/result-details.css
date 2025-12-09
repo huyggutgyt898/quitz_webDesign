@@ -212,11 +212,30 @@ body {
 .question-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 20px;
     padding-bottom: 15px;
     border-bottom: 2px solid #f0f0f0;
+    flex-wrap: wrap;
+    gap: 15px;
 }
+
+.question-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.question-result {
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+    display: inline-block;
+    width: fit-content;
+}
+
 
 .question-number {
     font-size: 1.2em;
@@ -231,14 +250,14 @@ body {
     font-weight: bold;
 }
 
-.status-correct {
-    background: #e8f5e9;
-    color: #2e7d32;
+.result-correct {
+    background: #E8F5E9;
+    color: #2E7D32;
 }
 
-.status-incorrect {
-    background: #ffebee;
-    color: #c62828;
+.result-incorrect {
+    background: #FFEBEE;
+    color: #C62828;
 }
 
 .question-text {
@@ -448,4 +467,222 @@ body {
 
 .question-item {
     animation: fadeIn 0.5s ease-out;
+}
+
+/* Thêm CSS cho phân tích đáp án chi tiết */
+.answer-analysis {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.analysis-title {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.options-analysis-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Style cho từng option trong phân tích */
+.option {
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 5px;
+}
+
+.option-label {
+    font-weight: bold;
+    font-size: 1.1em;
+    min-width: 30px;
+}
+
+.option-text {
+    font-size: 1.05em;
+    line-height: 1.5;
+}
+
+/* Badge styles */
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+}
+
+.correct-badge {
+    background: #4CAF50;
+    color: white;
+}
+
+.wrong-badge {
+    background: #F44336;
+    color: white;
+}
+
+/* Các trạng thái đáp án */
+.correct-user {
+    background: #E8F5E9;
+    border-color: #4CAF50;
+    border-left: 5px solid #4CAF50;
+}
+
+.correct-user .badge {
+    background: #2E7D32;
+}
+
+.correct-only {
+    background: #F1F8E9;
+    border-color: #8BC34A;
+    border-left: 5px solid #8BC34A;
+}
+
+.wrong-user {
+    background: #FFEBEE;
+    border-color: #F44336;
+    border-left: 5px solid #F44336;
+}
+
+.wrong-only {
+    background: #F5F5F5;
+    border-color: #9E9E9E;
+    border-left: 5px solid #9E9E9E;
+    opacity: 0.8;
+}
+
+/* Answer summary */
+.answer-summary {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.summary-correct {
+    background: #E8F5E9;
+    color: #2E7D32;
+}
+
+.summary-incorrect {
+    background: #FFEBEE;
+    color: #C62828;
+}
+
+.summary-item i {
+    font-size: 1.2em;
+}
+
+/* Question points */
+.question-points {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.points-label {
+    color: #666;
+    font-weight: 500;
+}
+
+.points-value {
+    font-weight: bold;
+    font-size: 1.3em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    min-width: 50px;
+    text-align: center;
+}
+
+.points-correct {
+    background: #4CAF50;
+    color: white;
+}
+
+.points-wrong {
+    background: #F44336;
+    color: white;
+}
+
+/* Legend cho các loại đáp án */
+.answer-legend {
+    margin-top: 25px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+}
+
+.legend-title {
+    margin-bottom: 15px;
+    color: #555;
+    font-weight: 600;
+}
+
+.legend-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+}
+
+.legend-correct-user {
+    background: #4CAF50;
+}
+
+.legend-correct-only {
+    background: #8BC34A;
+}
+
+.legend-wrong-user {
+    background: #F44336;
+}
+
+.legend-wrong-only {
+    background: #9E9E9E;
 }

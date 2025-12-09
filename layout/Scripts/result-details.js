@@ -234,3 +234,173 @@ errorStyle.textContent = `
     }
 `;
 document.head.appendChild(errorStyle);
+
+// Thêm hàm hiển thị đáp án chi tiết
+function displayAnswerAnalysis(question, questionNumber) {
+    const labels = ['A', 'B', 'C', 'D'];
+    let analysisHTML = '';
+    
+    question.allOptions.forEach((option, index) => {
+        const label = labels[index];
+        let optionClass = 'option';
+        let statusText = '';
+        let icon = '';
+        
+        // Kiểm tra đáp án
+        const isCorrectAnswer = option === question.correctAnswer;
+        const isUserAnswer = option === question.userAnswer;
+        
+        if (isCorrectAnswer && isUserAnswer) {
+            // Người chơi chọn đúng
+            optionClass += ' correct selected';
+            statusText = '<span class="answer-status correct-status">✓ Your Answer (Correct)</span>';
+            icon = '✅';
+        } else if (isCorrectAnswer && !isUserAnswer) {
+            // Đáp án đúng nhưng người chơi không chọn
+            optionClass += ' correct';
+            statusText = '<span class="answer-status correct-answer">✓ Correct Answer</span>';
+            icon = '⭐';
+        } else if (!isCorrectAnswer && isUserAnswer) {
+            // Người chơi chọn sai
+            optionClass += ' wrong selected';
+            statusText = '<span class="answer-status wrong-status">✗ Your Answer (Wrong)</span>';
+            icon = '❌';
+        } else {
+            // Đáp án sai khác
+            optionClass += ' wrong';
+            statusText = '<span class="answer-status wrong-answer">✗ Wrong Option</span>';
+            icon = '○';
+        }
+        
+        analysisHTML += `
+            <div class="${optionClass}">
+                <div class="option-header">
+                    <span class="option-label">${label}.</span>
+                    <span class="option-icon">${icon}</span>
+                    ${statusText}
+                </div>
+                <div class="option-text">${option}</div>
+            </div>
+        `;
+    });
+    
+    return analysisHTML;
+}
+
+// Cập nhật hàm generateOptionsHTML để sử dụng phân tích mới
+function generateOptionsHTML(question) {
+    const labels = ['A', 'B', 'C', 'D'];
+    let optionsHTML = '';
+    
+    question.allOptions.forEach((option, index) => {
+        const label = labels[index];
+        const isCorrectAnswer = option === question.correctAnswer;
+        const isUserAnswer = option === question.userAnswer;
+        
+        let optionClass = 'option';
+        let badge = '';
+        
+        if (isCorrectAnswer && isUserAnswer) {
+            optionClass += ' correct-user';
+            badge = '<span class="badge correct-badge">Your Correct Answer</span>';
+        } else if (isCorrectAnswer) {
+            optionClass += ' correct-only';
+            badge = '<span class="badge correct-badge">Correct Answer</span>';
+        } else if (isUserAnswer) {
+            optionClass += ' wrong-user';
+            badge = '<span class="badge wrong-badge">Your Wrong Answer</span>';
+        } else {
+            optionClass += ' wrong-only';
+            badge = '<span class="badge wrong-badge">Wrong Option</span>';
+        }
+        
+        optionsHTML += `
+            <div class="${optionClass}">
+                <div class="option-content">
+                    <div class="option-header">
+                        <span class="option-label">${label}.</span>
+                        ${badge}
+                    </div>
+                    <div class="option-text">${option}</div>
+                </div>
+            </div>
+        `;
+    });
+    
+    return optionsHTML;
+}
+
+// Cập nhật hàm displayDetailedQuestions
+function displayDetailedQuestions(resultData, detailedResults) {
+    const questionsList = document.getElementById('questions-list');
+    
+    if (!detailedResults.length) {
+        questionsList.innerHTML = `
+            <div class="no-data">
+                <i class="fas fa-info-circle"></i>
+                <p>Detailed question data is not available.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    let questionsHTML = '';
+    
+    detailedResults.forEach((question, index) => {
+        const questionNumber = index + 1;
+        const isCorrect = question.isCorrect;
+        
+        questionsHTML += `
+            <div class="question-item">
+                <div class="question-header">
+                    <div class="question-info">
+                        <div class="question-number">Question ${questionNumber}</div>
+                        <div class="question-result ${isCorrect ? 'result-correct' : 'result-incorrect'}">
+                            ${isCorrect ? '✅ Correct' : '❌ Incorrect'}
+                        </div>
+                    </div>
+                    <div class="question-points">
+                        <span class="points-label">Points:</span>
+                        <span class="points-value ${isCorrect ? 'points-correct' : 'points-wrong'}">
+                            ${isCorrect ? '+1' : '0'}
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="question-text">
+                    ${question.question || 'No question text available'}
+                </div>
+                
+                <!-- Phần đáp án chi tiết -->
+                <div class="answer-analysis">
+                    <h4 class="analysis-title">
+                        <i class="fas fa-list-check"></i> All Options Analysis
+                    </h4>
+                    <div class="options-analysis-container">
+                        ${generateOptionsHTML(question)}
+                    </div>
+                    
+                    <div class="answer-summary">
+                        <div class="summary-item ${isCorrect ? 'summary-correct' : 'summary-incorrect'}">
+                            <i class="fas ${isCorrect ? 'fa-check-circle' : 'fa-times-circle'}"></i>
+                            <span>
+                                ${isCorrect 
+                                    ? 'You answered correctly!' 
+                                    : `You selected: <strong>"${question.userAnswer}"</strong>`
+                                }
+                            </span>
+                        </div>
+                        ${!isCorrect ? `
+                        <div class="summary-item summary-correct">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Correct answer: <strong>"${question.correctAnswer}"</strong></span>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    
+    questionsList.innerHTML = questionsHTML;
+}
