@@ -1,0 +1,152 @@
+[
+  {
+    "question": "Đơn vị cơ bản của sự sống là gì?",
+    "answers": ["Phân tử", "Tế bào", "Mô", "Cơ quan"],
+    "correct": 1
+  },
+  {
+    "question": "Bộ phận nào của tế bào được gọi là 'nhà máy năng lượng'?",
+    "answers": ["Nhân tế bào", "Ty thể", "Lục lạp", "Bộ máy Golgi"],
+    "correct": 1
+  },
+  {
+    "question": "Quá trình quang hợp diễn ra chủ yếu ở bộ phận nào của cây?",
+    "answers": ["Rễ", "Thân", "Lá", "Hoa"],
+    "correct": 2
+  },
+  {
+    "question": "ADN là viết tắt của cụm từ nào?",
+    "answers": ["Axit DeoxyriboNucleic", "Amino Deoxy Nucleotide", "Advanced Digital Network", "Automatic Data Numbering"],
+    "correct": 0
+  },
+  {
+    "question": "Nhóm máu phổ biến nhất ở người là?",
+    "answers": ["Nhóm A", "Nhóm B", "Nhóm AB", "Nhóm O"],
+    "correct": 3
+  },
+  {
+    "question": "Cơ quan nào lớn nhất trong cơ thể người?",
+    "answers": ["Gan", "Não", "Da", "Tim"],
+    "correct": 2
+  },
+  {
+    "question": "Loài động vật nào lớn nhất trên cạn?",
+    "answers": ["Voi châu Phi", "Hươu cao cổ", "Tê giác", "Hà mã"],
+    "correct": 0
+  },
+  {
+    "question": "Quá trình phân chia tế bào tạo ra tế bào con giống hệt tế bào mẹ gọi là gì?",
+    "answers": ["Giảm phân", "Nguyên phân", "Thụ tinh", "Phân hóa"],
+    "correct": 1
+  },
+  {
+    "question": "Hormone nào điều khiển lượng đường trong máu?",
+    "answers": ["Adrenaline", "Insulin", "Estrogen", "Testosterone"],
+    "correct": 1
+  },
+  {
+    "question": "Loài cá nào lớn nhất thế giới?",
+    "answers": ["Cá mập trắng", "Cá voi xanh", "Cá mập voi", "Cá đuối"],
+    "correct": 2
+  },
+  {
+    "question": "Xương nào dài nhất trong cơ thể người?",
+    "answers": ["Xương đùi", "Xương cánh tay", "Xương sọ", "Xương sống"],
+    "correct": 0
+  },
+  {
+    "question": "Thực vật nào ăn côn trùng?",
+    "answers": ["Cây nắp ấm", "Cây xương rồng", "Cây tre", "Cây bạch đàn"],
+    "correct": 0
+  },
+  {
+    "question": "Quá trình thở ra và hít vào được gọi là gì?",
+    "answers": ["Tuần hoàn", "Hô hấp", "Tiêu hóa", "Bài tiết"],
+    "correct": 1
+  },
+  {
+    "question": "Loài chim nào không biết bay?",
+    "answers": ["Đà điểu", "Chim cánh cụt", "Chim kiwi", "Tất cả các đáp án trên"],
+    "correct": 3
+  },
+  {
+    "question": "Bộ phận nào của não điều khiển thăng bằng và phối hợp vận động?",
+    "answers": ["Đại não", "Tiểu não", "Thân não", "Tủy sống"],
+    "correct": 1
+  },
+  {
+    "question": "Chất diệp lục có màu gì?",
+    "answers": ["Đỏ", "Xanh lục", "Vàng", "Cam"],
+    "correct": 1
+  },
+  {
+    "question": "Nhiễm sắc thể giới tính của nữ là gì?",
+    "answers": ["XY", "XX", "YY", "XZ"],
+    "correct": 1
+  },
+  {
+    "question": "Loài bò sát nào lớn nhất thế giới?",
+    "answers": ["Cá sấu nước mặn", "Rồng Komodo", "Trăn Anaconda", "Rùa da"],
+    "correct": 0
+  },
+  {
+    "question": "Kháng thể được sản xuất bởi loại tế bào nào?",
+    "answers": ["Hồng cầu", "Tiểu cầu", "Bạch cầu", "Tế bào thần kinh"],
+    "correct": 2
+  },
+  {
+    "question": "Cây cối trao đổi khí qua bộ phận nào?",
+    "answers": ["Khí khổng", "Rễ", "Thân", "Hoa"],
+    "correct": 0
+  },
+  {
+    "question": "Loài động vật nào có thời gian mang thai dài nhất?",
+    "answers": ["Voi", "Cá voi", "Hươu cao cổ", "Tê giác"],
+    "correct": 0
+  },
+  {
+    "question": "Vitamin nào được tổng hợp khi da tiếp xúc với ánh nắng mặt trời?",
+    "answers": ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin E"],
+    "correct": 2
+  },
+  {
+    "question": "Loài côn trùng nào sống theo tổ chức xã hội phức tạp?",
+    "answers": ["Ong", "Kiến", "Mối", "Tất cả các đáp án trên"],
+    "correct": 3
+  },
+  {
+    "question": "Cơ quan nào sản xuất mật trong cơ thể người?",
+    "answers": ["Gan", "Túi mật", "Tụy", "Dạ dày"],
+    "correct": 0
+  },
+  {
+    "question": "Quá trình chuyển hóa nước thành hơi nước ở lá cây gọi là gì?",
+    "answers": ["Quang hợp", "Thoát hơi nước", "Hô hấp", "Vận chuyển"],
+    "correct": 1
+  },
+  {
+    "question": "Nhóm máu nào có thể nhận máu từ tất cả các nhóm khác?",
+    "answers": ["Nhóm A", "Nhóm B", "Nhóm AB", "Nhóm O"],
+    "correct": 2
+  },
+  {
+    "question": "Loài động vật nào ngủ đông?",
+    "answers": ["Gấu", "Sóc", "Dơi", "Tất cả các đáp án trên"],
+    "correct": 3
+  },
+  {
+    "question": "Cơ quan nào lọc máu trong cơ thể người?",
+    "answers": ["Gan", "Thận", "Phổi", "Tim"],
+    "correct": 1
+  },
+  {
+    "question": "Loài thực vật nào phát triển nhanh nhất thế giới?",
+    "answers": ["Tre", "Bạch đàn", "Thông", "Sồi"],
+    "correct": 0
+  },
+  {
+    "question": "Hệ thống miễn dịch bảo vệ cơ thể khỏi điều gì?",
+    "answers": ["Vi khuẩn", "Virus", "Ký sinh trùng", "Tất cả các đáp án trên"],
+    "correct": 3
+  }
+]
