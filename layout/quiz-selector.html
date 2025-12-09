@@ -1,204 +1,902 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Quiz Topic</title>
-    <link rel="stylesheet" href="./Styles/quiz-selector.css">
+    <title>QuizzKit - Kho Đề Trắc Nghiệm</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #7209b7;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo i {
+            font-size: 2.2rem;
+            color: var(--success);
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.05rem;
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--success);
+        }
+
+        .nav-links a.active {
+            color: var(--success);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--success);
+            border-radius: 3px;
+        }
+
+        .user-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .btn-create {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-create:hover {
+            background-color: #5a189a;
+            transform: translateY(-2px);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content */
+        .hero {
+            padding: 3rem 0 2rem;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Filter Section */
+        .filters {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .filter-select {
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--light-gray);
+            background-color: white;
+            color: var(--dark);
+            font-weight: 500;
+            cursor: pointer;
+            min-width: 180px;
+        }
+
+        /* Quiz Cards */
+        .quiz-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent);
+        }
+
+        .quiz-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .quiz-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .quiz-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .quiz-card.new::before {
+            content: 'MỚI';
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background-color: var(--warning);
+            color: white;
+            padding: 4px 30px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+
+        .quiz-header {
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .quiz-category {
+            display: inline-block;
+            background-color: var(--light-gray);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .quiz-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+        }
+
+        .quiz-description {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .quiz-details {
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .detail-item i {
+            color: var(--primary);
+        }
+
+        .quiz-tags {
+            padding: 0 1.5rem 1.2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .tag {
+            background-color: #e0e7ff;
+            color: var(--primary);
+            padding: 0.3rem 0.7rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .quiz-actions {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .btn-start {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-start:hover {
+            background-color: var(--secondary);
+        }
+
+        /* Subjects Section */
+        .subjects-section {
+            margin-bottom: 3rem;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .subject-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .subject-card:hover .subject-icon {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .subject-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .subject-name {
+            font-weight: 600;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* Sidebar Actions */
+        .sidebar-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            background-color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--card-shadow);
+            min-width: 200px;
+            justify-content: center;
+        }
+
+        .action-btn.ranking {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2.5rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.2rem;
+            color: var(--success);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.7rem;
+        }
+
+        .footer-links a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--success);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #495057;
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .quiz-cards {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1.2rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .action-btn {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .quiz-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .subjects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="main-header">
-            <div class="header-content">
-                <h1><i class="fas fa-brain"></i> Quiz Challenge</h1>
-                <p class="subtitle">Choose your topic and test your knowledge!</p>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-brain"></i>
+                <h1>QUIZZKIT</h1>
             </div>
-            <div class="user-info">
-                <div class="avatar" id="user-avatar">U</div>
-                <span id="username-display">Guest</span>
-            </div>
-        </header>
-
-        <!-- Main Content -->
-        <main class="quiz-selection">
-            <div class="selection-header">
-                <h2><i class="fas fa-book-open"></i> Available Quiz Topics</h2>
-                <p class="selection-subtitle">Select a topic to begin your challenge</p>
-            </div>
-
-            <!-- Quiz Cards -->
-            <div class="quiz-cards-container">
-                <!-- Geography Card -->
-                <div class="quiz-card geography-card" onclick="startQuiz('geography')">
-                    <div class="card-icon">
-                        <i class="fas fa-globe-americas"></i>
+            
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Trang chủ</a></li>
+                    <li><a href="#">Kho đề trắc nghiệm</a></li>
+                    <li><a href="#">Bảng xếp hạng</a></li>
+                    <li><a href="#">Thống kê</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <button class="btn-create">
+                    <i class="fas fa-plus-circle"></i>
+                    Tạo câu hỏi
+                </button>
+                
+                <div class="user-profile">
+                    <div class="avatar">
+                        <i class="fas fa-user"></i>
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Geography</h3>
-                        <div class="card-stats">
-                            <span class="stat-item">
-                                <i class="fas fa-question-circle"></i>
-                                40 Questions
-                            </span>
-                            <span class="stat-item">
-                                <i class="fas fa-clock"></i>
-                                20 Minutes
-                            </span>
+                    <span>Tài khoản</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Kho Đề Trắc Nghiệm</h2>
+            <p>Chọn chủ đề và bắt đầu thử thách kiến thức của bạn ngay! Hàng ngàn câu hỏi thú vị từ nhiều lĩnh vực khác nhau đang chờ đón bạn.</p>
+        </section>
+
+        <!-- Filters -->
+        <section class="filters">
+            <div class="filter-group">
+                <span class="filter-label">Lọc theo:</span>
+                <select class="filter-select">
+                    <option>Tất cả chủ đề</option>
+                    <option>Khoa học</option>
+                    <option>Lịch sử</option>
+                    <option>Địa lý</option>
+                    <option>Toán học</option>
+                    <option>Ngôn ngữ</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <span class="filter-label">Sắp xếp:</span>
+                <select class="filter-select">
+                    <option>Mới nhất</option>
+                    <option>Phổ biến nhất</option>
+                    <option>Đánh giá cao</option>
+                    <option>Số câu hỏi</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- Quiz Cards -->
+        <section class="quiz-section">
+            <h2 class="section-title">
+                <i class="fas fa-globe-americas"></i>
+                Đề thi phổ biến
+            </h2>
+            
+            <div class="quiz-cards">
+                <!-- Quiz Card 1 -->
+                <div class="quiz-card new">
+                    <div class="quiz-header">
+                        <span class="quiz-category">Địa lý</span>
+                        <h3 class="quiz-title">Địa lý Thế Giới</h3>
+                        <p class="quiz-description">Khám phá kiến thức về các quốc gia, thủ đô, sông núi và đặc điểm địa lý toàn cầu.</p>
+                    </div>
+                    
+                    <div class="quiz-details">
+                        <div class="detail-item">
+                            <i class="far fa-question-circle"></i>
+                            <span>40 câu hỏi</span>
                         </div>
-                        <p class="card-description">
-                            Test your knowledge about countries, capitals, rivers, mountains, 
-                            and geographical features around the world.
-                        </p>
-                        <div class="card-tags">
-                            <span class="tag">World</span>
-                            <span class="tag">Countries</span>
-                            <span class="tag">Nature</span>
+                        <div class="detail-item">
+                            <i class="far fa-clock"></i>
+                            <span>20 phút</span>
                         </div>
-                        <button class="start-btn">
-                            <i class="fas fa-play"></i> Start Quiz
+                        <div class="detail-item">
+                            <i class="fas fa-users"></i>
+                            <span>1.2K lượt thi</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-tags">
+                        <span class="tag">Quốc gia</span>
+                        <span class="tag">Thủ đô</span>
+                        <span class="tag">Thiên nhiên</span>
+                    </div>
+                    
+                    <div class="quiz-actions">
+                        <button class="btn-start">
+                            <i class="fas fa-play-circle"></i>
+                            Bắt đầu thi
                         </button>
                     </div>
                 </div>
-
-                <!-- Web Design Card -->
-                <div class="quiz-card webdesign-card" onclick="startQuiz('webdesign')">
-                    <div class="card-icon">
-                        <i class="fas fa-code"></i>
+                
+                <!-- Quiz Card 2 -->
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <span class="quiz-category">Công nghệ</span>
+                        <h3 class="quiz-title">Thiết kế Web Cơ Bản</h3>
+                        <p class="quiz-description">Kiểm tra kiến thức về HTML, CSS, JavaScript và các khái niệm phát triển web hiện đại.</p>
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Web Design Basics</h3>
-                        <div class="card-stats">
-                            <span class="stat-item">
-                                <i class="fas fa-question-circle"></i>
-                                20 Questions
-                            </span>
-                            <span class="stat-item">
-                                <i class="fas fa-clock"></i>
-                                10 Minutes
-                            </span>
+                    
+                    <div class="quiz-details">
+                        <div class="detail-item">
+                            <i class="far fa-question-circle"></i>
+                            <span>20 câu hỏi</span>
                         </div>
-                        <p class="card-description">
-                            Challenge yourself with HTML, CSS, JavaScript and modern 
-                            web development concepts.
-                        </p>
-                        <div class="card-tags">
-                            <span class="tag">HTML/CSS</span>
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">Development</span>
+                        <div class="detail-item">
+                            <i class="far fa-clock"></i>
+                            <span>10 phút</span>
                         </div>
-                        <button class="start-btn">
-                            <i class="fas fa-play"></i> Start Quiz
+                        <div class="detail-item">
+                            <i class="fas fa-users"></i>
+                            <span>2.5K lượt thi</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-tags">
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Frontend</span>
+                    </div>
+                    
+                    <div class="quiz-actions">
+                        <button class="btn-start">
+                            <i class="fas fa-play-circle"></i>
+                            Bắt đầu thi
                         </button>
                     </div>
                 </div>
+                
+                <!-- Quiz Card 3 -->
+                <div class="quiz-card">
+                    <div class="quiz-header">
+                        <span class="quiz-category">Lịch sử</span>
+                        <h3 class="quiz-title">Lịch Sử Việt Nam</h3>
+                        <p class="quiz-description">Khám phá các sự kiện, nhân vật và giai đoạn lịch sử quan trọng của Việt Nam.</p>
+                    </div>
+                    
+                    <div class="quiz-details">
+                        <div class="detail-item">
+                            <i class="far fa-question-circle"></i>
+                            <span>30 câu hỏi</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="far fa-clock"></i>
+                            <span>15 phút</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-users"></i>
+                            <span>850 lượt thi</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-tags">
+                        <span class="tag">Cổ đại</span>
+                        <span class="tag">Trung đại</span>
+                        <span class="tag">Hiện đại</span>
+                    </div>
+                    
+                    <div class="quiz-actions">
+                        <button class="btn-start">
+                            <i class="fas fa-play-circle"></i>
+                            Bắt đầu thi
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <!-- Biology Card -->
-                <div class="quiz-card biology-card" onclick="startQuiz('biology')">
-                    <div class="card-icon">
+        <!-- Subjects Section -->
+        <section class="subjects-section">
+            <h2 class="section-title">
+                <i class="fas fa-book-open"></i>
+                Môn học
+            </h2>
+            
+            <div class="subjects-grid">
+                <div class="subject-card">
+                    <div class="subject-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <span class="subject-name">Hóa học</span>
+                </div>
+                
+                <div class="subject-card">
+                    <div class="subject-icon">
                         <i class="fas fa-dna"></i>
                     </div>
-                    <div class="card-content">
-                        <h3 class="card-title">Biology</h3>
-                        <div class="card-stats">
-                            <span class="stat-item">
-                                <i class="fas fa-question-circle"></i>
-                                30 Questions
-                            </span>
-                            <span class="stat-item">
-                                <i class="fas fa-clock"></i>
-                                15 Minutes
-                            </span>
-                        </div>
-                        <p class="card-description">
-                            Explore the world of living organisms, cells, genetics, 
-                            and biological processes.
-                        </p>
-                        <div class="card-tags">
-                            <span class="tag">Science</span>
-                            <span class="tag">Cells</span>
-                            <span class="tag">Animals</span>
-                        </div>
-                        <button class="start-btn">
-                            <i class="fas fa-play"></i> Start Quiz
-                        </button>
+                    <span class="subject-name">Sinh học</span>
+                </div>
+                
+                <div class="subject-card">
+                    <div class="subject-icon">
+                        <i class="fas fa-book"></i>
                     </div>
+                    <span class="subject-name">Ngữ văn</span>
+                </div>
+                
+                <div class="subject-card">
+                    <div class="subject-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <span class="subject-name">Tiếng Anh</span>
+                </div>
+                
+                <div class="subject-card">
+                    <div class="subject-icon">
+                        <i class="fas fa-landmark"></i>
+                    </div>
+                    <span class="subject-name">Lịch sử</span>
+                </div>
+                
+                <div class="subject-card">
+                    <div class="subject-icon">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <span class="subject-name">Địa lý</span>
+                </div>
+                
+                <div class="subject-card">
+                    <div class="subject-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <span class="subject-name">Tin học</span>
+                </div>
+                
+                <div class="subject-card">
+                    <div class="subject-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <span class="subject-name">GDCD</span>
                 </div>
             </div>
+        </section>
 
-            <!-- Difficulty Selection -->
-            <div class="difficulty-section">
-                <h3><i class="fas fa-chart-line"></i> Select Difficulty</h3>
-                <div class="difficulty-options">
-                    <label class="difficulty-option">
-                        <input type="radio" name="difficulty" value="easy" checked>
-                        <span class="difficulty-label easy">
-                            <i class="fas fa-leaf"></i> Easy
-                        </span>
-                    </label>
-                    <label class="difficulty-option">
-                        <input type="radio" name="difficulty" value="medium">
-                        <span class="difficulty-label medium">
-                            <i class="fas fa-balance-scale"></i> Medium
-                        </span>
-                    </label>
-                    <label class="difficulty-option">
-                        <input type="radio" name="difficulty" value="hard">
-                        <span class="difficulty-label hard">
-                            <i class="fas fa-fire"></i> Hard
-                        </span>
-                    </label>
-                </div>
-            </div>
+        <!-- Sidebar Actions -->
+        <section class="sidebar-actions">
+            <button class="action-btn">
+                <i class="fas fa-plus-circle"></i>
+                Tạo câu hỏi
+            </button>
+            
+            <button class="action-btn ranking">
+                <i class="fas fa-trophy"></i>
+                Bảng xếp hạng
+            </button>
+        </section>
+    </main>
 
-            <!-- Stats Section -->
-            <div class="stats-section">
-                <h3><i class="fas fa-chart-bar"></i> Your Quiz Statistics</h3>
-                <div class="stats-cards">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h4>Highest Score</h4>
-                            <p class="stat-value" id="high-score">0%</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-gamepad"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h4>Quizzes Taken</h4>
-                            <p class="stat-value" id="quizzes-taken">0</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h4>Average Score</h4>
-                            <p class="stat-value" id="average-score">0%</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </main>
-
-        <!-- Footer -->
-        <footer class="main-footer">
+    <!-- Footer -->
+    <footer>
+        <div class="container">
             <div class="footer-content">
-                <p>© 2024 Quiz Game. All rights reserved.</p>
-                <div class="footer-links">
-                    <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
-                    <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                <div class="footer-section">
+                    <h3>QUIZZKIT</h3>
+                    <p>Nền tảng học tập và kiểm tra kiến thức hàng đầu với hàng ngàn câu hỏi trắc nghiệm đa dạng lĩnh vực.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Liên kết nhanh</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Kho đề thi</a></li>
+                        <li><a href="#">Bảng xếp hạng</a></li>
+                        <li><a href="#">Tạo câu hỏi</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Hỗ trợ</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Điều khoản dịch vụ</a></li>
+                    </ul>
                 </div>
             </div>
-        </footer>
-    </div>
+            
+            <div class="copyright">
+                &copy; 2023 QuizzKit. Tất cả các quyền được bảo lưu.
+            </div>
+        </div>
+    </footer>
 
-    <script src="./Scripts/quiz-selector.js"></script>
+    <script>
+        // Thêm hiệu ứng tương tác cho các nút
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hiệu ứng cho nút bắt đầu thi
+            const startButtons = document.querySelectorAll('.btn-start');
+            startButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang tải...';
+                    this.style.backgroundColor = '#3a0ca3';
+                    
+                    // Giả lập tải đề thi
+                    setTimeout(() => {
+                        alert('Bắt đầu làm bài thi! Chúc bạn may mắn!');
+                        this.innerHTML = '<i class="fas fa-play-circle"></i> Bắt đầu thi';
+                        this.style.backgroundColor = '';
+                    }, 800);
+                });
+            });
+            
+            // Hiệu ứng cho các card môn học
+            const subjectCards = document.querySelectorAll('.subject-card');
+            subjectCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const subjectName = this.querySelector('.subject-name').textContent;
+                    alert(`Bạn đã chọn môn: ${subjectName}`);
+                });
+            });
+            
+            // Hiệu ứng cho nút tạo câu hỏi
+            const createButtons = document.querySelectorAll('.btn-create, .action-btn:first-child');
+            createButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang mở trình tạo...';
+                    
+                    setTimeout(() => {
+                        alert('Chuyển đến trang tạo câu hỏi!');
+                        this.innerHTML = '<i class="fas fa-plus-circle"></i> Tạo câu hỏi';
+                    }, 600);
+                });
+            });
+            
+            // Hiệu ứng cho nút bảng xếp hạng
+            const rankingButton = document.querySelector('.ranking');
+            rankingButton.addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang tải...';
+                
+                setTimeout(() => {
+                    alert('Chuyển đến bảng xếp hạng!');
+                    this.innerHTML = '<i class="fas fa-trophy"></i> Bảng xếp hạng';
+                }, 600);
+            });
+        });
+    </script>
 </body>
 </html>

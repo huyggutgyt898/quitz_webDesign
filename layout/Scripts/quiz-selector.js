@@ -1,123 +1,182 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Quiz selector page loaded');
+    console.log('Library page loaded');
     
     // Load user information
     loadUserInfo();
     
-    // Load user statistics
-    loadUserStats();
+    // Setup filters
+    setupFilters();
     
-    // Add event listeners for cards
+    // Setup search
+    setupSearch();
+    
+    // Setup card interactions
     setupCardInteractions();
 });
 
 function loadUserInfo() {
     const username = localStorage.getItem('currentUser') || 'Guest';
-    const avatar = document.getElementById('user-avatar');
-    const usernameDisplay = document.getElementById('username-display');
+    const sidebarUsername = document.getElementById('sidebarUsername');
     
-    // Display username
-    usernameDisplay.textContent = username;
-    
-    // Set avatar
-    if (avatar) {
-        const firstLetter = username.charAt(0).toUpperCase();
-        avatar.textContent = firstLetter;
-        
-        // Set avatar color based on username
-        const colors = ['#FF6B6B', '#4ECDC4', '#FFD166', '#06D6A0', '#118AB2', '#EF476F'];
-        const colorIndex = username.charCodeAt(0) % colors.length;
-        avatar.style.background = `linear-gradient(135deg, ${colors[colorIndex]}, ${colors[(colorIndex + 1) % colors.length]})`;
-    }
-    
-    // Check if user is logged in
-    const isLoggedIn = localStorage.getItem('loggedIn') === 'true';
-    if (!isLoggedIn) {
-        // Redirect to login page after 2 seconds
-        setTimeout(() => {
-            alert('Please login to access quiz selection.');
-            window.location.href = 'login.html';
-        }, 2000);
+    // Update sidebar username
+    if (sidebarUsername) {
+        sidebarUsername.textContent = username;
     }
 }
 
-function loadUserStats() {
-    // Load quiz history from localStorage
-    const quizHistory = JSON.parse(localStorage.getItem('quizHistory') || '[]');
-    const username = localStorage.getItem('currentUser') || 'Guest';
+function setupFilters() {
+    const categoryFilter = document.getElementById('categoryFilter');
+    const sortFilter = document.getElementById('sortFilter');
     
-    // Filter quizzes for current user
-    const userQuizzes = quizHistory.filter(quiz => quiz.username === username);
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', filterTopics);
+    }
     
-    // Update statistics
-    document.getElementById('quizzes-taken').textContent = userQuizzes.length;
+    if (sortFilter) {
+        sortFilter.addEventListener('change', sortTopics);
+    }
+}
+
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
     
-    if (userQuizzes.length > 0) {
-        // Calculate highest score
-        const highestPercentage = Math.max(...userQuizzes.map(quiz => quiz.percentage));
-        document.getElementById('high-score').textContent = `${highestPercentage}%`;
+    if (searchInput) {
+        searchInput.addEventListener('input', searchTopics);
         
-        // Calculate average score
-        const averagePercentage = Math.round(
-            userQuizzes.reduce((sum, quiz) => sum + quiz.percentage, 0) / userQuizzes.length
-        );
-        document.getElementById('average-score').textContent = `${averagePercentage}%`;
-    } else {
-        document.getElementById('high-score').textContent = '0%';
-        document.getElementById('average-score').textContent = '0%';
+        // Add debounce for better performance
+        let debounceTimer;
+        searchInput.addEventListener('input', function() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(searchTopics, 300);
+        });
     }
 }
 
 function setupCardInteractions() {
-    // Add hover effects to cards
-    const cards = document.querySelectorAll('.quiz-card');
+    const cards = document.querySelectorAll('.topic-card');
+    
     cards.forEach(card => {
+        // Add hover effect
         card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-10px) scale(1.02)';
+            card.style.transform = 'translateY(-5px)';
+            card.style.boxShadow = '0 15px 35px rgba(0, 0, 0, 0.15)';
         });
         
         card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0) scale(1)';
+            card.style.transform = 'translateY(0)';
+            card.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.08)';
         });
+    });
+}
+
+function filterTopics() {
+    const category = document.getElementById('categoryFilter').value;
+    const cards = document.querySelectorAll('.topic-card');
+    
+    cards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        
+        if (category === 'all' || category === cardCategory) {
+            card.style.display = 'flex';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+}
+
+function sortTopics() {
+    const sortBy = document.getElementById('sortFilter').value;
+    const grid = document.getElementById('topicsGrid');
+    const cards = Array.from(grid.querySelectorAll('.topic-card'));
+    
+    switch(sortBy) {
+        case 'newest':
+            // Simple shuffle for demo
+            cards.sort(() => Math.random() - 0.5);
+            break;
+        case 'popular':
+            // Sort by "popular" badge first
+            cards.sort((a, b) => {
+                const aHasPopular = a.querySelector('.badge.popular');
+                const bHasPopular = b.querySelector('.badge.popular');
+                return (bHasPopular ? 1 : 0) - (aHasPopular ? 1 : 0);
+            });
+            break;
+        case 'questions':
+            // Sort by question count (hardcoded for demo)
+            const questionCounts = {
+                'geography': 40,
+                'web': 20,
+                'biology': 30
+            };
+            
+            cards.sort((a, b) => {
+                const aCategory = a.getAttribute('data-category');
+                const bCategory = b.getAttribute('data-category');
+                return questionCounts[bCategory] - questionCounts[aCategory];
+            });
+            break;
+    }
+    
+    // Reappend cards in new order
+    cards.forEach(card => grid.appendChild(card));
+}
+
+function searchTopics() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const cards = document.querySelectorAll('.topic-card');
+    
+    cards.forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const description = card.querySelector('p').textContent.toLowerCase();
+        const tags = Array.from(card.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
+        
+        const matches = title.includes(searchTerm) || 
+                       description.includes(searchTerm) ||
+                       tags.some(tag => tag.includes(searchTerm));
+        
+        card.style.display = matches ? 'flex' : 'none';
     });
 }
 
 function startQuiz(topic) {
     console.log(`Starting ${topic} quiz...`);
     
-    // Get selected difficulty
-    const difficulty = document.querySelector('input[name="difficulty"]:checked').value;
+    // Get topic name and json file
+    let topicName;
+    let jsonFile;
+    
+    switch(topic) {
+        case 'geography':
+            topicName = 'Địa Lý Thế Giới';
+            jsonFile = './Data/geography_questions.json';
+            break;
+        case 'webdesign':
+            topicName = 'Thiết Kế Web Cơ Bản';
+            jsonFile = './Data/web_design_questions.json';
+            break;
+        case 'biology':
+            topicName = 'Sinh Học Cơ Bản';
+            jsonFile = './Data/biology_questions.json';
+            break;
+        default:
+            topicName = 'Quiz';
+            jsonFile = './Data/questions.json';
+    }
     
     // Save quiz settings to localStorage
     const quizSettings = {
         topic: topic,
-        difficulty: difficulty,
+        topicName: topicName,
+        jsonFile: jsonFile,
         timestamp: new Date().toISOString()
     };
     
     localStorage.setItem('currentQuizSettings', JSON.stringify(quizSettings));
-    
-    // Determine which JSON file to load based on topic
-    let jsonFile;
-    switch(topic) {
-        case 'geography':
-            jsonFile = './Data/geography_questions.json';
-            break;
-        case 'webdesign':
-            jsonFile = './Data/web_design_questions.json';
-            break;
-        case 'biology':
-            jsonFile = './Data/biology_questions.json';
-            break;
-        default:
-            jsonFile = './Data/questions.json';
-    }
-    
-    // Save the selected JSON file path
     localStorage.setItem('selectedQuizFile', jsonFile);
     
     // Show loading animation
-    showLoadingAnimation();
+    showLoadingAnimation(topicName);
     
     // Redirect to quiz page after short delay
     setTimeout(() => {
@@ -125,132 +184,23 @@ function startQuiz(topic) {
     }, 1500);
 }
 
-function showLoadingAnimation() {
-    // Create loading overlay
-    const loadingOverlay = document.createElement('div');
-    loadingOverlay.className = 'loading-overlay';
-    loadingOverlay.innerHTML = `
-        <div class="loading-content">
-            <div class="loading-spinner"></div>
-            <h3>Loading Quiz...</h3>
-            <p>Preparing your ${getTopicName()} questions</p>
-            <div class="loading-progress">
-                <div class="progress-bar"></div>
-            </div>
-        </div>
-    `;
+function showLoadingAnimation(topicName) {
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    const loadingTopic = document.getElementById('loadingTopic');
     
-    // Add styles
-    const style = document.createElement('style');
-    style.textContent = `
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        .loading-content {
-            text-align: center;
-            color: white;
-            max-width: 400px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: #667eea;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        .loading-content h3 {
-            font-size: 1.8em;
-            margin-bottom: 10px;
-            color: white;
-        }
-        
-        .loading-content p {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 20px;
-        }
-        
-        .loading-progress {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 20px;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            animation: progress 1.5s ease-in-out forwards;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        @keyframes progress {
-            to { width: 100%; }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-    `;
-    
-    document.head.appendChild(style);
-    document.body.appendChild(loadingOverlay);
-}
-
-function getTopicName() {
-    const selected = localStorage.getItem('currentQuizSettings');
-    if (selected) {
-        const settings = JSON.parse(selected);
-        switch(settings.topic) {
-            case 'geography': return 'Geography';
-            case 'webdesign': return 'Web Design';
-            case 'biology': return 'Biology';
-            default: return 'General';
-        }
+    if (loadingOverlay && loadingTopic) {
+        loadingTopic.textContent = `Đang tải: ${topicName}`;
+        loadingOverlay.classList.add('active');
     }
-    return 'General';
 }
 
-// Add logout functionality
-function logout() {
-    localStorage.removeItem('loggedIn');
-    localStorage.removeItem('currentUser');
-    window.location.href = 'login.html';
+// Handle logout
+function logoutUser(e) {
+    e.preventDefault();
+    
+    if (confirm('Bạn có chắc chắn muốn đăng xuất?')) {
+        localStorage.removeItem('loggedIn');
+        localStorage.removeItem('currentUser');
+        window.location.href = 'login.html';
+    }
 }
-
-// Add event listener for logout if needed
-document.addEventListener('DOMContentLoaded', function() {
-    const logoutLinks = document.querySelectorAll('a[href="login.html"]');
-    logoutLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            logout();
-        });
-    });
-});
