@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tạo Câu Hỏi - QUIZZKIT</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="Styles/layout.css">
+  <link rel="stylesheet" href="Styles/taocauhoi.css">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    if (!localStorage.getItem("loggedIn")) {
+        window.location.href = "login.html";
+    }
+  </script>
+  <script src="Scripts/auth.js"></script>
+</head>
+
+<body>
+
+  <!-- OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- SIDEBAR -->
+     <aside class="layout-sidebar" id="sidebar">
+        <div class="layout-sidebar__title">MENU</div>
+        <a class="layout-sidebar__item" href="index.html">Trang chủ</a>
+        <a class="layout-sidebar__item active" href="modelform.html">Câu hỏi</a>
+        <a class="layout-sidebar__item" href="create.html">Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="history.html">Lịch sử</a>
+        <a class="layout-sidebar__item" href="profile.html">Hồ sơ</a>
+        <a class="layout-sidebar__item" href="settings.html">Cài đặt</a>
+    </aside>
+
+
+  <!-- MAIN WRAPPER -->
+  <div class="layout-main" id="mainContent">
+
+    <!-- TOPBAR -->
+    <header class="layout-topbar">
+
+      <div class="layout-topbar__left">
+        <div class="hamburger-menu" id="hamburgerMenu">
+          <span></span><span></span><span></span>
+        </div>
+        <div class="layout-topbar__logo">QUIZZKIT</div>
+      </div>
+
+      <div class="layout-topbar__search">
+        <input type="text" placeholder="Tìm kiếm khóa học, quiz...">
+      </div>
+
+      <div class="layout-topbar__avatar">
+        <img src="Images/A2.jpg" id="avatarBtn">
+        <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
+          <a href="login.html">Đăng nhập</a>
+          <a href="login.html" onclick="logoutUser(event)">Đăng xuất</a>
+        </div>
+      </div>
+
+    </header>
+
+    <!-- NAVBAR -->
+    <nav class="layout-navbar">
+      <a class="layout-navbar__item active" href="">Trang chủ</a>
+      <a class="layout-navbar__item" href="">Câu hỏi</a>
+      <a class="layout-navbar__item" href="trangtaocauhoi.html">Tạo câu hỏi</a>
+      <a class="layout-navbar__item" href="">Bảng xếp hạng</a>
+      <a class="layout-navbar__item" href="">Tài khoản</a>
+    </nav>
+
+    <!-- CONTENT -->
+    <section class="layout-content">
+
+
+      <!-- ========== STEP 1 ========== -->
+      <div id="step1" class="step-container">
+
+        <div class="page-header">
+          <h1>🎯 Thiết Lập Bộ Đề</h1>
+          <p>Điền thông tin cơ bản trước khi tạo câu hỏi</p>
+        </div>
+
+        <div class="setup-section">
+
+          <div class="form-group">
+            <label>Tên Bộ Đề <span class="required">*</span></label>
+            <input type="text" id="quizTitle" placeholder="Ví dụ: Đề ôn tập cấu trúc dữ liệu">
+          </div>
+
+          <div class="form-group">
+            <label>Môn học <span class="required">*</span></label>
+            <select id="quizSubject">
+              <option value="math">Toán học</option>
+              <option value="physics">Vật lý</option>
+              <option value="chemistry">Hóa học</option>
+              <option value="biology">Sinh học</option>
+              <option value="english">Tiếng Anh</option>
+              <option value="literature">Văn học</option>
+              <option value="history">Lịch sử</option>
+              <option value="geography">Địa lý</option>
+              <option value="it">Tin học</option>
+              <option value="iq">IQ/Trí tuệ</option>
+              <option value="other">Khác</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Số lượng câu hỏi <span class="required">*</span></label>
+            <input type="number" id="quizQuestionCount" value="10" min="1" max="100">
+          </div>
+
+          <div class="form-group">
+            <label>Mô tả (tùy chọn)</label>
+            <textarea id="quizDescription"></textarea>
+          </div>
+
+          <!-- Upload ảnh -->
+          <div class="form-group">
+            <label>Ảnh minh họa (tùy chọn)</label>
+
+            <div class="image-preview" id="imagePreview">
+              <div id="imagePlaceholder" class="image-placeholder">
+                <span>📷</span>
+                <p>Nhấn để chọn ảnh</p>
+              </div>
+              <img id="previewImg" style="display:none;">
+              <button type="button" id="removeImageBtn" class="remove-image-btn" style="display:none;">×</button>
+            </div>
+
+            <input type="file" id="quizImage" accept="image/*" style="display:none;">
+          </div>
+
+          <button class="btn btn-primary btn-large" id="startCreatingBtn">Bắt đầu →</button>
+
+        </div>
+           <div class="back-box">
+    
+</div>
+<a href="create.html" class="back-btn">← Quay lại</a> 
+      </div>
+
+
+      <!-- ========== STEP 2 ========== -->
+      <div id="step2" class="step-container" style="display:none;">
+
+        <div class="quiz-info-header">
+          <div class="quiz-info-left">
+            <h2 id="displayQuizTitle"></h2>
+            <p id="displayQuizSubject"></p>
+          </div>
+
+          <div class="quiz-info-right">
+            <div class="progress-info">
+              <span>Tiến độ: <strong id="progressText">0/10</strong></span>
+              <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+            </div>
+            <button class="btn btn-secondary btn-small" id="backToStep1Btn">← Quay lại</button>
+          </div>
+        </div>
+
+        <!-- FORM TẠO CÂU HỎI -->
+        <div class="create-section">
+          <h3 id="formTitle">➕ Thêm Câu Hỏi Mới</h3>
+
+          <div class="form-group">
+            <label>Câu hỏi <span class="required">*</span></label>
+            <textarea id="questionInput" rows="3"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Đáp án (chọn đáp án đúng)</label>
+
+            <div class="answers-grid">
+
+              <div class="answer-item">
+                <input type="radio" name="correctAnswer" value="0">
+                <span class="answer-label">A.</span>
+                <input type="text" id="answer0" placeholder="Nhập đáp án A">
+              </div>
+
+              <div class="answer-item">
+                <input type="radio" name="correctAnswer" value="1">
+                <span class="answer-label">B.</span>
+                <input type="text" id="answer1" placeholder="Nhập đáp án B">
+              </div>
+
+              <div class="answer-item">
+                <input type="radio" name="correctAnswer" value="2">
+                <span class="answer-label">C.</span>
+                <input type="text" id="answer2" placeholder="Nhập đáp án C">
+              </div>
+
+              <div class="answer-item">
+                <input type="radio" name="correctAnswer" value="3">
+                <span class="answer-label">D.</span>
+                <input type="text" id="answer3" placeholder="Nhập đáp án D">
+              </div>
+
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button class="btn btn-primary" id="addQuestionBtn">➕ Thêm câu hỏi</button>
+            <button class="btn btn-warning" id="cancelEditBtn" style="display:none;">Hủy</button>
+          </div>
+
+        </div>
+
+        <!-- DANH SÁCH CÂU HỎI -->
+        <div class="questions-list">
+          <div class="questions-list-header">
+            <h2>📝 Danh sách câu hỏi <span id="questionCount" class="question-count">0</span></h2>
+
+            <div class="action-buttons">
+              <button class="btn btn-success" id="saveBtn">💾 Lưu bộ đề</button>
+              <button class="btn btn-danger" id="clearBtn">🗑️ Xóa tất cả</button>
+            </div>
+
+          </div>
+
+          <div id="questionsList">
+            <div class="empty-state">
+              <div class="empty-state-icon">📝</div>
+              <p>Chưa có câu hỏi nào.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+      
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="layout-footer">
+      <div class="layout-footer-container">
+        <div class="layout-footer-section"><h3>Giới thiệu</h3><p>QUIZZKIT – Nền tảng quiz vui.</p></div>
+        <div class="layout-footer-section"><h3>Liên hệ</h3><p>Email: abc@gmail.com</p></div>
+        <div class="layout-footer-section"><h3>Liên kết</h3><p><a href="khode.html">Kho đề</a></p></div>
+        <div class="layout-footer-section"><h3>Cộng đồng</h3><p>Facebook · Instagram</p></div>
+      </div>
+      <div class="layout-footer-bottom"><p>© 2025 QUIZZKIT</p></div>
+    </footer>
+
+  </div>
+
+  <!-- JS -->
+  <script src="Scripts/layout.js"></script>
+  <script src="Scripts/taocauhoi.js"></script>
+
+</body>
+</html>

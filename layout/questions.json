@@ -1,0 +1,32 @@
+{
+  "name": "quizzkit-sync",
+  "displayName": "QuizzKit Sync",
+  "description": "Tự động lưu câu hỏi từ web vào file questions.json",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:quizzkit.startServer",
+    "onCommand:quizzkit.stopServer"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "quizzkit.startServer",
+        "title": "QuizzKit: Bật Server (Port 3000)"
+      },
+      {
+        "command": "quizzkit.stopServer",
+        "title": "QuizzKit: Tắt Server"
+      }
+    ]
+  },
+  "scripts": {
+    "test": "echo \"No tests\""
+  }
+}
