@@ -502,3 +502,15 @@ body.show-result .so-choice {
     font-size: 16px;
   }
 }
+
+/* Nút chuyển về trang chủ */
+.back-home{
+  position: fixed;
+  top: 200px;
+  left: 150px;
+}
+
+.fa-house{
+  font-size: 30px;
+  Color: #ff7a00;
+}
