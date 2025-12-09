@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Quiz Topic</title>
+    <link rel="stylesheet" href="./Styles/quiz-selector.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-content">
+                <h1><i class="fas fa-brain"></i> Quiz Challenge</h1>
+                <p class="subtitle">Choose your topic and test your knowledge!</p>
+            </div>
+            <div class="user-info">
+                <div class="avatar" id="user-avatar">U</div>
+                <span id="username-display">Guest</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="quiz-selection">
+            <div class="selection-header">
+                <h2><i class="fas fa-book-open"></i> Available Quiz Topics</h2>
+                <p class="selection-subtitle">Select a topic to begin your challenge</p>
+            </div>
+
+            <!-- Quiz Cards -->
+            <div class="quiz-cards-container">
+                <!-- Geography Card -->
+                <div class="quiz-card geography-card" onclick="startQuiz('geography')">
+                    <div class="card-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Geography</h3>
+                        <div class="card-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-question-circle"></i>
+                                40 Questions
+                            </span>
+                            <span class="stat-item">
+                                <i class="fas fa-clock"></i>
+                                20 Minutes
+                            </span>
+                        </div>
+                        <p class="card-description">
+                            Test your knowledge about countries, capitals, rivers, mountains, 
+                            and geographical features around the world.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">World</span>
+                            <span class="tag">Countries</span>
+                            <span class="tag">Nature</span>
+                        </div>
+                        <button class="start-btn">
+                            <i class="fas fa-play"></i> Start Quiz
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Web Design Card -->
+                <div class="quiz-card webdesign-card" onclick="startQuiz('webdesign')">
+                    <div class="card-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Web Design Basics</h3>
+                        <div class="card-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-question-circle"></i>
+                                20 Questions
+                            </span>
+                            <span class="stat-item">
+                                <i class="fas fa-clock"></i>
+                                10 Minutes
+                            </span>
+                        </div>
+                        <p class="card-description">
+                            Challenge yourself with HTML, CSS, JavaScript and modern 
+                            web development concepts.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">HTML/CSS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Development</span>
+                        </div>
+                        <button class="start-btn">
+                            <i class="fas fa-play"></i> Start Quiz
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Biology Card -->
+                <div class="quiz-card biology-card" onclick="startQuiz('biology')">
+                    <div class="card-icon">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title">Biology</h3>
+                        <div class="card-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-question-circle"></i>
+                                30 Questions
+                            </span>
+                            <span class="stat-item">
+                                <i class="fas fa-clock"></i>
+                                15 Minutes
+                            </span>
+                        </div>
+                        <p class="card-description">
+                            Explore the world of living organisms, cells, genetics, 
+                            and biological processes.
+                        </p>
+                        <div class="card-tags">
+                            <span class="tag">Science</span>
+                            <span class="tag">Cells</span>
+                            <span class="tag">Animals</span>
+                        </div>
+                        <button class="start-btn">
+                            <i class="fas fa-play"></i> Start Quiz
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Difficulty Selection -->
+            <div class="difficulty-section">
+                <h3><i class="fas fa-chart-line"></i> Select Difficulty</h3>
+                <div class="difficulty-options">
+                    <label class="difficulty-option">
+                        <input type="radio" name="difficulty" value="easy" checked>
+                        <span class="difficulty-label easy">
+                            <i class="fas fa-leaf"></i> Easy
+                        </span>
+                    </label>
+                    <label class="difficulty-option">
+                        <input type="radio" name="difficulty" value="medium">
+                        <span class="difficulty-label medium">
+                            <i class="fas fa-balance-scale"></i> Medium
+                        </span>
+                    </label>
+                    <label class="difficulty-option">
+                        <input type="radio" name="difficulty" value="hard">
+                        <span class="difficulty-label hard">
+                            <i class="fas fa-fire"></i> Hard
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="stats-section">
+                <h3><i class="fas fa-chart-bar"></i> Your Quiz Statistics</h3>
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>Highest Score</h4>
+                            <p class="stat-value" id="high-score">0%</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>Quizzes Taken</h4>
+                            <p class="stat-value" id="quizzes-taken">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h4>Average Score</h4>
+                            <p class="stat-value" id="average-score">0%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="footer-content">
+                <p>© 2024 Quiz Game. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                    <a href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="./Scripts/quiz-selector.js"></script>
+</body>
+</html>
