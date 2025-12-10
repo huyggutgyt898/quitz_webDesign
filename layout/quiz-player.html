@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Làm bài trắc nghiệm</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f0f2f5; margin:0; padding:20px; }
+    .container { max-width: 900px; margin: 20px auto; background: white; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; }
+    .header { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 30px; text-align: center; }
+    .header h1 { margin: 0; font-size: 28px; }
+    .info { display: flex; justify-content: space-between; padding: 20px; background: #f8f9fa; font-size: 18px; }
+    .question { padding: 25px; border-bottom: 1px solid #eee; }
+    .question h3 { margin: 0 0 20px 0; color: 1.2em; }
+    .answers label { display: block; padding: 15px; margin: 10px 0; background: #f8f9fa; border: 2px solid #ddd; border-radius: 10px; cursor: pointer; transition: 0.3s; }
+    .answers label:hover { border-color: #667eea; background: #e0e7ff; }
+    .answers input:checked + span { font-weight: bold; color: #667eea; }
+    .footer { padding: 20px; text-align: center; background: #f8f9fa; }
+    .btn { padding: 15px 40px; font-size: 18px; background: #667eea; color: white; border: none; border-radius: 12px; cursor: pointer; }
+    .timer { font-size: 20px; font-weight: bold; color: #d32f2f; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 id="title">Đang tải...</h1>
+    </div>
+    <div class="info">
+      <div>Số câu: <strong id="total">0</strong></div>
+      <div class="timer">Thời gian: <span id="timer">00:00</span></div>
+    </div>
+    <div id="questions"></div>
+    <div class="footer">
+      <button class="btn" onclick="submitQuiz()">Nộp bài</button>
+    </div>
+  </div>
+
+  <script>
+    let startTime = Date.now();
+    const quiz = JSON.parse(localStorage.getItem('currentQuiz') || '{}');
+    if (!quiz.questions) {
+      document.body.innerHTML = '<h2 style="text-align:center;color:red;padding:50px;">Không tìm thấy đề thi!</h2>';
+    } else {
+      document.getElementById('title').textContent = quiz.title;
+      document.getElementById('total').textContent = quiz.questions.length;
+
+      const letters = ['A', 'B', 'C', 'D'];
+      const container = document.getElementById('questions');
+
+      quiz.questions.forEach((q, i) => {
+        const div = document.createElement('div');
+        div.className = 'question';
+        div.innerHTML = `<h3>${i+1}. ${q.question || ''}</h3><div class="answers">`;
+        (q.answers || []).forEach((ans, j) => {
+          div.innerHTML += `
+            <label>
+              <input type="radio" name="q${i}" value="${j}" required>
+              <span>${letters[j]}. ${ans}</span>
+            </label>
+          `;
+        });
+        div.innerHTML += `</div>`;
+        container.appendChild(div);
+      });
+
+      // Đếm thời gian
+      setInterval(() => {
+        const elapsed = Math.floor((Date.now() - startTime) / 1000);
+        const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+        const s = String(elapsed % 60).padStart(2, '0');
+        document.getElementById('timer').textContent = `${m}:${s}`;
+      }, 1000);
+    }
+
+    function submitQuiz() {
+      if (!confirm('Bạn chắc chắn muốn nộp bài?')) return;
+
+      let correct = 0;
+      quiz.questions.forEach((q, i) => {
+        const selected = document.querySelector(`input[name="q${i}"]:checked`);
+        const ans = q.correct ?? q.correctAnswer;
+        if (selected && parseInt(selected.value) === ans) correct++;
+      });
+
+      const percent = Math.round((correct / quiz.questions.length) * 100);
+      const timeSpent = Math.floor((Date.now() - startTime) / 1000);
+      const mm = String(Math.floor(timeSpent / 60)).padStart(2, '0');
+      const ss = String(timeSpent % 60).padStart(2, '0');
+
+      alert(`Kết quả: ${correct}/${quiz.questions.length} câu đúng (${percent}%)\nThời gian: ${mm}:${ss}`);
+
+      localStorage.removeItem('currentQuiz');
+      setTimeout(() => window.location.href = 'index.html', 1000);
+    }
+  </script>
+</body>
+</html>

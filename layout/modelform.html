@@ -4,9 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QUIZZKIT - Câu Đố</title>
-    <link rel="stylesheet" href="Styles/layout.css" />
-    <link rel="stylesheet" href="Styles/modelform.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/home.css" />
+    <link rel="stylesheet" href="Styles/modelform.css" />
+    <link rel="stylesheet" href="Styles/leaderboard.css" />
+     <script src="Scripts/auth.js"></script>
 </head>
 <body class="bg-gray-50">
     <!-- OVERLAY -->
@@ -14,33 +18,43 @@
 
     <!-- SIDEBAR -->
     <aside class="layout-sidebar" id="sidebar">
-        <div class="layout-sidebar__title">MENU</div>
-        <a class="layout-sidebar__item" href="index.html">Trang chủ</a>
-        <a class="layout-sidebar__item active" href="modelform.html">Câu hỏi</a>
-        <a class="layout-sidebar__item" href="create.html">Tạo câu hỏi</a>
-        <a class="layout-sidebar__item" href="history.html">Lịch sử</a>
-        <a class="layout-sidebar__item" href="profile.html">Hồ sơ</a>
-        <a class="layout-sidebar__item" href="settings.html">Cài đặt</a>
+        <div class="layout-sidebar__user">
+            <img src="Images/Avatar.jpg" alt="Avatar" class="layout-sidebar__user-avatar">
+            <div class="layout-sidebar__user-info">
+                <div class="layout-sidebar__username">Guest User</div>
+                <div class="layout-sidebar__usertag">Thành viên</div>
+            </div>
+        </div>
+        <a class="layout-sidebar__item" href="index.html"><i class="fas fa-home mr-2"></i> Trang chủ</a>
+        <a class="layout-sidebar__item" href="createQuestions.html"><i class="fas fa-question-circle mr-2"></i> Tạo câu hỏi</a>
+        <!-- THÊM LINK XEM CÂU HỎI VÀO SIDEBAR -->
+        <a class="layout-sidebar__item" href="./showQuestion.html"><i class="fas fa-eye mr-2"></i> Xem câu hỏi</a>
+        <!-- THÊM LINK KHO ĐỀ VÀO SIDEBAR (đã có sẵn nhưng để rõ hơn) -->
+        <a class="layout-sidebar__item" href="questionLibrary.html"><i class="fas fa-folder-open mr-2"></i> Kho đề</a>
+        <a class="layout-sidebar__item" href="profile.html"><i class="fas fa-user mr-2"></i> Tài khoản</a>
+        <a class="layout-sidebar__item" href="settings.html"><i class="fas fa-cog mr-2"></i> Cài đặt</a>
     </aside>
 
-    <!-- MAIN WRAPPER -->
-    <div class="layout-main" id="mainContent">
+    <!-- MAIN -->
+    <div class="layout-main">
         <!-- TOPBAR -->
         <header class="layout-topbar">
             <div class="layout-topbar__left">
                 <div class="hamburger-menu" id="hamburgerMenu">
-                    <span></span><span></span><span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
-                <div class="layout-topbar__logo" onclick="window.location.href='index.html'">QUIZZKIT</div>
+                <div class="layout-topbar__logo">QUIZZKIT</div>
             </div>
             <div class="layout-topbar__search">
-                <input type="text" placeholder="Tìm kiếm khóa học, quiz..." id="searchInput" />
+                <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
             </div>
             <div class="layout-topbar__avatar">
                 <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
                 <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
-                    <a href="login.html">Đăng nhập</a>
-                    <a href="logout.html">Đăng xuất</a>
+                    <a href="settings.html">Cài đặt</a>
+                    <a href="login.html" onclick="logoutUser(event)">Đăng xuất</a>
                 </div>
             </div>
         </header>
@@ -48,27 +62,82 @@
         <!-- NAVBAR -->
         <nav class="layout-navbar">
             <a class="layout-navbar__item" href="index.html">Trang chủ</a>
-            <div class="layout-navbar__item active navbar-dropdown-wrapper">
-                <span>Môn học</span>
-                <span class="dropdown-arrow">▼</span>
-                <div class="navbar-dropdown" id="categoryDropdown">
-                    <a href="#" class="dropdown-item active" data-category="all">Tất cả</a>
-                    <a href="#" class="dropdown-item" data-category="math">Toán học</a>
-                    <a href="#" class="dropdown-item" data-category="physics">Vật lý</a>
-                    <a href="#" class="dropdown-item" data-category="chemistry">Hóa học</a>
-                    <a href="#" class="dropdown-item" data-category="biology">Sinh học</a>
-                    <a href="#" class="dropdown-item" data-category="literature">Ngữ văn</a>
-                    <a href="#" class="dropdown-item" data-category="english">Tiếng Anh</a>
-                    <a href="#" class="dropdown-item" data-category="history">Lịch sử</a>
-                    <a href="#" class="dropdown-item" data-category="geography">Địa lý</a>
-                    <a href="#" class="dropdown-item" data-category="computer">Tin học</a>
-                    <a href="#" class="dropdown-item" data-category="civics">GDCD</a>
-                </div>
-            </div>
-            <a class="layout-navbar__item" href="create.html">Tạo câu hỏi</a>
-            <a class="layout-navbar__item" href="leaderboard.html">Bảng xếp hạng</a>
-            <a class="layout-navbar__item" href="account.html">Tài khoản</a>
+            <!-- THÊM LINK KHO ĐỀ VÀO NAVBAR -->
+            <a class="layout-navbar__item" href="questionLibrary.html">Kho đề</a>
+            <div class="dropdown">
+                <a class="layout-navbar__item  active" href="modelform.html">Môn học <i class="fas fa-chevron-down text-xs"></i></a>
+        <div class="dropdown-content">
+            <a href="modelform.html" class="dropdown-item">Tất cả</a>
+            <a href="modelform.html?category=math" class="dropdown-item">Toán học</a>
+            <a href="modelform.html?category=physics" class="dropdown-item">Vật lý</a>
+            <a href="modelform.html?category=chemistry" class="dropdown-item">Hóa học</a>
+            <a href="modelform.html?category=biology" class="dropdown-item">Sinh học</a>
+            <a href="modelform.html?category=literature" class="dropdown-item">Ngữ văn</a>
+            <a href="modelform.html?category=english" class="dropdown-item">Tiếng Anh</a>
+            <a href="modelform.html?category=history" class="dropdown-item">Lịch sử</a>
+            <a href="modelform.html?category=geography" class="dropdown-item">Địa lý</a>
+            <a href="modelform.html?category=computer" class="dropdown-item">Tin học</a>
+            <a href="modelform.html?category=civics" class="dropdown-item">GDCD</a>
+        </div>
+    </div>
+            <a class="layout-navbar__item" href="createQuestions.html">Tạo câu hỏi</a>
+            <!-- THÊM LINK XEM CÂU HỎI VÀO NAVBAR -->
+            <div class="relative group">
+    <a class="layout-navbar__item flex items-center gap-1">
+        Bảng xếp hạng <i class="fas fa-chevron-down text-xs ml-1"></i>
+    </a>
+
+    <div class="leaderboard-dropdown" x-data>
+        <a href="leaderboard.html?tab=players"
+           class="block"
+           :class="{ 'active bg-yellow-50 ring-2 ring-yellow-400 rounded-lg': currentUrlTab() === 'players' }">
+            <button class="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+                <span class="icon"><i class="fas fa-trophy text-yellow-600"></i></span>
+                <div><div class="title">Top Người Chơi</div><div class="desc">Điểm cao nhất tuần</div></div>
+            </button>
+        </a>
+
+        <a href="leaderboard.html?tab=questions"
+           class="block"
+           :class="{ 'active bg-orange-50 ring-2 ring-orange-400 rounded-lg': currentUrlTab() === 'questions' }">
+            <button class="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+                <span class="icon"><i class="fas fa-fire text-orange-600"></i></span>
+                <div><div class="title">Bài Giảng Hot Nhất</div><div class="desc">Lượt chơi nhiều nhất</div></div>
+            </button>
+        </a>
+
+        <a href="leaderboard.html?tab=followers"
+           class="block"
+           :class="{ 'active bg-pink-50 ring-2 ring-pink-400 rounded-lg': currentUrlTab() === 'followers' }">
+            <button class="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+                <span class="icon"><i class="fas fa-heart text-pink-600"></i></span>
+                <div><div class="title">Được Follow Nhiều Nhất</div><div class="desc">Idol cộng đồng</div></div>
+            </button>
+        </a>
+
+        <a href="leaderboard.html?tab=creators"
+           class="block"
+           :class="{ 'active bg-purple-50 ring-2 ring-purple-400 rounded-lg': currentUrlTab() === 'creators' }">
+            <button class="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+                <span class="icon"><i class="fas fa-pen-nib text-purple-600"></i></span>
+                <div><div class="title">Tác Giả Nổi Bật</div><div class="desc">Tạo quiz chất lượng</div></div>
+            </button>
+        </a>
+    </div>
+</div>
+
+<!-- Hàm nhỏ này để dropdown ở các trang khác vẫn highlight đúng -->
+<script>
+function currentUrlTab() {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    const valid = ['players', 'questions', 'followers', 'creators'];
+    return tab && valid.includes(tab) ? tab : 'players';
+}
+</script>
+            <a class="layout-navbar__item" href="profile.html">Tài khoản</a>
         </nav>
+
 
         <!-- CONTENT -->
         <section class="layout-content">
@@ -139,8 +208,12 @@
             </div>
         </footer>
     </div>
-
+<script src="Scripts/modelform.js"></script>
+    <script src="Scripts/home.js"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="Scripts/leaderboard.js"></script>
     <script src="Scripts/layout.js"></script>
-    <script src="Scripts/modelform.js"></script>
+    <script src="Scripts/profile.js"></script>
+    <script src="Scripts/auth.js"></script>
 </body>
 </html>

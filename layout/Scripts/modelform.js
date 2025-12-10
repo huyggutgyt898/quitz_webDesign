@@ -10,23 +10,83 @@ const allSections = document.getElementById('allSections');
 const singleSection = document.getElementById('singleSection');
 const filteredQuizGrid = document.getElementById('filteredQuizGrid');
 
-// Navbar dropdown toggle
 const navbarDropdownWrapper = document.querySelector('.navbar-dropdown-wrapper');
 const categoryDropdown = document.getElementById('categoryDropdown');
 
 let currentFilter = 'all';
 let currentCategory = 'all';
-let searchTerm = '';
 let allQuizData = [];
 
-// Toggle Navbar Category Dropdown
+// ==================== HÀM ĐỌC CATEGORY TỪ URL ====================
+function getCurrentCategoryFromURL() {
+    const params = new URLSearchParams(location.search);
+    const cat = params.get('category');
+    const valid = ['all','math','physics','chemistry','biology','literature','english','history','geography','computer','civics'];
+    return cat && valid.includes(cat) ? cat : 'all';
+}
+
+// Cập nhật giao diện: active + text navbar
+function updateCategoryDisplay(category) {
+    // Active cho các item trong dropdown
+    document.querySelectorAll('#categoryDropdown .dropdown-item').forEach(item => {
+        item.classList.toggle('active', item.getAttribute('data-category') === category);
+    });
+
+    // Đổi text trên navbar (Môn học → Toán học, Tiếng Anh...)
+    const textEl = navbarDropdownWrapper?.querySelector('a, span');
+    if (textEl) {
+        const names = {
+            all: 'Tất cả', math: 'Toán học', physics: 'Vật lý', chemistry: 'Hóa học',
+            biology: 'Sinh học', literature: 'Ngữ văn', english: 'Tiếng Anh',
+            history: 'Lịch sử', geography: 'Địa lý', computer: 'Tin học', civics: 'GDCD'
+        };
+        textEl.textContent = names[category] || 'Môn học';
+    }
+}
+
+// Khi load trang: đọc URL → chọn đúng môn
+document.addEventListener('DOMContentLoaded', () => {
+    currentCategory = getCurrentCategoryFromURL();
+    updateCategoryDisplay(currentCategory);
+    applyFilter(); // áp dụng ngay nếu có ?category=
+});
+
+// Khi người dùng bấm chọn môn trong dropdown
+document.querySelectorAll('#categoryDropdown .dropdown-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+        e.preventDefault();
+        const selectedCat = this.getAttribute('data-category');
+
+        if (selectedCat === currentCategory) return;
+
+        currentCategory = selectedCat;
+
+        // Cập nhật URL (đẹp + hỗ trợ back/forward)
+        const url = new URL(location);
+        url.searchParams.set('category', selectedCat);
+        history.pushState({category: selectedCat}, '', url);
+
+        updateCategoryDisplay(selectedCat);
+        applyFilter();
+    });
+});
+
+// Back/Forward browser
+window.addEventListener('popstate', () => {
+    const cat = getCurrentCategoryFromURL();
+    if (cat !== currentCategory) {
+        currentCategory = cat;
+        updateCategoryDisplay(cat);
+        applyFilter();
+    }
+});
+
+// Toggle Navbar Dropdown
 if (navbarDropdownWrapper && categoryDropdown) {
     navbarDropdownWrapper.addEventListener('click', (e) => {
         e.stopPropagation();
         categoryDropdown.classList.toggle('show');
     });
-    
-    // Close dropdown when clicking outside
     document.addEventListener('click', (e) => {
         if (!navbarDropdownWrapper.contains(e.target)) {
             categoryDropdown.classList.remove('show');
@@ -44,136 +104,88 @@ if (filterDropdownBtn) {
 }
 
 document.addEventListener('click', (e) => {
-    if (filterDropdown && filterDropdownBtn) {
-        if (!filterDropdown.contains(e.target) && !filterDropdownBtn.contains(e.target)) {
-            filterDropdown.classList.add('opacity-0');
-            filterDropdown.classList.add('invisible');
-        }
+    if (filterDropdown && !filterDropdown.contains(e.target) && !filterDropdownBtn?.contains(e.target)) {
+        filterDropdown.classList.add('opacity-0', 'invisible');
     }
 });
 
-// Filter Options
+// Filter Options Click
 filterOptions.forEach(option => {
     option.addEventListener('click', function() {
-        filterOptions.forEach(opt => {
-            opt.classList.remove('active', 'bg-orange-50', 'border-orange-500', 'text-orange-600');
-        });
+        filterOptions.forEach(opt => opt.classList.remove('active', 'bg-orange-50', 'border-orange-500', 'text-orange-600'));
         this.classList.add('active', 'bg-orange-50', 'border-orange-500', 'text-orange-600');
         
-        currentFilter = this.getAttribute('data-filter');
-        const filterText = this.textContent;
-        if (filterDropdownBtn) {
-            filterDropdownBtn.querySelector('.filter-text').textContent = filterText;
-        }
-        
+        currentFilter = this.dataset.filter;
+        filterDropdownBtn.querySelector('.filter-text').textContent = this.textContent.trim();
         filterDropdown.classList.add('opacity-0', 'invisible');
         applyFilter();
     });
 });
 
-// Category Dropdown
-categoryDropdownItems.forEach(item => {
-    item.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        categoryDropdownItems.forEach(i => i.classList.remove('active'));
-        this.classList.add('active');
-        
-        currentCategory = this.getAttribute('data-category');
-        
-        // Close dropdown
-        if (categoryDropdown) {
-            categoryDropdown.classList.remove('show');
-        }
-        
-        applyFilter();
-    });
-});
-
+// Apply Filter + Search
 function applyFilter() {
-    searchTerm = '';
-    if (quizSearchInput) quizSearchInput.value = '';
-    
-    // Thêm logic lọc theo currentCategory
-    if (currentCategory !== 'all') {
-        showFilteredSection();  // Hiển thị single section với quiz lọc theo category
-    } else if (currentFilter === 'all') {
-        showAllSections();
+    const searchValue = quizSearchInput?.value.trim().toLowerCase() || '';
+
+    if (currentCategory !== 'all' || currentFilter !== 'all' || searchValue) {
+        showFilteredSection(searchValue);
     } else {
-        showFilteredSection();
+        showAllSections();
     }
 }
 
 function showAllSections() {
-    if (allSections) allSections.classList.remove('hidden');
-    if (singleSection) singleSection.classList.add('hidden');
+    allSections?.classList.remove('hidden');
+    singleSection?.classList.add('hidden');
 }
 
-function showFilteredSection() {
-    if (allSections) allSections.classList.add('hidden');
-    if (singleSection) singleSection.classList.remove('hidden');
-    
-    if (filteredQuizGrid) {
-        filteredQuizGrid.innerHTML = '';
-        
-        // SỬA: Lọc quiz theo currentCategory nếu != 'all', kết hợp với currentFilter
-        let matchingQuizzes = allQuizData;
-        if (currentCategory !== 'all') {
-            matchingQuizzes = matchingQuizzes.filter(q => q.category === currentCategory);
-        }
-        if (currentFilter !== 'all') {
-            matchingQuizzes = matchingQuizzes.filter(q => q.section === currentFilter);
-        }
-        
-        if (matchingQuizzes.length === 0) {
-            showEmptyState(filteredQuizGrid);
-            return;
-        }
-        
-        matchingQuizzes.forEach(quiz => {
-            const quizElement = createQuizElement(quiz);
-            filteredQuizGrid.appendChild(quizElement);
-        });
+function showFilteredSection(searchTerm = '') {
+    allSections?.classList.add('hidden');
+    singleSection?.classList.remove('hidden');
+    filteredQuizGrid.innerHTML = '';
+
+    let result = allQuizData;
+
+    if (currentCategory !== 'all') {
+        result = result.filter(q => q.category === currentCategory);
     }
-}
-
-// Search
-function handleSearch() {
-    if (!quizSearchInput) return;
-    searchTerm = quizSearchInput.value.toLowerCase().trim();
-    if (allSections) allSections.classList.add('hidden');
-    if (singleSection) singleSection.classList.remove('hidden');
-    
-    if (filteredQuizGrid) {
-        filteredQuizGrid.innerHTML = '';
-        // SỬA: Lọc theo searchTerm, và thêm lọc category/filter nếu có
-        let matchingQuizzes = allQuizData.filter(quiz => 
-            quiz.name.toLowerCase().includes(searchTerm)
-        );
-        if (currentCategory !== 'all') {
-            matchingQuizzes = matchingQuizzes.filter(q => q.category === currentCategory);
-        }
-        if (currentFilter !== 'all') {
-            matchingQuizzes = matchingQuizzes.filter(q => q.section === currentFilter);
-        }
-        
-        if (matchingQuizzes.length === 0) {
-            showEmptyState(filteredQuizGrid);
-            return;
-        }
-        
-        matchingQuizzes.forEach(quiz => {
-            const quizElement = createQuizElement(quiz);
-            filteredQuizGrid.appendChild(quizElement);
-        });
+    if (currentFilter !== 'all') {
+        result = result.filter(q => q.section === currentFilter);
     }
+    if (searchTerm) {
+        result = result.filter(q => q.name.toLowerCase().includes(searchTerm));
+    }
+
+    if (result.length === 0) {
+        showEmptyState(filteredQuizGrid);
+        return;
+    }
+
+    result.forEach(quiz => filteredQuizGrid.appendChild(createQuizElement(quiz)));
 }
 
-if (searchBtn) {
-    searchBtn.addEventListener('click', handleSearch);
+// Search button + Enter key
+if (searchBtn) searchBtn.addEventListener('click', () => applyFilter());
+if (quizSearchInput) {
+    quizSearchInput.addEventListener('keypress', e => {
+        if (e.key === 'Enter') applyFilter();
+    });
 }
 
+// Load data + khởi động
+window.addEventListener('load', () => {
+    fetch('data/allQuizzes.json')
+        .then(r => r.json())
+        .then(data => {
+            allQuizData = data;
+            renderSections(data);
+
+            // Chạy lại sau khi load xong để áp dụng URL
+            currentCategory = getCurrentCategoryFromURL();
+            updateCategoryDisplay(currentCategory);
+            applyFilter();
+        })
+        .catch(err => console.error('Lỗi load quiz:', err));
+});
 // Create Quiz Element
 function createQuizElement(quiz) {
     const quizDiv = document.createElement('div');

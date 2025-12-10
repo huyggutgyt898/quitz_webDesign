@@ -85,3 +85,49 @@ html.dark .layout-content p.text-center.mb-12 {
     color: #f1f5f9 !important;   /* trắng sáng, cực dễ đọc */
     text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
+/* ================= CHỈ DÀNH CHO ĐIỆN THOẠI - FIX NHẸ, KHÔNG ĐỤNG VÀO GỐC ================= */
+@media only screen and (max-width: 768px) {
+
+    /* 1. Fix font < 16px → iOS tự zoom (lỗi phổ biến nhất) */
+    .leaderboard-dropdown button,
+    .leaderboard-dropdown .title,
+    .leaderboard-dropdown .desc {
+        font-size: 16px !important;   /* quan trọng nhất */
+    }
+
+    /* 2. Dropdown trên mobile: không dùng hover → đổi thành hiện khi click */
+    .leaderboard-dropdown {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 88vw !important;
+        max-width: 340px !important;
+        margin: 0 !important;
+        border-radius: 16px !important;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3) !important;
+        z-index: 9999 !important;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Khi có class .show (do JS thêm vào) → hiện dropdown */
+    .leaderboard-dropdown.show {
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* Nút dễ bấm hơn */
+    .leaderboard-dropdown button {
+        padding: 18px 20px !important;
+        min-height: 56px !important;
+    }
+}
+
+/* Điện thoại rất nhỏ */
+@media only screen and (max-width: 380px) {
+    .leaderboard-dropdown {
+        width: 92vw !important;
+    }
+}

@@ -6,7 +6,16 @@
     <title>QUIZZKIT - Trang chủ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="Styles/layout.css" />
     <link rel="stylesheet" href="Styles/home.css" />
+    <link rel="stylesheet" href="Styles/modelform.css" />
+    <link rel="stylesheet" href="Styles/leaderboard.css" />
+     <script src="Scripts/auth.js"></script>
+    <script>
+    if (!localStorage.getItem("loggedIn")) {
+        window.location.href = "login.html";
+    }
+    </script>
 </head>
 <body>
     <!-- OVERLAY -->
@@ -15,21 +24,20 @@
     <!-- SIDEBAR -->
     <aside class="layout-sidebar" id="sidebar">
         <div class="layout-sidebar__user">
-            <img src="https://i.pravatar.cc/150?img=12" alt="Avatar" class="layout-sidebar__user-avatar">
+            <img src="Images/Avatar.jpg" alt="Avatar" class="layout-sidebar__user-avatar">
             <div class="layout-sidebar__user-info">
                 <div class="layout-sidebar__username">Guest User</div>
                 <div class="layout-sidebar__usertag">Thành viên</div>
             </div>
         </div>
-        <a class="layout-sidebar__item" href="#"><i class="fas fa-home mr-2"></i> Trang chủ</a>
-        <a class="layout-sidebar__item" href="#"><i class="fas fa-question-circle mr-2"></i> Tạo câu hỏi</a>
+        <a class="layout-sidebar__item" href="index.html"><i class="fas fa-home mr-2"></i> Trang chủ</a>
+        <a class="layout-sidebar__item" href="createQuestions.html"><i class="fas fa-question-circle mr-2"></i> Tạo câu hỏi</a>
         <!-- THÊM LINK XEM CÂU HỎI VÀO SIDEBAR -->
         <a class="layout-sidebar__item" href="./showQuestion.html"><i class="fas fa-eye mr-2"></i> Xem câu hỏi</a>
-        <a class="layout-sidebar__item" href="#"><i class="fas fa-upload mr-2"></i> Tải đề thi</a>
         <!-- THÊM LINK KHO ĐỀ VÀO SIDEBAR (đã có sẵn nhưng để rõ hơn) -->
-        <a class="layout-sidebar__item" href="quiz-selector.html"><i class="fas fa-folder-open mr-2"></i> Kho đề</a>
-        <a class="layout-sidebar__item" href="#"><i class="fas fa-user mr-2"></i> Tài khoản</a>
-        <a class="layout-sidebar__item" href="#"><i class="fas fa-cog mr-2"></i> Cài đặt</a>
+        <a class="layout-sidebar__item" href="questionLibrary.html"><i class="fas fa-folder-open mr-2"></i> Kho đề</a>
+        <a class="layout-sidebar__item" href="profile.html"><i class="fas fa-user mr-2"></i> Tài khoản</a>
+        <a class="layout-sidebar__item" href="settings.html"><i class="fas fa-cog mr-2"></i> Cài đặt</a>
     </aside>
 
     <!-- MAIN -->
@@ -48,45 +56,91 @@
                 <input type="text" placeholder="Tìm kiếm khóa học, quiz..." />
             </div>
             <div class="layout-topbar__avatar">
-                <img src="https://i.pravatar.cc/150?img=12" alt="avatar" id="avatarBtn"/>
+                <img src="Images/Avatar.jpg" alt="avatar" id="avatarBtn"/>
                 <div class="layout-topbar__avatar-dropdown" id="avatarDropdown">
-                    <a href="#">Đăng nhập</a>
-                    <a href="#">Đăng xuất</a>
+                    <a href="settings.html">Cài đặt</a>
+                    <a href="login.html" onclick="logoutUser(event)">Đăng xuất</a>
                 </div>
             </div>
         </header>
 
         <!-- NAVBAR -->
         <nav class="layout-navbar">
-            <a class="layout-navbar__item active" href="#">Trang chủ</a>
+            <a class="layout-navbar__item active" href="index.html">Trang chủ</a>
             <!-- THÊM LINK KHO ĐỀ VÀO NAVBAR -->
-            <a class="layout-navbar__item" href="quiz-selector.html">Kho đề</a>
+            <a class="layout-navbar__item" href="questionLibrary.html">Kho đề</a>
             <div class="dropdown">
-                <a class="layout-navbar__item" href="#">Môn học <i class="fas fa-chevron-down text-xs"></i></a>
-                <div class="dropdown-content">
-                    <a href="#" class="dropdown-item">Hóa học</a>
-                    <a href="#" class="dropdown-item">Sinh học</a>
-                    <a href="#" class="dropdown-item">Ngữ văn</a>
-                    <a href="#" class="dropdown-item">Tiếng Anh</a>
-                    <a href="#" class="dropdown-item">Lịch sử</a>
-                    <a href="#" class="dropdown-item">Địa lý</a>
-                    <a href="#" class="dropdown-item">Tin học</a>
-                    <a href="#" class="dropdown-item">GDCD</a>
-                </div>
-            </div>
-            <a class="layout-navbar__item" href="#">Tạo câu hỏi</a>
+                <a class="layout-navbar__item dropdown-trigger cursor-pointer">Môn học <i class="fas fa-chevron-down text-xs"></i></a>
+        <div class="dropdown-content">
+            <a href="modelform.html" class="dropdown-item">Tất cả</a>
+            <a href="modelform.html?category=math" class="dropdown-item">Toán học</a>
+            <a href="modelform.html?category=physics" class="dropdown-item">Vật lý</a>
+            <a href="modelform.html?category=chemistry" class="dropdown-item">Hóa học</a>
+            <a href="modelform.html?category=biology" class="dropdown-item">Sinh học</a>
+            <a href="modelform.html?category=literature" class="dropdown-item">Ngữ văn</a>
+            <a href="modelform.html?category=english" class="dropdown-item">Tiếng Anh</a>
+            <a href="modelform.html?category=history" class="dropdown-item">Lịch sử</a>
+            <a href="modelform.html?category=geography" class="dropdown-item">Địa lý</a>
+            <a href="modelform.html?category=computer" class="dropdown-item">Tin học</a>
+            <a href="modelform.html?category=civics" class="dropdown-item">GDCD</a>
+        </div>
+    </div>
+            <a class="layout-navbar__item" href="createQuestions.html">Tạo câu hỏi</a>
             <!-- THÊM LINK XEM CÂU HỎI VÀO NAVBAR -->
-            <a class="layout-navbar__item" href="./showQuestion.html">Xem câu hỏi</a>
-            <div class="dropdown">
-                <a class="layout-navbar__item" href="#">Bảng xếp hạng <i class="fas fa-chevron-down text-xs"></i></a>
-                <div class="dropdown-content">
-                    <a href="#" class="dropdown-item"><i class="fas fa-trophy text-yellow-500 mr-2"></i> Top Người Chơi</a>
-                    <a href="#" class="dropdown-item"><i class="fas fa-fire text-orange-500 mr-2"></i> Câu Hỏi Hot Nhất</a>
-                    <a href="#" class="dropdown-item"><i class="fas fa-heart text-red-500 mr-2"></i> Được Follow Nhiều Nhất</a>
-                    <a href="#" class="dropdown-item"><i class="fas fa-pen text-purple-500 mr-2"></i> Tác Giả Nổi Bật</a>
-                </div>
-            </div>
-            <a class="layout-navbar__item" href="#">Tài khoản</a>
+            <div class="relative group">
+    <a class="layout-navbar__item flex items-center gap-1">
+        Bảng xếp hạng <i class="fas fa-chevron-down text-xs ml-1"></i>
+    </a>
+
+    <div class="leaderboard-dropdown" x-data>
+        <a href="leaderboard.html?tab=players"
+           class="block"
+           :class="{ 'active bg-yellow-50 ring-2 ring-yellow-400 rounded-lg': currentUrlTab() === 'players' }">
+            <button class="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+                <span class="icon"><i class="fas fa-trophy text-yellow-600"></i></span>
+                <div><div class="title">Top Người Chơi</div><div class="desc">Điểm cao nhất tuần</div></div>
+            </button>
+        </a>
+
+        <a href="leaderboard.html?tab=questions"
+           class="block"
+           :class="{ 'active bg-orange-50 ring-2 ring-orange-400 rounded-lg': currentUrlTab() === 'questions' }">
+            <button class="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+                <span class="icon"><i class="fas fa-fire text-orange-600"></i></span>
+                <div><div class="title">Bài Giảng Hot Nhất</div><div class="desc">Lượt chơi nhiều nhất</div></div>
+            </button>
+        </a>
+
+        <a href="leaderboard.html?tab=followers"
+           class="block"
+           :class="{ 'active bg-pink-50 ring-2 ring-pink-400 rounded-lg': currentUrlTab() === 'followers' }">
+            <button class="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+                <span class="icon"><i class="fas fa-heart text-pink-600"></i></span>
+                <div><div class="title">Được Follow Nhiều Nhất</div><div class="desc">Idol cộng đồng</div></div>
+            </button>
+        </a>
+
+        <a href="leaderboard.html?tab=creators"
+           class="block"
+           :class="{ 'active bg-purple-50 ring-2 ring-purple-400 rounded-lg': currentUrlTab() === 'creators' }">
+            <button class="w-full text-left px-5 py-4 hover:bg-gray-100 transition">
+                <span class="icon"><i class="fas fa-pen-nib text-purple-600"></i></span>
+                <div><div class="title">Tác Giả Nổi Bật</div><div class="desc">Tạo quiz chất lượng</div></div>
+            </button>
+        </a>
+    </div>
+</div>
+
+<!-- Hàm nhỏ này để dropdown ở các trang khác vẫn highlight đúng -->
+<script>
+function currentUrlTab() {
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    const valid = ['players', 'questions', 'followers', 'creators'];
+    return tab && valid.includes(tab) ? tab : 'players';
+}
+</script>
+            <a class="layout-navbar__item" href="profile.html">Tài khoản</a>
         </nav>
 
         <!-- CONTENT -->
@@ -98,7 +152,7 @@
                     <p class="text-lg mb-6">Bạn có thể tạo <span class="font-bold">Bài tập</span>, <span class="font-bold">Đề thi</span> hoặc <span class="font-bold">Bảng đáp án</span> để học sinh thi online hoặc offline bằng phiếu tờ trắc nghiệm.</p>
                     <p class="text-base opacity-90 mb-6">Khám phá các tính năng mạnh mẽ của chúng tôi để tạo ra trải nghiệm học tập tốt nhất!</p>
                     <div class="hero-buttons">
-                        <a href="#" class="hero-btn hero-btn-primary">
+                        <a href="createQuestions.html" class="hero-btn hero-btn-primary">
                             <i class="fas fa-plus-circle"></i> Tạo Quiz Ngay
                         </a>
                         <a href="modelform.html" class="hero-btn hero-btn-secondary">
@@ -158,24 +212,24 @@
             <div class="mb-10">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-2xl font-bold text-gray-800"><i class="fas fa-trophy text-yellow-500 mr-2"></i> Bảng xếp hạng</h2>
-                    <a href="rank.html" class="text-orange-500 font-semibold hover:underline">xem thêm...</a>
+                    <a href="leaderboard.html" class="text-orange-500 font-semibold hover:underline">xem thêm...</a>
                 </div>
                 <div class="leaderboard-section">
-                    <a href="rank.html" class="leaderboard-item top1">
+                    <a href="leaderboard.html" class="leaderboard-item top1">
                         <div class="leaderboard-crown">👑</div>
                         <div class="leaderboard-rank">1</div>
-                        <img src="https://i.pravatar.cc/150?img=33" alt="User" class="leaderboard-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" class="leaderboard-avatar">
                         <div class="leaderboard-info">
                             <div class="leaderboard-name">Nguyễn Nhật Anh</div>
                             <div class="leaderboard-badge">Legend</div>
                         </div>
-                        <div class="leaderboard-score">12,850</div>
+                        <div class="leaderboard-score">9,850</div>
                         <span class="text-gray-500">điểm</span>
                     </a>
 
-                    <a href="rank.html" class="leaderboard-item top2">
+                    <a href="leaderboard.html" class="leaderboard-item top2">
                         <div class="leaderboard-rank">2</div>
-                        <img src="https://i.pravatar.cc/150?img=45" alt="User" class="leaderboard-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" class="leaderboard-avatar">
                         <div class="leaderboard-info">
                             <div class="leaderboard-name">Trần Minh Thư</div>
                             <div class="leaderboard-badge">Master</div>
@@ -184,36 +238,36 @@
                         <span class="text-gray-500">điểm</span>
                     </a>
 
-                    <a href="rank.html" class="leaderboard-item top3">
+                    <a href="leaderboard.html" class="leaderboard-item top3">
                         <div class="leaderboard-rank">3</div>
-                        <img src="https://i.pravatar.cc/150?img=12" alt="User" class="leaderboard-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="User" class="leaderboard-avatar">
                         <div class="leaderboard-info">
-                            <div class="leaderboard-name">Lê Hoàng Nam</div>
-                            <div class="leaderboard-badge">Expert</div>
+                            <div class="leaderboard-name">Lê Hoàng Long</div>
+                            <div class="leaderboard-badge">Master</div>
                         </div>
-                        <div class="leaderboard-score">8,765</div>
+                        <div class="leaderboard-score">9,180</div>
                         <span class="text-gray-500">điểm</span>
                     </a>
 
-                    <a href="rank.html" class="leaderboard-item">
+                    <a href="leaderboard.html" class="leaderboard-item">
                         <div class="leaderboard-rank">4</div>
-                        <img src="https://i.pravatar.cc/150?img=20" alt="User" class="leaderboard-avatar">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" class="leaderboard-avatar">
                         <div class="leaderboard-info">
-                            <div class="leaderboard-name">Phạm Thị Hương</div>
-                            <div class="leaderboard-badge">Pro</div>
+                            <div class="leaderboard-name">Phạm Quỳnh Anh</div>
+                            <div class="leaderboard-badge">Diamond</div>
                         </div>
-                        <div class="leaderboard-score">7,320</div>
+                        <div class="leaderboard-score">8,950</div>
                         <span class="text-gray-500">điểm</span>
                     </a>
 
-                    <a href="rank.html" class="leaderboard-item">
+                    <a href="leaderboard.html" class="leaderboard-item">
                         <div class="leaderboard-rank">5</div>
-                        <img src="https://i.pravatar.cc/150?img=8" alt="User" class="leaderboard-avatar">
+                        <img src="https://randomuser.me/api/portraits/men/68.jpg" alt="User" class="leaderboard-avatar">
                         <div class="leaderboard-info">
-                            <div class="leaderboard-name">Võ Đức Tài</div>
-                            <div class="leaderboard-badge">Advanced</div>
+                            <div class="leaderboard-name">Hoàng Minh Tuấn</div>
+                            <div class="leaderboard-badge">Diamond</div>
                         </div>
-                        <div class="leaderboard-score">6,890</div>
+                        <div class="leaderboard-score">8,720</div>
                         <span class="text-gray-500">điểm</span>
                     </a>
                 </div>
@@ -223,22 +277,17 @@
             <div class="mb-10">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6"><i class="fas fa-star text-yellow-500 mr-2"></i> Tính năng nổi bật</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <a href="create.html" class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-blue-500 hover:shadow-xl transition cursor-pointer">
+                    <a href="createQuestions.html" class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-blue-500 hover:shadow-xl transition cursor-pointer">
                         <div class="text-5xl mb-4">📝</div>
                         <h3 class="text-xl font-bold mb-2">Tạo bài tập hoặc đề thi</h3>
                         <p class="text-gray-600 text-sm">Dễ dàng tạo các bài tập trắc nghiệm, đề thi với nhiều dạng câu hỏi khác nhau. Hỗ trợ đầy đủ công cụ soạn thảo và quản lý ngân hàng câu hỏi.</p>
                     </a>
-                    <a href="khode.html" class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-green-500 hover:shadow-xl transition cursor-pointer">
+                    <a href="questionLibrary.html" class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-green-500 hover:shadow-xl transition cursor-pointer">
                         <div class="text-5xl mb-4">📁</div>
                         <h3 class="text-xl font-bold mb-2">Kho Đề</h3>
                         <p class="text-gray-600 text-sm">Truy cập thư viện câu hỏi phong phú được chia sẻ bởi cộng đồng giáo viên. Tiết kiệm thời gian với hàng nghìn câu hỏi chất lượng cao.</p>
                     </a>
-                    <a href="upload-exam.html" class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-orange-500 hover:shadow-xl transition cursor-pointer">
-                        <div class="text-5xl mb-4">📤</div>
-                        <h3 class="text-xl font-bold mb-2">Tải đề</h3>
-                        <p class="text-gray-600 text-sm">Nhập đề thi từ file Word, Excel hoặc tải lên hình ảnh để thi. Hệ thống tự động nhận diện và chuyển đổi thành bài tập điện tử.</p>
-                    </a>
-                    <a href="theory.html" class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-purple-500 hover:shadow-xl transition cursor-pointer">
+                    <a href="modelform.html" class="bg-white rounded-xl p-6 shadow-lg border-t-4 border-purple-500 hover:shadow-xl transition cursor-pointer">
                         <div class="text-5xl mb-4">📊</div>
                         <h3 class="text-xl font-bold mb-2">LÝ THUYẾT</h3>
                         <p class="text-gray-600 text-sm">Truy cập Tài liệu lý thuyết chất lượng cao từ cho tất cả các môn học. Tiết kiệm thời gian với hàng nghìn tài liệu chất lượng cao.</p>
@@ -247,38 +296,55 @@
             </div>
         </section>
 
-        <!-- FOOTER -->
-        <footer class="layout-footer">
+        <!-- FOOTER GỐC -->
+        <footer class="layout-footer reveal">
             <div class="layout-footer-container">
-                <div class="layout-footer-section">
-                    <h3>Giới thiệu</h3>
-                    <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
-                </div>
-                <div class="layout-footer-section">
-                    <h3>Liên hệ</h3>
-                    <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
-                    <p>Hotline: 0123 456 789</p>
-                </div>
-                <div class="layout-footer-section">
-                    <h3>Liên kết nhanh</h3>
-                    <p><a href="#">Trang chủ</a></p>
-                    <p><a href="#">Câu hỏi</a></p>
-                    <p><a href="#">Cài đặt</a></p>
-                    <p><a href="#">Đăng nhập</a></p>
-                </div>
-                <div class="layout-footer-section">
-                    <h3>Cộng đồng</h3>
-                    <p><a href="https://facebook.com" target="_blank"><i class="fab fa-facebook mr-2"></i> Facebook</a></p>
-                    <p><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram mr-2"></i> Instagram</a></p>
-                    <p><a href="https://discord.com" target="_blank"><i class="fab fa-discord mr-2"></i> Discord</a></p>
-                </div>
+                <div class="layout-footer-section"><h3>Giới thiệu</h3><p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p></div>
+                <div class="layout-footer-section"><h3>Liên hệ</h3><p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p><p>Hotline: 0123 456 789</p></div>
+                <div class="layout-footer-section"><h3>Liên kết nhanh</h3><p><a href="index.html">Trang chủ</a></p><p><a href="quiz.html">Câu hỏi</a></p><p><a href="leaderboard.html">Bảng xếp hạng</a></p><p><a href="login.html">Đăng nhập</a></p></div>
+                <div class="layout-footer-section"><h3>Cộng đồng</h3><p><a href="https://facebook.com" target="_blank">Facebook</a></p><p><a href="https://instagram.com" target="_blank">Instagram</a></p><p><a href="https://discord.com" target="_blank">Discord</a></p></div>
             </div>
-            <div class="layout-footer-bottom">
-                <p>© 2025 Quizzz. All rights reserved.</p>
-            </div>
+            <div class="layout-footer-bottom"><p>© 2025 QUIZZKIT. All rights reserved.</p></div>
         </footer>
+
+        <!-- BACK TO TOP VÀNG KIM CÓ VÒNG ĐẦY DẦN SIÊU MƯỢT -->
+        <div x-data="{ percent: 0 }"
+             x-init="window.addEventListener('scroll', () => {
+                 const s = document.documentElement.scrollTop || document.body.scrollTop;
+                 const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                 percent = h ? Math.round((s / h) * 100) : 0;
+             })"
+             class="fixed bottom-8 right-8 z-50">
+
+            <button @click="window.scrollTo({top:0,behavior:'smooth'})"
+                    x-show="percent > 20"
+                    x-transition
+                    class="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 shadow-2xl flex items-center justify-center text-white text-3xl hover:scale-110 transition-all relative overflow-hidden">
+
+                <svg class="absolute inset-0 w-full h-full -rotate-90">
+                    <circle cx="32" cy="32" r="28" stroke="#e5e7eb" stroke-width="6" fill="none"/>
+                    <circle cx="32" cy="32" r="28" stroke="url(#gold)" stroke-width="6" fill="none"
+                            stroke-dasharray="175.93" :stroke-dashoffset="175.93 - (175.93 * percent / 100)"
+                            stroke-linecap="round" class="transition-all duration-300"/>
+                    <defs>
+                        <linearGradient id="gold">
+                            <stop offset="0%" stop-color="#fbbf24"/>
+                            <stop offset="100%" stop-color="#f59e0b"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+
     </div>
 
     <script src="Scripts/home.js"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="Scripts/leaderboard.js"></script>
+    <script src="Scripts/layout.js"></script>
+    <script src="Scripts/profile.js"></script>
+    <script src="Scripts/auth.js"></script>
+    
 </body>
 </html>

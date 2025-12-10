@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>QUIZZKIT - Quiz</title>
-    <link rel="stylesheet" href="Styles/quiz.css" />
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="Styles/layout.css" />
-    <link rel="stylesheet" href="Styles/home.css" />
-    <link rel="stylesheet" href="Styles/modelform.css" />
-    <link rel="stylesheet" href="Styles/leaderboard.css" />
-     <script src="Scripts/auth.js"></script>
-    <script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kho Đề - QUIZZKIT</title>
+  <!-- CSS Files -->
+  <link rel="stylesheet" href="Styles/layout.css">
+  <link rel="stylesheet" href="Styles/questionLibrary.css">
+   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
     if (!localStorage.getItem("loggedIn")) {
         window.location.href = "login.html";
     }
-    </script>
+  </script>
+  <script src="Scripts/auth.js"></script>
+  <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/home.css" />
+    <link rel="stylesheet" href="Styles/settings.css" />
+    <link rel="stylesheet" href="Styles/modelform.css" />
+    <link rel="stylesheet" href="Styles/leaderboard.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="Scripts/auth.js"></script>
 </head>
-<body class="bg-gray-50">
-    <!-- OVERLAY -->
+<body>
+  <!-- OVERLAY -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
     <!-- SIDEBAR -->
@@ -36,7 +41,7 @@
         <!-- THÊM LINK XEM CÂU HỎI VÀO SIDEBAR -->
         <a class="layout-sidebar__item" href="./showQuestion.html"><i class="fas fa-eye mr-2"></i> Xem câu hỏi</a>
         <!-- THÊM LINK KHO ĐỀ VÀO SIDEBAR (đã có sẵn nhưng để rõ hơn) -->
-        <a class="layout-sidebar__item" href="quiz-selector.html"><i class="fas fa-folder-open mr-2"></i> Kho đề</a>
+        <a class="layout-sidebar__item" href="questionLibrary.html"><i class="fas fa-folder-open mr-2"></i> Kho đề</a>
         <a class="layout-sidebar__item" href="profile.html"><i class="fas fa-user mr-2"></i> Tài khoản</a>
         <a class="layout-sidebar__item" href="settings.html"><i class="fas fa-cog mr-2"></i> Cài đặt</a>
     </aside>
@@ -69,7 +74,7 @@
         <nav class="layout-navbar">
             <a class="layout-navbar__item" href="index.html">Trang chủ</a>
             <!-- THÊM LINK KHO ĐỀ VÀO NAVBAR -->
-            <a class="layout-navbar__item" href="quiz-selector.html">Kho đề</a>
+            <a class="layout-navbar__item active" href="questionLibrary.html">Kho đề</a>
             <div class="dropdown">
                 <a class="layout-navbar__item " href="modelform.html">Môn học <i class="fas fa-chevron-down text-xs"></i></a>
         <div class="dropdown-content">
@@ -143,105 +148,86 @@ function currentUrlTab() {
 </script>
             <a class="layout-navbar__item" href="profile.html">Tài khoản</a>
         </nav>
+    <!-- MAIN CONTENT AREA -->
+    <section class="layout-content">
+      <div class="settings-card">
+        <div class="topbar">
+          <div>
+            <h1 >📚 Kho đề của bạn</h1>
+            <div class="subtitle">Danh sách các đề đã lưu (lưu trữ cục bộ trên trình duyệt)</div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn btn-secondary" id="clearAll">🗑️ Xóa tất cả</button>
+            <button class="btn btn-secondary" id="importBtn">📂 Nhập JSON</button>
+            <button class="btn btn-primary" id="exportAll">📥 Xuất tất cả</button>
+          </div>
+        </div>
+          
+        <div id="list" class="list"></div>
+        <div id="empty" class="empty" style="display:none">
+          Chưa có đề nào trong kho. Bạn có thể lưu đề từ trang tải/soạn đề.
+        </div>
+        
+        <hr style="margin:18px 0;border:none;border-top:1px solid #eef2ff">
 
+        <div id="detail" style="display:none">
+          <h2>Chi tiết đề</h2>
+          <div id="detailMeta" style="margin-bottom:12px;color:#666"></div>
+          <pre id="detailJson"></pre>
+          <div style="margin-top:12px">
+            <button class="btn btn-secondary" id="backList">← Quay lại danh sách</button>
+          </div>
+        </div>
+      </div>
+      <div class="back-btn-box">
+    <a href="create.html" class="back-btn">← Quay lại</a>
+</div>
 
-        <!-- QUIZ CONTENT -->
-        <section class="layout-content">
-            <div class="quiz-container">
-                <!-- Quiz Header -->
-                <div class="quiz-header" id="quizHeader">
-                    <h1 class="text-3xl font-bold" id="quizTitle">Đang tải...</h1>
-                    <p class="text-white/80 mt-2" id="quizInfo">Câu 1 / 10</p>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="progressBar" style="width: 0%;"></div>
-                    </div>
-                </div>
+    </section>
 
-                <!-- Question Card -->
-                <div class="question-card fade-in" id="questionCard">
-                    <div class="question-header">
-                        <div class="question-number" id="questionNumber">Question 1/10</div>
-                        <div class="score-inline" id="scoreInline">
-                            <span class="score-icon">📊</span>
-                            <span class="score-text">Score: 0</span>
-                        </div>
-                    </div>
-                    <div class="question-text" id="questionText">Đang tải câu hỏi...</div>
-                    <div class="option-list" id="optionList">
-                        <!-- Options will be inserted here -->
-                    </div>
-                    <div class="flex justify-end mt-6">
-                        <button class="btn-next" id="nextBtn" disabled>Tiếp theo</button>
-                    </div>
-                </div>
+    <!-- FOOTER -->
+    <footer class="layout-footer">
+      <div class="layout-footer-container">
+        <div class="layout-footer-section">
+          <h3>Giới thiệu</h3>
+          <p>QUIZZKIT là nền tảng cung cấp các câu đề vui và thử thách trí tuệ.</p>
+        </div>
+        <div class="layout-footer-section">
+          <h3>Liên hệ</h3>
+          <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
+          <p>Hotline: 0123 456 789</p>
+        </div>
+        <div class="layout-footer-section">
+          <h3>Liên kết nhanh</h3>
+          <p><a href="trangtaocauhoi.html">Trang chủ</a></p>
+          <p><a href="taocauhoi.html">Tạo câu hỏi</a></p>
+          <p><a href="khode.html">Kho đề</a></p>
+          <p><a href="kholythuyet.html">Lý thuyết</a></p>
+        </div>
+        <div class="layout-footer-section">
+          <h3>Cộng đồng</h3>
+          <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
+          <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
+          <p><a href="https://discord.com" target="_blank">Discord</a></p>
+        </div>
+      </div>
+      <div class="layout-footer-bottom">
+        <p>© 2025 Quizzz. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
 
-                <!-- Result Container -->
-                <div class="result-container" id="resultContainer" style="display: none;">
-                    <div class="text-6xl mb-4">🎉</div>
-                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Hoàn thành!</h2>
-                    <div class="result-score" id="resultScore">8/10</div>
-                    <p class="result-message" id="resultMessage">Xuất sắc! Bạn đã làm rất tốt!</p>
-                    
-                    <div class="result-buttons">
-                        <button class="btn-next" id="reviewBtn">📝 Xem đáp án</button>
-                        <button class="btn-secondary" id="restartBtn">🔄 Làm lại</button>
-                        <button class="btn-secondary" id="backToLectureBtn">📚 Quay về bài giảng</button>
-                    </div>
-                </div>
-
-                <!-- Answer Review -->
-                <div class="answer-review" id="answerReview" style="display: none;">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">📋 Đáp án chi tiết</h3>
-                    <div id="reviewList">
-                        <!-- Review items will be inserted here -->
-                    </div>
-                    <div class="flex justify-center mt-6">
-                        <button class="btn-secondary" id="backToResultBtn">← Quay lại kết quả</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Hidden element for total questions -->
-            <span id="totalQuestions" style="display: none;">10</span>
-        </section>
-
-        <!-- FOOTER -->
-        <footer class="layout-footer">
-            <div class="layout-footer-container">
-                <div class="layout-footer-section">
-                    <h3>Giới thiệu</h3>
-                    <p>QUIZZKIT là nền tảng cung cấp các câu đố vui và thử thách trí tuệ.</p>
-                </div>
-                <div class="layout-footer-section">
-                    <h3>Liên hệ</h3>
-                    <p>Email: <a href="mailto:nhatthanh@quizzz.vn">nhatthanh@quizzz.vn</a></p>
-                    <p>Hotline: 0123 456 789</p>
-                </div>
-                <div class="layout-footer-section">
-                    <h3>Liên kết nhanh</h3>
-                    <p><a href="index.html">Trang chủ</a></p>
-                    <p><a href="modelform.html">Câu hỏi</a></p>
-                    <p><a href="settings.html">Cài đặt</a></p>
-                </div>
-                <div class="layout-footer-section">
-                    <h3>Cộng đồng</h3>
-                    <p><a href="https://facebook.com" target="_blank">Facebook</a></p>
-                    <p><a href="https://instagram.com" target="_blank">Instagram</a></p>
-                    <p><a href="https://discord.com" target="_blank">Discord</a></p>
-                </div>
-            </div>
-            <div class="layout-footer-bottom">
-                <p>© 2025 Quizzz. All rights reserved.</p>
-            </div>
-        </footer>
-    </div>
-
-        <script src="Scripts/home.js"></script>
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+  <input type="file" id="importFile" accept="application/json" style="display:none">
+  
+  <!-- JavaScript Files -->
+  <script src="/layout/Scripts/layout.js"></script>
+  <script src="Scripts/questionLibrary.js"></script>
+  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="Scripts/leaderboard.js"></script>
     <script src="Scripts/layout.js"></script>
+    <script src="Scripts/modelform.js"></script>
     <script src="Scripts/profile.js"></script>
     <script src="Scripts/auth.js"></script>
-    <script src="Scripts/quiz.js"></script>
+    <script src="Scripts/settings.js"></script>
 </body>
 </html>
