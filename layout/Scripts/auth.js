@@ -221,7 +221,7 @@ function loginUser(e) {
     showToast("Đăng nhập thành công!", "success");
 
     setTimeout(() => {
-        window.location.href = "profile.html"; // Chuyển đến trang profile
+        window.location.href = "index.html"; // Chuyển đến trang profile
     }, 1200);
 }
 

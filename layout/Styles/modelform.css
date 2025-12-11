@@ -103,3 +103,93 @@
 .navbar-dropdown-wrapper {
     cursor: pointer;
 }
+.dropdown-content {
+ display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    min-width: 180px;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 100;
+    margin-top: 8px
+}
+/* ================= DROPDOWN MÔN HỌC TRÊN ĐIỆN THOẠI - ĐẸP Y HỆT BẢNG XẾP HẠNG ================= */
+@media only screen and (max-width: 768px) {
+
+    /* 1. Ẩn hover mặc định */
+    .dropdown:hover .dropdown-content {
+        display: none !important;
+    }
+
+    /* 2. Biến dropdown thành popup giữa màn hình */
+    .dropdown-content {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) scale(0.92) !important;
+        width: 90vw !important;
+        max-width: 380px !important;
+        max-height: 82vh !important;
+        margin: 0 !important;
+        border-radius: 24px !important;
+        box-shadow: 0 25px 60px rgba(0,0,0,0.38) !important;
+        background: white !important;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+        z-index: 9999 !important;
+        overflow-y: auto !important;
+        padding: 12px 0 !important;
+    }
+
+    /* 3. Khi có class .show → hiện popup */
+    .dropdown-content.show {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translate(-50%, -50%) scale(1) !important;
+    }
+
+    /* 4. Item bên trong to, đẹp, dễ bấm */
+    .dropdown-item {
+        padding: 20px 24px !important;
+        font-size: 18px !important;
+        font-weight: 500 !important;
+        min-height: 64px !important;
+        display: flex !important;
+        align-items: center !important;
+        transition: background 0.2s !important;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item:active {
+        background: #fef3c7 !important;   /* vàng nhạt đẹp */
+    }
+
+    .dropdown-item.active {
+        background: #e07b39 !important;
+        color: white !important;
+        font-weight: 700 !important;
+    }
+
+    /* 5. Icon mũi tên nhỏ hơn, gọn */
+    .dropdown-arrow {
+        margin-left: 8px !important;
+        font-size: 12px !important;
+    }
+}
+
+/* Điện thoại siêu nhỏ */
+@media only screen and (max-width: 380px) {
+    .dropdown-content {
+        width: 94vw !important;
+        border-radius: 28px !important;
+    }
+    .dropdown-item {
+        padding: 22px 20px !important;
+        font-size: 19px !important;
+    }
+}

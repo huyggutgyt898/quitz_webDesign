@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -124,4 +125,132 @@
 
   <script src="./Scripts/showQuestion.js"></script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Game</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="./Styles/showQuestion.css">
+</head>
+<body class="theme-default">
+
+  <!-- Main content -->
+  <div class="main">
+    <div class="avatar" title="Profile" onclick="navigate('profile')"></div>
+
+    <!-- Quiz box -->
+    <div class="quiz-box">
+      <div class="quiz-header">
+        <div id="question-number">Question 1/10</div>
+        <div id="score">Score: 0</div>
+      </div>
+
+      <div id="question" class="question">Loading question...</div>
+      <div id="answers" class="answers"></div>
+
+      <button id="next-btn" class="next-btn">Next ➜</button>
+    </div>
+
+    <!-- Create question form -->
+    <div class="create-box" style="display:none;">
+      <h2>Create Your Own Question</h2>
+      <input type="text" id="new-question" placeholder="Enter question text">
+      <input type="text" id="opt1" placeholder="Option 1">
+      <input type="text" id="opt2" placeholder="Option 2">
+      <input type="text" id="opt3" placeholder="Option 3">
+      <input type="text" id="opt4" placeholder="Option 4">
+      <input type="number" id="correct" min="1" max="4" placeholder="Correct option (1–4)">
+      <button class="next-btn" onclick="saveQuestion()">Save Question</button>
+      <p id="save-msg"></p>
+    </div>
+  </div>
+
+  <!--Background choice-->
+  <div class="bg-choice">
+    <form action="action-page" method="POST">
+      <label for="choice_Background">Giao diện</label>
+      <select name="background" id="choice_Background">
+        <option value="default">Mặc định</option>
+        <option value="breach">Bãi biển</option>
+        <option value="love">Tình yêu</option>
+        <option value="noel">Giáng sinh</option>
+      </select>
+    </form>
+  </div>
+
+  <!--Sound Choice-->
+  <div class="so-choice">
+    <form action="Action-page" method="POST">
+      <label for="choice-Sound">Âm thanh</label>
+      <select name="sound" id="choice-Sound">
+        <option value="none">Tắt âm</option>
+        <option value="02">02 Charact Select</option>
+        <option value="08">08 Stage 4 Fairy Lake</option>
+        <option value="11">11 Stage 6 Dungeon</option>
+        <option value="35">35 Ending</option>
+      </select>
+    </form>
+  </div>
+
+  <!-- Result Overlay - Che toàn màn hình -->
+  <div id="result-overlay" class="result-overlay" style="display:none;">
+    <div class="result-container">
+      <h2>🎉 Quiz Completed!</h2>
+      
+      <div class="result-details">
+        <div class="result-row">
+          <span class="result-label">Người chơi:</span>
+          <span class="result-value" id="player-name">Player</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Điểm:</span>
+          <span class="result-value" id="final-score-text">0/0</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Tỉ lệ đúng:</span>
+          <span class="result-value" id="percentage-text">0%</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Xếp Loại:</span>
+          <span class="result-value" id="grade-text">-</span>
+        </div>
+      </div>
+      
+      <div class="result-buttons">
+        <button onclick="restartQuiz()" class="result-btn play-again-btn">
+          <span class="btn-icon">🔄</span> Play Again
+        </button>
+        <button onclick="viewDetailedResults()" class="result-btn view-details-btn">
+          <span class="btn-icon">📊</span> View Detailed Results
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="background-music" loop></audio>
+
+  <!--Tạo nút chuyển về trang chủ-->
+  <div class="back-home">
+    <a href="./index.html">
+      <button>
+        <i class="fa-solid fa-house"></i>
+      </button>
+    </a>    
+  </div>
+
+  <!--Quay về trang bộ câu hỏi-->
+  <div class="back-modelform">
+    <a href="./modelform.html">
+    <i class="fa-solid fa-arrow-left"></i>
+</a>
+
+  </div>
+
+  <script src="./Scripts/showQuestion.js"></script>
+</body>
+>>>>>>> 0c26d7c09351f032fc13cf47da767b509352bd4a
 </html>

@@ -493,3 +493,83 @@ body {
         grid-template-columns: 1fr;
     }
 }
+/* ================= FIX HOÀN HẢO CHO ĐIỆN THOẠI - DÁN CUỐI FILE layout.css ================= */
+@media only screen and (max-width: 768px) {
+
+    /* 1. Fix 100vh bị thiếu thanh address bar (iOS Safari) */
+    body, .layout-sidebar {
+        height: 100dvh !important;
+        min-height: -webkit-fill-available !important;
+    }
+
+    /* 2. Sidebar rộng hơn + dễ vuốt */
+    .layout-sidebar {
+        width: 280px !important;
+        max-width: 88vw !important;
+        padding: 30px 20px !important;
+        left: -280px !important;
+    }
+    .layout-sidebar.active { left: 0 !important; }
+
+    /* 3. Topbar gọn + đẹp */
+    .layout-topbar {
+        height: 70px !important;
+        padding: 0 16px !important;
+    }
+    .layout-topbar__logo {
+        font-size: 26px !important;
+        color: white !important;
+        font-weight: 800 !important;
+    }
+    .layout-topbar__search input {
+        width: 44vw !important;
+        padding: 12px 18px !important;
+        font-size: 16px !important;
+        background: rgba(255,255,255,0.2);
+        color: white;
+    }
+    .layout-topbar__search input::placeholder { color: rgba(255,255,255,0.8); }
+
+    /* 4. Navbar cuộn mượt, không bị tràn */
+    .layout-navbar {
+        height: 56px !important;
+        padding: 0 12px !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        scrollbar-width: none !important;
+    }
+    .layout-navbar::-webkit-scrollbar { display: none !important; }
+    .layout-navbar__item {
+        padding: 11px 22px !important;
+        font-size: 15px !important;
+        white-space: nowrap !important;
+    }
+
+    /* 5. Content + Hero đẹp */
+    .layout-content { padding: 20px 16px !important; }
+    .hero-section {
+        padding: 40px 24px !important;
+        grid-template-columns: 1fr !important;
+        border-radius: 20px !important;
+    }
+    .hero-content h1 { font-size: 36px !important; }
+    .hero-content p { font-size: 17px !important; }
+    .hero-buttons { flex-direction: column !important; }
+    .hero-btn { width: 100% !important; padding: 16px !important; font-size: 18px !important; }
+
+    /* 6. Quiz card + Leaderboard */
+    .quiz-grid { grid-template-columns: 1fr !important; gap: 20px !important; }
+    .leaderboard-item { flex-direction: column !important; text-align: center !important; padding: 24px !important; gap: 12px !important; }
+    .leaderboard-avatar { margin: 0 !important; }
+
+    /* 7. Footer gọn */
+    .layout-footer-container { grid-template-columns: 1fr !important; gap: 35px !important; text-align: center !important; }
+}
+
+/* Điện thoại siêu nhỏ (iPhone SE, Galaxy Fold) */
+@media only screen and (max-width: 480px) {
+    .layout-topbar__search { display: none !important; }
+    .layout-topbar__logo { font-size: 23px !important; }
+    .hero-content h1 { font-size: 32px !important; }
+    .layout-content { padding: 16px 12px !important; }
+}

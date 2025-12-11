@@ -10,9 +10,12 @@
     }
     </script>
     <link rel="stylesheet" href="Styles/layout.css" />
+    <link rel="stylesheet" href="Styles/home.css" />
+    <link rel="stylesheet" href="Styles/modelform.css" />
     <link rel="stylesheet" href="Styles/leaderboard.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="Scripts/auth.js"></script>
 </head>
 <body>
 
@@ -21,15 +24,22 @@
 
     <!-- SIDEBAR -->
     <aside class="layout-sidebar" id="sidebar">
-        <div class="layout-sidebar__title">MENU</div>
-        <a class="layout-sidebar__item" href="index.html">Trang chủ</a>
-        <a class="layout-sidebar__item" href="quiz.html">Bài giảng</a>
-        <a class="layout-sidebar__item" href="create-quiz.html">Tạo bài giảng</a>
-        <a class="layout-sidebar__item active" href="leaderboard.html">Bảng xếp hạng</a>
-        <a class="layout-sidebar__item" href="profile.html">Hồ sơ</a>
-        <a class="layout-sidebar__item" href="settings.html">Cài đặt</a>
+        <div class="layout-sidebar__user">
+            <img src="Images/Avatar.jpg" alt="Avatar" class="layout-sidebar__user-avatar">
+            <div class="layout-sidebar__user-info">
+                <div class="layout-sidebar__username">Guest User</div>
+                <div class="layout-sidebar__usertag">Thành viên</div>
+            </div>
+        </div>
+        <a class="layout-sidebar__item" href="index.html"><i class="fas fa-home mr-2"></i> Trang chủ</a>
+        <a class="layout-sidebar__item" href="createQuestions.html"><i class="fas fa-question-circle mr-2"></i> Tạo câu hỏi</a>
+        <!-- THÊM LINK XEM CÂU HỎI VÀO SIDEBAR -->
+        <a class="layout-sidebar__item" href="./showQuestion.html"><i class="fas fa-eye mr-2"></i> Xem câu hỏi</a>
+        <!-- THÊM LINK KHO ĐỀ VÀO SIDEBAR (đã có sẵn nhưng để rõ hơn) -->
+        <a class="layout-sidebar__item" href="questionLibrary.html"><i class="fas fa-folder-open mr-2"></i> Kho đề</a>
+        <a class="layout-sidebar__item" href="profile.html"><i class="fas fa-user mr-2"></i> Tài khoản</a>
+        <a class="layout-sidebar__item" href="settings.html"><i class="fas fa-cog mr-2"></i> Cài đặt</a>
     </aside>
-
     <!-- MAIN -->
     <div class="layout-main" id="mainContent" x-data="leaderboardData()">
 
@@ -56,12 +66,29 @@
             </div>
         </header>
 
-        <!-- NAVBAR GỐC + DROPDOWN ĐẸP -->
+        <!-- NAVBAR -->
         <nav class="layout-navbar">
             <a class="layout-navbar__item" href="index.html">Trang chủ</a>
-            <a class="layout-navbar__item" href="quiz.html">Bài giảng</a>
-            <a class="layout-navbar__item" href="create-quiz.html">Tạo bài giảng</a>
-
+            <!-- THÊM LINK KHO ĐỀ VÀO NAVBAR -->
+            <a class="layout-navbar__item" href="questionLibrary.html">Kho đề</a>
+            <div class="dropdown">
+                <a class="layout-navbar__item " href="modelform.html">Môn học <i class="fas fa-chevron-down text-xs"></i></a>
+        <div class="dropdown-content">
+            <a href="modelform.html" class="dropdown-item">Tất cả</a>
+            <a href="modelform.html?category=math" class="dropdown-item">Toán học</a>
+            <a href="modelform.html?category=physics" class="dropdown-item">Vật lý</a>
+            <a href="modelform.html?category=chemistry" class="dropdown-item">Hóa học</a>
+            <a href="modelform.html?category=biology" class="dropdown-item">Sinh học</a>
+            <a href="modelform.html?category=literature" class="dropdown-item">Ngữ văn</a>
+            <a href="modelform.html?category=english" class="dropdown-item">Tiếng Anh</a>
+            <a href="modelform.html?category=history" class="dropdown-item">Lịch sử</a>
+            <a href="modelform.html?category=geography" class="dropdown-item">Địa lý</a>
+            <a href="modelform.html?category=computer" class="dropdown-item">Tin học</a>
+            <a href="modelform.html?category=civics" class="dropdown-item">GDCD</a>
+        </div>
+    </div>
+            <a class="layout-navbar__item" href="createQuestions.html">Tạo câu hỏi</a>
+            <!-- THÊM LINK XEM CÂU HỎI VÀO NAVBAR -->
            <!-- NAVBAR + DROPDOWN ĐẸP NHƯ SHOPEE -->
 <div class="relative group">
     <a class="layout-navbar__item active flex items-center gap-1">
@@ -273,5 +300,8 @@
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="Scripts/leaderboard.js"></script>
     <script src="Scripts/layout.js"></script>
+    <script src="Scripts/modelform.js"></script>
+    <script src="Scripts/profile.js"></script>
+    <script src="Scripts/auth.js"></script>
 </body>
 </html>

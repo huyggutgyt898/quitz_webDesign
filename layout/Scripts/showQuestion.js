@@ -103,60 +103,101 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // ========== CÁC HÀM QUIZ ==========
 async function loadQuestions() {
-    try {
-        const res = await fetch("./Data/web_design_questions.json");
-        questions = await res.json();
+    let quizData = null;
 
-        currentQuestion = 0;
-        score = 0;
-        detailedResults = []; // Reset kết quả chi tiết
-        
-        const scoreElement = document.getElementById("score");
-        if (scoreElement) {
-            scoreElement.innerText = "Score: 0";
+    // Ưu tiên 1: Kiểm tra có đề đang làm từ kho đề không (currentQuiz)
+    const currentQuizStr = localStorage.getItem('currentQuiz');
+    if (currentQuizStr) {
+        try {
+            quizData = JSON.parse(currentQuizStr);
+            console.log('Đang làm bài từ kho đề:', quizData.title);
+        } catch (e) {
+            console.error('Lỗi parse currentQuiz:', e);
         }
-
-        showQuestion();
-    } catch (err) {
-        const questionElement = document.getElementById("question");
-        if (questionElement) {
-            questionElement.innerText = "❌ Failed to load questions.";
-        }
-        console.error("Lỗi tải câu hỏi:", err);
     }
+
+    // Ưu tiên 2: Nếu không có → load từ file JSON cũ (giữ tương thích)
+    if (!quizData || !quizData.questions || quizData.questions.length === 0) {
+        try {
+            const res = await fetch("./Data/web_design_questions.json");
+            if (!res.ok) throw new Error('File not found');
+            const jsonData = await res.json();
+
+            // Hỗ trợ cả 2 kiểu: mảng trực tiếp hoặc object có .questions
+            quizData = Array.isArray(jsonData) ? { title: "Web Design Quiz", questions: jsonData } : jsonData;
+            console.log('Load từ file JSON thành công');
+        } catch (err) {
+            console.error("Không tải được file JSON:", err);
+            document.getElementById("question").innerText = "Không tải được bộ câu hỏi.";
+            return;
+        }
+    }
+
+    // Gán dữ liệu toàn cục
+    questions = quizData.questions || [];
+    
+    // Cập nhật tiêu đề đề thi (nếu có)
+    const titleEl = document.getElementById("quiz-title") || document.querySelector("h1");
+    if (titleEl && quizData.title) {
+        titleEl.innerText = quizData.title;
+    }
+
+    // Reset trạng thái
+    currentQuestion = 0;
+    score = 0;
+    detailedResults = [];
+
+    const scoreElement = document.getElementById("score");
+    if (scoreElement) scoreElement.innerText = "Score: 0";
+
+    showQuestion();
 }
 
 function showQuestion() {
+    // Kết thúc → hiện kết quả
     if (currentQuestion >= questions.length) {
         showResult();
         return;
     }
 
     const q = questions[currentQuestion];
-    
+
+    // Cập nhật số câu
     const questionNumberElement = document.getElementById("question-number");
     if (questionNumberElement) {
-        questionNumberElement.innerText = `Question ${currentQuestion + 1}/${questions.length}`;
+        questionNumberElement.innerText = `Câu ${currentQuestion + 1}/${questions.length}`;
     }
-    
+
+    // Hiển thị câu hỏi
     const questionElement = document.getElementById("question");
     if (questionElement) {
-        questionElement.innerText = q.question;
+        questionElement.innerHTML = q.question || q.text || "Câu hỏi không có nội dung";
     }
-    
+
+    // Xóa đáp án cũ
     const answersDiv = document.getElementById("answers");
     if (answersDiv) {
         answersDiv.innerHTML = "";
-        
-        q.answers.forEach((ans, i) => {
+
+        const answers = q.answers || q.options || [];
+        const correctIndex = q.correct !== undefined ? q.correct : q.correctAnswer;
+
+        answers.forEach((ans, i) => {
             const btn = document.createElement("button");
-            btn.innerText = ans;
-            btn.onclick = () => checkAnswer(btn, i === q.correct);
+            btn.className = "answer-btn";
+            btn.innerHTML = ans;
+
+            btn.onclick = function() {
+                checkAnswer(btn, i === correctIndex);
+            };
+
             answersDiv.appendChild(btn);
         });
     }
-}
 
+    // Cuộn lên đầu câu hỏi mới (tùy chọn)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 function checkAnswer(button, isCorrect) {
     const allBtns = document.querySelectorAll(".answers button");
     allBtns.forEach(b => b.disabled = true);

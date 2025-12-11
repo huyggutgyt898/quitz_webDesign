@@ -6,6 +6,7 @@
     <title>Cài đặt - QUIZZKIT</title>
     <link rel="stylesheet" href="Styles/layout.css" />
     <link rel="stylesheet" href="Styles/settings.css" /> <!-- Mới -->
+    <link rel="stylesheet" href="Styles/leaderboard.css" />
     <script>
     if (!localStorage.getItem("loggedIn")) {
         window.location.href = "login.html";
@@ -103,8 +104,39 @@
             </div>
             <div class="layout-footer-bottom"><p>© 2025 QUIZZKIT. All rights reserved.</p></div>
         </footer>
-   
+    
+        <!-- BACK TO TOP VÀNG KIM CÓ VÒNG ĐẦY DẦN SIÊU MƯỢT -->
+        <div x-data="{ percent: 0 }"
+             x-init="window.addEventListener('scroll', () => {
+                 const s = document.documentElement.scrollTop || document.body.scrollTop;
+                 const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                 percent = h ? Math.round((s / h) * 100) : 0;
+             })"
+             class="fixed bottom-8 right-8 z-50">
+
+            <button @click="window.scrollTo({top:0,behavior:'smooth'})"
+                    x-show="percent > 20"
+                    x-transition
+                    class="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-amber-600 shadow-2xl flex items-center justify-center text-white text-3xl hover:scale-110 transition-all relative overflow-hidden">
+
+                <svg class="absolute inset-0 w-full h-full -rotate-90">
+                    <circle cx="32" cy="32" r="28" stroke="#e5e7eb" stroke-width="6" fill="none"/>
+                    <circle cx="32" cy="32" r="28" stroke="url(#gold)" stroke-width="6" fill="none"
+                            stroke-dasharray="175.93" :stroke-dashoffset="175.93 - (175.93 * percent / 100)"
+                            stroke-linecap="round" class="transition-all duration-300"/>
+                    <defs>
+                        <linearGradient id="gold">
+                            <stop offset="0%" stop-color="#fbbf24"/>
+                            <stop offset="100%" stop-color="#f59e0b"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+        </div>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <script src="Scripts/settings.js"></script> <!-- Mới -->
     <script src="Scripts/layout.js"></script>
+    <script src="Scripts/leaderboard.js"></script>
 </body>
 </html>
